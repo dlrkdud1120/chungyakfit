@@ -6,6 +6,8 @@
  */
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import { saveMyScore } from "@/lib/myScore";
 import {
   calcScore,
   fmt,
@@ -23,6 +25,7 @@ function todayKST(): string {
 }
 
 export default function Calculator() {
+  const router = useRouter();
   const [baseDate, setBaseDate] = useState(todayKST);
   const [birthDate, setBirthDate] = useState("");
   const [married, setMarried] = useState(false);
@@ -228,6 +231,22 @@ export default function Calculator() {
                 <span className="text-sm text-muted"> / {TOTAL_MAX}점</span>
               </span>
             </div>
+            <button
+              type="button"
+              onClick={() => {
+                saveMyScore({
+                  total: result.total,
+                  homeless: result.homeless.score,
+                  dependents: result.dependents.score,
+                  account: result.account.score,
+                  savedAt: baseDate,
+                });
+                router.push("/compare");
+              }}
+              className="mt-2 w-full rounded bg-brand py-3 text-sm font-semibold text-white hover:bg-brand/90"
+            >
+              이 점수로 단지 비교하기 →
+            </button>
           </>
         )}
       </div>

@@ -1,0 +1,123 @@
+{
+  "meta": {
+    "isSample": true,
+    "source": "수업용 가상 예시 데이터 (실제 단지·실제 당첨 가점 아님)",
+    "updatedAt": "2026-11-10",
+    "note": "실제 데이터로 바꿀 때는 complexes 배열만 같은 형식으로 교체하고 isSample을 false로 바꾸세요. 가점제 물량이 없는 타입은 score를 null로 둡니다."
+  },
+  "complexes": [
+    {
+      "id": "seoul-gangnam-01",
+      "name": "강남 리버포레 (예시)",
+      "region": { "sido": "서울", "sigungu": "강남구" },
+      "saleMonth": "2025-05",
+      "isSample": true,
+      "types": [
+        { "type": "59A", "area": 59, "supply": 42, "gajeomRatio": 0.4, "lotteryRatio": 0.6, "score": { "min": 69, "avg": 72, "max": 79 } },
+        { "type": "84A", "area": 84, "supply": 65, "gajeomRatio": 0.7, "lotteryRatio": 0.3, "score": { "min": 72, "avg": 75, "max": 84 } },
+        { "type": "114A", "area": 114, "supply": 18, "gajeomRatio": 0.8, "lotteryRatio": 0.2, "score": { "min": 74, "avg": 77, "max": 82 } }
+      ]
+    },
+    {
+      "id": "seoul-seocho-01",
+      "name": "서초 그린센트럴 (예시)",
+      "region": { "sido": "서울", "sigungu": "서초구" },
+      "saleMonth": "2025-09",
+      "isSample": true,
+      "types": [
+        { "type": "59B", "area": 59, "supply": 28, "gajeomRatio": 0.4, "lotteryRatio": 0.6, "score": { "min": 66, "avg": 70, "max": 77 } },
+        { "type": "84B", "area": 84, "supply": 51, "gajeomRatio": 0.7, "lotteryRatio": 0.3, "score": { "min": 69, "avg": 73, "max": 80 } }
+      ]
+    },
+    {
+      "id": "seoul-songpa-01",
+      "name": "송파 레이크뷰 (예시)",
+      "region": { "sido": "서울", "sigungu": "송파구" },
+      "saleMonth": "2025-02",
+      "isSample": true,
+      "types": [
+        { "type": "49A", "area": 49, "supply": 35, "gajeomRatio": 0.4, "lotteryRatio": 0.6, "score": { "min": 60, "avg": 64, "max": 71 } },
+        { "type": "84A", "area": 84, "supply": 88, "gajeomRatio": 0.7, "lotteryRatio": 0.3, "score": { "min": 65, "avg": 69, "max": 79 } }
+      ]
+    },
+    {
+      "id": "seoul-mapo-01",
+      "name": "마포 한강하이츠 (예시)",
+      "region": { "sido": "서울", "sigungu": "마포구" },
+      "saleMonth": "2025-11",
+      "isSample": true,
+      "types": [
+        { "type": "59A", "area": 59, "supply": 46, "gajeomRatio": 0.4, "lotteryRatio": 0.6, "score": { "min": 58, "avg": 63, "max": 72 } },
+        { "type": "84A", "area": 84, "supply": 70, "gajeomRatio": 0.7, "lotteryRatio": 0.3, "score": { "min": 62, "avg": 66, "max": 74 } }
+      ]
+    },
+    {
+      "id": "seoul-eunpyeong-01",
+      "name": "은평 숲속마을 (예시)",
+      "region": { "sido": "서울", "sigungu": "은평구" },
+      "saleMonth": "2026-03",
+      "isSample": true,
+      "types": [
+        { "type": "59A", "area": 59, "supply": 74, "gajeomRatio": 0.4, "lotteryRatio": 0.6, "score": { "min": 49, "avg": 55, "max": 66 } },
+        { "type": "74A", "area": 74, "supply": 40, "gajeomRatio": 0.7, "lotteryRatio": 0.3, "score": { "min": 52, "avg": 57, "max": 69 } },
+        { "type": "84A", "area": 84, "supply": 96, "gajeomRatio": 0.7, "lotteryRatio": 0.3, "score": { "min": 55, "avg": 60, "max": 72 } }
+      ]
+    },
+    {
+      "id": "gyeonggi-gwacheon-01",
+      "name": "과천 지식타운 파크 (예시)",
+      "region": { "sido": "경기", "sigungu": "과천시" },
+      "saleMonth": "2025-07",
+      "isSample": true,
+      "types": [
+        { "type": "59A", "area": 59, "supply": 38, "gajeomRatio": 0.4, "lotteryRatio": 0.6, "score": { "min": 63, "avg": 67, "max": 74 } },
+        { "type": "84A", "area": 84, "supply": 57, "gajeomRatio": 0.7, "lotteryRatio": 0.3, "score": { "min": 66, "avg": 70, "max": 79 } }
+      ]
+    },
+    {
+      "id": "gyeonggi-bundang-01",
+      "name": "분당 정자 센트럴 (예시)",
+      "region": { "sido": "경기", "sigungu": "성남시 분당구" },
+      "saleMonth": "2026-01",
+      "isSample": true,
+      "types": [
+        { "type": "59A", "area": 59, "supply": 33, "gajeomRatio": 0.4, "lotteryRatio": 0.6, "score": { "min": 54, "avg": 60, "max": 69 } },
+        { "type": "84A", "area": 84, "supply": 62, "gajeomRatio": 0.7, "lotteryRatio": 0.3, "score": { "min": 58, "avg": 63, "max": 74 } }
+      ]
+    },
+    {
+      "id": "gyeonggi-goyang-01",
+      "name": "일산 호수공원 더힐 (예시)",
+      "region": { "sido": "경기", "sigungu": "고양시 일산동구" },
+      "saleMonth": "2025-10",
+      "isSample": true,
+      "types": [
+        { "type": "59A", "area": 59, "supply": 120, "gajeomRatio": 0.4, "lotteryRatio": 0.6, "score": { "min": 34, "avg": 45, "max": 62 } },
+        { "type": "84A", "area": 84, "supply": 210, "gajeomRatio": 0.4, "lotteryRatio": 0.6, "score": { "min": 39, "avg": 49, "max": 67 } },
+        { "type": "101A", "area": 101, "supply": 44, "gajeomRatio": 0, "lotteryRatio": 1, "score": null }
+      ]
+    },
+    {
+      "id": "gyeonggi-hwaseong-01",
+      "name": "동탄 시범 레이크 (예시)",
+      "region": { "sido": "경기", "sigungu": "화성시" },
+      "saleMonth": "2026-05",
+      "isSample": true,
+      "types": [
+        { "type": "74A", "area": 74, "supply": 150, "gajeomRatio": 0.4, "lotteryRatio": 0.6, "score": { "min": 42, "avg": 51, "max": 64 } },
+        { "type": "84A", "area": 84, "supply": 230, "gajeomRatio": 0.4, "lotteryRatio": 0.6, "score": { "min": 45, "avg": 53, "max": 69 } }
+      ]
+    },
+    {
+      "id": "gyeonggi-pyeongtaek-01",
+      "name": "평택 고덕 스카이 (예시)",
+      "region": { "sido": "경기", "sigungu": "평택시" },
+      "saleMonth": "2026-06",
+      "isSample": true,
+      "types": [
+        { "type": "59A", "area": 59, "supply": 180, "gajeomRatio": 0.4, "lotteryRatio": 0.6, "score": { "min": 23, "avg": 34, "max": 55 } },
+        { "type": "84A", "area": 84, "supply": 320, "gajeomRatio": 0.4, "lotteryRatio": 0.6, "score": { "min": 28, "avg": 38, "max": 61 } }
+      ]
+    }
+  ]
+}
