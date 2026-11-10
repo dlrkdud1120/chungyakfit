@@ -8,12 +8,12 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { saveMyScore } from "@/lib/myScore";
+import { gapText, type Benchmark } from "@/lib/benchmark";
 import {
   calcScore,
   fmt,
   FUTURE_ASSUMPTIONS,
   projectScores,
-  TOTAL_MAX,
   type Child,
   type FutureScore,
   type ScoreInput,
@@ -28,7 +28,8 @@ function todayKST(): string {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
 }
 
-export default function Calculator() {
+/** benchmark: 관심 단지 평균 당첨 가점 (app/score/page.tsx가 CSV에서 계산해 넘겨줌) */
+export default function Calculator({ benchmark }: { benchmark: Benchmark | null }) {
   const router = useRouter();
   const [baseDate, setBaseDate] = useState(todayKST);
   const [birthDate, setBirthDate] = useState("");
@@ -229,12 +230,14 @@ export default function Calculator() {
             <ResultRow title="무주택기간" item={result.homeless} />
             <ResultRow title="부양가족 수" item={result.dependents} />
             <ResultRow title="청약통장 가입기간" item={result.account} />
-            <div className="flex items-baseline justify-between border-t-2 border-brand py-3">
-              <span className="font-semibold">총점</span>
-              <span className="tabular-nums">
-                <b className="text-xl text-brand">{fmt(result.total)}</b>
-                <span className="text-sm text-muted"> / {TOTAL_MAX}점</span>
-              </span>
+            <div className="border-t-2 border-brand py-3">
+              <div className="flex items-baseline justify-between">
+                <span className="font-semibold">총점</span>
+                <span className="tabular-nums">
+                  <b className="text-lg text-brand">{fmt(result.total)}</b>점
+                </span>
+              </div>
+              <p className="mt-1 text-right text-xs text-accent-dark">{gapText(result.total, benchmark)}</p>
             </div>
 
             <FutureTable now={result} future={future} />
@@ -406,18 +409,13 @@ function FutureTable({ now, future }: { now: ReturnType<typeof calcScore>; futur
 }
 
 function ResultRow({ title, item }: { title: string; item: ItemResult }) {
-  const pct = (item.score / item.max) * 100;
   return (
     <div className="border-b border-line py-3">
       <div className="flex items-baseline justify-between">
         <span className="text-sm font-medium">{title}</span>
         <span className="text-sm tabular-nums">
-          <b className="text-brand">{fmt(item.score)}</b>
-          <span className="text-muted"> / {item.max}</span>
+          <b className="text-brand">{fmt(item.score)}</b>점
         </span>
-      </div>
-      <div className="mt-2 h-1 w-full bg-line">
-        <div className="h-1 bg-accent" style={{ width: `${pct}%` }} />
       </div>
       <ul className="mt-2 space-y-1">
         {item.lines.map((l, i) => (

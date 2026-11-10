@@ -1,20 +1,20 @@
-import { Suspense } from "react";
-import Calculator from "@/components/Calculator";
+/**
+ * 메인 화면 (/)
+ * 단지 데이터는 빌드할 때 CSV에서 읽어 넘기고, 내 점수와 분양 공고는 화면(HomeDashboard)에서 불러옵니다.
+ */
+
+import HomeDashboard from "@/components/HomeDashboard";
+import { loadComplexes } from "@/lib/complexes";
 
 export default function Home() {
+  const { complexes } = loadComplexes();
   return (
     <>
-      <header className="mb-10 border-b border-line pb-6">
-        <h1 className="text-2xl font-bold text-brand sm:text-3xl">청약 가점 계산기</h1>
-        <p className="mt-2 text-sm text-muted">
-          무주택기간, 부양가족, 청약통장 세 항목으로 84점 만점 가점을 계산하고 근거를 함께 보여줍니다.
-        </p>
+      <header className="mb-8 border-b border-line pb-6">
+        <h1 className="text-2xl font-bold text-brand sm:text-3xl">청약핏</h1>
+        <p className="mt-2 text-sm text-muted">내 청약 가점으로 관심 단지에 당첨 가능성이 있는지 한눈에 봅니다.</p>
       </header>
-
-      {/* 계산기는 '오늘 날짜'를 쓰므로 방문할 때마다 새로 그립니다 */}
-      <Suspense fallback={<p className="py-10 text-sm text-muted">계산기를 불러오는 중…</p>}>
-        <Calculator />
-      </Suspense>
+      <HomeDashboard complexes={complexes} />
     </>
   );
 }

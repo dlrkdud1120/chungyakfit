@@ -7,12 +7,14 @@
  */
 
 import Link from "next/link";
-import { useMemo, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import type { Complex, ComplexData, HouseType } from "@/lib/complexes";
 import { judge, VERDICT_ORDER, VERDICTS, type Judgement, type Verdict } from "@/lib/judge";
 import { parseMyScore, readMyScoreRaw, subscribeMyScore, type SavedFuture } from "@/lib/myScore";
 import { FUTURE_ASSUMPTIONS } from "@/lib/score";
 import { hasManyHard, lotteryRatio, percent, recommendLotteryTypes, type JudgedRow } from "@/lib/lottery";
+import { averageCutoff, gapText } from "@/lib/benchmark";
+import { FUTURE_SECTION_ID, rowAnchor } from "@/lib/anchors";
 
 const NO_DATA = "데이터 없음";
 type Filter = "전체" | Verdict | typeof NO_DATA;
@@ -33,9 +35,17 @@ const SORTS: [SortKey, string][] = [
   ["recent", "공고일 최신 순"],
 ];
 
-// 가점 막대의 눈금 범위
-const SCALE_MIN = 0;
-const SCALE_MAX = 84;
+/** 가점 막대의 눈금 범위. 만점(84)이 아니라 실제 당첨 가점이 분포한 구간에 맞춥니다 */
+type Scale = { lo: number; hi: number };
+
+function scaleFor(rows: Row[], mine: number | null): Scale {
+  const values = rows.flatMap((r) => [r.type.min, r.type.avg, r.type.max]).filter((v): v is number => v !== null);
+  if (mine !== null) values.push(mine);
+  if (values.length === 0) return { lo: 0, hi: 1 };
+  const lo = Math.max(0, Math.floor(Math.min(...values) / 5) * 5 - 5);
+  const hi = Math.ceil(Math.max(...values) / 5) * 5 + 5;
+  return { lo, hi: hi > lo ? hi : lo + 10 };
+}
 
 /** 단지 비교 행에 붙이는 입지 점수 요약 (자세한 근거는 /location) */
 export type LocationBrief = { anchor: string; total: number | null; max: number };
@@ -54,6 +64,21 @@ export default function CompareList({
   const manualNum = manual !== null && manual !== "" ? Number(manual) : null;
   const manualActive = manualNum !== null && !Number.isNaN(manualNum);
   const myScore = manualActive ? Math.min(Math.max(manualNum, 0), 84) : (saved?.total ?? null);
+
+  // ── 메인 화면에서 /compare#줄id로 들어오면 그 줄로 내려가 잠깐 강조
+  useEffect(() => {
+    const go = () => {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      const el = id ? document.getElementById(id) : null;
+      if (!el) return;
+      el.scrollIntoView({ block: "start" });
+      el.dataset.flash = "1";
+      window.setTimeout(() => delete el.dataset.flash, 2500);
+    };
+    go();
+    window.addEventListener("hashchange", go);
+    return () => window.removeEventListener("hashchange", go);
+  }, []);
 
   // ── 필터·정렬
   const [sido, setSido] = useState("전체");
@@ -97,6 +122,10 @@ export default function CompareList({
   };
   for (const r of regionRows) counts[r.judgement ? r.judgement.verdict : NO_DATA] += 1;
 
+  // 지금 보고 있는 지역의 평균 당첨 가점 (내 점수와 비교용)
+  const benchmark = averageCutoff(regionRows.map((r) => r.type));
+  const scale = scaleFor(allRows, myScore);
+
   const rows = regionRows
     .filter((r) => filter === "전체" || (r.judgement ? r.judgement.verdict === filter : filter === NO_DATA))
     .sort(compare(sort, myScore));
@@ -133,10 +162,17 @@ export default function CompareList({
           ) : (
             <span className="ml-2 text-muted">
               저장된 점수가 없어요.{" "}
-              <Link href="/" className="text-brand underline">
+              <Link href="/score" className="text-brand underline">
                 계산기에서 구하기
               </Link>
             </span>
+          )}
+          {myScore !== null && (
+            <p className="mt-1 text-xs text-accent-dark">
+              {manualActive ? `${fmt(myScore)}점은 ` : ""}
+              {gapText(myScore, benchmark)}
+              {benchmark && sido !== "전체" && ` · ${sigungu !== "전체" ? sigungu : sido} 기준`}
+            </p>
           )}
         </div>
         <label className="flex items-center gap-2 text-sm">
@@ -248,6 +284,7 @@ export default function CompareList({
                   row={r}
                   myScore={myScore}
                   location={locations[r.complex.id]}
+                  scale={scale}
                 />
               ))}
             </ul>
@@ -286,7 +323,7 @@ function FutureImprovements({
 
   if (nowScore === null || !future || future.length === 0) {
     return (
-      <section className="mt-8">
+      <section id={FUTURE_SECTION_ID} className="mt-8 scroll-mt-6">
         {heading}
         <p className="py-4 text-sm text-muted">
           {manualActive
@@ -312,7 +349,7 @@ function FutureImprovements({
     .sort((a, b) => a.firstBetter - b.firstBetter || (b.row.type.avg ?? 0) - (a.row.type.avg ?? 0));
 
   return (
-    <section className="mt-8">
+    <section id={FUTURE_SECTION_ID} className="mt-8 scroll-mt-6">
       {heading}
 
       {/* 점수 변화 요약 */}
@@ -495,14 +532,19 @@ function ResultRow({
   row,
   myScore,
   location,
+  scale,
 }: {
   row: Row;
   myScore: number | null;
   location: LocationBrief | undefined;
+  scale: Scale;
 }) {
   const { complex, type, judgement, lotteryOnly } = row;
   return (
-    <li className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-2 border-b border-line py-4 md:grid-cols-[1.4fr_0.9fr_1.6fr_0.9fr] md:items-center">
+    <li
+      id={rowAnchor(complex.id, type.type)}
+      className="grid scroll-mt-6 grid-cols-[1fr_auto] gap-x-4 gap-y-2 border-b border-line py-4 transition-colors duration-700 data-[flash]:bg-accent/15 md:grid-cols-[1.4fr_0.9fr_1.6fr_0.9fr] md:items-center"
+    >
       {/* 단지 */}
       <div className="min-w-0">
         <div className="text-[15px] font-semibold">{complex.name}</div>
@@ -541,7 +583,7 @@ function ResultRow({
           <div className="text-xs text-muted">가점제 물량이 없어 추첨으로만 선정합니다.</div>
         ) : (
           <>
-            <ScoreBar type={type} mine={myScore} />
+            <ScoreBar type={type} mine={myScore} scale={scale} />
             <div className="mt-1 text-xs tabular-nums text-muted">
               최저 {val(type.min)} · 평균 <b className="text-ink">{val(type.avg)}</b> · 최고 {val(type.max)}
             </div>
@@ -552,8 +594,9 @@ function ResultRow({
   );
 }
 
-function ScoreBar({ type, mine }: { type: HouseType; mine: number | null }) {
-  const pos = (n: number) => `${((Math.min(Math.max(n, SCALE_MIN), SCALE_MAX) - SCALE_MIN) / (SCALE_MAX - SCALE_MIN)) * 100}%`;
+/** 최저~최고 당첨 가점 범위(연한 초록), 평균(세로선), 내 점수(주황 점). 눈금은 실제 당첨 가점 분포 구간 */
+function ScoreBar({ type, mine, scale }: { type: HouseType; mine: number | null; scale: Scale }) {
+  const pos = (n: number) => `${((Math.min(Math.max(n, scale.lo), scale.hi) - scale.lo) / (scale.hi - scale.lo)) * 100}%`;
   const { min, avg, max } = type;
   return (
     <div className="relative h-4" aria-hidden>

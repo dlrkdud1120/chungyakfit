@@ -6,10 +6,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const MENU = [
-  { href: "/", label: "가점 계산" },
+  { href: "/", label: "홈" },
+  { href: "/score", label: "가점 계산" },
   { href: "/compare", label: "단지 비교" },
   { href: "/location", label: "입지 점수" },
-  { href: "/notices", label: "분양 공고" },
+  { href: "/notice", label: "분양 공고" },
 ];
 
 export default function SiteNav() {
