@@ -39,7 +39,8 @@ npm run dev
 3. 미래 점수 예측 ✅ (`lib/score.ts`의 `projectScores`, 시점은 `FUTURE_YEARS`)
 4. 추첨제 물량 안내 ✅ (`lib/lottery.ts`, 기준값은 `LOTTERY_RULES`)
 5. 입지 점수 ✅ (기준표 `lib/location.ts`, 데이터 `data/locations.csv`, 화면 `/location`)
-6. 청약홈 공공데이터 API 연동 ✅ (분양 공고 화면 `/notices`)
+6. 청약홈 공공데이터 API 연동 ✅ (분양 공고 화면 `/notice`)
+7. 원하는 단지 당첨 가능성 확인 ✅ (`/check`)
 
 
 ## 당첨 가능성 확인 (/check) — 핵심 기능
@@ -59,7 +60,7 @@ npm run dev
 
 ## 청약홈 API 설정
 
-분양정보 API는 공고와 공급세대수만 주고 당첨가점은 주지 않습니다. 당첨가점 판정은 계속 `data/complexes.csv`를 씁니다.
+분양정보 API는 공고와 공급세대수를, 경쟁률 API(getAptLttotPblancScore)는 주택형·거주구분별 당첨가점을 줍니다. 가능성 확인(/check)은 둘을 이어 붙여 쓰고, 단지 비교(/compare)는 직접 정리한 `data/complexes.csv`를 씁니다.
 
 | 파일 | 역할 |
 | --- | --- |
