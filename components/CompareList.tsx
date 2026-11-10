@@ -8,6 +8,7 @@
  */
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import type { Complex, ComplexData, HouseType } from "@/lib/complexes";
 import { judge, VERDICT_ORDER, VERDICTS, type Judgement, type Verdict } from "@/lib/judge";
@@ -94,9 +95,14 @@ export default function CompareList({
   }, [data]); // 데이터가 도착한 뒤에 줄이 생기므로 데이터가 바뀔 때 다시 확인
 
   // ── 필터·정렬
-  const [sido, setSido] = useState("전체");
+  // 가능성 확인 화면에서 /compare?sido=경기&verdict=안정 으로 들어오면 필터를 미리 맞춤
+  const sp = useSearchParams();
+  const [sido, setSido] = useState(sp.get("sido") ?? "전체");
   const [sigungu, setSigungu] = useState("전체");
-  const [filter, setFilter] = useState<Filter>("전체");
+  const [filter, setFilter] = useState<Filter>(() => {
+    const v = sp.get("verdict");
+    return v && (VERDICTS as string[]).includes(v) ? (v as Verdict) : "전체";
+  });
   const [sort, setSort] = useState<SortKey>("verdict");
 
   const sidos = useMemo(() => unique(data.complexes.map((c) => c.sido)), [data]);

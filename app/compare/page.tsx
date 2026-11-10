@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import CompareList, { type LocationBrief } from "@/components/CompareList";
 import { loadComplexes } from "@/lib/complexes";
 import { loadLocations } from "@/lib/locationData";
@@ -21,7 +22,10 @@ export default function ComparePage() {
           청약홈에 공개된 최근 과거 당첨 가점과 내 점수를 단지·주택형마다 비교해 안정, 도전, 어려움으로 나눠 보여줍니다.
         </p>
       </header>
-      <CompareList fallback={fallback} locations={locations} />
+      {/* 주소의 ?sido=…&verdict=… 를 읽기 때문에 화면에서 그립니다 */}
+      <Suspense fallback={<p className="py-10 text-sm text-muted">불러오는 중…</p>}>
+        <CompareList fallback={fallback} locations={locations} />
+      </Suspense>
     </>
   );
 }

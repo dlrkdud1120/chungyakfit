@@ -9,11 +9,12 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import type { Notice, NoticeResult } from "@/lib/applyhome";
-import { judge, type Verdict } from "@/lib/judge";
+import { FUTURE_SECTION_ID } from "@/lib/anchors";
+import { judge, VERDICT_ORDER, type Verdict } from "@/lib/judge";
 import { parseMyHome, readMyHomeRaw, saveMyHome, subscribeMyHome } from "@/lib/myHome";
-import { parseMyScore, readMyScoreRaw, subscribeMyScore } from "@/lib/myScore";
+import { parseMyScore, readMyScoreRaw, subscribeMyScore, type SavedFuture } from "@/lib/myScore";
 import {
   areaOf,
   bandLabel,
@@ -129,6 +130,16 @@ export default function CheckPossibility() {
     };
   }, [query]);
   const similarData = similar && similar.key === query ? similar.data : null;
+
+  // 모바일: 공고에서 단지·주택형을 고르고 결과가 오면 판정 요약이 화면 위쪽에 오도록 한 번 스크롤
+  const summaryRef = useRef<HTMLDivElement>(null);
+  const scrolledFor = useRef<string | null>(null);
+  useEffect(() => {
+    if (mode !== "notice" || !query || !similarData || scrolledFor.current === query) return;
+    scrolledFor.current = query;
+    if (!window.matchMedia("(max-width: 1023px)").matches) return; // 넓은 화면은 판정이 옆에 보임
+    requestAnimationFrame(() => summaryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  }, [mode, query, similarData]);
 
   return (
     <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] lg:gap-14">
@@ -317,11 +328,14 @@ export default function CheckPossibility() {
         <Section title="3. 가능성 판정">
           <Result
             myScore={myScore}
+            future={manualScore === "" ? (saved?.future ?? null) : null}
             hasHome={!!home.sido}
             target={target}
             reside={reside}
             data={similarData}
             waiting={!!query && !similarData}
+            notice={mode === "notice" ? notice : null}
+            summaryRef={summaryRef}
           />
         </Section>
       </div>
@@ -331,20 +345,43 @@ export default function CheckPossibility() {
 
 // ───────────────────────── 결과 ─────────────────────────
 
+type Stats = { min: number; avg: number; max: number };
+
+/** 판정별 색: 왼쪽 세로선과 판정 글자 */
+const TONE: Record<Verdict, { line: string; text: string }> = {
+  안정: { line: "bg-ok", text: "text-ok" },
+  도전: { line: "bg-accent", text: "text-accent-dark" },
+  어려움: { line: "bg-bad", text: "text-bad" },
+};
+
+/** 판정을 한 문장으로 풀기 (판정 자체는 lib/judge.ts가 정함) */
+function verdictSentence(verdict: Verdict, my: number, s: Stats): string {
+  if (verdict === "어려움") return `비슷한 사례의 최저 당첨 가점보다 ${fmt(round1(s.min - my))}점 낮아요`;
+  if (verdict === "도전") return `최저 당첨 가점은 넘지만 평균보다 ${fmt(round1(s.avg - my))}점 낮아요`;
+  const diff = round1(my - s.avg);
+  return diff === 0 ? "비슷한 사례 평균과 같아요" : `비슷한 사례 평균보다 ${fmt(diff)}점 높아요`;
+}
+
 function Result({
   myScore,
+  future,
   hasHome,
   target,
   reside,
   data,
   waiting,
+  notice,
+  summaryRef,
 }: {
   myScore: number | null;
+  future: SavedFuture[] | null;
   hasHome: boolean;
   target: Target | null;
   reside: Reside | null;
   data: SimilarResponse | null;
   waiting: boolean;
+  notice: Notice | null;
+  summaryRef: React.RefObject<HTMLDivElement | null>;
 }) {
   if (myScore === null) return <Empty>먼저 내 가점을 계산하거나 직접 넣어 주세요.</Empty>;
   if (!hasHome) return <Empty>거주지 시·도를 골라 주세요. 해당지역·기타지역에 따라 비교할 당첨 가점이 달라집니다.</Empty>;
@@ -356,12 +393,18 @@ function Result({
   const { result } = data;
   const areaText = result.level === "sido" ? `${target.sido} 전체` : `${target.sido} ${target.unit}`;
   const basis = `${areaText} · ${bandLabel(target.band)} · 최근 ${SIMILAR_RULES.yearsBack}년 · ${reside}`;
-  const judgement = result.stats ? judge(myScore, result.stats) : null;
+  const stats = result.stats;
+  const judgement = stats ? judge(myScore, stats) : null;
   const passed = result.cases.filter((c) => c.min !== null && myScore >= c.min).length;
+
+  // 최저 당첨 가점과의 차이가 작은 사례부터
+  const cases = [...result.cases].sort(
+    (a, b) => Math.abs(myScore - (a.min ?? 0)) - Math.abs(myScore - (b.min ?? 0)) || b.noticeDate.localeCompare(a.noticeDate),
+  );
 
   return (
     <div>
-      <table className="w-full text-sm tabular-nums">
+      <table className="w-full text-sm">
         <tbody>
           <tr className="border-b border-line">
             <td className="py-2.5 text-muted">원하는 단지</td>
@@ -371,61 +414,72 @@ function Result({
             <td className="py-2.5 text-muted">비교 기준</td>
             <td className="py-2.5 text-right">{basis}</td>
           </tr>
-          <tr className="border-b border-line">
-            <td className="py-2.5 font-semibold">판정</td>
-            <td className="py-2.5 text-right">
-              {judgement ? (
-                <>
-                  <Badge verdict={judgement.verdict} />
-                  <div className="mt-1 text-xs text-muted">{judgement.reason}</div>
-                </>
-              ) : (
-                <span className="text-muted">사례 부족으로 판정하지 않음</span>
-              )}
-            </td>
-          </tr>
-          {result.stats && (
-            <>
-              <tr className="border-b border-line">
-                <td className="py-2.5">내 가점</td>
-                <td className="py-2.5 text-right">
-                  <b className="text-brand">{fmt(myScore)}점</b>
-                </td>
-              </tr>
-              <tr className="border-b border-line">
-                <td className="py-2.5">비슷한 사례 평균 당첨 가점 (중앙값)</td>
-                <td className="py-2.5 text-right">{fmt(result.stats.avg)}점</td>
-              </tr>
-              <tr className="border-b border-line">
-                <td className="py-2.5">비슷한 사례 최저 당첨 가점 (중앙값)</td>
-                <td className="py-2.5 text-right">{fmt(result.stats.min)}점</td>
-              </tr>
-              <tr className="border-b border-line">
-                <td className="py-2.5">내 점수가 최저 당첨 가점 이상이던 사례</td>
-                <td className="py-2.5 text-right">
-                  {result.cases.length}개 중 <b className="text-accent-dark">{passed}개</b>
-                </td>
-              </tr>
-            </>
-          )}
         </tbody>
       </table>
-
       {result.level === "sido" && (
-        <p className="mt-2 text-xs text-muted">
+        <p className="pt-2 text-xs text-muted">
           {target.unit}에는 비슷한 사례가 {SIMILAR_RULES.minCases}개보다 적어 {target.sido} 전체로 넓혀 비교했습니다.
         </p>
       )}
-      {!result.stats && (
-        <p className="mt-2 text-xs text-muted">
-          {target.sido} 전체에서도 같은 면적대의 사례가 {SIMILAR_RULES.minCases}개보다 적습니다. 면적대를 바꾸거나 청약홈 공고를 직접 확인해 보세요.
-        </p>
+
+      {/* 판정 요약 + 점수 위치 막대 */}
+      <div ref={summaryRef} className="scroll-mt-4">
+        {judgement && stats ? (
+          <>
+            <div className="mt-4 flex gap-3">
+              <span className={`w-1 shrink-0 ${TONE[judgement.verdict].line}`} aria-hidden />
+              <div className="py-0.5">
+                <p className={`text-lg leading-tight font-bold ${TONE[judgement.verdict].text}`}>{judgement.verdict}</p>
+                <p className="mt-1 text-sm">{verdictSentence(judgement.verdict, myScore, stats)}</p>
+              </div>
+            </div>
+            <PositionBar my={myScore} stats={stats} />
+          </>
+        ) : (
+          <p className="mt-4 border-l-4 border-line py-1 pl-3 text-sm text-muted">
+            {target.sido} 전체에서도 같은 면적대의 사례가 {SIMILAR_RULES.minCases}개보다 적어 판정하지 않았어요. 면적대를 바꾸거나
+            청약홈 공고를 직접 확인해 보세요.
+          </p>
+        )}
+      </div>
+
+      {/* 판정 근거 숫자 */}
+      {stats && (
+        <>
+          <h3 className="mt-6 border-b-2 border-brand pb-2 text-sm font-semibold text-brand">판정 근거</h3>
+          <table className="w-full text-sm tabular-nums">
+            <tbody>
+              <NumRow label="내 가점" value={`${fmt(myScore)}점`} strong />
+              <NumRow
+                label="평균 당첨 가점"
+                note={`사례 ${result.cases.length}개의 평균 당첨 가점을 줄 세운 중간값`}
+                value={`${fmt(stats.avg)}점`}
+              />
+              <NumRow
+                label="최저 당첨 가점"
+                note={`사례 ${result.cases.length}개의 최저 당첨 가점을 줄 세운 중간값`}
+                value={`${fmt(stats.min)}점`}
+              />
+              <NumRow
+                label={`비슷한 사례 ${result.cases.length}개 중 내 점수로 당첨선을 넘은 곳`}
+                note="당첨선 = 그 사례의 최저 당첨 가점"
+                value={`${passed}개`}
+              />
+            </tbody>
+          </table>
+        </>
       )}
 
-      {result.cases.length > 0 && (
+      {/* 다음에 할 수 있는 것 */}
+      {judgement && stats && (
+        <NextSteps verdict={judgement.verdict} my={myScore} stats={stats} future={future} target={target} notice={notice} cases={result.cases} />
+      )}
+
+      {/* 과거 사례 표 */}
+      {cases.length > 0 && (
         <>
           <h3 className="mt-8 border-b-2 border-brand pb-2 text-sm font-semibold text-brand">
-            {result.stats ? "판정에 쓴" : "찾은"} 과거 사례 {result.cases.length}개 (단지 {result.complexCount}곳)
+            {stats ? "판정에 쓴" : "찾은"} 과거 사례 {cases.length}개 (단지 {result.complexCount}곳)
           </h3>
           <table className="w-full text-[13px] tabular-nums">
             <thead>
@@ -434,12 +488,12 @@ function Result({
                 <th className="py-2 text-right font-normal">최저</th>
                 <th className="py-2 text-right font-normal">평균</th>
                 <th className="py-2 text-right font-normal">최고</th>
-                <th className="py-2 text-right font-normal">내 점수</th>
+                <th className="py-2 pl-2 text-right font-normal">최저와 차이</th>
               </tr>
             </thead>
             <tbody>
-              {result.cases.map((c) => {
-                const ok = c.min !== null && myScore >= c.min;
+              {cases.map((c) => {
+                const diff = c.min === null ? null : round1(myScore - c.min);
                 return (
                   <tr key={`${c.no}-${c.houseTy}`} className="border-b border-line align-top">
                     <td className="py-2 pr-2">
@@ -458,8 +512,8 @@ function Result({
                     <td className="py-2 text-right">{val(c.min)}</td>
                     <td className="py-2 text-right">{val(c.avg)}</td>
                     <td className="py-2 text-right">{val(c.max)}</td>
-                    <td className={`py-2 text-right text-xs font-semibold ${ok ? "text-brand" : "text-muted"}`}>
-                      {ok ? "최저 이상" : "부족"}
+                    <td className={`py-2 text-right font-semibold ${diff === null ? "text-muted" : diff >= 0 ? "text-ok" : "text-bad"}`}>
+                      {diff === null ? "–" : diff > 0 ? `+${fmt(diff)}` : fmt(diff)}
                     </td>
                   </tr>
                 );
@@ -471,11 +525,203 @@ function Result({
 
       <ul className="mt-4 space-y-0.5 text-xs leading-relaxed text-muted">
         <li>· 출처: 한국부동산원 청약홈 당첨가점·분양정보 API ({dot(data.fetchedAt.slice(0, 10))} 기준).</li>
-        <li>· 판정 기준값: 사례별 평균 당첨 가점의 중앙값과 최저 당첨 가점의 중앙값. 판정 방식(안정·도전·어려움)은 단지 비교와 같습니다.</li>
+        <li>· 판정 방식(안정·도전·어려움)은 단지 비교와 같습니다. 평균·최저는 위 판정 근거의 중간값을 씁니다.</li>
         <li>· 과거 결과는 다음 분양을 보장하지 않습니다. 분양가, 입지, 공급 물량, 규제가 달라지면 커트라인도 달라집니다.</li>
-        <li>· 가점이 부족해도 추첨제 물량이 있는 주택형은 당첨 기회가 있습니다. 분양공고에서 공급 구성을 확인하세요.</li>
       </ul>
     </div>
+  );
+}
+
+/** 0점부터 사례 최고 당첨 가점보다 조금 높은 곳까지, 최저 미만(회색)·최저~평균(주황)·평균 이상(초록) */
+function PositionBar({ my, stats }: { my: number; stats: Stats }) {
+  const hi = Math.ceil((Math.max(stats.max, my) + 3) / 5) * 5;
+  const pos = (n: number) => Math.min(Math.max(n / hi, 0), 1) * 100;
+  const pMin = pos(stats.min);
+  const pAvg = pos(stats.avg);
+  const pMy = pos(my);
+  // 최저·평균 눈금이 가까우면 글자를 두 줄로 나눠 겹치지 않게
+  const twoRows = pAvg - pMin < 22;
+
+  return (
+    <div className="mt-4 mb-2" role="img" aria-label={`최저 ${fmt(stats.min)}점, 평균 ${fmt(stats.avg)}점, 내 점수 ${fmt(my)}점`}>
+      <div className={`relative text-[11px] text-muted tabular-nums ${twoRows ? "h-8" : "h-4"}`}>
+        <TickLabel pos={pMin} side="end" top={0}>
+          최저 {fmt(stats.min)}
+        </TickLabel>
+        <TickLabel pos={pAvg} side="start" top={twoRows ? 16 : 0}>
+          평균 {fmt(stats.avg)}
+        </TickLabel>
+      </div>
+      <div className="relative h-1.5">
+        <span className="absolute bottom-0 h-1.5 w-px bg-muted" style={{ left: `${pMin}%` }} />
+        <span className="absolute bottom-0 h-1.5 w-px bg-muted" style={{ left: `${pAvg}%` }} />
+      </div>
+      <div className="relative h-2.5 overflow-hidden rounded-sm bg-line">
+        <div className="absolute inset-y-0 bg-accent" style={{ left: `${pMin}%`, width: `${pAvg - pMin}%` }} />
+        <div className="absolute inset-y-0 right-0 bg-ok" style={{ left: `${pAvg}%` }} />
+      </div>
+      <div className="relative h-8 text-[11px] tabular-nums">
+        <span
+          className="absolute top-1 h-0 w-0 -translate-x-1/2 border-x-[5px] border-b-[7px] border-x-transparent border-b-ink"
+          style={{ left: `${pMy}%` }}
+        />
+        <span
+          className={`absolute top-3.5 font-semibold whitespace-nowrap ${pMy >= 12 && pMy <= 88 ? "-translate-x-1/2" : ""}`}
+          style={pMy < 12 ? { left: 0 } : pMy > 88 ? { right: 0 } : { left: `${pMy}%` }}
+        >
+          내 점수 {fmt(my)}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/** side="end": 글자가 눈금에서 끝남(왼쪽에 놓임), side="start": 눈금에서 시작. 막대 끝에 닿으면 안쪽으로 붙임 */
+function TickLabel({ pos, side, top, children }: { pos: number; side: "start" | "end"; top: number; children: React.ReactNode }) {
+  let style: React.CSSProperties;
+  if (side === "end") style = pos < 14 ? { left: 0 } : { right: `${100 - pos}%` };
+  else style = pos > 80 ? { right: 0 } : { left: `${pos}%` };
+  return (
+    <span className="absolute px-0.5 whitespace-nowrap" style={{ ...style, top }}>
+      {children}
+    </span>
+  );
+}
+
+function NumRow({ label, note, value, strong = false }: { label: string; note?: string; value: string; strong?: boolean }) {
+  return (
+    <tr className="border-b border-line align-top">
+      <td className="py-2.5 pr-3">
+        {label}
+        {note && <div className="text-xs text-muted">{note}</div>}
+      </td>
+      <td className="py-2.5 text-right whitespace-nowrap">{strong ? <b className="text-brand">{value}</b> : value}</td>
+    </tr>
+  );
+}
+
+// ───────────────────────── 다음에 할 수 있는 것 ─────────────────────────
+
+function NextSteps({
+  verdict,
+  my,
+  stats,
+  future,
+  target,
+  notice,
+  cases,
+}: {
+  verdict: Verdict;
+  my: number;
+  stats: Stats;
+  future: SavedFuture[] | null;
+  target: Target;
+  notice: Notice | null;
+  cases: SimilarResult["cases"];
+}) {
+  const items: React.ReactNode[] = [];
+
+  if (verdict === "어려움") {
+    // 1) 같은 단지의 추첨제 물량
+    const bigTypes = notice?.types.filter((t) => (areaOf(t.type) ?? 0) > 85).map((t) => shortType(t.type)) ?? [];
+    items.push(
+      <>
+        가점만으로는 어려우니 <b>추첨제 물량</b>을 노려볼 수 있어요.{" "}
+        {bigTypes.length > 0
+          ? `이 단지의 전용 85㎡ 초과 주택형(${bigTypes.join(", ")})은 추첨제 비율이 높은 편이에요. `
+          : "주택형별 추첨제 세대수는 청약홈 데이터에 없어 공고문에서 확인해야 해요. "}
+        {notice?.url ? <ExtLink href={notice.url}>청약홈 공고문 보기</ExtLink> : <InLink href="/notice">분양 공고 보기</InLink>}
+      </>,
+    );
+    // 2) 미래 점수로 언제 도전이 되는지
+    if (future && future.length > 0) {
+      const better = future
+        .map((f) => ({ f, j: judge(f.total, stats) }))
+        .find((x) => x.j && VERDICT_ORDER[x.j.verdict] < VERDICT_ORDER["어려움"]);
+      const last = future[future.length - 1];
+      items.push(
+        <>
+          {better ? (
+            <>
+              지금 입력 그대로면 <b>{better.f.years}년 뒤 {fmt(better.f.total)}점</b>으로 {better.j!.verdict} 단계가 돼요.{" "}
+            </>
+          ) : (
+            <>
+              {last.years}년 뒤 {fmt(last.total)}점이어도 아직 어려움이에요. 최저 당첨 가점까지 {fmt(round1(stats.min - last.total))}점이 더 필요해요.{" "}
+            </>
+          )}
+          <InLink href={`/compare#${FUTURE_SECTION_ID}`}>미래 점수 예측 보기</InLink>
+        </>,
+      );
+    } else {
+      items.push(
+        <>
+          가점 계산에서 점수를 저장하면 몇 년 뒤 도전 단계가 되는지 알려드려요. <InLink href="/score">가점 계산하기</InLink>
+        </>,
+      );
+    }
+  }
+
+  if (verdict === "도전") {
+    // 같은 비교 기준의 과거 사례 중 내 점수가 평균 이상(=안정)인 곳
+    const safe = cases.filter((c) => c.avg !== null && my >= c.avg).slice(0, 3);
+    const compareHref = `/compare?${new URLSearchParams({ sido: target.sido, verdict: "안정" })}`;
+    items.push(
+      safe.length > 0 ? (
+        <>
+          비슷한 지역에서 내 점수로 <b>안정</b>이던 곳:{" "}
+          {safe.map((c) => `${c.name} ${shortType(c.houseTy)}(평균 ${fmt(c.avg!)})`).join(", ")}.{" "}
+          <InLink href={compareHref}>{target.sido} 안정 단지 모두 보기</InLink>
+        </>
+      ) : (
+        <>
+          같은 조건의 과거 사례 중에는 안정인 곳이 없어요. <InLink href={compareHref}>{target.sido}에서 안정인 단지 찾아보기</InLink>
+        </>
+      ),
+    );
+  }
+
+  if (verdict === "안정") {
+    items.push(
+      notice?.url ? (
+        <>
+          비슷한 사례 기준으로는 해볼 만해요. 접수 일정과 자격 조건을 확인하세요. <ExtLink href={notice.url}>청약홈 공고 보기</ExtLink>
+        </>
+      ) : (
+        <>
+          비슷한 사례 기준으로는 해볼 만해요. 이 지역의 다가오는 공고를 확인하세요. <InLink href="/notice">분양 공고 보기</InLink>
+        </>
+      ),
+    );
+  }
+
+  return (
+    <>
+      <h3 className="mt-6 border-b-2 border-brand pb-2 text-sm font-semibold text-brand">다음에 할 수 있는 것</h3>
+      <ul>
+        {items.map((it, i) => (
+          <li key={i} className="border-b border-line py-2.5 text-sm leading-relaxed">
+            {it}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+function InLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <Link href={href} className="whitespace-nowrap text-brand underline underline-offset-2">
+      {children} →
+    </Link>
+  );
+}
+
+function ExtLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap text-brand underline underline-offset-2">
+      {children} ↗
+    </a>
   );
 }
 
@@ -535,16 +781,6 @@ function BandSelect({ value, onChange }: { value: BandId; onChange: (b: BandId) 
   );
 }
 
-const BADGE: Record<Verdict, string> = {
-  안정: "bg-brand text-white",
-  도전: "bg-accent text-ink",
-  어려움: "bg-line text-muted",
-};
-
-function Badge({ verdict }: { verdict: Verdict }) {
-  return <span className={`inline-block rounded-sm px-2 py-0.5 text-xs font-semibold ${BADGE[verdict]}`}>{verdict}</span>;
-}
-
 function Empty({ children }: { children: React.ReactNode }) {
   return <p className="py-4 text-sm leading-relaxed text-muted">{children}</p>;
 }
@@ -552,3 +788,4 @@ function Empty({ children }: { children: React.ReactNode }) {
 const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
 const val = (n: number | null) => (n === null ? "–" : fmt(n));
 const dot = (d: string | null) => (d ? d.replaceAll("-", ".") : "–");
+const round1 = (n: number) => Math.round(n * 10) / 10;

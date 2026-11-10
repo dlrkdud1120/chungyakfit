@@ -8,6 +8,8 @@
   --color-ink: #1c2422; /* 본문 글자 */
   --color-muted: #6b7672; /* 보조 글자 */
   --color-line: #e3e8e6; /* 얇은 구분선 */
+  --color-ok: #2e9e6a; /* 판정: 안정 */
+  --color-bad: #d9534f; /* 판정: 어려움 */
   --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 }
 
