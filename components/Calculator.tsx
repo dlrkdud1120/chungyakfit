@@ -11,8 +11,12 @@ import { saveMyScore } from "@/lib/myScore";
 import {
   calcScore,
   fmt,
+  FUTURE_ASSUMPTIONS,
+  projectScores,
   TOTAL_MAX,
   type Child,
+  type FutureScore,
+  type ScoreInput,
   type HouseHistory,
   type ItemResult,
   type Parent,
@@ -39,24 +43,25 @@ export default function Calculator() {
   const [spouseHasAccount, setSpouseHasAccount] = useState(false);
   const [spouseAccountJoinDate, setSpouseAccountJoinDate] = useState("");
 
-  const result = useMemo(
-    () =>
-      calcScore({
-        baseDate,
-        birthDate,
-        married,
-        marriageDate,
-        houseHistory,
-        soldDate,
-        children,
-        parents,
-        hasAccount,
-        accountJoinDate,
-        spouseHasAccount,
-        spouseAccountJoinDate,
-      }),
+  const input: ScoreInput = useMemo(
+    () => ({
+      baseDate,
+      birthDate,
+      married,
+      marriageDate,
+      houseHistory,
+      soldDate,
+      children,
+      parents,
+      hasAccount,
+      accountJoinDate,
+      spouseHasAccount,
+      spouseAccountJoinDate,
+    }),
     [baseDate, birthDate, married, marriageDate, houseHistory, soldDate, children, parents, hasAccount, accountJoinDate, spouseHasAccount, spouseAccountJoinDate],
   );
+  const result = useMemo(() => calcScore(input), [input]);
+  const future = useMemo(() => projectScores(input), [input]);
 
   const updateChild = (i: number, patch: Partial<Child>) =>
     setChildren((list) => list.map((c, j) => (j === i ? { ...c, ...patch } : c)));
@@ -231,6 +236,9 @@ export default function Calculator() {
                 <span className="text-sm text-muted"> / {TOTAL_MAX}점</span>
               </span>
             </div>
+
+            <FutureTable now={result} future={future} />
+
             <button
               type="button"
               onClick={() => {
@@ -240,6 +248,7 @@ export default function Calculator() {
                   dependents: result.dependents.score,
                   account: result.account.score,
                   savedAt: baseDate,
+                  future: future.map((f) => ({ years: f.years, baseDate: f.baseDate, total: f.total })),
                 });
                 router.push("/compare");
               }}
@@ -349,6 +358,50 @@ function RemoveButton({ onClick }: { onClick: () => void }) {
     <button type="button" onClick={onClick} className="text-xs text-muted underline hover:text-ink">
       삭제
     </button>
+  );
+}
+
+/** 지금 · 1년 뒤 · 3년 뒤 점수 표 */
+function FutureTable({ now, future }: { now: ReturnType<typeof calcScore>; future: FutureScore[] }) {
+  if (future.length === 0) return null;
+  const rows = [
+    { label: "지금", homeless: now.homeless.score, dependents: now.dependents.score, account: now.account.score, total: now.total, diff: 0 },
+    ...future.map((f) => ({ label: `${f.years}년 뒤`, ...f, diff: f.total - now.total })),
+  ];
+  return (
+    <div className="mt-6">
+      <h3 className="border-b-2 border-brand pb-2 text-sm font-semibold text-brand">앞으로의 점수</h3>
+      <table className="w-full text-sm tabular-nums">
+        <thead>
+          <tr className="border-b border-line text-xs text-muted">
+            <th className="py-2 text-left font-normal">시점</th>
+            <th className="py-2 text-right font-normal">무주택</th>
+            <th className="py-2 text-right font-normal">부양</th>
+            <th className="py-2 text-right font-normal">통장</th>
+            <th className="py-2 text-right font-normal">총점</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr key={r.label} className="border-b border-line">
+              <td className="py-2">{r.label}</td>
+              <td className="py-2 text-right">{fmt(r.homeless)}</td>
+              <td className="py-2 text-right">{fmt(r.dependents)}</td>
+              <td className="py-2 text-right">{fmt(r.account)}</td>
+              <td className="py-2 text-right">
+                <b className="text-brand">{fmt(r.total)}</b>
+                {r.diff > 0 && <span className="ml-1 text-xs text-accent-dark">+{fmt(r.diff)}</span>}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <ul className="mt-2 space-y-0.5 text-xs leading-relaxed text-muted">
+        {FUTURE_ASSUMPTIONS.map((a) => (
+          <li key={a}>· {a}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

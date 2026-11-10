@@ -8,12 +8,15 @@
 const KEY = "chungyakfit:myScore";
 const EVENT = "chungyakfit:myScore-change";
 
+export type SavedFuture = { years: number; baseDate: string; total: number };
+
 export type SavedScore = {
   total: number;
   homeless: number;
   dependents: number;
   account: number;
   savedAt: string; // "YYYY-MM-DD"
+  future?: SavedFuture[]; // 1년 뒤, 3년 뒤 예측 점수 (3단계부터 저장)
 };
 
 export function saveMyScore(s: SavedScore) {

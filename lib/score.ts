@@ -349,6 +349,48 @@ export function calcScore(input: ScoreInput): ScoreResult {
   };
 }
 
+// ───────────────────────── 미래 점수 ─────────────────────────
+
+/** 미래 예측에서 보여줄 시점 (년). 5년 뒤도 보고 싶으면 [1, 3, 5]로 */
+export const FUTURE_YEARS = [1, 3] as const;
+
+/** 예측의 전제. 화면에 그대로 보여줍니다 */
+export const FUTURE_ASSUMPTIONS = [
+  "부양가족 수는 지금과 같다고 가정합니다.",
+  "무주택 상태와 청약통장(배우자 통장 포함)을 계속 유지한다고 가정합니다.",
+  "가점 제도가 바뀌지 않는다고 가정합니다.",
+];
+
+export type FutureScore = {
+  years: number;
+  baseDate: string;
+  homeless: number;
+  dependents: number;
+  account: number;
+  total: number;
+};
+
+/**
+ * 지금 입력값 그대로 기준일만 N년 뒤로 미뤄 다시 계산합니다.
+ * 무주택기간·통장 가입기간은 날짜로 계산하므로 자연히 늘어나고,
+ * 부양가족은 날짜와 상관없이 지금 체크한 그대로 셉니다.
+ */
+export function projectScores(input: ScoreInput, years: readonly number[] = FUTURE_YEARS): FutureScore[] {
+  if (validate(input).length > 0) return [];
+  return years.map((y) => {
+    const baseDate = addYears(input.baseDate, y);
+    const r = calcScore({ ...input, baseDate });
+    return {
+      years: y,
+      baseDate,
+      homeless: r.homeless.score,
+      dependents: r.dependents.score,
+      account: r.account.score,
+      total: r.total,
+    };
+  });
+}
+
 /** 0.5점 단위가 생길 수 있어 소수점은 필요할 때만 표시 */
 export function fmt(n: number): string {
   return Number.isInteger(n) ? String(n) : n.toFixed(1);

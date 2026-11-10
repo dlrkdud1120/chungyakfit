@@ -10,7 +10,8 @@ import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
 import type { Complex, ComplexData, HouseType } from "@/lib/complexes";
 import { judge, VERDICT_ORDER, VERDICTS, type Judgement, type Verdict } from "@/lib/judge";
-import { parseMyScore, readMyScoreRaw, subscribeMyScore } from "@/lib/myScore";
+import { parseMyScore, readMyScoreRaw, subscribeMyScore, type SavedFuture } from "@/lib/myScore";
+import { FUTURE_ASSUMPTIONS } from "@/lib/score";
 
 const NO_DATA = "데이터 없음";
 type Filter = "전체" | Verdict | typeof NO_DATA;
@@ -41,8 +42,8 @@ export default function CompareList({ data }: { data: ComplexData }) {
   const saved = useMemo(() => parseMyScore(savedRaw), [savedRaw]);
   const [manual, setManual] = useState<string | null>(null);
   const manualNum = manual !== null && manual !== "" ? Number(manual) : null;
-  const myScore =
-    manualNum !== null && !Number.isNaN(manualNum) ? Math.min(Math.max(manualNum, 0), 84) : (saved?.total ?? null);
+  const manualActive = manualNum !== null && !Number.isNaN(manualNum);
+  const myScore = manualActive ? Math.min(Math.max(manualNum, 0), 84) : (saved?.total ?? null);
 
   // ── 필터·정렬
   const [sido, setSido] = useState("전체");
@@ -205,6 +206,17 @@ export default function CompareList({ data }: { data: ComplexData }) {
             </FilterLine>
           </div>
 
+          {/* 미래 점수로 판정이 좋아지는 단지 */}
+          <FutureImprovements
+            rows={regionRows}
+            nowScore={myScore}
+            future={manualActive ? null : (saved?.future ?? null)}
+            manualActive={manualActive}
+            hasSaved={saved !== null}
+          />
+
+          <h2 className="mt-10 text-sm font-semibold text-brand">지금 점수로 본 전체 단지</h2>
+
           {/* 표 머리 (넓은 화면에서만) */}
           <div className="hidden grid-cols-[1.4fr_0.9fr_1.6fr_0.9fr] gap-4 border-b-2 border-brand py-2 text-xs font-semibold text-brand md:grid">
             <span>단지 · 공고일 · 출처</span>
@@ -230,6 +242,142 @@ export default function CompareList({ data }: { data: ComplexData }) {
         비어 있는 주택형은 &ldquo;데이터 없음&rdquo;으로 판정하지 않습니다. 당첨 가점 출처: 청약홈 &gt; 청약일정 및 통계 &gt; 당첨가점.
       </p>
     </div>
+  );
+}
+
+// ───────────────────────── 미래 판정 ─────────────────────────
+
+function FutureImprovements({
+  rows,
+  nowScore,
+  future,
+  manualActive,
+  hasSaved,
+}: {
+  rows: Row[];
+  nowScore: number | null;
+  future: SavedFuture[] | null;
+  manualActive: boolean;
+  hasSaved: boolean;
+}) {
+  const heading = (
+    <h2 className="border-b-2 border-brand pb-2 text-sm font-semibold text-brand">
+      시간이 지나면 판정이 좋아지는 단지
+    </h2>
+  );
+
+  if (nowScore === null || !future || future.length === 0) {
+    return (
+      <section className="mt-8">
+        {heading}
+        <p className="py-4 text-sm text-muted">
+          {manualActive
+            ? "직접 넣은 점수에는 미래 예측이 없습니다. 되돌리기를 누르면 저장된 점수 기준으로 보여드려요."
+            : hasSaved
+              ? "미래 점수가 저장되어 있지 않아요. 계산기에서 '이 점수로 단지 비교하기'를 한 번 더 눌러 주세요."
+              : "계산기에서 점수를 구하면 1년 뒤, 3년 뒤 판정도 함께 보여드려요."}
+        </p>
+      </section>
+    );
+  }
+
+  // 지금 판정이 있는 행 중에서, 미래 어느 시점에라도 판정이 한 단계 이상 좋아지는 것
+  const improved = rows
+    .filter((r) => !r.lotteryOnly && r.judgement)
+    .map((r) => {
+      const now = r.judgement!;
+      const later = future.map((f) => judge(f.total, r.type));
+      const firstBetter = later.findIndex((j) => j && VERDICT_ORDER[j.verdict] < VERDICT_ORDER[now.verdict]);
+      return { row: r, now, later, firstBetter };
+    })
+    .filter((x) => x.firstBetter !== -1)
+    .sort((a, b) => a.firstBetter - b.firstBetter || (b.row.type.avg ?? 0) - (a.row.type.avg ?? 0));
+
+  return (
+    <section className="mt-8">
+      {heading}
+
+      {/* 점수 변화 요약 */}
+      <div className="flex flex-wrap gap-x-5 gap-y-1 border-b border-line py-3 text-sm tabular-nums">
+        <span>
+          지금 <b className="text-brand">{fmt(nowScore)}</b>점
+        </span>
+        {future.map((f) => (
+          <span key={f.years}>
+            {f.years}년 뒤 <b className="text-brand">{fmt(f.total)}</b>점
+            {f.total > nowScore && <span className="ml-1 text-xs text-accent-dark">+{fmt(f.total - nowScore)}</span>}
+          </span>
+        ))}
+      </div>
+
+      {improved.length === 0 ? (
+        <p className="py-4 text-sm text-muted">
+          {future.every((f) => f.total === nowScore)
+            ? "앞으로도 점수가 그대로라 판정이 바뀌는 단지가 없습니다."
+            : "지금 조건의 단지 중 판정이 바뀌는 곳은 없습니다."}
+        </p>
+      ) : (
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-line text-xs text-muted">
+              <th className="py-2 text-left font-normal">단지 · 주택형</th>
+              <th className="py-2 text-center font-normal">지금</th>
+              {future.map((f) => (
+                <th key={f.years} className="py-2 text-center font-normal">
+                  {f.years}년 뒤
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {improved.map(({ row, now, later }, i) => (
+              <tr key={`${row.complex.id}-${row.type.type}-${i}`} className="border-b border-line">
+                <td className="py-2.5 pr-2">
+                  <div className="font-medium">
+                    {row.complex.name} <span className="text-muted">{row.type.type}</span>
+                  </div>
+                  <div className="text-xs text-muted">
+                    {row.complex.sido} {row.complex.sigungu} · 최저 {val(row.type.min)} · 평균 {val(row.type.avg)}
+                  </div>
+                </td>
+                <td className="py-2.5 text-center">
+                  <MiniBadge verdict={now.verdict} />
+                </td>
+                {later.map((j, k) => {
+                  const prev = k === 0 ? now : later[k - 1];
+                  const changed = j && prev && j.verdict !== prev.verdict;
+                  return (
+                    <td key={k} className="py-2.5 text-center">
+                      {j ? <MiniBadge verdict={j.verdict} changed={!!changed} /> : <span className="text-xs text-muted">–</span>}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
+      <ul className="mt-3 space-y-0.5 text-xs leading-relaxed text-muted">
+        {FUTURE_ASSUMPTIONS.map((a) => (
+          <li key={a}>· {a}</li>
+        ))}
+        <li>· 단지의 당첨 가점도 지금 CSV 값 그대로라고 보고 비교합니다. 실제 커트라인은 해마다 달라집니다.</li>
+      </ul>
+    </section>
+  );
+}
+
+function MiniBadge({ verdict, changed = false }: { verdict: Verdict; changed?: boolean }) {
+  return (
+    <span
+      className={`inline-block rounded-sm px-1.5 py-0.5 text-xs font-semibold ${BADGE[verdict]} ${
+        changed ? "ring-2 ring-accent ring-offset-1" : ""
+      }`}
+    >
+      {changed && "↑ "}
+      {verdict}
+    </span>
   );
 }
 
