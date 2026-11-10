@@ -1,26 +1,19 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 청약핏 색상 — 여기서 바꾸면 화면 전체 색이 바뀝니다 */
+@theme {
+  --color-brand: #1f4e46; /* 메인 초록 */
+  --color-accent: #f4a53f; /* 포인트 주황 */
+  --color-accent-dark: #c47a14; /* 주황 글자용(흰 배경에서 잘 보이게) */
+  --color-ink: #1c2422; /* 본문 글자 */
+  --color-muted: #6b7672; /* 보조 글자 */
+  --color-line: #e3e8e6; /* 얇은 구분선 */
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #fbfcfb;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  word-break: keep-all;
 }

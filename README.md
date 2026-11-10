@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 청약핏
 
-## Getting Started
+내 청약 가점으로 관심 단지에 당첨 가능성이 있는지 알려주는 웹앱. 부동산프롭테크 기말 프로젝트.
 
-First, run the development server:
+## 실행
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+브라우저에서 http://localhost:3000 을 엽니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 파일 구조
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| 파일 | 역할 |
+| --- | --- |
+| `lib/score.ts` | 가점 계산 규칙 전부. 제도가 바뀌면 이 파일 맨 위 `RULES`만 고치면 됩니다. |
+| `components/Calculator.tsx` | 입력 폼과 결과 표. 계산은 하지 않고 `score.ts`에 맡깁니다. |
+| `app/page.tsx` | 첫 화면. 제목, 계산기, 하단 안내 문구를 배치합니다. |
+| `app/layout.tsx` | 모든 페이지 공통 틀. 한국어 설정, 웹폰트, 브라우저 탭 제목. |
+| `app/globals.css` | 색상(초록·주황)과 기본 글꼴. |
 
-## Learn More
+## 진행 단계
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. 가점 계산기 ✅
+2. 단지 목록과 내 점수 비교 판정 (`data/complexes.json`)
+3. 미래 점수 예측
+4. 추첨제 물량 안내
+5. 입지 점수
+6. 청약홈 공공데이터 API 연동
