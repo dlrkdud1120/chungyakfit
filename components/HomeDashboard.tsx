@@ -109,6 +109,12 @@ function MyStatus({
         </tbody>
       </table>
       <p className="mt-2 text-xs text-muted">{saved.savedAt} 기준으로 저장한 점수입니다.</p>
+      <Link
+        href="/check"
+        className="mt-4 inline-block rounded bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand/90"
+      >
+        원하는 단지 가능성 확인하기 →
+      </Link>
     </Section>
   );
 }
@@ -232,9 +238,9 @@ function UpcomingNotices() {
         if (!alive) return;
         if (!result.ok) return setState({ status: "fail", reason: result.reason });
         const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
-        // 접수가 아직 끝나지 않은 공고를 접수 시작일이 가까운 순으로
+        // 접수가 아직 끝나지 않은 일반 APT 공고를 접수 시작일이 가까운 순으로
         const list = result.notices
-          .filter((n) => n.receiptEnd && n.receiptEnd >= today)
+          .filter((n) => n.kind === "APT" && n.receiptEnd && n.receiptEnd >= today)
           .sort((a, b) => (a.receiptStart ?? "").localeCompare(b.receiptStart ?? ""))
           .slice(0, TOP_N);
         setState({ status: "ok", list, today });
@@ -263,8 +269,12 @@ function UpcomingNotices() {
               {state.list.map((n) => (
                 <tr key={n.houseManageNo || n.name} className="border-b border-line">
                   <td className="py-2.5 pr-2">
-                    <span className="font-medium">{n.name}</span>
-                    <div className="text-xs text-muted">{n.region}</div>
+                    <Link href={`/check?no=${encodeURIComponent(n.houseManageNo)}`} className="font-medium hover:underline">
+                      {n.name}
+                    </Link>
+                    <div className="text-xs text-muted">
+                      {n.region} {n.unit}
+                    </div>
                   </td>
                   <td className="py-2.5 text-right whitespace-nowrap tabular-nums">
                     {dot(n.receiptStart)} ~ {dot(n.receiptEnd)}

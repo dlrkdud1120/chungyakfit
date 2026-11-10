@@ -66,7 +66,16 @@ function NoticeRow({ n }: { n: Notice }) {
     <li className="border-b border-line py-4">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3">
         <span className="font-semibold">
-          {n.name}
+          {n.url ? (
+            <a href={n.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+              {n.name}
+            </a>
+          ) : (
+            n.name
+          )}
+          <span className="ml-2 text-xs font-normal text-muted">
+            {[n.kind, n.supplyKind].filter(Boolean).join(" · ")}
+          </span>
           {n.overheated && <span className="ml-2 text-xs font-normal text-accent-dark">투기과열지구</span>}
         </span>
         <span className="text-xs text-muted">공고일 {dot(n.noticeDate)}</span>
@@ -92,6 +101,7 @@ function NoticeRow({ n }: { n: Notice }) {
               <th className="py-1 text-right font-normal">일반공급</th>
               <th className="py-1 text-right font-normal">특별공급</th>
               <th className="py-1 text-right font-normal">분양 최고가</th>
+              <th className="py-1 text-right font-normal" />
             </tr>
           </thead>
           <tbody>
@@ -101,12 +111,23 @@ function NoticeRow({ n }: { n: Notice }) {
                 <td className="py-1.5 text-right">{t.supply ?? "–"}</td>
                 <td className="py-1.5 text-right">{t.special ?? "–"}</td>
                 <td className="py-1.5 text-right">{t.topAmount !== null ? `${t.topAmount.toLocaleString()}만원` : "–"}</td>
+                <td className="py-1.5 pl-2 text-right whitespace-nowrap">
+                  {n.kind === "APT" && (
+                    <Link
+                      href={`/check?no=${encodeURIComponent(n.houseManageNo)}&type=${encodeURIComponent(t.type)}`}
+                      className="text-xs text-brand underline"
+                    >
+                      가능성
+                    </Link>
+                  )}
+                </td>
               </tr>
             ))}
             <tr className="border-t border-line text-muted">
               <td className="py-1.5">합계</td>
               <td className="py-1.5 text-right">{totalSupply ?? "–"}</td>
               <td className="py-1.5 text-right">{totalSpecial ?? "–"}</td>
+              <td />
               <td />
             </tr>
           </tbody>

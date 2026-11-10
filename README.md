@@ -41,6 +41,22 @@ npm run dev
 5. 입지 점수 ✅ (기준표 `lib/location.ts`, 데이터 `data/locations.csv`, 화면 `/location`)
 6. 청약홈 공공데이터 API 연동 ✅ (분양 공고 화면 `/notices`)
 
+
+## 당첨 가능성 확인 (/check) — 핵심 기능
+
+원하는 단지를 고르면 같은 지역·같은 면적대의 최근 과거 당첨가점과 내 가점을 비교합니다.
+
+| 파일 | 역할 |
+| --- | --- |
+| `lib/similar.ts` | "비슷한 사례" 기준(`SIMILAR_RULES`: 기간·면적대·최소 사례 수), 해당지역/기타지역 판단, 판정용 최저·평균 계산. |
+| `lib/applyhome.ts` | 분양정보 + 당첨가점 API를 주택관리번호로 이어 붙여 과거 이력을 만듦(하루 캐시). |
+| `app/api/similar/route.ts` | 비슷한 사례를 찾아 돌려주는 서버 주소. 내 가점은 서버로 보내지 않음. |
+| `components/CheckPossibility.tsx` | 가능성 확인 화면. 판정은 `lib/judge.ts`를 그대로 사용. |
+| `lib/myHome.ts` | 내 거주지를 브라우저에 저장. |
+| `check-api.mjs` | 청약홈 API 응답 확인용 스크립트 (`node check-api.mjs`). |
+
+필요한 활용신청: 분양정보 조회 서비스, 청약접수 경쟁률 및 특별공급 신청현황 조회 서비스 (같은 인증키 사용).
+
 ## 청약홈 API 설정
 
 분양정보 API는 공고와 공급세대수만 주고 당첨가점은 주지 않습니다. 당첨가점 판정은 계속 `data/complexes.csv`를 씁니다.

@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 const MENU = [
   { href: "/", label: "홈" },
   { href: "/score", label: "가점 계산" },
+  { href: "/check", label: "가능성 확인" },
   { href: "/compare", label: "단지 비교" },
   { href: "/location", label: "입지 점수" },
   { href: "/notice", label: "분양 공고" },
