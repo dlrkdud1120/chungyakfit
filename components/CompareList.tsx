@@ -37,7 +37,16 @@ const SORTS: [SortKey, string][] = [
 const SCALE_MIN = 0;
 const SCALE_MAX = 84;
 
-export default function CompareList({ data }: { data: ComplexData }) {
+/** 단지 비교 행에 붙이는 입지 점수 요약 (자세한 근거는 /location) */
+export type LocationBrief = { anchor: string; total: number | null; max: number };
+
+export default function CompareList({
+  data,
+  locations,
+}: {
+  data: ComplexData;
+  locations: Record<string, LocationBrief>;
+}) {
   // ── 내 점수: 저장값을 기본으로, 직접 바꿔 넣어 볼 수도 있음
   const savedRaw = useSyncExternalStore(subscribeMyScore, readMyScoreRaw, () => null);
   const saved = useMemo(() => parseMyScore(savedRaw), [savedRaw]);
@@ -234,7 +243,12 @@ export default function CompareList({ data }: { data: ComplexData }) {
           ) : (
             <ul>
               {rows.map((r, i) => (
-                <ResultRow key={`${r.complex.id}-${r.type.type}-${i}`} row={r} myScore={myScore} />
+                <ResultRow
+                  key={`${r.complex.id}-${r.type.type}-${i}`}
+                  row={r}
+                  myScore={myScore}
+                  location={locations[r.complex.id]}
+                />
               ))}
             </ul>
           )}
@@ -477,7 +491,15 @@ function MiniBadge({ verdict, changed = false }: { verdict: Verdict; changed?: b
 
 // ───────────────────────── 한 줄 ─────────────────────────
 
-function ResultRow({ row, myScore }: { row: Row; myScore: number | null }) {
+function ResultRow({
+  row,
+  myScore,
+  location,
+}: {
+  row: Row;
+  myScore: number | null;
+  location: LocationBrief | undefined;
+}) {
   const { complex, type, judgement, lotteryOnly } = row;
   return (
     <li className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-2 border-b border-line py-4 md:grid-cols-[1.4fr_0.9fr_1.6fr_0.9fr] md:items-center">
@@ -490,6 +512,11 @@ function ResultRow({ row, myScore }: { row: Row; myScore: number | null }) {
         <div className="text-[11px] text-muted">
           청약홈 당첨가점 기준{type.checkedAt ? ` (${dot(type.checkedAt)} 확인)` : ""}
         </div>
+        {location && (
+          <Link href={`/location#${location.anchor}`} className="mt-0.5 inline-block text-xs text-brand underline-offset-2 hover:underline">
+            입지 {location.total === null ? NO_DATA : `${location.total}/${location.max}점`} · 근거 보기
+          </Link>
+        )}
       </div>
 
       {/* 판정 (모바일에서는 오른쪽 위) */}

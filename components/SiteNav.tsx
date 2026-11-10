@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 const MENU = [
   { href: "/", label: "가점 계산" },
   { href: "/compare", label: "단지 비교" },
+  { href: "/location", label: "입지 점수" },
 ];
 
 export default function SiteNav() {

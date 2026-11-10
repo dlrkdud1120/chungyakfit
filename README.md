@@ -35,5 +35,5 @@ npm run dev
 2. 단지 목록과 내 점수 비교 판정 ✅
 3. 미래 점수 예측 ✅ (`lib/score.ts`의 `projectScores`, 시점은 `FUTURE_YEARS`)
 4. 추첨제 물량 안내 ✅ (`lib/lottery.ts`, 기준값은 `LOTTERY_RULES`)
-5. 입지 점수
+5. 입지 점수 ✅ (기준표 `lib/location.ts`, 데이터 `data/locations.csv`, 화면 `/location`)
 6. 청약홈 공공데이터 API 연동
