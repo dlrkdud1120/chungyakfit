@@ -14,15 +14,20 @@ import { averageCutoff, gapText } from "@/lib/benchmark";
 import type { Complex, HouseType } from "@/lib/complexes";
 import { judge, VERDICT_ORDER, VERDICTS, type Verdict } from "@/lib/judge";
 import { parseMyScore, readMyScoreRaw, subscribeMyScore } from "@/lib/myScore";
+import { useComplexes } from "@/lib/useComplexes";
 
 const TOP_N = 5; // 노려볼 단지·분양공고를 몇 개까지 보여줄지
 
 type Row = { complex: Complex; type: HouseType; verdict: Verdict | null };
 
-export default function HomeDashboard({ complexes }: { complexes: Complex[] }) {
+/** fallback: 청약홈 API가 실패할 때 쓰는 data/complexes.csv 단지 */
+export default function HomeDashboard({ fallback }: { fallback: Complex[] }) {
   const savedRaw = useSyncExternalStore(subscribeMyScore, readMyScoreRaw, () => null);
   const saved = useMemo(() => parseMyScore(savedRaw), [savedRaw]);
+  const cs = useComplexes(fallback);
+  const complexes = cs.complexes;
   const benchmark = useMemo(() => averageCutoff(complexes.flatMap((c) => c.types)), [complexes]);
+  const benchLabel = cs.source === "api" && cs.scope ? cs.scope : "관심 단지";
 
   // 단지·주택형마다 지금 판정 (가점제 물량이 없으면 판정하지 않음)
   const rows: Row[] = useMemo(
@@ -39,7 +44,7 @@ export default function HomeDashboard({ complexes }: { complexes: Complex[] }) {
 
   return (
     <div className="grid gap-x-12 gap-y-10 lg:grid-cols-2">
-      <MyStatus saved={saved} rows={rows} benchmarkText={saved ? gapText(saved.total, benchmark) : ""} />
+      <MyStatus saved={saved} rows={rows} benchmarkText={saved ? gapText(saved.total, benchmark, benchLabel) : ""} />
       <Targets hasScore={saved !== null} rows={rows} />
       <NextYear saved={saved} rows={rows} />
       <UpcomingNotices />

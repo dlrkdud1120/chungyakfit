@@ -8,7 +8,9 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { saveMyScore } from "@/lib/myScore";
-import { gapText, type Benchmark } from "@/lib/benchmark";
+import { averageCutoff, gapText } from "@/lib/benchmark";
+import type { Complex } from "@/lib/complexes";
+import { useComplexes } from "@/lib/useComplexes";
 import {
   calcScore,
   fmt,
@@ -28,9 +30,13 @@ function todayKST(): string {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
 }
 
-/** benchmark: 관심 단지 평균 당첨 가점 (app/score/page.tsx가 CSV에서 계산해 넘겨줌) */
-export default function Calculator({ benchmark }: { benchmark: Benchmark | null }) {
+/** fallback: 청약홈 API가 실패할 때 평균 당첨 가점 비교에 쓸 complexes.csv 단지 */
+export default function Calculator({ fallback }: { fallback: Complex[] }) {
   const router = useRouter();
+  // 내 점수와 비교할 평균 당첨 가점 (청약홈 과거 당첨가점, 실패하면 CSV)
+  const cs = useComplexes(fallback);
+  const benchmark = useMemo(() => averageCutoff(cs.complexes.flatMap((c) => c.types)), [cs.complexes]);
+  const benchLabel = cs.source === "api" && cs.scope ? cs.scope : "관심 단지";
   const [baseDate, setBaseDate] = useState(todayKST);
   const [birthDate, setBirthDate] = useState("");
   const [married, setMarried] = useState(false);
@@ -237,7 +243,7 @@ export default function Calculator({ benchmark }: { benchmark: Benchmark | null 
                   <b className="text-lg text-brand">{fmt(result.total)}</b>점
                 </span>
               </div>
-              <p className="mt-1 text-right text-xs text-accent-dark">{gapText(result.total, benchmark)}</p>
+              <p className="mt-1 text-right text-xs text-accent-dark">{gapText(result.total, benchmark, benchLabel)}</p>
             </div>
 
             <FutureTable now={result} future={future} />

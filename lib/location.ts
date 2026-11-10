@@ -162,3 +162,17 @@ export function scoreLocation(v: LocationInput): LocationScore {
   const complete = items.every((i) => i.score !== null);
   return { total: complete ? partial : null, partial, max: LOCATION_MAX, items };
 }
+
+// ───────────────────────── 단지 연결용 키 ─────────────────────────
+
+/** 단지명·지역의 띄어쓰기 차이는 같은 단지로 봅니다 (단지 비교 ↔ 입지 점수 연결) */
+export function locationKey(name: string, region: string): string {
+  return `${name.replace(/\s+/g, "")}|${region.replace(/\s+/g, "")}`;
+}
+
+/** 입지 점수 페이지 안에서 단지로 바로 가는 링크용 id */
+export function anchorId(key: string): string {
+  let h = 5381;
+  for (const ch of key) h = ((h * 33) ^ ch.charCodeAt(0)) >>> 0;
+  return `loc-${h.toString(36)}`;
+}

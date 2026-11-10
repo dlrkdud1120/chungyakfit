@@ -23,7 +23,7 @@ npm run dev
 | `components/Calculator.tsx` | 입력 폼과 결과 표. 계산은 하지 않고 `score.ts`에 맡깁니다. |
 | `app/layout.tsx` | 모든 페이지 공통 틀. 한국어 설정, 웹폰트, 브라우저 탭 제목. |
 | `app/globals.css` | 색상(초록·주황)과 기본 글꼴. |
-| `data/complexes.csv` | 청약홈 당첨가점을 직접 옮겨 적는 파일. `#`로 시작하는 줄은 무시. |
+| `data/complexes.csv` | API가 실패할 때 쓰는 예비 데이터. 청약홈 당첨가점을 직접 옮겨 적는 파일(`#` 줄은 무시). |
 | `lib/csv.ts` | CSV를 줄·칸으로 나누는 도구. |
 | `lib/complexes.ts` | CSV를 읽어 단지 목록으로 바꾸고, 잘못된 값을 경고로 모음. API로 바꿀 때 이 파일만 수정. |
 | `lib/judge.ts` | 안정·도전·어려움 판정 기준. |
@@ -60,7 +60,7 @@ npm run dev
 
 ## 청약홈 API 설정
 
-분양정보 API는 공고와 공급세대수를, 경쟁률 API(getAptLttotPblancScore)는 주택형·거주구분별 당첨가점을 줍니다. 가능성 확인(/check)은 둘을 이어 붙여 쓰고, 단지 비교(/compare)는 직접 정리한 `data/complexes.csv`를 씁니다.
+분양정보 API는 공고와 공급세대수를, 경쟁률 API(getAptLttotPblancScore)는 주택형·거주구분별 당첨가점을 줍니다. 가능성 확인(/check)과 단지 비교(/compare)·메인·가점 계산의 평균 비교는 둘을 이어 붙인 과거 당첨가점(`/api/complexes`, `lib/useComplexes.ts`)을 쓰고, API가 실패할 때만 `data/complexes.csv`를 씁니다. API에는 가점제·추첨제 세대수가 없어 추첨제 안내는 CSV 데이터에서만 계산됩니다.
 
 | 파일 | 역할 |
 | --- | --- |

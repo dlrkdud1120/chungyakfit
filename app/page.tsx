@@ -1,6 +1,7 @@
 /**
  * 메인 화면 (/)
- * 단지 데이터는 빌드할 때 CSV에서 읽어 넘기고, 내 점수와 분양 공고는 화면(HomeDashboard)에서 불러옵니다.
+ * 단지 데이터(청약홈 과거 당첨가점), 내 점수, 분양 공고는 화면(HomeDashboard)에서 불러옵니다.
+ * 여기서 읽는 CSV는 청약홈 API가 실패할 때만 쓰는 예비용입니다.
  */
 
 import HomeDashboard from "@/components/HomeDashboard";
@@ -14,7 +15,7 @@ export default function Home() {
         <h1 className="text-2xl font-bold text-brand sm:text-3xl">청약핏</h1>
         <p className="mt-2 text-sm text-muted">내 청약 가점으로 관심 단지에 당첨 가능성이 있는지 한눈에 봅니다.</p>
       </header>
-      <HomeDashboard complexes={complexes} />
+      <HomeDashboard fallback={complexes} />
     </>
   );
 }

@@ -9,7 +9,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { parseCsv } from "./csv";
-import { scoreLocation, type LocationInput, type LocationScore } from "./location";
+import { anchorId, locationKey, scoreLocation, type LocationInput, type LocationScore } from "./location";
 
 const CSV_PATH = path.join(process.cwd(), "data", "locations.csv");
 
@@ -41,16 +41,7 @@ export type LocationEntry = {
 
 export type LocationData = { entries: LocationEntry[]; warnings: string[] };
 
-/** 단지명·지역의 띄어쓰기 차이는 같은 단지로 봅니다 */
-export function locationKey(name: string, region: string): string {
-  return `${name.replace(/\s+/g, "")}|${region.replace(/\s+/g, "")}`;
-}
-
-export function anchorId(key: string): string {
-  let h = 5381;
-  for (const ch of key) h = ((h * 33) ^ ch.charCodeAt(0)) >>> 0;
-  return `loc-${h.toString(36)}`;
-}
+export { anchorId, locationKey };
 
 export function loadLocations(): LocationData {
   let text: string;

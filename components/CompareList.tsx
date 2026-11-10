@@ -3,7 +3,8 @@
 /**
  * 단지 비교 화면
  * 저장된 내 점수를 불러와 단지·주택형마다 판정(lib/judge.ts)을 붙이고, 지역·판정 필터와 정렬을 제공합니다.
- * 데이터는 app/compare/page.tsx가 CSV에서 읽어 넘겨줍니다.
+ * 데이터는 청약홈 과거 당첨가점 API(/api/complexes, lib/useComplexes.ts)에서 가져오고,
+ * API가 실패하면 app/compare/page.tsx가 넘겨준 data/complexes.csv를 대신 씁니다.
  */
 
 import Link from "next/link";
@@ -15,6 +16,10 @@ import { FUTURE_ASSUMPTIONS } from "@/lib/score";
 import { hasManyHard, lotteryRatio, percent, recommendLotteryTypes, type JudgedRow } from "@/lib/lottery";
 import { averageCutoff, gapText } from "@/lib/benchmark";
 import { FUTURE_SECTION_ID, rowAnchor } from "@/lib/anchors";
+import { locationKey } from "@/lib/location";
+import { saveMyHome } from "@/lib/myHome";
+import { SIDO_LIST } from "@/lib/similar";
+import { useComplexes } from "@/lib/useComplexes";
 
 const NO_DATA = "데이터 없음";
 type Filter = "전체" | Verdict | typeof NO_DATA;
@@ -51,12 +56,19 @@ function scaleFor(rows: Row[], mine: number | null): Scale {
 export type LocationBrief = { anchor: string; total: number | null; max: number };
 
 export default function CompareList({
-  data,
+  fallback,
   locations,
 }: {
-  data: ComplexData;
-  locations: Record<string, LocationBrief>;
+  fallback: ComplexData; // API가 실패할 때 쓰는 CSV 데이터
+  locations: Record<string, LocationBrief>; // 키: locationKey(단지명, 지역)
 }) {
+  // ── 단지 데이터: 청약홈 과거 당첨가점 (실패하면 CSV)
+  const cs = useComplexes(fallback.complexes);
+  const data: ComplexData = useMemo(
+    () => ({ complexes: cs.complexes, warnings: cs.source === "csv" ? fallback.warnings : [] }),
+    [cs.complexes, cs.source, fallback.warnings],
+  );
+
   // ── 내 점수: 저장값을 기본으로, 직접 바꿔 넣어 볼 수도 있음
   const savedRaw = useSyncExternalStore(subscribeMyScore, readMyScoreRaw, () => null);
   const saved = useMemo(() => parseMyScore(savedRaw), [savedRaw]);
@@ -70,7 +82,8 @@ export default function CompareList({
     const go = () => {
       const id = decodeURIComponent(window.location.hash.slice(1));
       const el = id ? document.getElementById(id) : null;
-      if (!el) return;
+      if (!el || el.dataset.seen) return;
+      el.dataset.seen = "1";
       el.scrollIntoView({ block: "start" });
       el.dataset.flash = "1";
       window.setTimeout(() => delete el.dataset.flash, 2500);
@@ -78,7 +91,7 @@ export default function CompareList({
     go();
     window.addEventListener("hashchange", go);
     return () => window.removeEventListener("hashchange", go);
-  }, []);
+  }, [data]); // 데이터가 도착한 뒤에 줄이 생기므로 데이터가 바뀔 때 다시 확인
 
   // ── 필터·정렬
   const [sido, setSido] = useState("전체");
@@ -170,8 +183,11 @@ export default function CompareList({
           {myScore !== null && (
             <p className="mt-1 text-xs text-accent-dark">
               {manualActive ? `${fmt(myScore)}점은 ` : ""}
-              {gapText(myScore, benchmark)}
-              {benchmark && sido !== "전체" && ` · ${sigungu !== "전체" ? sigungu : sido} 기준`}
+              {gapText(
+                myScore,
+                benchmark,
+                sido !== "전체" ? (sigungu !== "전체" ? sigungu : sido) : cs.source === "api" && cs.scope ? cs.scope : "관심 단지",
+              )}
             </p>
           )}
         </div>
@@ -197,7 +213,12 @@ export default function CompareList({
         </label>
       </div>
 
-      {data.complexes.length === 0 ? (
+      {/* 데이터 출처와 거주지 */}
+      <SourceBar cs={cs} />
+
+      {cs.loading && data.complexes.length === 0 ? (
+        <p className="py-10 text-sm text-muted">청약홈에서 과거 당첨 가점을 불러오는 중… (처음엔 몇 초 걸릴 수 있어요)</p>
+      ) : data.complexes.length === 0 ? (
         <EmptyState />
       ) : (
         <>
@@ -269,7 +290,7 @@ export default function CompareList({
           {/* 표 머리 (넓은 화면에서만) */}
           <div className="hidden grid-cols-[1.4fr_0.9fr_1.6fr_0.9fr] gap-4 border-b-2 border-brand py-2 text-xs font-semibold text-brand md:grid">
             <span>단지 · 공고일 · 출처</span>
-            <span>주택형 · 공급</span>
+            <span>주택형</span>
             <span>과거 당첨 가점</span>
             <span className="text-right">판정</span>
           </div>
@@ -283,7 +304,7 @@ export default function CompareList({
                   key={`${r.complex.id}-${r.type.type}-${i}`}
                   row={r}
                   myScore={myScore}
-                  location={locations[r.complex.id]}
+                  location={locations[locationKey(r.complex.name, `${r.complex.sido} ${r.complex.sigungu}`)]}
                   scale={scale}
                 />
               ))}
@@ -417,7 +438,7 @@ function FutureImprovements({
         {FUTURE_ASSUMPTIONS.map((a) => (
           <li key={a}>· {a}</li>
         ))}
-        <li>· 단지의 당첨 가점도 지금 CSV 값 그대로라고 보고 비교합니다. 실제 커트라인은 해마다 달라집니다.</li>
+        <li>· 단지의 당첨 가점도 지금 보이는 과거 값 그대로라고 보고 비교합니다. 실제 커트라인은 해마다 달라집니다.</li>
       </ul>
     </section>
   );
@@ -433,6 +454,27 @@ function LotteryGuide({ rows }: { rows: Row[] }) {
   }));
   const { hard, judged, many } = hasManyHard(judgedRows);
   if (!many) return null;
+
+  // 청약홈 당첨가점 API에는 가점제·추첨제 세대수가 없어 비율을 계산할 수 없습니다
+  if (rows.every((r) => lotteryRatio(r.type) === null)) {
+    return (
+      <section className="mt-10">
+        <h2 className="border-b-2 border-brand pb-2 text-sm font-semibold text-brand">추첨제로 노려볼 타입</h2>
+        <p className="py-3 text-sm leading-relaxed">
+          판정이 나온 {judged}개 주택형 중 <b>{hard}개가 어려움</b>입니다. 가점이 부족하면 추첨제 물량을 노려볼 수 있지만,
+          청약홈 당첨가점 데이터에는 가점제·추첨제 세대수가 없어 여기서 비율을 계산하지 못합니다.
+        </p>
+        <p className="text-xs leading-relaxed text-muted">
+          전용 85㎡ 이하는 지역에 따라 추첨제 비율이 있고, 85㎡ 초과는 추첨제 비율이 더 높은 편입니다. 단지별 정확한 가점제·추첨제
+          세대수는{" "}
+          <Link href="/notice" className="text-brand underline">
+            분양 공고
+          </Link>
+          의 청약홈 공고문에서 확인하세요.
+        </p>
+      </section>
+    );
+  }
 
   const picks = recommendLotteryTypes(judgedRows);
 
@@ -547,12 +589,21 @@ function ResultRow({
     >
       {/* 단지 */}
       <div className="min-w-0">
-        <div className="text-[15px] font-semibold">{complex.name}</div>
+        <div className="text-[15px] font-semibold">
+          {complex.url ? (
+            <a href={complex.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+              {complex.name}
+            </a>
+          ) : (
+            complex.name
+          )}
+        </div>
         <div className="text-xs text-muted">
           {complex.sido} {complex.sigungu} · 공고일 {complex.noticeDate ? dot(complex.noticeDate) : NO_DATA}
         </div>
         <div className="text-[11px] text-muted">
-          청약홈 당첨가점 기준{type.checkedAt ? ` (${dot(type.checkedAt)} 확인)` : ""}
+          청약홈 당첨가점 기준{type.reside ? ` · ${type.reside}` : ""}
+          {type.checkedAt ? ` (${dot(type.checkedAt)} 확인)` : ""}
         </div>
         {location && (
           <Link href={`/location#${location.anchor}`} className="mt-0.5 inline-block text-xs text-brand underline-offset-2 hover:underline">
@@ -570,11 +621,16 @@ function ResultRow({
       {/* 주택형 */}
       <div className="col-span-2 text-sm md:col-span-1">
         <span className="font-medium">{type.type}</span>
-        <span className="text-muted"> · 공급 {cnt(type.supply)}</span>
-        <div className="text-xs text-muted">
-          가점제 {cnt(type.gajeomSupply)} · 추첨제 {cnt(type.lotterySupply)}
-          {lotteryRatio(type) !== null && ` (추첨 ${percent(lotteryRatio(type)!)})`}
-        </div>
+        {/* 청약홈 당첨가점 API에는 세대수가 없어서, 세대수가 하나라도 있을 때만 보여줍니다 (CSV 데이터) */}
+        {(type.supply !== null || type.gajeomSupply !== null || type.lotterySupply !== null) && (
+          <>
+            <span className="text-muted"> · 공급 {cnt(type.supply)}</span>
+            <div className="text-xs text-muted">
+              가점제 {cnt(type.gajeomSupply)} · 추첨제 {cnt(type.lotterySupply)}
+              {lotteryRatio(type) !== null && ` (추첨 ${percent(lotteryRatio(type)!)})`}
+            </div>
+          </>
+        )}
       </div>
 
       {/* 가점 범위 */}
@@ -643,13 +699,57 @@ function VerdictBadge({
   );
 }
 
+/** 데이터 출처(청약홈 API / CSV)와 내 거주지 */
+function SourceBar({ cs }: { cs: ReturnType<typeof useComplexes> }) {
+  const { home } = cs;
+  return (
+    <div className="flex flex-col gap-3 border-b border-line py-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="text-xs leading-relaxed text-muted">
+        {cs.source === "api" ? (
+          <>
+            출처: 한국부동산원 청약홈 당첨가점 API · {cs.scope} 민영·국민 APT
+            {cs.fetchedAt && ` · ${dot(cs.fetchedAt.slice(0, 10))} 기준`}
+            <br />
+            주택형마다 {home.sido ? "내 거주지 기준" : "해당지역"} 당첨 가점을 보여줍니다. 당첨 가점이 &lsquo;-&rsquo;(미달·추첨)인 주택형은 뺐습니다.
+          </>
+        ) : cs.failReason ? (
+          <span className="text-accent-dark">
+            청약홈 API를 불러오지 못해 직접 정리한 complexes.csv로 보여줍니다. ({cs.failReason})
+          </span>
+        ) : (
+          "청약홈에서 불러오는 중…"
+        )}
+      </div>
+      <label className="flex shrink-0 items-center gap-2 text-sm">
+        <span className="text-muted">내 거주지</span>
+        <select
+          value={home.sido}
+          onChange={(e) => saveMyHome({ ...home, sido: e.target.value })}
+          className="rounded border border-line bg-white px-2 py-1.5 text-sm"
+        >
+          <option value="">선택</option>
+          {SIDO_LIST.map((s) => (
+            <option key={s}>{s}</option>
+          ))}
+        </select>
+        <input
+          value={home.unit}
+          onChange={(e) => saveMyHome({ ...home, unit: e.target.value })}
+          placeholder="시·군·구"
+          className="w-24 rounded border border-line bg-white px-2 py-1.5 text-sm focus:border-brand focus:outline-none"
+        />
+      </label>
+    </div>
+  );
+}
+
 function EmptyState() {
   return (
     <div className="py-10 text-sm leading-relaxed text-muted">
-      <p className="font-semibold text-ink">아직 등록된 단지가 없습니다.</p>
+      <p className="font-semibold text-ink">비교할 단지가 없습니다.</p>
       <p className="mt-2">
-        청약홈 &gt; 청약일정 및 통계 &gt; 당첨가점에서 확인한 값을 <code className="text-ink">data/complexes.csv</code>에 한 줄씩
-        추가하고 다시 배포하면 여기에 나타납니다.
+        청약홈 API가 연결되면 최근 과거 당첨 가점이 자동으로 나타납니다. API 키 설정은 README의 &ldquo;청약홈 API 설정&rdquo;을
+        참고하세요. API 없이 쓰려면 <code className="text-ink">data/complexes.csv</code>에 직접 정리한 값을 넣을 수 있습니다.
       </p>
     </div>
   );

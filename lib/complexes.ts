@@ -45,6 +45,7 @@ export type HouseType = {
   avg: number | null;
   max: number | null;
   checkedAt: string | null; // 출처 확인일 "YYYY-MM-DD"
+  reside?: string; // 청약홈 API 데이터일 때: 이 값이 어느 거주 구분의 당첨가점인지 (해당지역 등)
 };
 
 export type Complex = {
@@ -53,6 +54,7 @@ export type Complex = {
   sido: string; // "서울"
   sigungu: string; // "강남구", "성남시 분당구"
   noticeDate: string | null; // 공고일 "YYYY-MM-DD"
+  url?: string | null; // 청약홈 공고 링크 (API 데이터일 때)
   types: HouseType[];
 };
 

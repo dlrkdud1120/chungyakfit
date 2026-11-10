@@ -9,7 +9,8 @@
  * 이 파일은 app/api/ 아래 Route Handler(서버)에서만 불러야 합니다. 화면 컴포넌트에서는 타입만 가져다 씁니다.
  */
 
-import { areaOf, bandOf, shortSido, unitFromAddress, type PastRow } from "./similar";
+import type { Complex } from "./complexes";
+import { areaOf, bandOf, groupByType, pickRow, shortSido, shortType, unitFromAddress, type Home, type PastRow } from "./similar";
 
 /** 활용명세의 Base URL. 테스트용으로 APPLYHOME_API_BASE로 바꿀 수 있습니다. */
 const BASE_URL = process.env.APPLYHOME_API_BASE ?? "https://api.odcloud.kr/api";
@@ -282,4 +283,42 @@ export async function fetchHistory(yearsBack: number): Promise<HistoryResult> {
   } catch (e) {
     return { ok: false, reason: (e as Error).message };
   }
+}
+
+// ───────────────────────── 3. 단지 비교용 목록 ─────────────────────────
+
+/**
+ * 과거 당첨가점 이력을 단지 비교 화면이 쓰는 단지 목록(Complex) 형태로 바꿉니다.
+ * - 분양 공고 화면과 같은 지역(NOTICE_SETTINGS.regions)만
+ * - 주택형마다 내 거주지 기준 거주 구분(해당지역/기타경기/기타지역)의 값 한 줄만
+ * - 평균 당첨가점이 '-'(미달·추첨 등)인 주택형은 뺍니다
+ * 가점제·추첨제 세대수는 API에 없어 비워 둡니다.
+ */
+export function historyToComplexes(rows: PastRow[], home: Home | null, fetchedAt: string): Complex[] {
+  const checkedAt = fetchedAt.slice(0, 10);
+  const byNo = new Map<string, Complex>();
+  const regions = NOTICE_SETTINGS.regions.map(shortSido);
+
+  for (const group of groupByType(rows.filter((r) => regions.includes(r.sido)))) {
+    const row = pickRow(group, home);
+    if (!row || row.avg === null) continue;
+    let c = byNo.get(row.no);
+    if (!c) {
+      c = { id: row.no, name: row.name, sido: row.sido, sigungu: row.unit, noticeDate: row.noticeDate, url: row.url, types: [] };
+      byNo.set(row.no, c);
+    }
+    c.types.push({
+      type: shortType(row.houseTy),
+      supply: null,
+      gajeomSupply: null,
+      lotterySupply: null,
+      min: row.min,
+      avg: row.avg,
+      max: row.max,
+      checkedAt,
+      reside: row.reside,
+    });
+  }
+  for (const c of byNo.values()) c.types.sort((a, b) => a.type.localeCompare(b.type, "ko", { numeric: true }));
+  return [...byNo.values()].sort((a, b) => (b.noticeDate ?? "").localeCompare(a.noticeDate ?? ""));
 }

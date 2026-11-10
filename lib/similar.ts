@@ -142,21 +142,34 @@ export function findSimilar(
   return { level: null, cases: [], stats: null, complexCount: 0 };
 }
 
-/** 같은 공고·주택형마다, 나에게 해당하는 거주 구분의 당첨가점 한 줄만 고르기 */
-function pickCases(rows: PastRow[], home: Home, override: Reside | null, target: Target): PickedCase[] {
+/** 같은 공고·주택형끼리 묶기 (거주 구분별로 줄이 따로 오기 때문) */
+export function groupByType(rows: PastRow[]): PastRow[][] {
   const groups = new Map<string, PastRow[]>();
   for (const r of rows) {
     const k = `${r.no}|${r.houseTy}`;
     groups.set(k, [...(groups.get(k) ?? []), r]);
   }
+  return [...groups.values()];
+}
+
+/**
+ * 한 공고·주택형 묶음에서 나에게 해당하는 거주 구분의 줄 고르기
+ * want를 주지 않으면 거주지로 판단하고, 거주지가 없으면 해당지역 값을 씁니다.
+ */
+export function pickRow(group: PastRow[], home: Home | null, want?: Reside): PastRow | null {
+  const first = group[0];
+  const w = want ?? (home && home.sido ? resideFor(home, first.sido, first.unit) : "해당지역");
+  const order: string[] = w === "기타경기" ? ["기타경기", "기타지역"] : [w];
+  return order.map((x) => group.find((r) => r.reside === x)).find(Boolean) ?? null;
+}
+
+/** 같은 공고·주택형마다, 나에게 해당하는 거주 구분의 당첨가점 한 줄만 고르기 */
+function pickCases(rows: PastRow[], home: Home, override: Reside | null, target: Target): PickedCase[] {
   const picked: PickedCase[] = [];
-  for (const g of groups.values()) {
-    const first = g[0];
+  for (const g of groupByType(rows)) {
     // 직접 고른 구분은 '원하는 단지와 같은 지역' 사례에만 그대로 적용하고, 다른 시·군 사례는 거주지 기준으로 다시 계산
-    const sameUnit = norm(first.unit) === norm(target.unit);
-    const want = override && sameUnit ? override : resideFor(home, first.sido, first.unit);
-    const order: string[] = want === "기타경기" ? ["기타경기", "기타지역"] : [want];
-    const row = order.map((w) => g.find((r) => r.reside === w)).find(Boolean);
+    const sameUnit = norm(g[0].unit) === norm(target.unit);
+    const row = pickRow(g, home, override && sameUnit ? override : undefined);
     if (row && row.avg !== null && row.min !== null) picked.push(row);
   }
   return picked.sort((a, b) => b.noticeDate.localeCompare(a.noticeDate));

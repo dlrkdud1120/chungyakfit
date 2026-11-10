@@ -1,14 +1,13 @@
 import { Suspense } from "react";
 import Calculator from "@/components/Calculator";
-import { averageCutoff } from "@/lib/benchmark";
 import { loadComplexes } from "@/lib/complexes";
 import { RULES, TOTAL_MAX } from "@/lib/score";
 
 export const metadata = { title: "가점 계산 — 청약핏" };
 
 export default function ScorePage() {
-  // 내 점수를 실제 당첨 가점과 비교하기 위한 기준값 (complexes.csv에서 계산)
-  const benchmark = averageCutoff(loadComplexes().complexes.flatMap((c) => c.types));
+  // 평균 당첨 가점 비교는 화면에서 청약홈 API로 하고, 실패할 때 쓸 CSV만 넘깁니다
+  const fallback = loadComplexes().complexes;
 
   return (
     <>
@@ -21,7 +20,7 @@ export default function ScorePage() {
 
       {/* 계산기는 '오늘 날짜'를 쓰므로 방문할 때마다 새로 그립니다 */}
       <Suspense fallback={<p className="py-10 text-sm text-muted">계산기를 불러오는 중…</p>}>
-        <Calculator benchmark={benchmark} />
+        <Calculator fallback={fallback} />
       </Suspense>
 
       <ScoreCriteria />
