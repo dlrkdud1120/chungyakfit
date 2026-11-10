@@ -20,8 +20,9 @@ npm run dev
 | `app/page.tsx` | 첫 화면. 제목, 계산기, 하단 안내 문구를 배치합니다. |
 | `app/layout.tsx` | 모든 페이지 공통 틀. 한국어 설정, 웹폰트, 브라우저 탭 제목. |
 | `app/globals.css` | 색상(초록·주황)과 기본 글꼴. |
-| `data/complexes.json` | 단지 데이터(지금은 가상 예시, `isSample: true`). |
-| `lib/complexes.ts` | 단지 데이터를 읽어오는 곳. API로 바꿀 때 이 파일만 수정. |
+| `data/complexes.csv` | 청약홈 당첨가점을 직접 옮겨 적는 파일. `#`로 시작하는 줄은 무시. |
+| `lib/csv.ts` | CSV를 줄·칸으로 나누는 도구. |
+| `lib/complexes.ts` | CSV를 읽어 단지 목록으로 바꾸고, 잘못된 값을 경고로 모음. API로 바꿀 때 이 파일만 수정. |
 | `lib/judge.ts` | 안정·도전·어려움 판정 기준. |
 | `lib/myScore.ts` | 내 점수를 브라우저(localStorage)에 저장·불러오기. |
 | `app/compare/page.tsx` | 단지 비교 페이지 주소(/compare). |
