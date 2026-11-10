@@ -12,6 +12,7 @@ import type { Complex, ComplexData, HouseType } from "@/lib/complexes";
 import { judge, VERDICT_ORDER, VERDICTS, type Judgement, type Verdict } from "@/lib/judge";
 import { parseMyScore, readMyScoreRaw, subscribeMyScore, type SavedFuture } from "@/lib/myScore";
 import { FUTURE_ASSUMPTIONS } from "@/lib/score";
+import { hasManyHard, lotteryRatio, percent, recommendLotteryTypes, type JudgedRow } from "@/lib/lottery";
 
 const NO_DATA = "데이터 없음";
 type Filter = "전체" | Verdict | typeof NO_DATA;
@@ -215,6 +216,9 @@ export default function CompareList({ data }: { data: ComplexData }) {
             hasSaved={saved !== null}
           />
 
+          {/* 어려움이 많을 때 추첨제 물량 안내 */}
+          {myScore !== null && <LotteryGuide rows={regionRows} />}
+
           <h2 className="mt-10 text-sm font-semibold text-brand">지금 점수로 본 전체 단지</h2>
 
           {/* 표 머리 (넓은 화면에서만) */}
@@ -368,6 +372,96 @@ function FutureImprovements({
   );
 }
 
+// ───────────────────────── 추첨제 안내 ─────────────────────────
+
+function LotteryGuide({ rows }: { rows: Row[] }) {
+  const judgedRows: JudgedRow[] = rows.map((r) => ({
+    complex: r.complex,
+    type: r.type,
+    verdict: r.judgement?.verdict ?? null,
+  }));
+  const { hard, judged, many } = hasManyHard(judgedRows);
+  if (!many) return null;
+
+  const picks = recommendLotteryTypes(judgedRows);
+
+  return (
+    <section className="mt-10">
+      <h2 className="border-b-2 border-brand pb-2 text-sm font-semibold text-brand">추첨제로 노려볼 타입</h2>
+      <p className="border-b border-line py-3 text-sm leading-relaxed">
+        판정이 나온 {judged}개 주택형 중 <b>{hard}개가 어려움</b>입니다. 가점이 부족해도 추첨제 물량은 점수와 상관없이 뽑으므로, 같은
+        단지 안에서 추첨 비율이 높은 타입을 함께 살펴보세요.
+      </p>
+
+      <ul>
+        {picks.map((p) => (
+          <li key={p.complex.id} className="border-b border-line py-3">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+              <span className="font-semibold">{p.complex.name}</span>
+              <span className="text-xs text-muted">
+                {p.complex.sido} {p.complex.sigungu} · 공고일 {p.complex.noticeDate ? dot(p.complex.noticeDate) : NO_DATA}
+              </span>
+            </div>
+            <p className="mt-1 text-[13px] text-muted">
+              {p.best ? (
+                <>
+                  어려움: {p.hardTypes.join(", ")} → 추천{" "}
+                  <b className="text-accent-dark">{p.best.type.type}</b> (추첨 {percent(p.best.ratio!)},{" "}
+                  {cnt(p.best.type.lotterySupply)})
+                </>
+              ) : (
+                <>어려움: {p.hardTypes.join(", ")} → 가점제·추첨제 세대수가 비어 있어 비율을 계산할 수 없습니다.</>
+              )}
+            </p>
+
+            <table className="mt-2 w-full text-[13px] tabular-nums">
+              <thead>
+                <tr className="text-xs text-muted">
+                  <th className="py-1 text-left font-normal">주택형</th>
+                  <th className="py-1 text-right font-normal">추첨 비율</th>
+                  <th className="py-1 text-right font-normal">추첨 세대</th>
+                  <th className="py-1 text-right font-normal">가점 판정</th>
+                </tr>
+              </thead>
+              <tbody>
+                {p.options.map((o) => {
+                  const isBest = p.best && o.type === p.best.type;
+                  return (
+                    <tr key={o.type.type} className={`border-t border-line ${isBest ? "bg-accent/10" : ""}`}>
+                      <td className="py-1.5 pl-1">
+                        {o.type.type}
+                        {isBest && <span className="ml-1.5 text-xs font-semibold text-accent-dark">추천</span>}
+                      </td>
+                      <td className="py-1.5 text-right">
+                        {o.ratio === null ? NO_DATA : percent(o.ratio)}
+                        {o.ratio !== null && (
+                          <span className="ml-2 inline-block h-1.5 w-12 bg-line align-middle">
+                            <span className="block h-1.5 bg-accent" style={{ width: percent(o.ratio) }} />
+                          </span>
+                        )}
+                      </td>
+                      <td className="py-1.5 text-right">{cnt(o.type.lotterySupply)}</td>
+                      <td className="py-1.5 pr-1 text-right text-xs">
+                        {o.verdict ?? (o.type.gajeomSupply === 0 ? "추첨만" : NO_DATA)}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </li>
+        ))}
+      </ul>
+
+      <ul className="mt-3 space-y-0.5 text-xs leading-relaxed text-muted">
+        <li>· 추첨 비율은 CSV에 적은 공고별 가점제·추첨제 세대수로 계산합니다. 세대수가 비어 있는 타입은 비율을 계산하지 않습니다.</li>
+        <li>· 추첨제도 청약 1순위 자격이 필요하고, 무주택자 우선 배정 같은 조건이 공고마다 다르므로 입주자모집공고를 꼭 확인하세요.</li>
+        <li>· 추첨은 점수와 상관없이 뽑지만 경쟁률이 높으면 당첨 확률은 낮습니다. 물량이 많을수록 기회가 늘어난다는 뜻으로 봐 주세요.</li>
+      </ul>
+    </section>
+  );
+}
+
 function MiniBadge({ verdict, changed = false }: { verdict: Verdict; changed?: boolean }) {
   return (
     <span
@@ -410,6 +504,7 @@ function ResultRow({ row, myScore }: { row: Row; myScore: number | null }) {
         <span className="text-muted"> · 공급 {cnt(type.supply)}</span>
         <div className="text-xs text-muted">
           가점제 {cnt(type.gajeomSupply)} · 추첨제 {cnt(type.lotterySupply)}
+          {lotteryRatio(type) !== null && ` (추첨 ${percent(lotteryRatio(type)!)})`}
         </div>
       </div>
 
