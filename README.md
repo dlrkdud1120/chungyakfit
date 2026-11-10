@@ -21,7 +21,6 @@ npm run dev
 | `lib/anchors.ts` | 메인 화면에서 단지 비교의 특정 줄로 이동하는 주소 만들기. |
 | `lib/score.ts` | 가점 계산 규칙 전부. 제도가 바뀌면 이 파일 맨 위 `RULES`만 고치면 됩니다. |
 | `components/Calculator.tsx` | 입력 폼과 결과 표. 계산은 하지 않고 `score.ts`에 맡깁니다. |
-| `app/layout.tsx` 아래 각 화면: `/` 홈, `/score` 가점 계산, `/compare` 단지 비교, `/location` 입지 점수, `/notice` 분양 공고 | |
 | `app/layout.tsx` | 모든 페이지 공통 틀. 한국어 설정, 웹폰트, 브라우저 탭 제목. |
 | `app/globals.css` | 색상(초록·주황)과 기본 글꼴. |
 | `data/complexes.csv` | 청약홈 당첨가점을 직접 옮겨 적는 파일. `#`로 시작하는 줄은 무시. |
