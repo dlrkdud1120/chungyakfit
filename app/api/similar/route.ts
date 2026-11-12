@@ -6,11 +6,12 @@
  *   homeSido·homeUnit : 내 거주지 (해당지역·기타지역 구분용)
  *   reside(선택) : 거주 구분을 직접 고른 경우 (해당지역/기타경기/기타지역)
  *   exclude(선택) : 원하는 단지 자신의 주택관리번호 (이미 결과가 있어도 사례에서 뺌)
+ *   houseTy(선택) : 원하는 단지의 주택형 (084.9800A). exclude와 함께 주면 그 주택형의 경쟁률(targetCmpet)도 돌려줌
  * 내 가점은 서버로 보내지 않습니다. 판정은 화면에서 lib/judge.ts로 합니다.
  */
 
 import { connection } from "next/server";
-import { fetchHistory } from "@/lib/applyhome";
+import { cmpetKey, fetchHistory } from "@/lib/applyhome";
 import { findSimilar, shortSido, SIMILAR_RULES, type BandId, type Reside } from "@/lib/similar";
 
 const BANDS = SIMILAR_RULES.bands.map((b) => b.id) as string[];
@@ -41,8 +42,13 @@ export async function GET(req: Request) {
     today,
   );
 
+  // 원하는 단지 주택형의 경쟁률 (당첨가점이 아직 없는 공고도 경쟁률은 있을 수 있음)
+  const exclude = q.get("exclude");
+  const houseTy = q.get("houseTy");
+  const targetCmpet = exclude && houseTy ? (history.cmpet[cmpetKey(exclude, houseTy)] ?? null) : null;
+
   return Response.json(
-    { ok: true, result, fetchedAt: history.fetchedAt, totalRows: history.rows.length },
+    { ok: true, result, targetCmpet, fetchedAt: history.fetchedAt, totalRows: history.rows.length },
     { headers: { "Cache-Control": "s-maxage=3600, stale-while-revalidate=600" } },
   );
 }

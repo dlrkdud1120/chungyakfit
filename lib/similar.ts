@@ -9,6 +9,8 @@
  * 판정 자체는 lib/judge.ts를 그대로 씁니다. 여기서는 판정에 넣을 최저·평균을 만듭니다.
  */
 
+import type { CmpetRow } from "./competition";
+
 export const SIMILAR_RULES = {
   yearsBack: 2, // 최근 몇 년 공고까지 볼지
   minCases: 3, // 사례가 이보다 적으면 지역을 넓히고, 그래도 적으면 판정하지 않음
@@ -38,6 +40,7 @@ export type PastRow = {
   min: number | null;
   avg: number | null;
   max: number | null;
+  cmpet?: CmpetRow[]; // 같은 공고·주택형의 청약 경쟁률 (순위·거주구분별, 없으면 빈 배열)
 };
 
 /** 판정에 쓰인 사례 한 건 (주택형 하나) */

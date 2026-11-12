@@ -54,6 +54,8 @@ npm run dev
 | `app/api/similar/route.ts` | 비슷한 사례를 찾아 돌려주는 서버 주소. 내 가점은 서버로 보내지 않음. |
 | `components/CheckPossibility.tsx` | 가능성 확인 화면. 판정은 `lib/judge.ts`를 그대로 사용. |
 | `lib/myHome.ts` | 내 거주지를 브라우저에 저장. |
+| `lib/competition.ts` | 청약 경쟁률(getAPTLttotPblancCmpet) 읽기·표시 도구. 1순위 내 거주 구분 경쟁률을 대표로 고르고, 미달(△n)을 구분. 판정에는 쓰지 않음. |
+| `check-cmpet.mjs` | 경쟁률 API 응답 확인용 스크립트 (`node check-cmpet.mjs`). |
 | `check-api.mjs` | 청약홈 API 응답 확인용 스크립트 (`node check-api.mjs`). |
 
 필요한 활용신청: 분양정보 조회 서비스, 청약접수 경쟁률 및 특별공급 신청현황 조회 서비스 (같은 인증키 사용).

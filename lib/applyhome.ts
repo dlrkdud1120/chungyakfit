@@ -10,6 +10,7 @@
  */
 
 import type { Complex } from "./complexes";
+import { parseRate, pickCmpet, type CmpetRow } from "./competition";
 import { areaOf, bandOf, groupByType, pickRow, shortSido, shortType, unitFromAddress, type Home, type PastRow } from "./similar";
 
 /** 활용명세의 Base URL. 테스트용으로 APPLYHOME_API_BASE로 바꿀 수 있습니다. */
@@ -217,7 +218,9 @@ export async function fetchNotices(): Promise<NoticeResult> {
 
 // ───────────────────────── 2. 과거 당첨가점 이력 ─────────────────────────
 
-export type HistoryResult = { ok: true; rows: PastRow[]; fetchedAt: string } | { ok: false; reason: string };
+export type HistoryResult =
+  | { ok: true; rows: PastRow[]; cmpet: Record<string, CmpetRow[]>; fetchedAt: string }
+  | { ok: false; reason: string };
 
 // 같은 서버가 살아 있는 동안은 계산 결과를 재사용 (Vercel에서는 위 fetch 캐시가 주 역할)
 let memo: { at: number; result: HistoryResult } | null = null;
@@ -234,7 +237,7 @@ export async function fetchHistory(yearsBack: number): Promise<HistoryResult> {
     const sinceYear = since.slice(0, 4);
     const cache = NOTICE_SETTINGS.historyCacheSec;
 
-    const [details, scores] = await Promise.all([
+    const [details, scores, cmpetRaw] = await Promise.all([
       getAll(`${DETAIL}/getAPTLttotPblancDetail`, { "cond[RCRIT_PBLANC_DE::GTE]": since }, cache),
       // 주택관리번호가 연도로 시작해서(2026…) 그 이후 번호만 요청해 봅니다. 조건을 안 받으면 전체를 받습니다.
       getAll(`${CMPET}/getAptLttotPblancScore`, { "cond[HOUSE_MANAGE_NO::GTE]": `${sinceYear}000000` }, cache).catch(
@@ -243,7 +246,30 @@ export async function fetchHistory(yearsBack: number): Promise<HistoryResult> {
           throw e;
         },
       ),
+      // 청약 경쟁률: 같은 방식으로 받고, 실패해도 당첨가점 화면은 그대로 보이도록 빈 목록으로 둡니다
+      getAll(`${CMPET}/getAPTLttotPblancCmpet`, { "cond[HOUSE_MANAGE_NO::GTE]": `${sinceYear}000000` }, cache)
+        .catch((e) => {
+          if (e instanceof NoDataError) return getAll(`${CMPET}/getAPTLttotPblancCmpet`, {}, cache);
+          throw e;
+        })
+        .catch(() => [] as Raw[]),
     ]);
+
+    // 경쟁률을 "주택관리번호|주택형"으로 묶기
+    const cmpet: Record<string, CmpetRow[]> = {};
+    for (const c of cmpetRaw) {
+      const no = str(c.HOUSE_MANAGE_NO);
+      const ty = str(c.HOUSE_TY);
+      if (!no || !ty) continue;
+      const key = cmpetKey(no, ty);
+      (cmpet[key] ??= []).push({
+        rank: num(c.SUBSCRPT_RANK_CODE),
+        reside: str(c.RESIDE_SENM) ?? "",
+        supply: num(c.SUPLY_HSHLDCO),
+        req: num(c.REQ_CNT),
+        ...parseRate(str(c.CMPET_RATE)),
+      });
+    }
 
     const byNo = new Map<string, Raw>();
     for (const d of details) {
@@ -275,16 +301,20 @@ export async function fetchHistory(yearsBack: number): Promise<HistoryResult> {
         min: score(s.LWET_SCORE),
         avg: score(s.AVRG_SCORE),
         max: score(s.TOP_SCORE),
+        cmpet: cmpet[cmpetKey(no, houseTy)] ?? [],
       });
     }
 
-    const result: HistoryResult = { ok: true, rows, fetchedAt: new Date().toISOString() };
+    const result: HistoryResult = { ok: true, rows, cmpet, fetchedAt: new Date().toISOString() };
     memo = { at: Date.now(), result };
     return result;
   } catch (e) {
     return { ok: false, reason: (e as Error).message };
   }
 }
+
+/** 경쟁률 묶음 열쇠: 주택관리번호|주택형 (두 API의 HOUSE_TY 표기가 같음) */
+export const cmpetKey = (no: string, houseTy: string) => `${no.trim()}|${houseTy.trim()}`;
 
 // ───────────────────────── 3. 단지 비교용 목록 ─────────────────────────
 
@@ -327,6 +357,7 @@ export function historyToComplexes(rows: PastRow[], home: Home | null, fetchedAt
       max: row.max,
       checkedAt,
       reside: row.reside,
+      cmpet: pickCmpet(row.cmpet, row.reside),
     });
   }
   for (const c of byNo.values()) c.types.sort((a, b) => a.type.localeCompare(b.type, "ko", { numeric: true }));

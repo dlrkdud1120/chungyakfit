@@ -23,6 +23,7 @@ import { SIDO_LIST } from "@/lib/similar";
 import { useComplexes } from "@/lib/useComplexes";
 import { imageFor, type ComplexImages } from "@/lib/complexImage";
 import ComplexThumb from "@/components/ComplexThumb";
+import { isShort, NO_CMPET, rankText, rateText } from "@/lib/competition";
 
 const NO_DATA = "데이터 없음";
 type Filter = "전체" | Verdict | typeof NO_DATA;
@@ -655,6 +656,18 @@ function ResultRow({
             </div>
           </>
         )}
+        {/* 대표 청약 경쟁률 (1순위, 내 거주 구분 기준) — 참고용, 판정에는 쓰지 않음 */}
+        <div className="text-xs text-muted">
+          {type.cmpet ? (
+            <>
+              경쟁률{" "}
+              <span className={isShort(type.cmpet) ? "font-semibold text-accent-dark" : "text-ink"}>{rateText(type.cmpet)}</span> (
+              {rankText(type.cmpet)})
+            </>
+          ) : (
+            NO_CMPET
+          )}
+        </div>
       </div>
 
       {/* 가점 범위 */}

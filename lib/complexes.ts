@@ -16,6 +16,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { parseCsv } from "./csv";
+import type { CmpetRow } from "./competition";
 import { IMAGE_DIR, imageKey, type ComplexImages } from "./complexImage";
 
 export const CSV_PATH = path.join(process.cwd(), "data", "complexes.csv");
@@ -53,6 +54,7 @@ export type HouseType = {
   avg: number | null;
   max: number | null;
   checkedAt: string | null; // 출처 확인일 "YYYY-MM-DD"
+  cmpet?: CmpetRow | null; // 청약홈 API 데이터일 때: 대표 청약 경쟁률 (CSV에는 없음)
   reside?: string; // 청약홈 API 데이터일 때: 이 값이 어느 거주 구분의 당첨가점인지 (해당지역 등)
 };
 

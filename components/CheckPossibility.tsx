@@ -14,6 +14,7 @@ import type { Notice, NoticeResult } from "@/lib/applyhome";
 import { FUTURE_SECTION_ID } from "@/lib/anchors";
 import { imageFor, type ComplexImages } from "@/lib/complexImage";
 import ComplexThumb from "@/components/ComplexThumb";
+import { isShort, NO_CMPET, pickCmpet, rankText, rateShort, rateText, type CmpetRow } from "@/lib/competition";
 import { judge, VERDICT_ORDER, type Verdict } from "@/lib/judge";
 import { parseMyHome, readMyHomeRaw, saveMyHome, subscribeMyHome } from "@/lib/myHome";
 import { parseMyScore, readMyScoreRaw, subscribeMyScore, type SavedFuture } from "@/lib/myScore";
@@ -32,9 +33,9 @@ import {
 } from "@/lib/similar";
 
 type Mode = "notice" | "manual";
-type Target = { sido: string; unit: string; band: BandId; exclude?: string; label: string };
+type Target = { sido: string; unit: string; band: BandId; exclude?: string; houseTy?: string; label: string };
 type SimilarResponse =
-  | { ok: true; result: SimilarResult; fetchedAt: string; totalRows: number }
+  | { ok: true; result: SimilarResult; targetCmpet?: CmpetRow[] | null; fetchedAt: string; totalRows: number }
   | { ok: false; reason: string };
 
 /** images: complexes.csv에 등록한 조감도 (app/check/page.tsx가 넘겨줌) */
@@ -95,6 +96,7 @@ export default function CheckPossibility({ images }: { images: ComplexImages }) 
         unit: notice.unit,
         band,
         exclude: notice.houseManageNo,
+        houseTy: selectedType?.type,
         label: `${notice.name}${selectedType ? ` ${shortType(selectedType.type)}` : ""}`,
       };
     }
@@ -116,6 +118,7 @@ export default function CheckPossibility({ images }: { images: ComplexImages }) 
           homeUnit: home.unit,
           ...(resideOverride ? { reside: resideOverride } : {}),
           ...(target.exclude ? { exclude: target.exclude } : {}),
+          ...(target.exclude && target.houseTy ? { houseTy: target.houseTy } : {}),
         }).toString()
       : null;
   const [similar, setSimilar] = useState<{ key: string; data: SimilarResponse } | null>(null);
@@ -402,6 +405,8 @@ function Result({
   const stats = result.stats;
   const judgement = stats ? judge(myScore, stats) : null;
   const passed = result.cases.filter((c) => c.min !== null && myScore >= c.min).length;
+  // 원하는 단지 주택형의 청약 경쟁률 (분양공고에서 고른 경우만. 판정에는 쓰지 않는 참고 정보)
+  const myCmpet = target.houseTy ? pickCmpet(data.targetCmpet, reside) : null;
 
   // 최저 당첨 가점과의 차이가 작은 사례부터
   const cases = [...result.cases].sort(
@@ -505,6 +510,26 @@ function Result({
                 note="당첨선 = 그 사례의 최저 당첨 가점"
                 value={`${passed}개`}
               />
+              {target.houseTy && (
+                <NumRow
+                  label="이 주택형 경쟁률"
+                  note={
+                    myCmpet
+                      ? `${isShort(myCmpet) ? "미달이면 순위 안에만 들면 당첨될 수 있어요 · " : ""}접수 ${myCmpet.req ?? "–"}건 / 공급 ${myCmpet.supply ?? "–"}세대`
+                      : "아직 접수 전이거나 청약홈에 경쟁률이 없어요"
+                  }
+                  value={
+                    myCmpet ? (
+                      <>
+                        <span className={isShort(myCmpet) ? "font-semibold text-accent-dark" : ""}>{rateText(myCmpet)}</span>
+                        <span className="block text-xs text-muted sm:ml-1 sm:inline">({rankText(myCmpet)})</span>
+                      </>
+                    ) : (
+                      <span className="text-muted">{NO_CMPET}</span>
+                    )
+                  }
+                />
+              )}
             </tbody>
           </table>
         </>
@@ -525,15 +550,17 @@ function Result({
             <thead>
               <tr className="border-b border-line text-xs text-muted">
                 <th className="py-2 text-left font-normal">단지 · 주택형</th>
-                <th className="py-2 text-right font-normal">최저</th>
-                <th className="py-2 text-right font-normal">평균</th>
-                <th className="py-2 text-right font-normal">최고</th>
+                <th className="py-2 pl-2 text-right font-normal">최저</th>
+                <th className="py-2 pl-2 text-right font-normal">평균</th>
+                <th className="hidden py-2 text-right font-normal sm:table-cell">최고</th>
+                <th className="py-2 pl-2 text-right font-normal">경쟁률</th>
                 <th className="py-2 pl-2 text-right font-normal">최저와 차이</th>
               </tr>
             </thead>
             <tbody>
               {cases.map((c) => {
                 const diff = c.min === null ? null : round1(myScore - c.min);
+                const cm = pickCmpet(c.cmpet, c.reside);
                 return (
                   <tr key={`${c.no}-${c.houseTy}`} className="border-b border-line align-top">
                     <td className="py-2 pr-2">
@@ -549,9 +576,15 @@ function Result({
                         {c.unit} · 공고 {dot(c.noticeDate)} · {c.reside}
                       </div>
                     </td>
-                    <td className="py-2 text-right">{val(c.min)}</td>
-                    <td className="py-2 text-right">{val(c.avg)}</td>
-                    <td className="py-2 text-right">{val(c.max)}</td>
+                    <td className="py-2 pl-2 text-right">{val(c.min)}</td>
+                    <td className="py-2 pl-2 text-right">{val(c.avg)}</td>
+                    <td className="hidden py-2 text-right sm:table-cell">{val(c.max)}</td>
+                    <td
+                      className={`py-2 pl-2 text-right whitespace-nowrap ${!cm ? "text-muted" : isShort(cm) ? "font-semibold text-accent-dark" : ""}`}
+                      title={cm ? `${rateText(cm)} (${rankText(cm)})` : NO_CMPET}
+                    >
+                      {rateShort(cm)}
+                    </td>
                     <td className={`py-2 text-right font-semibold ${diff === null ? "text-muted" : diff >= 0 ? "text-ok" : "text-bad"}`}>
                       {diff === null ? "–" : diff > 0 ? `+${fmt(diff)}` : fmt(diff)}
                     </td>
@@ -564,7 +597,8 @@ function Result({
       )}
 
       <ul className="mt-4 space-y-0.5 text-xs leading-relaxed text-muted">
-        <li>· 출처: 한국부동산원 청약홈 당첨가점·분양정보 API ({dot(data.fetchedAt.slice(0, 10))} 기준).</li>
+        <li>· 경쟁률은 1순위 내 거주 구분 기준(없으면 1순위 해당지역)이고, 판정에는 쓰지 않는 참고 정보예요. – 는 경쟁률 정보 없음.</li>
+        <li>· 출처: 한국부동산원 청약홈 당첨가점·경쟁률·분양정보 API ({dot(data.fetchedAt.slice(0, 10))} 기준).</li>
         <li>· 판정 방식(안정·도전·어려움)은 단지 비교와 같습니다. 평균·최저는 위 판정 근거의 중간값을 씁니다.</li>
         <li>· 과거 결과는 다음 분양을 보장하지 않습니다. 분양가, 입지, 공급 물량, 규제가 달라지면 커트라인도 달라집니다.</li>
       </ul>
@@ -628,7 +662,17 @@ function TickLabel({ pos, side, top, children }: { pos: number; side: "start" | 
   );
 }
 
-function NumRow({ label, note, value, strong = false }: { label: string; note?: string; value: string; strong?: boolean }) {
+function NumRow({
+  label,
+  note,
+  value,
+  strong = false,
+}: {
+  label: string;
+  note?: string;
+  value: React.ReactNode;
+  strong?: boolean;
+}) {
   return (
     <tr className="border-b border-line align-top">
       <td className="py-2.5 pr-3">
