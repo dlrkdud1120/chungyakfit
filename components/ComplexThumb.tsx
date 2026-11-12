@@ -10,7 +10,8 @@
  * 화면에 보이기 직전에만 불러옵니다 (lazy loading).
  *
  * size="sm": 목록용 (모바일 56px, 넓은 화면 80px, 4:3)
- * size="lg": 가능성 확인용 (240px, 4:3), 누르면 카카오맵에서 위치가 열림
+ * size="lg": 가능성 확인용 (240px, 4:3)
+ * 두 크기 모두 누르면 카카오맵에서 위치가 새 탭으로 열립니다.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -122,7 +123,7 @@ export default function ComplexThumb({ name, address, region, image, size = "sm"
           className={`absolute inset-0 h-full w-full object-cover ${imageLoaded ? "" : "opacity-0"}`}
         />
       ) : (
-        // 카카오 정적 지도가 이 안에 그려짐. 목록에서는 눌러도 이동하지 않게 막음
+        // 카카오 정적 지도가 이 안에 그려짐. 클릭은 바깥 링크가 받도록 지도 자체의 클릭은 막음
         <div
           ref={mapRef}
           aria-label={`${name} 위치 지도`}
@@ -134,19 +135,16 @@ export default function ComplexThumb({ name, address, region, image, size = "sm"
 
   return (
     <figure className={`shrink-0 ${BOX[size]}`}>
-      {size === "lg" ? (
-        <a
-          href={kakaoMapLink(name, mapCoord, address || `${region ?? ""} ${name}`)}
-          target="_blank"
-          rel="noopener noreferrer"
-          title="카카오맵에서 위치 보기"
-          className="block"
-        >
-          {frame}
-        </a>
-      ) : (
-        frame
-      )}
+      <a
+        href={kakaoMapLink(name, mapCoord, address || `${region ?? ""} ${name}`)}
+        target="_blank"
+        rel="noopener noreferrer"
+        title="카카오맵에서 위치 보기"
+        aria-label={`${name} 위치를 카카오맵에서 보기`}
+        className="block"
+      >
+        {frame}
+      </a>
       {caption && (
         <figcaption className="mt-0.5 truncate text-[10px] leading-tight text-muted" title={`출처: ${caption}`}>
           출처: {caption}
