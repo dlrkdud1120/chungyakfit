@@ -21,6 +21,8 @@ import { locationKey } from "@/lib/location";
 import { saveMyHome } from "@/lib/myHome";
 import { SIDO_LIST } from "@/lib/similar";
 import { useComplexes } from "@/lib/useComplexes";
+import { imageFor, type ComplexImages } from "@/lib/complexImage";
+import ComplexThumb from "@/components/ComplexThumb";
 
 const NO_DATA = "데이터 없음";
 type Filter = "전체" | Verdict | typeof NO_DATA;
@@ -66,8 +68,13 @@ export default function CompareList({
   // ── 단지 데이터: 청약홈 과거 당첨가점 (실패하면 CSV)
   const cs = useComplexes(fallback.complexes);
   const data: ComplexData = useMemo(
-    () => ({ complexes: cs.complexes, warnings: cs.source === "csv" ? fallback.warnings : [] }),
-    [cs.complexes, cs.source, fallback.warnings],
+    () => ({
+      complexes: cs.complexes,
+      warnings: [...(cs.source === "csv" ? fallback.warnings : []), ...fallback.imageWarnings],
+      images: fallback.images,
+      imageWarnings: [],
+    }),
+    [cs.complexes, cs.source, fallback.warnings, fallback.imageWarnings, fallback.images],
   );
 
   // ── 내 점수: 저장값을 기본으로, 직접 바꿔 넣어 볼 수도 있음
@@ -312,6 +319,7 @@ export default function CompareList({
                   myScore={myScore}
                   location={locations[locationKey(r.complex.name, `${r.complex.sido} ${r.complex.sigungu}`)]}
                   scale={scale}
+                  images={fallback.images}
                 />
               ))}
             </ul>
@@ -581,11 +589,13 @@ function ResultRow({
   myScore,
   location,
   scale,
+  images,
 }: {
   row: Row;
   myScore: number | null;
   location: LocationBrief | undefined;
   scale: Scale;
+  images: ComplexImages;
 }) {
   const { complex, type, judgement, lotteryOnly } = row;
   return (
@@ -593,29 +603,37 @@ function ResultRow({
       id={rowAnchor(complex.id, type.type)}
       className="grid scroll-mt-6 grid-cols-[1fr_auto] gap-x-4 gap-y-2 border-b border-line py-4 transition-colors duration-700 data-[flash]:bg-accent/15 md:grid-cols-[1.4fr_0.9fr_1.6fr_0.9fr] md:items-center"
     >
-      {/* 단지 */}
-      <div className="min-w-0">
-        <div className="text-[15px] font-semibold">
-          {complex.url ? (
-            <a href={complex.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
-              {complex.name}
-            </a>
-          ) : (
-            complex.name
+      {/* 단지: 왼쪽 썸네일(조감도 또는 위치 지도) + 오른쪽 정보 */}
+      <div className="flex min-w-0 gap-3">
+        <ComplexThumb
+          name={complex.name}
+          address={complex.address}
+          region={`${complex.sido} ${complex.sigungu}`}
+          image={imageFor(images, complex.name)}
+        />
+        <div className="min-w-0">
+          <div className="line-clamp-2 text-[15px] leading-snug font-semibold">
+            {complex.url ? (
+              <a href={complex.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                {complex.name}
+              </a>
+            ) : (
+              complex.name
+            )}
+          </div>
+          <div className="text-xs text-muted">
+            {complex.sido} {complex.sigungu} · 공고일 {complex.noticeDate ? dot(complex.noticeDate) : NO_DATA}
+          </div>
+          <div className="text-[11px] text-muted">
+            청약홈 당첨가점 기준{type.reside ? ` · ${type.reside}` : ""}
+            {type.checkedAt ? ` (${dot(type.checkedAt)} 확인)` : ""}
+          </div>
+          {location && (
+            <Link href={`/location#${location.anchor}`} className="mt-0.5 inline-block text-xs text-brand underline-offset-2 hover:underline">
+              입지 {location.total === null ? NO_DATA : `${location.total}/${location.max}점`} · 근거 보기
+            </Link>
           )}
         </div>
-        <div className="text-xs text-muted">
-          {complex.sido} {complex.sigungu} · 공고일 {complex.noticeDate ? dot(complex.noticeDate) : NO_DATA}
-        </div>
-        <div className="text-[11px] text-muted">
-          청약홈 당첨가점 기준{type.reside ? ` · ${type.reside}` : ""}
-          {type.checkedAt ? ` (${dot(type.checkedAt)} 확인)` : ""}
-        </div>
-        {location && (
-          <Link href={`/location#${location.anchor}`} className="mt-0.5 inline-block text-xs text-brand underline-offset-2 hover:underline">
-            입지 {location.total === null ? NO_DATA : `${location.total}/${location.max}점`} · 근거 보기
-          </Link>
-        )}
       </div>
 
       {/* 판정 (모바일에서는 오른쪽 위) */}

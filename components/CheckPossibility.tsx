@@ -12,6 +12,8 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import type { Notice, NoticeResult } from "@/lib/applyhome";
 import { FUTURE_SECTION_ID } from "@/lib/anchors";
+import { imageFor, type ComplexImages } from "@/lib/complexImage";
+import ComplexThumb from "@/components/ComplexThumb";
 import { judge, VERDICT_ORDER, type Verdict } from "@/lib/judge";
 import { parseMyHome, readMyHomeRaw, saveMyHome, subscribeMyHome } from "@/lib/myHome";
 import { parseMyScore, readMyScoreRaw, subscribeMyScore, type SavedFuture } from "@/lib/myScore";
@@ -35,7 +37,8 @@ type SimilarResponse =
   | { ok: true; result: SimilarResult; fetchedAt: string; totalRows: number }
   | { ok: false; reason: string };
 
-export default function CheckPossibility() {
+/** images: complexes.csv에 등록한 조감도 (app/check/page.tsx가 넘겨줌) */
+export default function CheckPossibility({ images }: { images: ComplexImages }) {
   const params = useSearchParams();
 
   // ── 1. 내 가점 (저장값, 직접 바꿔볼 수 있음)
@@ -336,6 +339,7 @@ export default function CheckPossibility() {
             waiting={!!query && !similarData}
             notice={mode === "notice" ? notice : null}
             summaryRef={summaryRef}
+            images={images}
           />
         </Section>
       </div>
@@ -372,6 +376,7 @@ function Result({
   waiting,
   notice,
   summaryRef,
+  images,
 }: {
   myScore: number | null;
   future: SavedFuture[] | null;
@@ -382,6 +387,7 @@ function Result({
   waiting: boolean;
   notice: Notice | null;
   summaryRef: React.RefObject<HTMLDivElement | null>;
+  images: ComplexImages;
 }) {
   if (myScore === null) return <Empty>먼저 내 가점을 계산하거나 직접 넣어 주세요.</Empty>;
   if (!hasHome) return <Empty>거주지 시·도를 골라 주세요. 해당지역·기타지역에 따라 비교할 당첨 가점이 달라집니다.</Empty>;
@@ -410,6 +416,20 @@ function Result({
             <td className="py-2.5 text-muted">원하는 단지</td>
             <td className="py-2.5 text-right font-medium">{target.label}</td>
           </tr>
+          {/* 원하는 단지의 조감도 또는 위치 지도 (누르면 카카오맵) — 분양공고에서 고른 경우만 */}
+          {notice && (
+            <tr className="border-b border-line">
+              <td colSpan={2} className="py-3">
+                <ComplexThumb
+                  size="lg"
+                  name={notice.name}
+                  address={notice.address}
+                  region={`${notice.region} ${notice.unit}`}
+                  image={imageFor(images, notice.name)}
+                />
+              </td>
+            </tr>
+          )}
           <tr className="border-b border-line">
             <td className="py-2.5 text-muted">비교 기준</td>
             <td className="py-2.5 text-right">{basis}</td>

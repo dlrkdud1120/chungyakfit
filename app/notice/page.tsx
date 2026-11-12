@@ -14,7 +14,7 @@ export default function NoticesPage() {
           청약홈 분양정보 API에서 서울·경기의 최근 APT 분양 공고와 주택형별 공급세대수를 불러옵니다.
         </p>
       </header>
-      <NoticeList fallback={fallback.complexes} />
+      <NoticeList fallback={fallback.complexes} images={fallback.images} />
     </>
   );
 }

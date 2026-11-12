@@ -31,6 +31,7 @@ export type PastRow = {
   unit: string; // 강남구, 수원시 …
   noticeDate: string; // 모집공고일
   url: string | null; // 청약홈 공고 링크
+  address: string; // 공급 위치 주소 (지도 썸네일용)
   houseTy: string; // 084.8860A
   band: BandId;
   reside: string; // 해당지역, 기타경기, 기타지역 (청약홈 표기 그대로)

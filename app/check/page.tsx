@@ -1,9 +1,12 @@
 import { Suspense } from "react";
 import CheckPossibility from "@/components/CheckPossibility";
+import { loadComplexes } from "@/lib/complexes";
 
 export const metadata = { title: "당첨 가능성 확인 — 청약핏" };
 
 export default function CheckPage() {
+  // complexes.csv에 등록한 조감도 (파일이 있는 것만)
+  const { images } = loadComplexes();
   return (
     <>
       <header className="mb-8 border-b border-line pb-6">
@@ -14,7 +17,7 @@ export default function CheckPage() {
       </header>
       {/* 주소의 ?no=…&type=… 를 읽기 때문에 화면에서 그립니다 */}
       <Suspense fallback={<p className="py-10 text-sm text-muted">불러오는 중…</p>}>
-        <CheckPossibility />
+        <CheckPossibility images={images} />
       </Suspense>
     </>
   );

@@ -268,6 +268,7 @@ export async function fetchHistory(yearsBack: number): Promise<HistoryResult> {
         unit: unitFromAddress(str(d.HSSPLY_ADRES) ?? ""),
         noticeDate,
         url: str(d.PBLANC_URL),
+        address: str(d.HSSPLY_ADRES) ?? "",
         houseTy,
         band: bandOf(area),
         reside: str(s.RESIDE_SENM) ?? "",
@@ -304,7 +305,16 @@ export function historyToComplexes(rows: PastRow[], home: Home | null, fetchedAt
     if (!row || row.avg === null) continue;
     let c = byNo.get(row.no);
     if (!c) {
-      c = { id: row.no, name: row.name, sido: row.sido, sigungu: row.unit, noticeDate: row.noticeDate, url: row.url, types: [] };
+      c = {
+        id: row.no,
+        name: row.name,
+        sido: row.sido,
+        sigungu: row.unit,
+        noticeDate: row.noticeDate,
+        url: row.url,
+        address: row.address,
+        types: [],
+      };
       byNo.set(row.no, c);
     }
     c.types.push({

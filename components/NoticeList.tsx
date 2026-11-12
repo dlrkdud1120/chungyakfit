@@ -10,10 +10,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Notice, NoticeResult } from "@/lib/applyhome";
 import type { Complex } from "@/lib/complexes";
+import { imageFor, type ComplexImages } from "@/lib/complexImage";
+import ComplexThumb from "@/components/ComplexThumb";
 
 type State = { status: "loading" } | { status: "done"; result: NoticeResult };
 
-export default function NoticeList({ fallback }: { fallback: Complex[] }) {
+export default function NoticeList({ fallback, images }: { fallback: Complex[]; images: ComplexImages }) {
   const [state, setState] = useState<State>({ status: "loading" });
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export default function NoticeList({ fallback }: { fallback: Complex[] }) {
   }
 
   const { result } = state;
-  if (!result.ok) return <Fallback reason={result.reason} complexes={fallback} />;
+  if (!result.ok) return <Fallback reason={result.reason} complexes={fallback} images={images} />;
 
   return (
     <div>
@@ -49,7 +51,7 @@ export default function NoticeList({ fallback }: { fallback: Complex[] }) {
       ) : (
         <ul>
           {result.notices.map((n) => (
-            <NoticeRow key={n.houseManageNo || n.name} n={n} />
+            <NoticeRow key={n.houseManageNo || n.name} n={n} images={images} />
           ))}
         </ul>
       )}
@@ -59,38 +61,44 @@ export default function NoticeList({ fallback }: { fallback: Complex[] }) {
   );
 }
 
-function NoticeRow({ n }: { n: Notice }) {
+function NoticeRow({ n, images }: { n: Notice; images: ComplexImages }) {
   const totalSupply = sum(n.types.map((t) => t.supply));
   const totalSpecial = sum(n.types.map((t) => t.special));
   return (
     <li className="border-b border-line py-4">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-3">
-        <span className="font-semibold">
-          {n.url ? (
-            <a href={n.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
-              {n.name}
-            </a>
-          ) : (
-            n.name
-          )}
-          <span className="ml-2 text-xs font-normal text-muted">
-            {[n.kind, n.supplyKind].filter(Boolean).join(" · ")}
-          </span>
-          {n.overheated && <span className="ml-2 text-xs font-normal text-accent-dark">투기과열지구</span>}
-        </span>
-        <span className="text-xs text-muted">공고일 {dot(n.noticeDate)}</span>
-      </div>
-      <div className="mt-0.5 text-xs text-muted">{n.address || n.region}</div>
-      <div className="mt-1 text-xs text-muted">
-        청약접수 {dot(n.receiptStart)} ~ {dot(n.receiptEnd)} · 당첨자 발표 {dot(n.winnerDate)}
-        {n.homepage && (
-          <>
-            {" · "}
-            <a href={n.homepage} target="_blank" rel="noopener noreferrer" className="text-brand underline">
-              분양 홈페이지
-            </a>
-          </>
-        )}
+      {/* 왼쪽 썸네일(조감도 또는 위치 지도) + 오른쪽 공고 정보 */}
+      <div className="flex gap-3">
+        <ComplexThumb name={n.name} address={n.address} region={`${n.region} ${n.unit}`} image={imageFor(images, n.name)} />
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+            <span className="line-clamp-2 leading-snug font-semibold">
+              {n.url ? (
+                <a href={n.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  {n.name}
+                </a>
+              ) : (
+                n.name
+              )}
+              <span className="ml-2 text-xs font-normal text-muted">
+                {[n.kind, n.supplyKind].filter(Boolean).join(" · ")}
+              </span>
+              {n.overheated && <span className="ml-2 text-xs font-normal text-accent-dark">투기과열지구</span>}
+            </span>
+            <span className="text-xs text-muted">공고일 {dot(n.noticeDate)}</span>
+          </div>
+          <div className="mt-0.5 text-xs text-muted">{n.address || n.region}</div>
+          <div className="mt-1 text-xs text-muted">
+            청약접수 {dot(n.receiptStart)} ~ {dot(n.receiptEnd)} · 당첨자 발표 {dot(n.winnerDate)}
+            {n.homepage && (
+              <>
+                {" · "}
+                <a href={n.homepage} target="_blank" rel="noopener noreferrer" className="text-brand underline">
+                  분양 홈페이지
+                </a>
+              </>
+            )}
+          </div>
+        </div>
       </div>
 
       {n.types.length > 0 && (
@@ -137,7 +145,7 @@ function NoticeRow({ n }: { n: Notice }) {
   );
 }
 
-function Fallback({ reason, complexes }: { reason: string; complexes: Complex[] }) {
+function Fallback({ reason, complexes, images }: { reason: string; complexes: Complex[]; images: ComplexImages }) {
   return (
     <div>
       <p className="mb-4 border-l-2 border-accent bg-accent/10 px-3 py-2 text-[13px] leading-relaxed">
@@ -150,13 +158,16 @@ function Fallback({ reason, complexes }: { reason: string; complexes: Complex[] 
       ) : (
         <ul>
           {complexes.map((c) => (
-            <li key={c.id} className="border-b border-line py-3">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-3">
-                <span className="font-semibold">{c.name}</span>
-                <span className="text-xs text-muted">공고일 {dot(c.noticeDate)}</span>
-              </div>
-              <div className="text-xs text-muted">
-                {c.sido} {c.sigungu} · 주택형 {c.types.map((t) => t.type).join(", ")}
+            <li key={c.id} className="flex gap-3 border-b border-line py-3">
+              <ComplexThumb name={c.name} address={c.address} region={`${c.sido} ${c.sigungu}`} image={imageFor(images, c.name)} />
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+                  <span className="line-clamp-2 leading-snug font-semibold">{c.name}</span>
+                  <span className="text-xs text-muted">공고일 {dot(c.noticeDate)}</span>
+                </div>
+                <div className="text-xs text-muted">
+                  {c.sido} {c.sigungu} · 주택형 {c.types.map((t) => t.type).join(", ")}
+                </div>
               </div>
             </li>
           ))}

@@ -73,3 +73,20 @@ npm run dev
 2. 마이페이지에서 일반 인증키(Decoding) 복사
 3. 내 컴퓨터: `.env.example`을 복사해 `.env.local`을 만들고 `APPLYHOME_API_KEY=키` 입력 → `npm run dev` 다시 실행
 4. Vercel: 프로젝트 Settings → Environment Variables에 `APPLYHOME_API_KEY` 추가 → Redeploy
+
+## 단지 썸네일 (조감도 / 위치 지도)
+
+단지 비교·분양 공고·가능성 확인 화면의 단지명 옆에 이미지를 보여줍니다.
+
+| 파일 | 역할 |
+| --- | --- |
+| `components/ComplexThumb.tsx` | 썸네일. 조감도 → 위치 지도 → 빈 칸 순서. 화면에 보일 때만 불러옴. |
+| `lib/kakaoMap.ts` | 카카오맵 SDK 불러오기, 카카오맵 링크 만들기. |
+| `lib/coords.ts`, `app/api/coords/route.ts` | 주소 → 좌표. coords.json(직접 입력) 먼저, 없으면 카카오 로컬 API 실시간 호출. |
+| `data/coords.json` | 카카오가 못 찾는 단지의 좌표를 직접 적는 파일. |
+| `lib/complexImage.ts` | 조감도를 단지명으로 연결. |
+| `public/images/complexes/` | 조감도 이미지 폴더. |
+
+- 카카오 로컬 API 결과(좌표·주소)는 카카오 운영정책상 저장·캐시하면 안 되므로 매번 실시간으로 부르고 저장하지 않습니다.
+- 조감도: 이미지를 `public/images/complexes/`에 넣고 `data/complexes.csv`의 "조감도 파일명", "이미지 출처" 열에 적습니다. 단지명은 화면에 나오는 이름과 같게(띄어쓰기는 달라도 됨). 주택형을 비워 두면 조감도 등록용 줄로만 쓰입니다.
+- 환경변수: `KAKAO_REST_KEY`(서버 전용), `NEXT_PUBLIC_KAKAO_JS_KEY`(지도용, 카카오에 도메인 등록 필요).
