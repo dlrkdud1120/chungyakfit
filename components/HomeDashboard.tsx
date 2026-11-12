@@ -8,7 +8,9 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useMy } from "@/components/Providers";
 import { FUTURE_SECTION_ID, rowAnchor } from "@/lib/anchors";
+import { ddayText, md, nextEvent, todayKST } from "@/lib/mySchedule";
 import type { Notice, NoticeResult } from "@/lib/applyhome";
 import { averageCutoff, gapText } from "@/lib/benchmark";
 import type { Complex, HouseType } from "@/lib/complexes";
@@ -47,7 +49,10 @@ export default function HomeDashboard({ fallback }: { fallback: Complex[] }) {
       <MyStatus saved={saved} rows={rows} benchmarkText={saved ? gapText(saved.total, benchmark, benchLabel) : ""} />
       <Targets hasScore={saved !== null} rows={rows} />
       <NextYear saved={saved} rows={rows} />
-      <UpcomingNotices />
+      <div>
+        <MyNextEvent />
+        <UpcomingNotices />
+      </div>
     </div>
   );
 }
@@ -230,6 +235,30 @@ function NextYear({ saved, rows }: { saved: ReturnType<typeof parseMyScore>; row
     <Section title="1년 뒤 달라지는 점" href={`/compare#${FUTURE_SECTION_ID}`}>
       {body}
     </Section>
+  );
+}
+
+// ───────────────────────── 로그인한 사용자: 내 관심 공고 다음 일정 한 줄 ─────────────────────────
+
+function MyNextEvent() {
+  const my = useMy();
+  if (my.status !== "user" || !my.data) return null;
+  const today = todayKST();
+  const next = my.data.favorites
+    .map((f) => ({ f, u: nextEvent(f.schedule, today) }))
+    .filter((x): x is { f: (typeof x)["f"]; u: NonNullable<(typeof x)["u"]> } => x.u !== null)
+    .sort((a, b) => a.u.start.localeCompare(b.u.start))[0];
+  return (
+    <Link
+      href="/mypage"
+      className="mb-5 flex items-baseline justify-between gap-3 border-y border-line py-2.5 text-sm hover:bg-brand/5"
+    >
+      <span className="min-w-0 truncate">
+        <span className="mr-2 text-xs text-muted">내 관심 공고 다음 일정</span>
+        {next ? `${next.f.name} ${ddayText(next.u)} (${md(next.u.start)})` : "예정된 일정이 없어요"}
+      </span>
+      <span className="shrink-0 text-xs text-muted">마이페이지 →</span>
+    </Link>
   );
 }
 

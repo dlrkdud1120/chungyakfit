@@ -14,6 +14,9 @@ import type { Notice, NoticeResult } from "@/lib/applyhome";
 import { FUTURE_SECTION_ID } from "@/lib/anchors";
 import { imageFor, type ComplexImages } from "@/lib/complexImage";
 import CalendarButton from "@/components/CalendarButton";
+import FavoriteStar from "@/components/FavoriteStar";
+import { useMy } from "@/components/Providers";
+import { favoriteFromNotice } from "@/lib/meTypes";
 import ComplexThumb from "@/components/ComplexThumb";
 import { isShort, NO_CMPET, pickCmpet, rankText, rateShort, rateText, type CmpetRow } from "@/lib/competition";
 import { judge, VERDICT_ORDER, type Verdict } from "@/lib/judge";
@@ -84,6 +87,16 @@ export default function CheckPossibility({ images }: { images: ComplexImages }) 
 
   const noticeList = notices.status === "ok" ? notices.list : [];
   const notice = noticeList.find((n) => n.houseManageNo === noticeNo) ?? null;
+
+  // 로그인한 경우에만: 고른 공고를 "최근 열람한 공고"에 남김 (로그인 전에는 아무것도 보내지 않음)
+  const my = useMy();
+  const seenNo = mode === "notice" && notice && my.dataState === "ok" ? notice.houseManageNo : null;
+  useEffect(() => {
+    if (!seenNo || !notice) return;
+    my.addRecent({ no: notice.houseManageNo, name: notice.name, sido: shortSido(notice.region), unit: notice.unit });
+    // 공고가 바뀔 때만 기록
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [seenNo]);
   const selectedType = notice ? (notice.types.find((t) => t.type === noticeType) ?? notice.types[0] ?? null) : null;
 
   // 지금 고른 단지를 비교 기준으로 정리
@@ -279,7 +292,12 @@ export default function CheckPossibility({ images }: { images: ComplexImages }) 
                       )}
                     </p>
                   )}
-                  {notice && <CalendarButton notice={notice} className="mb-2" />}
+                  {notice && (
+                    <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+                      <CalendarButton notice={notice} />
+                      <FavoriteStar item={favoriteFromNotice(notice, selectedType?.type)} label />
+                    </div>
+                  )}
                 </>
               )}
             </>

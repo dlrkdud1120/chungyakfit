@@ -75,6 +75,26 @@ npm run dev
 | `lib/calendar.ts` | 공고 일정(특별공급·1순위·2순위 접수, 당첨자 발표, 계약 시작) 정리와 .ics 파일 만들기. 하루 전 오전 9시(한국시간) 알림. |
 | `components/CalendarButton.tsx` | "내 캘린더에 추가" 버튼. 브라우저에서 바로 파일을 만들어 내려받음(서버 저장 없음). |
 
+## 카카오 로그인(선택)과 마이페이지 (/mypage)
+
+로그인은 선택입니다. 로그인하지 않으면 서버에 아무것도 저장하지 않고 기존 기능은 그대로 동작합니다.
+저장하는 것: 카카오 회원번호, 닉네임, 계산된 점수 기록, 거주지(시·군), 관심 공고, 최근 열람 공고, 캘린더에 담은 일정.
+저장하지 않는 것: 생년월일, 혼인신고일, 주택 처분일, 가족 구성 같은 원래 입력값.
+
+| 파일 | 역할 |
+| --- | --- |
+| `lib/auth.ts`, `app/api/auth/[...nextauth]/route.ts` | Auth.js 카카오 로그인. 동의 항목은 닉네임만, 쿠키에는 회원번호와 닉네임만. |
+| `lib/db.ts`, `supabase/schema.sql` | Supabase 저장소(서버 전용)와 테이블 만드는 SQL. |
+| `lib/meApi.ts`, `app/api/me/**` | 내 데이터 주소(/api/me…). 로그인한 사람만, 자기 데이터만. |
+| `lib/meTypes.ts`, `lib/mySchedule.ts`, `lib/growth.ts` | 저장 데이터 모양, 다음 일정·D-day 계산, 성장 단계 이름. |
+| `components/Providers.tsx` | 로그인 상태와 내 데이터를 모든 화면에 나눠 줌. 점수를 저장하면 계정에도 기록. |
+| `components/KakaoLogin.tsx` | 로그인 버튼, 내비게이션 오른쪽 메뉴, 별을 눌렀을 때 로그인 안내, 계정으로 옮기기 안내. |
+| `components/FavoriteStar.tsx` | 관심 공고 별 표시 (분양 공고·단지 비교·가능성 확인). |
+| `components/MyPage.tsx`, `app/mypage/page.tsx` | 마이페이지: 점수 기록, 관심 공고, 달력, 최근 열람, 계정. |
+
+환경변수(`.env.local`과 Vercel 둘 다): `AUTH_SECRET`, `AUTH_KAKAO_ID`(비우면 `KAKAO_REST_KEY` 사용), `AUTH_KAKAO_SECRET`, `SUPABASE_URL`, `SUPABASE_SECRET_KEY`.
+카카오 Redirect URI: `http://localhost:3000/api/auth/callback/kakao`, `https://내주소.vercel.app/api/auth/callback/kakao`.
+
 ## 청약홈 API 설정
 
 분양정보 API는 공고와 공급세대수를, 경쟁률 API(getAptLttotPblancScore)는 주택형·거주구분별 당첨가점을 줍니다. 가능성 확인(/check)과 단지 비교(/compare)·메인·가점 계산의 평균 비교는 둘을 이어 붙인 과거 당첨가점(`/api/complexes`, `lib/useComplexes.ts`)을 쓰고, API가 실패할 때만 `data/complexes.csv`를 씁니다. API에는 가점제·추첨제 세대수가 없어 추첨제 안내는 CSV 데이터에서만 계산됩니다.

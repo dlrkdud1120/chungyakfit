@@ -6,16 +6,25 @@
  * 일정 만드는 규칙은 lib/calendar.ts에 있습니다.
  */
 
+import { useMy } from "@/components/Providers";
 import type { Notice } from "@/lib/applyhome";
 import { downloadIcs, scheduleEvents } from "@/lib/calendar";
 
 export default function CalendarButton({ notice, className = "" }: { notice: Notice; className?: string }) {
-  const count = scheduleEvents(notice.schedule).length;
+  const my = useMy();
+  const events = scheduleEvents(notice.schedule);
+  const count = events.length;
   if (count === 0) return null; // 넣을 일정이 없으면 버튼을 숨김
   return (
     <button
       type="button"
-      onClick={() => downloadIcs(notice)}
+      onClick={() => {
+        if (!downloadIcs(notice)) return;
+        // 로그인한 경우에만 "캘린더에 담은 일정"으로 기록 (로그인 전에는 서버로 아무것도 보내지 않음)
+        if (my.status === "user") {
+          my.saveCalendar(events.map((e) => ({ no: notice.houseManageNo, key: e.key, label: e.label, start: e.range.start, end: e.range.end })));
+        }
+      }}
       title={`접수·발표·계약 일정 ${count}개를 .ics 파일로 받아요 (하루 전 오전 9시 알림)`}
       className={`inline-flex items-center gap-1 rounded border border-line bg-white px-2 py-1 text-xs text-brand hover:border-brand ${className}`}
     >

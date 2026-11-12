@@ -23,6 +23,7 @@ import { SIDO_LIST } from "@/lib/similar";
 import { useComplexes } from "@/lib/useComplexes";
 import { imageFor, type ComplexImages } from "@/lib/complexImage";
 import ComplexThumb from "@/components/ComplexThumb";
+import FavoriteStar from "@/components/FavoriteStar";
 import { isShort, NO_CMPET, rankText, rateText } from "@/lib/competition";
 
 const NO_DATA = "데이터 없음";
@@ -624,6 +625,23 @@ function ResultRow({
           </div>
           <div className="text-xs text-muted">
             {complex.sido} {complex.sigungu} · 공고일 {complex.noticeDate ? dot(complex.noticeDate) : NO_DATA}
+            {/* 관심 공고 별 표시: 청약홈 공고번호가 있는 단지만 (로그인하면 마이페이지에 저장) */}
+            {/^\d{6,12}$/.test(complex.id) && (
+              <span className="ml-2">
+                <FavoriteStar
+                  item={{
+                    no: complex.id,
+                    name: complex.name,
+                    sido: complex.sido,
+                    unit: complex.sigungu,
+                    houseTy: type.type,
+                    url: complex.url ?? null,
+                    noticeDate: complex.noticeDate,
+                    schedule: null,
+                  }}
+                />
+              </span>
+            )}
           </div>
           <div className="text-[11px] text-muted">
             청약홈 당첨가점 기준{type.reside ? ` · ${type.reside}` : ""}

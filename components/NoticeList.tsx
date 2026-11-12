@@ -12,6 +12,8 @@ import type { Notice, NoticeResult } from "@/lib/applyhome";
 import type { Complex } from "@/lib/complexes";
 import { imageFor, type ComplexImages } from "@/lib/complexImage";
 import CalendarButton from "@/components/CalendarButton";
+import FavoriteStar from "@/components/FavoriteStar";
+import { favoriteFromNotice } from "@/lib/meTypes";
 import ComplexThumb from "@/components/ComplexThumb";
 
 type State = { status: "loading" } | { status: "done"; result: NoticeResult };
@@ -100,7 +102,11 @@ function NoticeRow({ n, images }: { n: Notice; images: ComplexImages }) {
               </>
             )}
           </div>
-          <CalendarButton notice={n} className="mt-2" />
+          {/* 캘린더 파일 받기 + 관심 공고 별 표시(로그인하면 마이페이지에 저장) */}
+          <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+            <CalendarButton notice={n} />
+            <FavoriteStar item={favoriteFromNotice(n)} label />
+          </div>
         </div>
       </div>
 

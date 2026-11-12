@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
+import { MigratePrompt } from "@/components/KakaoLogin";
+import Providers from "@/components/Providers";
 import SiteNav from "@/components/SiteNav";
 import "./globals.css";
 
@@ -15,6 +17,12 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // 카카오 로그인 환경변수가 다 있는지 (없으면 로그인 버튼이 "설정 전" 안내만 보여줌. 다른 기능은 그대로)
+  const loginReady = !!(
+    process.env.AUTH_SECRET &&
+    (process.env.AUTH_KAKAO_ID ?? process.env.KAKAO_REST_KEY) &&
+    process.env.AUTH_KAKAO_SECRET
+  );
   return (
     <html lang="ko" className="h-full antialiased">
       <head>
@@ -25,11 +33,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="flex min-h-full flex-col">
-        <Suspense fallback={<div className="h-[46px] border-b border-line bg-white" />}>
-          <SiteNav />
-        </Suspense>
+        {/* 로그인은 선택. Providers는 로그인 상태와 내 데이터를 모든 화면에 나눠 줍니다 */}
+        <Providers enabled={loginReady}>
+          <Suspense fallback={<div className="h-[46px] border-b border-line bg-white" />}>
+            <SiteNav />
+          </Suspense>
+          <MigratePrompt />
 
-        <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6 sm:py-12">{children}</main>
+          <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6 sm:py-12">{children}</main>
+        </Providers>
 
         <footer className="mx-auto w-full max-w-5xl px-4 pb-10 sm:px-6">
           <p className="border-t border-line pt-5 text-xs leading-relaxed text-muted">

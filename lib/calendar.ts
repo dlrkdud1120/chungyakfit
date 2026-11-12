@@ -136,11 +136,15 @@ export type IcsNotice = { houseManageNo: string; name: string; url: string | nul
 
 /** 공고 하나의 일정을 .ics 글자로. 일정이 하나도 없으면 null */
 export function buildIcs(n: IcsNotice, now = new Date()): string | null {
-  const events = scheduleEvents(n.schedule);
-  if (!events.length) return null;
+  return buildIcsMany([n], `${CALENDAR_SETTINGS.titlePrefix} ${n.name}`, now);
+}
+
+/** 공고 여러 개의 일정을 .ics 파일 하나로 (마이페이지 "전체를 내 캘린더에 추가") */
+export function buildIcsMany(list: IcsNotice[], calName: string, now = new Date()): string | null {
+  const all = list.flatMap((n) => scheduleEvents(n.schedule).map((e) => ({ n, e })));
+  if (!all.length) return null;
   const { timeZone, titlePrefix } = CALENDAR_SETTINGS;
   const stamp = now.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-  const link = n.url ?? "https://www.applyhome.co.kr";
 
   const lines = [
     "BEGIN:VCALENDAR",
@@ -148,7 +152,7 @@ export function buildIcs(n: IcsNotice, now = new Date()): string | null {
     "PRODID:-//chungyakfit//ko",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
-    `X-WR-CALNAME:${esc(`${titlePrefix} ${n.name}`)}`,
+    `X-WR-CALNAME:${esc(calName)}`,
     `X-WR-TIMEZONE:${timeZone}`,
     // 한국 표준시 정의 (서머타임 없음)
     "BEGIN:VTIMEZONE",
@@ -161,7 +165,8 @@ export function buildIcs(n: IcsNotice, now = new Date()): string | null {
     "END:STANDARD",
     "END:VTIMEZONE",
   ];
-  for (const e of events) {
+  for (const { n, e } of all) {
+    const link = n.url ?? "https://www.applyhome.co.kr";
     const title = `${titlePrefix} ${n.name} ${e.label}`;
     const memo = [e.memo ? `일정: ${e.memo}` : "", `청약홈 공고: ${link}`].filter(Boolean).join("\n");
     lines.push(
@@ -187,18 +192,30 @@ export function buildIcs(n: IcsNotice, now = new Date()): string | null {
   return lines.map(fold).join("\r\n") + "\r\n";
 }
 
-/** 브라우저에서 .ics 파일 내려받기 (서버에 보내지 않음) */
-export function downloadIcs(n: IcsNotice): boolean {
-  const text = buildIcs(n);
-  if (!text) return false;
+function saveFile(text: string, filename: string) {
   const blob = new Blob([text], { type: "text/calendar;charset=utf-8" });
   const href = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = href;
-  a.download = `chungyakfit-${n.houseManageNo}.ics`;
+  a.download = filename;
   document.body.appendChild(a);
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(href), 10_000);
+}
+
+/** 브라우저에서 .ics 파일 내려받기 (서버에 보내지 않음) */
+export function downloadIcs(n: IcsNotice): boolean {
+  const text = buildIcs(n);
+  if (!text) return false;
+  saveFile(text, `chungyakfit-${n.houseManageNo}.ics`);
+  return true;
+}
+
+/** 공고 여러 개를 파일 하나로 내려받기 */
+export function downloadIcsMany(list: IcsNotice[]): boolean {
+  const text = buildIcsMany(list, `${CALENDAR_SETTINGS.titlePrefix} 관심 공고 일정`);
+  if (!text) return false;
+  saveFile(text, "chungyakfit-my-calendar.ics");
   return true;
 }
