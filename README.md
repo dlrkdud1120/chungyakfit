@@ -60,6 +60,15 @@ npm run dev
 
 필요한 활용신청: 분양정보 조회 서비스, 청약접수 경쟁률 및 특별공급 신청현황 조회 서비스 (같은 인증키 사용).
 
+## 부적격 위험 점검 (/score 아래, /eligibility)
+
+| 파일 | 역할 |
+| --- | --- |
+| `lib/eligibility-check.ts` | 점검 규칙과 문구 전부(무주택 기산일, 세대원 주택 소유, 해당지역/기타지역, 부양가족 본인 제외, 공고 규제 조건 설명). |
+| `components/EligibilityCheck.tsx` | 질문과 "확인됨 / 다시 확인 필요" 결과 화면. 입력값은 저장하지 않음. |
+| `app/eligibility/page.tsx` | 점검만 따로 여는 페이지. `?no=주택관리번호`로 공고를 고른 채 열 수 있음. |
+| `check-detail.mjs` | 분양정보 API의 규제 조건 필드 이름 확인용 스크립트 (`node check-detail.mjs`). |
+
 ## 청약홈 API 설정
 
 분양정보 API는 공고와 공급세대수를, 경쟁률 API(getAptLttotPblancScore)는 주택형·거주구분별 당첨가점을 줍니다. 가능성 확인(/check)과 단지 비교(/compare)·메인·가점 계산의 평균 비교는 둘을 이어 붙인 과거 당첨가점(`/api/complexes`, `lib/useComplexes.ts`)을 쓰고, API가 실패할 때만 `data/complexes.csv`를 씁니다. API에는 가점제·추첨제 세대수가 없어 추첨제 안내는 CSV 데이터에서만 계산됩니다.

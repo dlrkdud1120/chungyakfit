@@ -7,6 +7,7 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import EligibilityCheck from "@/components/EligibilityCheck";
 import { saveMyScore } from "@/lib/myScore";
 import { averageCutoff, gapText } from "@/lib/benchmark";
 import type { Complex } from "@/lib/complexes";
@@ -14,6 +15,7 @@ import { useComplexes } from "@/lib/useComplexes";
 import {
   calcScore,
   fmt,
+  RULES,
   FUTURE_ASSUMPTIONS,
   projectScores,
   type Child,
@@ -75,7 +77,13 @@ export default function Calculator({ fallback }: { fallback: Complex[] }) {
   const updateParent = (i: number, patch: Partial<Parent>) =>
     setParents((list) => list.map((p, j) => (j === i ? { ...p, ...patch } : p)));
 
+  // 부적격 위험 점검에 넘길 값 (저장하지 않음). 부양가족 수는 계산 결과 점수에서 되돌려 셈
+  const dependentsCount = result.errors.length
+    ? null
+    : Math.round((result.dependents.score - RULES.dependents.base) / RULES.dependents.perPerson);
+
   return (
+    <>
     <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-14">
       {/* ───────── 입력 ───────── */}
       <div>
@@ -269,6 +277,12 @@ export default function Calculator({ fallback }: { fallback: Complex[] }) {
         )}
       </div>
     </div>
+
+    {/* 부적격 위험 점검: 위에 넣은 값을 그대로 씀 (저장하지 않음) */}
+    <EligibilityCheck
+      calc={{ birthDate, married, marriageDate, houseHistory, soldDate, dependentsCount }}
+    />
+    </>
   );
 }
 

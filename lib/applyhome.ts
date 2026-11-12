@@ -11,6 +11,7 @@
 
 import type { Complex } from "./complexes";
 import { parseRate, pickCmpet, type CmpetRow } from "./competition";
+import { readRegulations, REGULATIONS, type RegulationFlags } from "./eligibility-check";
 import { areaOf, bandOf, groupByType, pickRow, shortSido, shortType, unitFromAddress, type Home, type PastRow } from "./similar";
 
 /** 활용명세의 Base URL. 테스트용으로 APPLYHOME_API_BASE로 바꿀 수 있습니다. */
@@ -146,6 +147,7 @@ export type Notice = {
   receiptEnd: string | null;
   winnerDate: string | null;
   overheated: boolean;
+  regulations: RegulationFlags | null; // 규제 조건 (투기과열지구 등). 응답에 해당 필드가 없으면 null
   homepage: string | null;
   url: string | null; // 청약홈 공고 페이지
   types: NoticeType[];
@@ -183,6 +185,7 @@ export async function fetchNotices(): Promise<NoticeResult> {
         receiptEnd: str(d.RCEPT_ENDDE),
         winnerDate: str(d.PRZWNER_PRESNATN_DE),
         overheated: str(d.MDAT_TRGET_AREA_SECD) === "Y",
+        regulations: readRegulations(Object.fromEntries(REGULATIONS.map((r) => [r.code, str(d[r.code])]))),
         homepage: str(d.HMPG_ADRES),
         url: str(d.PBLANC_URL),
         types: [] as NoticeType[],

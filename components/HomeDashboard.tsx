@@ -73,6 +73,9 @@ function MyStatus({
         >
           가점 계산하기
         </Link>
+        <Link href="/eligibility" className="ml-3 inline-block text-sm text-brand underline-offset-2 hover:underline">
+          부적격 위험 점검 →
+        </Link>
       </Section>
     );
   }
@@ -119,6 +122,9 @@ function MyStatus({
         className="mt-4 inline-block rounded bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand/90"
       >
         원하는 단지 가능성 확인하기 →
+      </Link>
+      <Link href="/eligibility" className="mt-4 ml-3 inline-block text-sm text-brand underline-offset-2 hover:underline">
+        부적격 위험 점검 →
       </Link>
     </Section>
   );
