@@ -67,7 +67,13 @@ npm run dev
 | `lib/eligibility-check.ts` | 점검 규칙과 문구 전부(무주택 기산일, 세대원 주택 소유, 해당지역/기타지역, 부양가족 본인 제외, 공고 규제 조건 설명). |
 | `components/EligibilityCheck.tsx` | 질문과 "확인됨 / 다시 확인 필요" 결과 화면. 입력값은 저장하지 않음. |
 | `app/eligibility/page.tsx` | 점검만 따로 여는 페이지. `?no=주택관리번호`로 공고를 고른 채 열 수 있음. |
-| `check-detail.mjs` | 분양정보 API의 규제 조건 필드 이름 확인용 스크립트 (`node check-detail.mjs`). |
+
+## 캘린더 추가 (분양 공고, 가능성 확인)
+
+| 파일 | 역할 |
+| --- | --- |
+| `lib/calendar.ts` | 공고 일정(특별공급·1순위·2순위 접수, 당첨자 발표, 계약 시작) 정리와 .ics 파일 만들기. 하루 전 오전 9시(한국시간) 알림. |
+| `components/CalendarButton.tsx` | "내 캘린더에 추가" 버튼. 브라우저에서 바로 파일을 만들어 내려받음(서버 저장 없음). |
 
 ## 청약홈 API 설정
 

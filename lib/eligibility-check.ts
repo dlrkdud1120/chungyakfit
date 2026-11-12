@@ -231,8 +231,8 @@ export type RegulationFlags = Partial<Record<RegulationName, boolean>>;
 
 /**
  * 분양정보(getAPTLttotPblancDetail) 응답의 규제 항목과 쉬운 설명
- * code는 공공데이터포털 활용가이드의 항목 이름입니다. 응답에 그 필드가 없으면 화면에 표시하지 않습니다.
- * (실제 응답 필드는 check-detail.mjs로 확인)
+ * code는 실제 응답(check-api.mjs 결과)에서 확인한 필드 이름이고, 값은 "Y"/"N"입니다.
+ * 응답에 그 필드가 없으면 화면에 표시하지 않습니다.
  */
 export const REGULATIONS: { code: string; name: RegulationName; plain: string }[] = [
   {

@@ -13,6 +13,7 @@ import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "reac
 import type { Notice, NoticeResult } from "@/lib/applyhome";
 import { FUTURE_SECTION_ID } from "@/lib/anchors";
 import { imageFor, type ComplexImages } from "@/lib/complexImage";
+import CalendarButton from "@/components/CalendarButton";
 import ComplexThumb from "@/components/ComplexThumb";
 import { isShort, NO_CMPET, pickCmpet, rankText, rateShort, rateText, type CmpetRow } from "@/lib/competition";
 import { judge, VERDICT_ORDER, type Verdict } from "@/lib/judge";
@@ -278,6 +279,7 @@ export default function CheckPossibility({ images }: { images: ComplexImages }) 
                       )}
                     </p>
                   )}
+                  {notice && <CalendarButton notice={notice} className="mb-2" />}
                 </>
               )}
             </>

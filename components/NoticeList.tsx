@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import type { Notice, NoticeResult } from "@/lib/applyhome";
 import type { Complex } from "@/lib/complexes";
 import { imageFor, type ComplexImages } from "@/lib/complexImage";
+import CalendarButton from "@/components/CalendarButton";
 import ComplexThumb from "@/components/ComplexThumb";
 
 type State = { status: "loading" } | { status: "done"; result: NoticeResult };
@@ -82,7 +83,8 @@ function NoticeRow({ n, images }: { n: Notice; images: ComplexImages }) {
               <span className="ml-2 text-xs font-normal text-muted">
                 {[n.kind, n.supplyKind].filter(Boolean).join(" · ")}
               </span>
-              {n.overheated && <span className="ml-2 text-xs font-normal text-accent-dark">투기과열지구</span>}
+              {n.regulations?.["투기과열지구"] && <span className="ml-2 text-xs font-normal text-accent-dark">투기과열지구</span>}
+              {n.regulations?.["조정대상지역"] && <span className="ml-2 text-xs font-normal text-accent-dark">조정대상지역</span>}
             </span>
             <span className="text-xs text-muted">공고일 {dot(n.noticeDate)}</span>
           </div>
@@ -98,6 +100,7 @@ function NoticeRow({ n, images }: { n: Notice; images: ComplexImages }) {
               </>
             )}
           </div>
+          <CalendarButton notice={n} className="mt-2" />
         </div>
       </div>
 

@@ -11,6 +11,7 @@
 
 import type { Complex } from "./complexes";
 import { parseRate, pickCmpet, type CmpetRow } from "./competition";
+import { scheduleFromRaw, type NoticeSchedule } from "./calendar";
 import { readRegulations, REGULATIONS, type RegulationFlags } from "./eligibility-check";
 import { areaOf, bandOf, groupByType, pickRow, shortSido, shortType, unitFromAddress, type Home, type PastRow } from "./similar";
 
@@ -147,6 +148,7 @@ export type Notice = {
   receiptEnd: string | null;
   winnerDate: string | null;
   overheated: boolean;
+  schedule: NoticeSchedule; // 특별공급·1순위·2순위 접수, 당첨자 발표, 계약 시작일 (캘린더 파일용)
   regulations: RegulationFlags | null; // 규제 조건 (투기과열지구 등). 응답에 해당 필드가 없으면 null
   homepage: string | null;
   url: string | null; // 청약홈 공고 페이지
@@ -185,6 +187,7 @@ export async function fetchNotices(): Promise<NoticeResult> {
         receiptEnd: str(d.RCEPT_ENDDE),
         winnerDate: str(d.PRZWNER_PRESNATN_DE),
         overheated: str(d.MDAT_TRGET_AREA_SECD) === "Y",
+        schedule: scheduleFromRaw((k) => str(d[k])),
         regulations: readRegulations(Object.fromEntries(REGULATIONS.map((r) => [r.code, str(d[r.code])]))),
         homepage: str(d.HMPG_ADRES),
         url: str(d.PBLANC_URL),
