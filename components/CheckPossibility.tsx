@@ -416,17 +416,37 @@ function Result({
             <td className="py-2.5 text-muted">원하는 단지</td>
             <td className="py-2.5 text-right font-medium">{target.label}</td>
           </tr>
-          {/* 원하는 단지의 조감도 또는 위치 지도 (누르면 카카오맵) — 분양공고에서 고른 경우만 */}
+          {/* 원하는 단지의 조감도와 위치 지도 (누르면 카카오맵) — 분양공고에서 고른 경우만.
+              조감도가 있으면 조감도와 지도를 나란히, 없으면 지도만 */}
           {notice && (
             <tr className="border-b border-line">
               <td colSpan={2} className="py-3">
-                <ComplexThumb
-                  size="lg"
-                  name={notice.name}
-                  address={notice.address}
-                  region={`${notice.region} ${notice.unit}`}
-                  image={imageFor(images, notice.name)}
-                />
+                {imageFor(images, notice.name) ? (
+                  <div className="grid max-w-[492px] grid-cols-2 gap-3">
+                    <ComplexThumb
+                      size="fill"
+                      name={notice.name}
+                      address={notice.address}
+                      region={`${notice.region} ${notice.unit}`}
+                      image={imageFor(images, notice.name)}
+                    />
+                    <ComplexThumb
+                      size="fill"
+                      name={notice.name}
+                      address={notice.address}
+                      region={`${notice.region} ${notice.unit}`}
+                      image={null}
+                    />
+                  </div>
+                ) : (
+                  <ComplexThumb
+                    size="lg"
+                    name={notice.name}
+                    address={notice.address}
+                    region={`${notice.region} ${notice.unit}`}
+                    image={null}
+                  />
+                )}
               </td>
             </tr>
           )}

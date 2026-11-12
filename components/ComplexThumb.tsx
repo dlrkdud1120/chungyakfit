@@ -11,6 +11,7 @@
  *
  * size="sm": 목록용 (모바일 56px, 넓은 화면 80px, 4:3)
  * size="lg": 가능성 확인용 (240px, 4:3)
+ * size="fill": 부모 칸 너비에 맞춤 (가능성 확인에서 조감도와 지도를 나란히 둘 때)
  * 두 크기 모두 누르면 카카오맵에서 위치가 새 탭으로 열립니다.
  */
 
@@ -23,7 +24,7 @@ type Props = {
   address?: string | null;
   region?: string;
   image?: ComplexImage | null;
-  size?: "sm" | "lg";
+  size?: "sm" | "lg" | "fill";
 };
 
 type CoordState = { status: "idle" | "loading" } | { status: "ok"; lat: number; lng: number } | { status: "fail" };
@@ -31,6 +32,7 @@ type CoordState = { status: "idle" | "loading" } | { status: "ok"; lat: number; 
 const BOX = {
   sm: "w-14 sm:w-20",
   lg: "w-60 max-w-full",
+  fill: "w-full",
 } as const;
 
 export default function ComplexThumb({ name, address, region, image, size = "sm" }: Props) {
@@ -91,7 +93,7 @@ export default function ComplexThumb({ name, address, region, image, size = "sm"
         if (!alive) return;
         el.innerHTML = "";
         const center = new maps.LatLng(coord.lat, coord.lng);
-        new maps.StaticMap(el, { center, level: size === "lg" ? 4 : 5, marker: { position: center } });
+        new maps.StaticMap(el, { center, level: size === "sm" ? 5 : 4, marker: { position: center } });
         setMapState("ok");
       })
       .catch(() => alive && setMapState("fail"));
@@ -109,7 +111,7 @@ export default function ComplexThumb({ name, address, region, image, size = "sm"
       className={`relative aspect-[4/3] overflow-hidden rounded-[3px] border border-line bg-[#eef2f0] ${BOX[size]}`}
     >
       {/* 빈 칸 (불러오는 중이거나 지도를 못 그릴 때) */}
-      {!(showImage && imageLoaded) && mapState !== "ok" && <Placeholder big={size === "lg"} />}
+      {!(showImage && imageLoaded) && mapState !== "ok" && <Placeholder big={size !== "sm"} />}
 
       {showImage ? (
         // eslint-disable-next-line @next/next/no-img-element
@@ -150,7 +152,7 @@ export default function ComplexThumb({ name, address, region, image, size = "sm"
           출처: {caption}
         </figcaption>
       )}
-      {size === "lg" && !caption && (
+      {size !== "sm" && !caption && (
         <figcaption className="mt-1 text-[11px] text-muted">누르면 카카오맵에서 위치가 열려요</figcaption>
       )}
     </figure>
