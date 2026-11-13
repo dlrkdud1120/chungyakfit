@@ -95,6 +95,20 @@ npm run dev
 환경변수(`.env.local`과 Vercel 둘 다): `AUTH_SECRET`, `AUTH_KAKAO_ID`(비우면 `KAKAO_REST_KEY` 사용), `AUTH_KAKAO_SECRET`, `SUPABASE_URL`, `SUPABASE_SECRET_KEY`.
 카카오 Redirect URI: `http://localhost:3000/api/auth/callback/kakao`, `https://내주소.vercel.app/api/auth/callback/kakao`.
 
+## 화면 구성과 이동 방식
+
+한 화면에 섹션은 세 개까지만 두고, 자세한 정보는 "자세히 보기"로 접어 둡니다. 단계와 상세 화면은 주소에 반영되어 브라우저 뒤로 가기로 돌아갈 수 있습니다.
+
+| 파일 | 역할 |
+| --- | --- |
+| `components/SiteNav.tsx` | 위 바(메뉴 버튼·아이콘·로그인), 왼쪽 메뉴 판, 모바일 하단 탭 4개. |
+| `components/Fold.tsx` | "자세히 보기" 접기 부품 (공용). |
+| `components/Calculator.tsx`, `components/scoreDraft.ts` | 가점 계산을 한 화면에 한 질문씩(`/score?step=2`). 입력값은 이 브라우저 탭 안에만 보관. |
+| `components/CheckPossibility.tsx` | 가능성 확인: 고르기(`/check`) → 결과(`/check?no=…&view=result`). |
+| `components/CompareList.tsx` | 단지 비교: 목록(`/compare`) → 상세(`/compare?id=…&t=…`). |
+| `components/NoticeList.tsx`, `components/useNoticeVerdict.ts` | 분양 공고: 목록(`/notice`) → 상세(`/notice?no=…`), 공고별 내 판정. |
+| `components/HomeDashboard.tsx` | 홈: 내 점수 한 줄, 노려볼 단지 3개, 다가오는 분양공고 3개. |
+
 ## 앱 아이콘
 
 | 파일 | 역할 |

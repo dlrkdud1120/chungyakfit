@@ -13,6 +13,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import FavoriteStar from "@/components/FavoriteStar";
+import Fold from "@/components/Fold";
 import { KakaoLoginButton } from "@/components/KakaoLogin";
 import { useMy } from "@/components/Providers";
 import { downloadIcsMany, scheduleEvents } from "@/lib/calendar";
@@ -103,8 +104,15 @@ function Sections({ data }: { data: MeData }) {
       <ScoreSection scores={data.scores} />
       <FavoriteSection favorites={data.favorites} score={score} home={home} today={today} />
       <CalendarSection favorites={data.favorites} today={today} />
-      <RecentSection data={data} />
-      <AccountSection data={data} />
+      {/* 한 화면에 세 섹션까지만: 나머지는 접어 둠 */}
+      <div>
+        <Fold label={`최근 열람한 공고 보기 (${data.recent.length})`}>
+          <RecentSection data={data} />
+        </Fold>
+        <Fold label="계정 설정 보기">
+          <AccountSection data={data} />
+        </Fold>
+      </div>
     </div>
   );
 }

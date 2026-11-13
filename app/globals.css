@@ -19,3 +19,41 @@ body {
   font-family: var(--font-sans);
   word-break: keep-all;
 }
+
+/* ───── 화면 전환 효과 (동작 줄이기 설정을 켜 두면 효과 없이 바로 바뀜) ───── */
+@media (prefers-reduced-motion: no-preference) {
+  .step-next {
+    animation: step-from-right 0.25s ease-out;
+  }
+  .step-prev {
+    animation: step-from-left 0.25s ease-out;
+  }
+  .menu-slide {
+    animation: menu-from-left 0.2s ease-out;
+  }
+  .menu-fade {
+    animation: fade-in 0.2s ease-out;
+  }
+}
+@keyframes step-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+}
+@keyframes step-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+}
+@keyframes menu-from-left {
+  from {
+    transform: translateX(-100%);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}

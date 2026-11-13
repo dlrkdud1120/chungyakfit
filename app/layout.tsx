@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex min-h-full flex-col">
         {/* 로그인은 선택. Providers는 로그인 상태와 내 데이터를 모든 화면에 나눠 줍니다 */}
         <Providers enabled={loginReady}>
-          <Suspense fallback={<div className="h-[46px] border-b border-line bg-white" />}>
+          <Suspense fallback={<div className="h-12 border-b border-line bg-white" />}>
             <SiteNav />
           </Suspense>
           <MigratePrompt />
@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6 sm:py-12">{children}</main>
         </Providers>
 
-        <footer className="mx-auto w-full max-w-5xl px-4 pb-10 sm:px-6">
+        <footer className="mx-auto w-full max-w-5xl px-4 pb-24 sm:px-6 sm:pb-10">
           <p className="border-t border-line pt-5 text-xs leading-relaxed text-muted">
             실제 청약 자격과 점수는 청약홈 및 입주자모집공고 기준으로 확인하세요.
           </p>

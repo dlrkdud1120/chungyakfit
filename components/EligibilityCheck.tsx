@@ -8,7 +8,9 @@
  * calc를 넘기면(가점 계산 화면) 생년월일·혼인·주택 이력·부양가족 수를 다시 묻지 않고 그 값을 씁니다.
  */
 
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useScoreDraft } from "@/components/scoreDraft";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import type { Notice, NoticeResult } from "@/lib/applyhome";
 import {
@@ -24,7 +26,7 @@ import {
   type CheckResult,
 } from "@/lib/eligibility-check";
 import { parseMyHome, readMyHomeRaw, subscribeMyHome } from "@/lib/myHome";
-import type { HouseHistory } from "@/lib/score";
+import { calcScore, RULES, type HouseHistory } from "@/lib/score";
 import { shortSido, SIDO_LIST } from "@/lib/similar";
 
 export type CalcValues = {
@@ -48,7 +50,23 @@ export default function EligibilityCheck({ calc }: { calc?: CalcValues }) {
   const [houseHistory, setHouseHistory] = useState<HouseHistory>("never");
   const [soldDate, setSoldDate] = useState("");
   const [depCount, setDepCount] = useState("");
-  const v: CalcValues = calc ?? {
+  // 가점 계산에 넣어 둔 값이 이 브라우저 탭에 남아 있으면 다시 묻지 않고 그 값을 씀 (저장·전송하지 않음)
+  const [draft, , hasDraft] = useScoreDraft();
+  const [today] = useState(() => new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date()));
+  const fromDraft: CalcValues | undefined = useMemo(() => {
+    if (calc || !hasDraft || !draft.birthDate) return undefined;
+    const r = calcScore({ ...draft, baseDate: draft.baseDate ?? today });
+    return {
+      birthDate: draft.birthDate,
+      married: draft.married,
+      marriageDate: draft.marriageDate,
+      houseHistory: draft.houseHistory,
+      soldDate: draft.soldDate,
+      dependentsCount: r.errors.length ? null : Math.round((r.dependents.score - RULES.dependents.base) / RULES.dependents.perPerson),
+    };
+  }, [calc, hasDraft, draft, today]);
+  const given = calc ?? fromDraft;
+  const v: CalcValues = given ?? {
     birthDate,
     married,
     marriageDate,
@@ -109,7 +127,7 @@ export default function EligibilityCheck({ calc }: { calc?: CalcValues }) {
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
         {/* ───────── 질문 ───────── */}
         <div>
-          {!calc && (
+          {!given && (
             <Group title="기본 정보">
               <Row label="생년월일">
                 <DateInput value={birthDate} onChange={setBirthDate} />
@@ -146,9 +164,12 @@ export default function EligibilityCheck({ calc }: { calc?: CalcValues }) {
               </Row>
             </Group>
           )}
-          {calc && (
+          {given && (
             <p className="border-b border-line py-3 text-[13px] text-muted">
-              생년월일, 혼인, 주택 소유 이력, 부양가족 수는 위 계산기에 넣은 값을 씁니다.
+              생년월일, 혼인, 주택 소유 이력, 부양가족 수는 가점 계산에 넣은 값을 씁니다.{" "}
+              <Link href="/score" className="text-brand underline">
+                입력 고치기
+              </Link>
             </p>
           )}
 

@@ -1,20 +1,22 @@
 "use client";
 
 /**
- * 당첨 가능성 확인 화면 (앱의 핵심 기능)
- *  1) 내 가점과 거주지
- *  2) 원하는 단지 고르기 — 다가오는 분양공고에서 / 지역·면적 직접
- *  3) 비슷한 과거 사례(/api/similar)로 lib/judge.ts 판정 + 근거 사례 표
+ * 당첨 가능성 확인 화면 (앱의 핵심 기능) — 고르기 → 결과 두 화면
+ *  1단계(/check): 단지와 주택형 고르기. 내 가점과 거주지는 저장값을 한 줄로 보여주고 "수정"을 눌러야 입력칸이 열림
+ *  2단계(/check?…&view=result): 판정 요약, 점수 위치 막대, 경쟁률, 다음에 할 수 있는 것.
+ *     숫자 행과 과거 사례 표는 "판정 근거 자세히 보기"로 접어 둠
+ * 판정은 비슷한 과거 사례(/api/similar)와 lib/judge.ts를 그대로 씁니다.
  */
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import type { Notice, NoticeResult } from "@/lib/applyhome";
 import { FUTURE_SECTION_ID } from "@/lib/anchors";
 import { imageFor, type ComplexImages } from "@/lib/complexImage";
 import CalendarButton from "@/components/CalendarButton";
 import FavoriteStar from "@/components/FavoriteStar";
+import Fold from "@/components/Fold";
 import { useMy } from "@/components/Providers";
 import { favoriteFromNotice } from "@/lib/meTypes";
 import ComplexThumb from "@/components/ComplexThumb";
@@ -45,6 +47,10 @@ type SimilarResponse =
 /** images: complexes.csv에 등록한 조감도 (app/check/page.tsx가 넘겨줌) */
 export default function CheckPossibility({ images }: { images: ComplexImages }) {
   const params = useSearchParams();
+  const router = useRouter();
+  // 2단계(결과) 화면인지. 다른 화면에서 /check?no=… 로 들어오면 바로 결과를 보여줌
+  const showResult = params.get("view") === "result" || (params.has("no") && !params.has("view"));
+  const [editOpen, setEditOpen] = useState(false); // 내 가점·거주지 입력칸
 
   // ── 1. 내 가점 (저장값, 직접 바꿔볼 수 있음)
   const savedRaw = useSyncExternalStore(subscribeMyScore, readMyScoreRaw, () => null);
@@ -58,11 +64,18 @@ export default function CheckPossibility({ images }: { images: ComplexImages }) 
   const home = useMemo(() => parseMyHome(homeRaw), [homeRaw]);
 
   // ── 2. 원하는 단지
-  const [mode, setMode] = useState<Mode>("notice");
+  const [mode, setMode] = useState<Mode>(params.get("unit") ? "manual" : "notice");
   const [noticeNo, setNoticeNo] = useState(params.get("no") ?? "");
   const [noticeType, setNoticeType] = useState(params.get("type") ?? "");
   const [noticeBand, setNoticeBand] = useState<BandId>("m"); // 주택형 정보가 없을 때만 사용
-  const [manual, setManual] = useState<{ sido: string; unit: string; band: BandId }>({ sido: "서울", unit: "", band: "m" });
+  const [manual, setManual] = useState<{ sido: string; unit: string; band: BandId }>(() => {
+    const band = params.get("band");
+    return {
+      sido: params.get("sido") ?? "서울",
+      unit: params.get("unit") ?? "",
+      band: SIMILAR_RULES.bands.some((b) => b.id === band) ? (band as BandId) : "m",
+    };
+  });
   const [resideOverride, setResideOverride] = useState<Reside | null>(null);
 
   // 분양 공고 불러오기
@@ -90,7 +103,7 @@ export default function CheckPossibility({ images }: { images: ComplexImages }) 
 
   // 로그인한 경우에만: 고른 공고를 "최근 열람한 공고"에 남김 (로그인 전에는 아무것도 보내지 않음)
   const my = useMy();
-  const seenNo = mode === "notice" && notice && my.dataState === "ok" ? notice.houseManageNo : null;
+  const seenNo = showResult && mode === "notice" && notice && my.dataState === "ok" ? notice.houseManageNo : null;
   useEffect(() => {
     if (!seenNo || !notice) return;
     my.addRecent({ no: notice.houseManageNo, name: notice.name, sido: shortSido(notice.region), unit: notice.unit });
@@ -151,21 +164,74 @@ export default function CheckPossibility({ images }: { images: ComplexImages }) 
   }, [query]);
   const similarData = similar && similar.key === query ? similar.data : null;
 
-  // 모바일: 공고에서 단지·주택형을 고르고 결과가 오면 판정 요약이 화면 위쪽에 오도록 한 번 스크롤
-  const summaryRef = useRef<HTMLDivElement>(null);
-  const scrolledFor = useRef<string | null>(null);
-  useEffect(() => {
-    if (mode !== "notice" || !query || !similarData || scrolledFor.current === query) return;
-    scrolledFor.current = query;
-    if (!window.matchMedia("(max-width: 1023px)").matches) return; // 넓은 화면은 판정이 옆에 보임
-    requestAnimationFrame(() => summaryRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
-  }, [mode, query, similarData]);
+  // 고른 단지를 주소에 담아 결과 화면으로 (브라우저 뒤로 가기를 누르면 고르기 화면으로 돌아옴)
+  const canJudge = !!target && myScore !== null && !!home.sido;
+  const toResult = () => {
+    const qs: Record<string, string> =
+      mode === "notice" && notice
+        ? { no: notice.houseManageNo, ...(selectedType ? { type: selectedType.type } : {}) }
+        : { sido: manual.sido, unit: manual.unit.trim(), band: manual.band };
+    router.push(`/check?${new URLSearchParams({ ...qs, view: "result" })}`);
+  };
+  const needEdit = myScore === null || !home.sido;
 
+  // ───────── 2단계: 결과 ─────────
+  if (showResult) {
+    const back = (
+      <button
+        type="button"
+        onClick={() => router.push("/check")}
+        className="shrink-0 rounded border border-line bg-white px-3 py-1.5 text-xs text-brand hover:border-brand"
+      >
+        다른 단지 보기
+      </button>
+    );
+    if (!target) {
+      return (
+        <div className="max-w-2xl">
+          <Empty>{mode === "notice" && notices.status === "loading" ? "청약홈에서 공고를 불러오는 중…" : "단지를 먼저 골라 주세요."}</Empty>
+          {back}
+        </div>
+      );
+    }
+    return (
+      <div className="max-w-2xl">
+        <Result
+          myScore={myScore}
+          future={manualScore === "" ? (saved?.future ?? null) : null}
+          hasHome={!!home.sido}
+          target={target}
+          reside={reside}
+          data={similarData}
+          waiting={!!query && !similarData}
+          notice={mode === "notice" ? notice : null}
+          selectedType={selectedType?.type ?? null}
+          back={back}
+          images={images}
+        />
+      </div>
+    );
+  }
+
+  // ───────── 1단계: 고르기 ─────────
   return (
-    <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] lg:gap-14">
-      {/* ───────── 입력 ───────── */}
-      <div>
-        <Section title="1. 내 가점과 거주지">
+    <div className="max-w-2xl">
+        {/* 내 가점과 거주지: 저장된 값을 한 줄로, "수정"을 눌렀을 때만 입력칸 */}
+        <div className="flex items-center justify-between gap-3 border-y border-line py-3 text-sm">
+          <span className="min-w-0">
+            <span className="mr-1.5 text-xs text-muted">내 가점</span>
+            <b className="text-brand">{myScore !== null ? `${fmt(myScore)}점` : "없음"}</b>
+            <span className="mr-1.5 ml-4 text-xs text-muted">거주지</span>
+            {home.sido ? `${home.sido} ${home.unit}`.trim() : "없음"}
+          </span>
+          {!needEdit && (
+            <button type="button" onClick={() => setEditOpen((v) => !v)} aria-expanded={editOpen} className="shrink-0 text-xs text-brand underline underline-offset-2">
+              {editOpen ? "닫기" : "수정"}
+            </button>
+          )}
+        </div>
+        {(editOpen || needEdit) && (
+        <div className="mb-2">
           <Row label="내 가점">
             <div className="flex items-center gap-2 text-sm">
               <input
@@ -214,9 +280,10 @@ export default function CheckPossibility({ images }: { images: ComplexImages }) 
               />
             </div>
           </Row>
-        </Section>
+        </div>
+        )}
 
-        <Section title="2. 원하는 단지">
+        <Section title="원하는 단지" className="mt-8">
           <div className="border-b border-line py-3">
             <Segment
               value={mode}
@@ -292,12 +359,6 @@ export default function CheckPossibility({ images }: { images: ComplexImages }) 
                       )}
                     </p>
                   )}
-                  {notice && (
-                    <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1">
-                      <CalendarButton notice={notice} />
-                      <FavoriteStar item={favoriteFromNotice(notice, selectedType?.type)} label />
-                    </div>
-                  )}
                 </>
               )}
             </>
@@ -341,31 +402,21 @@ export default function CheckPossibility({ images }: { images: ComplexImages }) 
               </select>
             </Row>
           )}
-          {target && reside && (
-            <p className="py-2 text-xs leading-relaxed text-muted">
-              해당지역 범위와 우선공급 비율은 공고마다 다릅니다(예: 대규모 택지는 해당 시·군, 경기, 그 밖 수도권으로 나눔). 정확한 구분은 입주자모집공고에서 확인하세요.
-            </p>
-          )}
         </Section>
-      </div>
 
-      {/* ───────── 결과 ───────── */}
-      <div>
-        <Section title="3. 가능성 판정">
-          <Result
-            myScore={myScore}
-            future={manualScore === "" ? (saved?.future ?? null) : null}
-            hasHome={!!home.sido}
-            target={target}
-            reside={reside}
-            data={similarData}
-            waiting={!!query && !similarData}
-            notice={mode === "notice" ? notice : null}
-            summaryRef={summaryRef}
-            images={images}
-          />
-        </Section>
-      </div>
+        {!canJudge && (
+          <p className="mb-2 text-xs text-accent-dark">
+            {myScore === null ? "내 가점을 넣어 주세요." : !home.sido ? "거주지를 골라 주세요." : "단지(또는 지역과 면적대)를 골라 주세요."}
+          </p>
+        )}
+        <button
+          type="button"
+          disabled={!canJudge}
+          onClick={toResult}
+          className="w-full rounded bg-brand py-2.5 text-sm font-semibold text-white hover:bg-brand/90 disabled:bg-line disabled:text-muted"
+        >
+          판정 보기
+        </button>
     </div>
   );
 }
@@ -398,7 +449,8 @@ function Result({
   data,
   waiting,
   notice,
-  summaryRef,
+  selectedType,
+  back,
   images,
 }: {
   myScore: number | null;
@@ -409,15 +461,41 @@ function Result({
   data: SimilarResponse | null;
   waiting: boolean;
   notice: Notice | null;
-  summaryRef: React.RefObject<HTMLDivElement | null>;
+  selectedType: string | null;
+  back: React.ReactNode; // "다른 단지 보기" 버튼
   images: ComplexImages;
 }) {
-  if (myScore === null) return <Empty>먼저 내 가점을 계산하거나 직접 넣어 주세요.</Empty>;
-  if (!hasHome) return <Empty>거주지 시·도를 골라 주세요. 해당지역·기타지역에 따라 비교할 당첨 가점이 달라집니다.</Empty>;
-  if (!target) return <Empty>원하는 단지(또는 지역과 면적대)를 골라 주세요.</Empty>;
-  if (waiting) return <Empty>청약홈 과거 당첨 가점에서 비슷한 사례를 찾는 중… (처음엔 몇 초 걸릴 수 있어요)</Empty>;
+  // 맨 위: 고른 단지 이름과 "다른 단지 보기"
+  const head = (basis?: string) => (
+    <div className="flex items-start justify-between gap-3 border-b border-line pb-3">
+      <div className="min-w-0">
+        <div className="font-medium">{target?.label}</div>
+        {basis && <div className="mt-0.5 text-xs text-muted">비교 기준: {basis}</div>}
+      </div>
+      {back}
+    </div>
+  );
+  const note = (text: React.ReactNode) => (
+    <div>
+      {head()}
+      <Empty>{text}</Empty>
+    </div>
+  );
+  if (myScore === null) {
+    return note(
+      <>
+        먼저 내 가점이 필요해요.{" "}
+        <Link href="/score" className="text-brand underline">
+          가점 계산하기 →
+        </Link>
+      </>,
+    );
+  }
+  if (!hasHome) return note("거주지 시·도를 골라 주세요. 해당지역·기타지역에 따라 비교할 당첨 가점이 달라집니다.");
+  if (!target) return null;
+  if (waiting) return note("청약홈 과거 당첨 가점에서 비슷한 사례를 찾는 중… (처음엔 몇 초 걸릴 수 있어요)");
   if (!data) return null;
-  if (!data.ok) return <Empty>과거 당첨 가점을 불러오지 못했습니다. ({data.reason})</Empty>;
+  if (!data.ok) return note(`과거 당첨 가점을 불러오지 못했습니다. (${data.reason})`);
 
   const { result } = data;
   const areaText = result.level === "sido" ? `${target.sido} 전체` : `${target.sido} ${target.unit}`;
@@ -435,17 +513,68 @@ function Result({
 
   return (
     <div>
-      <table className="w-full text-sm">
-        <tbody>
-          <tr className="border-b border-line">
-            <td className="py-2.5 text-muted">원하는 단지</td>
-            <td className="py-2.5 text-right font-medium">{target.label}</td>
-          </tr>
-          {/* 원하는 단지의 조감도와 위치 지도 (누르면 카카오맵) — 분양공고에서 고른 경우만.
-              조감도가 있으면 조감도와 지도를 나란히, 없으면 지도만 */}
-          {notice && (
-            <tr className="border-b border-line">
-              <td colSpan={2} className="py-3">
+      {head(basis)}
+      {notice && (
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-line py-2">
+          <CalendarButton notice={notice} />
+          <FavoriteStar item={favoriteFromNotice(notice, selectedType)} label />
+        </div>
+      )}
+
+      {/* 판정 요약 + 점수 위치 막대 */}
+      {judgement && stats ? (
+        <>
+          <div className="mt-4 flex gap-3">
+            <span className={`w-1 shrink-0 ${TONE[judgement.verdict].line}`} aria-hidden />
+            <div className="py-0.5">
+              <p className={`text-lg leading-tight font-bold ${TONE[judgement.verdict].text}`}>{judgement.verdict}</p>
+              <p className="mt-1 text-sm">{verdictSentence(judgement.verdict, myScore, stats)}</p>
+            </div>
+          </div>
+          <PositionBar my={myScore} stats={stats} />
+        </>
+      ) : (
+        <p className="mt-4 border-l-4 border-line py-1 pl-3 text-sm text-muted">
+          {target.sido} 전체에서도 같은 면적대의 사례가 {SIMILAR_RULES.minCases}개보다 적어 판정하지 않았어요. 면적대를 바꾸거나
+          청약홈 공고를 직접 확인해 보세요.
+        </p>
+      )}
+
+      {/* 경쟁률 (분양공고에서 고른 경우만. 판정에는 쓰지 않는 참고 정보) */}
+      {target.houseTy && (
+        <table className="mt-2 w-full border-t border-line text-sm tabular-nums">
+          <tbody>
+                <NumRow
+                  label="이 주택형 경쟁률"
+                  note={
+                    myCmpet
+                      ? `${isShort(myCmpet) ? "미달이면 순위 안에만 들면 당첨될 수 있어요 · " : ""}접수 ${myCmpet.req ?? "–"}건 / 공급 ${myCmpet.supply ?? "–"}세대`
+                      : "아직 접수 전이거나 청약홈에 경쟁률이 없어요"
+                  }
+                  value={
+                    myCmpet ? (
+                      <>
+                        <span className={isShort(myCmpet) ? "font-semibold text-accent-dark" : ""}>{rateText(myCmpet)}</span>
+                        <span className="block text-xs text-muted sm:ml-1 sm:inline">({rankText(myCmpet)})</span>
+                      </>
+                    ) : (
+                      <span className="text-muted">{NO_CMPET}</span>
+                    )
+                  }
+                />
+          </tbody>
+        </table>
+      )}
+
+      {/* 다음에 할 수 있는 것 */}
+      {judgement && stats && (
+        <NextSteps verdict={judgement.verdict} my={myScore} stats={stats} future={future} target={target} notice={notice} cases={result.cases} />
+      )}
+
+      {/* 숫자 행 전체와 과거 사례 표는 접어 둠 */}
+      <Fold label="판정 근거 자세히 보기" className="mt-6">
+        {notice && (
+          <div className="border-b border-line py-3">
                 {imageFor(images, notice.name) ? (
                   <div className="grid max-w-[492px] grid-cols-2 gap-3">
                     <ComplexThumb
@@ -472,46 +601,14 @@ function Result({
                     image={null}
                   />
                 )}
-              </td>
-            </tr>
-          )}
-          <tr className="border-b border-line">
-            <td className="py-2.5 text-muted">비교 기준</td>
-            <td className="py-2.5 text-right">{basis}</td>
-          </tr>
-        </tbody>
-      </table>
-      {result.level === "sido" && (
-        <p className="pt-2 text-xs text-muted">
-          {target.unit}에는 비슷한 사례가 {SIMILAR_RULES.minCases}개보다 적어 {target.sido} 전체로 넓혀 비교했습니다.
-        </p>
-      )}
-
-      {/* 판정 요약 + 점수 위치 막대 */}
-      <div ref={summaryRef} className="scroll-mt-4">
-        {judgement && stats ? (
-          <>
-            <div className="mt-4 flex gap-3">
-              <span className={`w-1 shrink-0 ${TONE[judgement.verdict].line}`} aria-hidden />
-              <div className="py-0.5">
-                <p className={`text-lg leading-tight font-bold ${TONE[judgement.verdict].text}`}>{judgement.verdict}</p>
-                <p className="mt-1 text-sm">{verdictSentence(judgement.verdict, myScore, stats)}</p>
-              </div>
-            </div>
-            <PositionBar my={myScore} stats={stats} />
-          </>
-        ) : (
-          <p className="mt-4 border-l-4 border-line py-1 pl-3 text-sm text-muted">
-            {target.sido} 전체에서도 같은 면적대의 사례가 {SIMILAR_RULES.minCases}개보다 적어 판정하지 않았어요. 면적대를 바꾸거나
-            청약홈 공고를 직접 확인해 보세요.
+          </div>
+        )}
+        {result.level === "sido" && (
+          <p className="border-b border-line py-2 text-xs text-muted">
+            {target.unit}에는 비슷한 사례가 {SIMILAR_RULES.minCases}개보다 적어 {target.sido} 전체로 넓혀 비교했습니다.
           </p>
         )}
-      </div>
-
-      {/* 판정 근거 숫자 */}
-      {stats && (
-        <>
-          <h3 className="mt-6 border-b-2 border-brand pb-2 text-sm font-semibold text-brand">판정 근거</h3>
+        {stats && (
           <table className="w-full text-sm tabular-nums">
             <tbody>
               <NumRow label="내 가점" value={`${fmt(myScore)}점`} strong />
@@ -530,42 +627,15 @@ function Result({
                 note="당첨선 = 그 사례의 최저 당첨 가점"
                 value={`${passed}개`}
               />
-              {target.houseTy && (
-                <NumRow
-                  label="이 주택형 경쟁률"
-                  note={
-                    myCmpet
-                      ? `${isShort(myCmpet) ? "미달이면 순위 안에만 들면 당첨될 수 있어요 · " : ""}접수 ${myCmpet.req ?? "–"}건 / 공급 ${myCmpet.supply ?? "–"}세대`
-                      : "아직 접수 전이거나 청약홈에 경쟁률이 없어요"
-                  }
-                  value={
-                    myCmpet ? (
-                      <>
-                        <span className={isShort(myCmpet) ? "font-semibold text-accent-dark" : ""}>{rateText(myCmpet)}</span>
-                        <span className="block text-xs text-muted sm:ml-1 sm:inline">({rankText(myCmpet)})</span>
-                      </>
-                    ) : (
-                      <span className="text-muted">{NO_CMPET}</span>
-                    )
-                  }
-                />
-              )}
             </tbody>
           </table>
-        </>
-      )}
+        )}
 
-      {/* 다음에 할 수 있는 것 */}
-      {judgement && stats && (
-        <NextSteps verdict={judgement.verdict} my={myScore} stats={stats} future={future} target={target} notice={notice} cases={result.cases} />
-      )}
-
-      {/* 과거 사례 표 */}
-      {cases.length > 0 && (
-        <>
-          <h3 className="mt-8 border-b-2 border-brand pb-2 text-sm font-semibold text-brand">
-            {stats ? "판정에 쓴" : "찾은"} 과거 사례 {cases.length}개 (단지 {result.complexCount}곳)
-          </h3>
+        {cases.length > 0 && (
+          <>
+            <h3 className="mt-6 border-b-2 border-brand pb-2 text-sm font-semibold text-brand">
+              {stats ? "판정에 쓴" : "찾은"} 과거 사례 {cases.length}개 (단지 {result.complexCount}곳)
+            </h3>
           <table className="w-full text-[13px] tabular-nums">
             <thead>
               <tr className="border-b border-line text-xs text-muted">
@@ -613,15 +683,17 @@ function Result({
               })}
             </tbody>
           </table>
-        </>
-      )}
+          </>
+        )}
 
-      <ul className="mt-4 space-y-0.5 text-xs leading-relaxed text-muted">
-        <li>· 경쟁률은 1순위 내 거주 구분 기준(없으면 1순위 해당지역)이고, 판정에는 쓰지 않는 참고 정보예요. – 는 경쟁률 정보 없음.</li>
-        <li>· 출처: 한국부동산원 청약홈 당첨가점·경쟁률·분양정보 API ({dot(data.fetchedAt.slice(0, 10))} 기준).</li>
-        <li>· 판정 방식(안정·도전·어려움)은 단지 비교와 같습니다. 평균·최저는 위 판정 근거의 중간값을 씁니다.</li>
-        <li>· 과거 결과는 다음 분양을 보장하지 않습니다. 분양가, 입지, 공급 물량, 규제가 달라지면 커트라인도 달라집니다.</li>
-      </ul>
+        <ul className="mt-4 space-y-0.5 text-xs leading-relaxed text-muted">
+          <li>· 경쟁률은 1순위 내 거주 구분 기준(없으면 1순위 해당지역)이고, 판정에는 쓰지 않는 참고 정보예요. – 는 경쟁률 정보 없음.</li>
+          <li>· 해당지역 범위와 우선공급 비율은 공고마다 다릅니다. 정확한 구분은 입주자모집공고에서 확인하세요.</li>
+          <li>· 출처: 한국부동산원 청약홈 당첨가점·경쟁률·분양정보 API ({dot(data.fetchedAt.slice(0, 10))} 기준).</li>
+          <li>· 판정 방식(안정·도전·어려움)은 단지 비교와 같습니다. 평균·최저는 위 숫자의 중간값을 씁니다.</li>
+          <li>· 과거 결과는 다음 분양을 보장하지 않습니다. 분양가, 입지, 공급 물량, 규제가 달라지면 커트라인도 달라집니다.</li>
+        </ul>
+      </Fold>
     </div>
   );
 }
@@ -831,9 +903,9 @@ function ExtLink({ href, children }: { href: string; children: React.ReactNode }
 
 // ───────────────────────── 작은 부품 ─────────────────────────
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ title, children, className = "" }: { title: string; children: React.ReactNode; className?: string }) {
   return (
-    <section className="mb-8">
+    <section className={`mb-6 ${className}`}>
       <h2 className="border-b-2 border-brand pb-2 text-sm font-semibold text-brand">{title}</h2>
       {children}
     </section>

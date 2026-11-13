@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import Calculator from "@/components/Calculator";
+import Fold from "@/components/Fold";
 import { loadComplexes } from "@/lib/complexes";
 import { RULES, TOTAL_MAX } from "@/lib/score";
 
@@ -11,10 +12,10 @@ export default function ScorePage() {
 
   return (
     <>
-      <header className="mb-10 border-b border-line pb-6">
+      <header className="mb-8 border-b border-line pb-6">
         <h1 className="text-2xl font-bold text-brand sm:text-3xl">청약 가점 계산기</h1>
         <p className="mt-2 text-sm text-muted">
-          무주택기간, 부양가족, 청약통장 세 항목으로 가점을 계산하고 근거를 함께 보여줍니다.
+          질문에 차례로 답하면 무주택기간, 부양가족, 청약통장 세 항목으로 가점을 계산합니다.
         </p>
       </header>
 
@@ -23,7 +24,10 @@ export default function ScorePage() {
         <Calculator fallback={fallback} />
       </Suspense>
 
-      <ScoreCriteria />
+      {/* 만점과 계산 방법은 접어 두고, 눌렀을 때만 펼침 */}
+      <Fold label="가점 계산 기준 보기" className="mt-10 max-w-xl">
+        <ScoreCriteria />
+      </Fold>
     </>
   );
 }
@@ -52,8 +56,7 @@ function ScoreCriteria() {
   ];
 
   return (
-    <section className="mt-14">
-      <h2 className="border-b-2 border-brand pb-2 text-sm font-semibold text-brand">가점 계산 기준</h2>
+    <section>
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-line text-xs text-muted">

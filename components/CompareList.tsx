@@ -1,7 +1,9 @@
 "use client";
 
 /**
- * 단지 비교 화면
+ * 단지 비교 — 목록 → 상세 두 화면
+ *  목록(/compare): 행마다 썸네일, 단지명, 지역, 내 판정, 공고일만. 내 가점·거주지·지역·판정·정렬은 "필터"를 눌러야 펼쳐짐
+ *  상세(/compare?id=단지&t=주택형): 그 단지의 주택형별 과거 당첨 가점, 공급세대, 경쟁률, 입지 점수, 관심 공고 별
  * 저장된 내 점수를 불러와 단지·주택형마다 판정(lib/judge.ts)을 붙이고, 지역·판정 필터와 정렬을 제공합니다.
  * 데이터는 청약홈 과거 당첨가점 API(/api/complexes, lib/useComplexes.ts)에서 가져오고,
  * API가 실패하면 app/compare/page.tsx가 넘겨준 data/complexes.csv를 대신 씁니다.
@@ -23,6 +25,7 @@ import { SIDO_LIST } from "@/lib/similar";
 import { useComplexes } from "@/lib/useComplexes";
 import { imageFor, type ComplexImages } from "@/lib/complexImage";
 import ComplexThumb from "@/components/ComplexThumb";
+import Fold from "@/components/Fold";
 import FavoriteStar from "@/components/FavoriteStar";
 import { isShort, NO_CMPET, rankText, rateText } from "@/lib/competition";
 
@@ -113,6 +116,9 @@ export default function CompareList({
     return v && (VERDICTS as string[]).includes(v) ? (v as Verdict) : "전체";
   });
   const [sort, setSort] = useState<SortKey>("verdict");
+  const [filterOpen, setFilterOpen] = useState(false);
+  const detailId = sp.get("id"); // 있으면 상세 화면
+  const detailType = sp.get("t");
 
   const sidos = useMemo(() => unique(data.complexes.map((c) => c.sido)), [data]);
   const sigungus = useMemo(
@@ -158,29 +164,72 @@ export default function CompareList({
     .filter((r) => filter === "전체" || (r.judgement ? r.judgement.verdict === filter : filter === NO_DATA))
     .sort(compare(sort, myScore));
 
+  const loading = cs.loading && data.complexes.length === 0;
+  const NOTE = "아래 가점은 이미 끝난 분양의 당첨 결과입니다. 다음 분양의 당첨 가점은 공급 물량, 시세, 규제에 따라 달라지므로 판정은 참고용이에요.";
+
+  // ───────── 상세 ─────────
+  if (detailId) {
+    const mine = allRows
+      .filter((r) => r.complex.id === detailId)
+      .sort((a, b) => Number(b.type.type === detailType) - Number(a.type.type === detailType));
+    return (
+      <div>
+        <Link href="/compare" className="inline-block rounded border border-line bg-white px-3 py-1.5 text-xs text-brand hover:border-brand">
+          ← 목록
+        </Link>
+        {loading ? (
+          <p className="py-10 text-sm text-muted">청약홈에서 과거 당첨 가점을 불러오는 중…</p>
+        ) : mine.length === 0 ? (
+          <p className="py-10 text-sm text-muted">이 단지를 찾지 못했어요. 거주지를 바꾸면 보이는 단지가 달라질 수 있어요.</p>
+        ) : (
+          <>
+            <ul className="mt-2">
+              {mine.map((r, i) => (
+                <ResultRow
+                  key={`${r.complex.id}-${r.type.type}-${i}`}
+                  row={r}
+                  myScore={myScore}
+                  location={locations[locationKey(r.complex.name, `${r.complex.sido} ${r.complex.sigungu}`)]}
+                  scale={scale}
+                  images={fallback.images}
+                />
+              ))}
+            </ul>
+            <p className="mt-3 text-xs leading-relaxed text-muted">{NOTE}</p>
+          </>
+        )}
+      </div>
+    );
+  }
+
+  // ───────── 목록 ─────────
   return (
     <div>
-      {/* 안내 */}
-      <p className="mb-6 border-l-2 border-accent bg-accent/10 px-3 py-2 text-[13px] leading-relaxed text-ink">
-        아래 가점은 <b>이미 끝난 분양의 당첨 결과</b>입니다. 다음 분양의 경쟁률과 당첨 가점은 공급 물량, 시세, 규제에 따라 달라지므로
-        판정은 참고용이며 당첨을 보장하지 않습니다.
-      </p>
+      {/* 한 줄: 내 가점, 조건 요약, "필터" */}
+      <div className="flex items-center justify-between gap-3 border-y border-line py-3 text-sm">
+        <span className="min-w-0 truncate">
+          <span className="mr-1.5 text-xs text-muted">내 가점</span>
+          {myScore !== null ? (
+            <b className="text-brand">{fmt(myScore)}점</b>
+          ) : (
+            <Link href="/score" className="text-brand underline">
+              계산하기
+            </Link>
+          )}
+          <span className="ml-3 text-xs text-muted">
+            {sido === "전체" ? (cs.source === "api" && cs.scope ? cs.scope : "전체 지역") : sigungu === "전체" ? sido : `${sido} ${sigungu}`}
+            {filter !== "전체" && ` · ${filter}`} · {rows.length}건
+          </span>
+        </span>
+        <button type="button" onClick={() => setFilterOpen((v) => !v)} aria-expanded={filterOpen} className="shrink-0 text-brand underline underline-offset-2">
+          {filterOpen ? "필터 닫기" : "필터"}
+        </button>
+      </div>
 
-      {data.warnings.length > 0 && (
-        <details className="mb-6 border-l-2 border-line px-3 py-2 text-[13px]">
-          <summary className="cursor-pointer font-semibold text-accent-dark">
-            CSV에서 확인할 부분 {data.warnings.length}건
-          </summary>
-          <ul className="mt-2 space-y-1 text-muted">
-            {data.warnings.map((w) => (
-              <li key={w}>· {w}</li>
-            ))}
-          </ul>
-        </details>
-      )}
-
+      {filterOpen && (
+        <div>
       {/* 내 점수 */}
-      <div className="flex flex-col gap-3 border-y border-line py-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 border-b border-line py-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="text-sm">
           <span className="font-semibold">내 가점</span>
           {saved ? (
@@ -228,15 +277,10 @@ export default function CompareList({
         </label>
       </div>
 
-      {/* 데이터 출처와 거주지 */}
-      <SourceBar cs={cs} />
-
-      {cs.loading && data.complexes.length === 0 ? (
-        <p className="py-10 text-sm text-muted">청약홈에서 과거 당첨 가점을 불러오는 중… (처음엔 몇 초 걸릴 수 있어요)</p>
-      ) : data.complexes.length === 0 ? (
-        <EmptyState />
-      ) : (
-        <>
+          {/* 데이터 출처와 거주지 */}
+          <SourceBar cs={cs} />
+          {data.complexes.length > 0 && (
+            <>
           {/* 필터 */}
           <div className="flex flex-col gap-3 border-b border-line py-4">
             <FilterLine label="지역">
@@ -288,54 +332,99 @@ export default function CompareList({
             </FilterLine>
           </div>
 
-          {/* 미래 점수로 판정이 좋아지는 단지 */}
-          <FutureImprovements
-            rows={regionRows}
-            nowScore={myScore}
-            future={manualActive ? null : (saved?.future ?? null)}
-            manualActive={manualActive}
-            hasSaved={saved !== null}
-          />
+            </>
+          )}
+        </div>
+      )}
 
-          {/* 어려움이 많을 때 추첨제 물량 안내 */}
-          {myScore !== null && <LotteryGuide rows={regionRows} />}
+      {data.warnings.length > 0 && (
+        <details className="mb-6 border-l-2 border-line px-3 py-2 text-[13px]">
+          <summary className="cursor-pointer font-semibold text-accent-dark">
+            CSV에서 확인할 부분 {data.warnings.length}건
+          </summary>
+          <ul className="mt-2 space-y-1 text-muted">
+            {data.warnings.map((w) => (
+              <li key={w}>· {w}</li>
+            ))}
+          </ul>
+        </details>
+      )}
 
-          <h2 className="mt-10 text-sm font-semibold text-brand">지금 점수로 본 전체 단지</h2>
 
-          {/* 표 머리 (넓은 화면에서만) */}
-          <div className="hidden grid-cols-[1.4fr_0.9fr_1.6fr_0.9fr] gap-4 border-b-2 border-brand py-2 text-xs font-semibold text-brand md:grid">
-            <span>단지 · 공고일 · 출처</span>
-            <span>주택형</span>
-            <span>과거 당첨 가점</span>
-            <span className="text-right">판정</span>
-          </div>
-
+      {loading ? (
+        <p className="py-10 text-sm text-muted">청약홈에서 과거 당첨 가점을 불러오는 중… (처음엔 몇 초 걸릴 수 있어요)</p>
+      ) : data.complexes.length === 0 ? (
+        <EmptyState />
+      ) : (
+        <>
           {rows.length === 0 ? (
             <p className="py-10 text-center text-sm text-muted">조건에 맞는 단지가 없습니다.</p>
           ) : (
             <ul>
               {rows.map((r, i) => (
-                <ResultRow
-                  key={`${r.complex.id}-${r.type.type}-${i}`}
-                  row={r}
-                  myScore={myScore}
-                  location={locations[locationKey(r.complex.name, `${r.complex.sido} ${r.complex.sigungu}`)]}
-                  scale={scale}
-                  images={fallback.images}
-                />
+                <ListRow key={`${r.complex.id}-${r.type.type}-${i}`} row={r} hasScore={myScore !== null} images={fallback.images} />
               ))}
             </ul>
           )}
+
+          {/* 자세한 안내는 접어 둠 */}
+          <Fold label="시간이 지나면 판정이 좋아지는 단지 보기" className="mt-6" openOnHash={FUTURE_SECTION_ID}>
+            <FutureImprovements
+              rows={regionRows}
+              nowScore={myScore}
+              future={manualActive ? null : (saved?.future ?? null)}
+              manualActive={manualActive}
+              hasSaved={saved !== null}
+            />
+          </Fold>
+          <Fold label="판정 기준과 추첨제 안내 보기">
+            {myScore !== null && <LotteryGuide rows={regionRows} />}
+            <p className="mt-3 text-xs leading-relaxed text-muted">
+              {NOTE} 판정 기준: 안정 = 내 점수 ≥ 과거 평균, 도전 = 과거 최저 ≤ 내 점수 &lt; 평균, 어려움 = 내 점수 &lt; 과거 최저. 최저나
+              평균이 비어 있는 주택형은 &ldquo;데이터 없음&rdquo;으로 판정하지 않습니다. 당첨 가점 출처: 청약홈 &gt; 청약일정 및 통계 &gt;
+              당첨가점.
+            </p>
+          </Fold>
         </>
       )}
-
-      <p className="mt-4 text-xs leading-relaxed text-muted">
-        판정 기준: 안정 = 내 점수 ≥ 과거 평균, 도전 = 과거 최저 ≤ 내 점수 &lt; 평균, 어려움 = 내 점수 &lt; 과거 최저. 최저나 평균이
-        비어 있는 주택형은 &ldquo;데이터 없음&rdquo;으로 판정하지 않습니다. 당첨 가점 출처: 청약홈 &gt; 청약일정 및 통계 &gt; 당첨가점.
-      </p>
     </div>
   );
 }
+
+/** 목록 한 줄: 썸네일, 단지명·주택형, 지역, 내 판정, 공고일. 누르면 상세로 */
+function ListRow({ row, hasScore, images }: { row: Row; hasScore: boolean; images: ComplexImages }) {
+  const { complex, type, judgement, lotteryOnly } = row;
+  return (
+    <li className="flex items-center gap-3 border-b border-line py-3">
+      <ComplexThumb name={complex.name} address={complex.address} region={`${complex.sido} ${complex.sigungu}`} image={imageFor(images, complex.name)} />
+      <Link href={`/compare?${new URLSearchParams({ id: complex.id, t: type.type })}`} className="group flex min-w-0 flex-1 items-center gap-3">
+        <span className="min-w-0 flex-1">
+          <span className="line-clamp-2 text-sm leading-snug font-medium group-hover:underline">
+            {complex.name} <span className="font-normal text-muted">{type.type}</span>
+          </span>
+          <span className="block truncate text-xs text-muted">
+            {complex.sido} {complex.sigungu}
+          </span>
+        </span>
+        <span className="shrink-0 text-right">
+          <span className="block text-sm">
+            {judgement ? (
+              <span className={`font-semibold ${VERDICT_TEXT[judgement.verdict]}`}>{judgement.verdict}</span>
+            ) : (
+              <span className="text-xs text-muted">{lotteryOnly ? "추첨제" : hasScore ? NO_DATA : "점수 필요"}</span>
+            )}
+          </span>
+          <span className="block text-xs whitespace-nowrap text-muted">{complex.noticeDate ? `공고 ${dot(complex.noticeDate)}` : "공고일 없음"}</span>
+        </span>
+        <span className="shrink-0 text-muted" aria-hidden>
+          ›
+        </span>
+      </Link>
+    </li>
+  );
+}
+
+const VERDICT_TEXT: Record<Verdict, string> = { 안정: "text-ok", 도전: "text-accent-dark", 어려움: "text-bad" };
 
 // ───────────────────────── 미래 판정 ─────────────────────────
 

@@ -1,24 +1,24 @@
 "use client";
 
 /**
- * 메인 화면 내용
- * 1) 내 청약 현황  2) 노려볼 만한 단지  3) 1년 뒤 달라지는 점  4) 다가오는 분양공고
+ * 메인 화면 내용 — 세 가지만
+ * 1) 내 점수와 성장 단계 한 줄  2) 내 점수로 노려볼 만한 단지 3개  3) 다가오는 분양공고 3개
+ * (1년 뒤 달라지는 점은 단지 비교의 "시간이 지나면 판정이 좋아지는 단지"와 가점 계산의 계산 근거에서 볼 수 있음)
  * 판정은 lib/judge.ts를 그대로 쓰고, 이 파일은 요약해서 보여주기만 합니다.
  */
 
 import Link from "next/link";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { useMy } from "@/components/Providers";
-import { FUTURE_SECTION_ID, rowAnchor } from "@/lib/anchors";
 import { ddayText, md, nextEvent, todayKST } from "@/lib/mySchedule";
 import type { Notice, NoticeResult } from "@/lib/applyhome";
-import { averageCutoff, gapText } from "@/lib/benchmark";
+import { growthStage } from "@/lib/growth";
 import type { Complex, HouseType } from "@/lib/complexes";
-import { judge, VERDICT_ORDER, VERDICTS, type Verdict } from "@/lib/judge";
+import { judge, VERDICT_ORDER, type Verdict } from "@/lib/judge";
 import { parseMyScore, readMyScoreRaw, subscribeMyScore } from "@/lib/myScore";
 import { useComplexes } from "@/lib/useComplexes";
 
-const TOP_N = 5; // 노려볼 단지·분양공고를 몇 개까지 보여줄지
+const TOP_N = 3; // 노려볼 단지·분양공고를 몇 개까지 보여줄지
 
 type Row = { complex: Complex; type: HouseType; verdict: Verdict | null };
 
@@ -28,8 +28,6 @@ export default function HomeDashboard({ fallback }: { fallback: Complex[] }) {
   const saved = useMemo(() => parseMyScore(savedRaw), [savedRaw]);
   const cs = useComplexes(fallback);
   const complexes = cs.complexes;
-  const benchmark = useMemo(() => averageCutoff(complexes.flatMap((c) => c.types)), [complexes]);
-  const benchLabel = cs.source === "api" && cs.scope ? cs.scope : "관심 단지";
 
   // 단지·주택형마다 지금 판정 (가점제 물량이 없으면 판정하지 않음)
   const rows: Row[] = useMemo(
@@ -45,93 +43,43 @@ export default function HomeDashboard({ fallback }: { fallback: Complex[] }) {
   );
 
   return (
-    <div className="grid gap-x-12 gap-y-10 lg:grid-cols-2">
-      <MyStatus saved={saved} rows={rows} benchmarkText={saved ? gapText(saved.total, benchmark, benchLabel) : ""} />
+    <div className="max-w-2xl space-y-10">
+      <ScoreLine saved={saved} />
       <Targets hasScore={saved !== null} rows={rows} />
-      <NextYear saved={saved} rows={rows} />
-      <div>
-        <MyNextEvent />
-        <UpcomingNotices />
-      </div>
+      <UpcomingNotices />
     </div>
   );
 }
 
-// ───────────────────────── 1. 내 청약 현황 ─────────────────────────
+// ───────────────────────── 1. 내 점수와 성장 단계 한 줄 ─────────────────────────
 
-function MyStatus({
-  saved,
-  rows,
-  benchmarkText,
-}: {
-  saved: ReturnType<typeof parseMyScore>;
-  rows: Row[];
-  benchmarkText: string;
-}) {
+function ScoreLine({ saved }: { saved: ReturnType<typeof parseMyScore> }) {
   if (!saved) {
     return (
-      <Section title="내 청약 현황" href="/score">
-        <p className="py-4 text-sm text-muted">가점을 먼저 계산해 보세요.</p>
-        <Link
-          href="/score"
-          className="inline-block rounded bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand/90"
-        >
+      <div className="flex items-center justify-between gap-3 border-y border-line py-3 text-sm">
+        <span className="text-muted">가점을 먼저 계산해 보세요.</span>
+        <Link href="/score" className="shrink-0 rounded bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand/90">
           가점 계산하기
         </Link>
-        <Link href="/eligibility" className="ml-3 inline-block text-sm text-brand underline-offset-2 hover:underline">
-          부적격 위험 점검 →
-        </Link>
-      </Section>
+      </div>
     );
   }
-
-  const counts = Object.fromEntries(VERDICTS.map((v) => [v, rows.filter((r) => r.verdict === v).length])) as Record<
-    Verdict,
-    number
-  >;
-  const judged = rows.filter((r) => r.verdict !== null).length;
-
+  const stage = growthStage(saved.total);
   return (
-    <Section title="내 청약 현황" href="/score">
-      <table className="w-full text-sm tabular-nums">
-        <tbody>
-          <Line label="무주택기간" value={`${fmt(saved.homeless)}점`} />
-          <Line label="부양가족" value={`${fmt(saved.dependents)}점`} />
-          <Line label="청약통장 가입기간" value={`${fmt(saved.account)}점`} />
-          <tr className="border-b border-line">
-            <td className="py-2.5 font-semibold">합계</td>
-            <td className="py-2.5 text-right">
-              <b className="text-brand">{fmt(saved.total)}점</b>
-              <div className="text-xs font-normal text-accent-dark">{benchmarkText}</div>
-            </td>
-          </tr>
-          <tr className="border-b border-line">
-            <td className="py-2.5">판정 요약</td>
-            <td className="py-2.5 text-right">
-              {judged === 0 ? (
-                <span className="text-muted">판정할 단지 데이터가 아직 없습니다</span>
-              ) : (
-                <span>
-                  안정 <b className="text-brand">{counts["안정"]}</b> · 도전 <b className="text-accent-dark">{counts["도전"]}</b> ·
-                  어려움 <b>{counts["어려움"]}</b>
-                  <span className="ml-1 text-xs text-muted">(주택형 기준)</span>
-                </span>
-              )}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <p className="mt-2 text-xs text-muted">{saved.savedAt} 기준으로 저장한 점수입니다.</p>
-      <Link
-        href="/check"
-        className="mt-4 inline-block rounded bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand/90"
-      >
-        원하는 단지 가능성 확인하기 →
+    <div className="flex items-center justify-between gap-3 border-y border-line py-3 text-sm">
+      <span className="min-w-0">
+        <span className="mr-1.5 text-xs text-muted">내 점수</span>
+        <b className="text-brand">{fmt(saved.total)}점</b>
+        <span className="mr-1.5 ml-4 text-xs text-muted">성장 단계</span>
+        {stage.name}{" "}
+        <span className="text-xs text-muted">
+          ({stage.step}/{stage.of})
+        </span>
+      </span>
+      <Link href="/check" className="shrink-0 text-xs text-brand underline underline-offset-2">
+        가능성 확인 →
       </Link>
-      <Link href="/eligibility" className="mt-4 ml-3 inline-block text-sm text-brand underline-offset-2 hover:underline">
-        부적격 위험 점검 →
-      </Link>
-    </Section>
+    </div>
   );
 }
 
@@ -165,7 +113,7 @@ function Targets({ hasScore, rows }: { hasScore: boolean; rows: Row[] }) {
             {picks.map((r) => (
               <tr key={`${r.complex.id}-${r.type.type}`} className="border-b border-line">
                 <td className="py-2.5 pr-2">
-                  <Link href={`/compare#${rowAnchor(r.complex.id, r.type.type)}`} className="hover:underline">
+                  <Link href={`/compare?${new URLSearchParams({ id: r.complex.id, t: r.type.type })}`} className="hover:underline">
                     <span className="font-medium">{r.complex.name}</span> <span className="text-muted">{r.type.type}</span>
                   </Link>
                   <div className="text-xs text-muted">
@@ -185,59 +133,6 @@ function Targets({ hasScore, rows }: { hasScore: boolean; rows: Row[] }) {
   );
 }
 
-// ───────────────────────── 3. 1년 뒤 달라지는 점 ─────────────────────────
-
-function NextYear({ saved, rows }: { saved: ReturnType<typeof parseMyScore>; rows: Row[] }) {
-  const oneYear = saved?.future?.find((f) => f.years === 1);
-
-  let body: React.ReactNode;
-  if (!saved) {
-    body = <Empty>가점을 계산하면 1년 뒤 점수와 판정 변화를 알려드려요.</Empty>;
-  } else if (!oneYear) {
-    body = <Empty>미래 점수가 저장되어 있지 않아요. 가점 계산에서 &lsquo;이 점수로 단지 비교하기&rsquo;를 한 번 더 눌러 주세요.</Empty>;
-  } else {
-    const ups = rows
-      .filter((r) => r.verdict !== null)
-      .map((r) => ({ r, later: judge(oneYear.total, r.type)?.verdict ?? null }))
-      .filter((x) => x.later && VERDICT_ORDER[x.later] < VERDICT_ORDER[x.r.verdict!]);
-
-    const diff = oneYear.total - saved.total;
-    body = (
-      <>
-        <p className="border-b border-line py-2.5 text-sm">
-          1년 뒤 점수 <b className="text-brand">{fmt(oneYear.total)}점</b>
-          {diff > 0 ? <span className="ml-1 text-accent-dark">(+{fmt(diff)}점)</span> : <span className="ml-1 text-muted">(변화 없음)</span>}
-        </p>
-        {ups.length === 0 ? (
-          <Empty>1년 뒤 점수로 판정이 올라가는 단지는 없습니다.</Empty>
-        ) : (
-          <table className="w-full text-sm">
-            <tbody>
-              {ups.slice(0, TOP_N).map(({ r, later }) => (
-                <tr key={`${r.complex.id}-${r.type.type}`} className="border-b border-line">
-                  <td className="py-2.5 pr-2">
-                    {r.complex.name} <span className="text-muted">{r.type.type}</span>
-                  </td>
-                  <td className="py-2.5 text-right whitespace-nowrap">
-                    <VerdictText verdict={r.verdict!} /> <span className="text-muted">→</span> <VerdictText verdict={later!} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-        <p className="mt-2 text-xs text-muted">부양가족 수는 그대로라고 가정한 예측입니다.</p>
-      </>
-    );
-  }
-
-  return (
-    <Section title="1년 뒤 달라지는 점" href={`/compare#${FUTURE_SECTION_ID}`}>
-      {body}
-    </Section>
-  );
-}
-
 // ───────────────────────── 로그인한 사용자: 내 관심 공고 다음 일정 한 줄 ─────────────────────────
 
 function MyNextEvent() {
@@ -251,7 +146,7 @@ function MyNextEvent() {
   return (
     <Link
       href="/mypage"
-      className="mb-5 flex items-baseline justify-between gap-3 border-y border-line py-2.5 text-sm hover:bg-brand/5"
+      className="flex items-baseline justify-between gap-3 border-b border-line py-2.5 text-sm hover:bg-brand/5"
     >
       <span className="min-w-0 truncate">
         <span className="mr-2 text-xs text-muted">내 관심 공고 다음 일정</span>
@@ -292,6 +187,8 @@ function UpcomingNotices() {
 
   return (
     <Section title="다가오는 분양공고" href="/notice">
+      {/* 로그인한 사용자: 내 관심 공고의 다음 일정 한 줄 */}
+      <MyNextEvent />
       {state.status === "loading" && <Empty>청약홈에서 공고를 불러오는 중…</Empty>}
       {state.status === "fail" && <Empty>공고를 불러오지 못했습니다. ({state.reason})</Empty>}
       {state.status === "ok" &&
@@ -309,7 +206,7 @@ function UpcomingNotices() {
               {state.list.map((n) => (
                 <tr key={n.houseManageNo || n.name} className="border-b border-line">
                   <td className="py-2.5 pr-2">
-                    <Link href={`/check?no=${encodeURIComponent(n.houseManageNo)}`} className="font-medium hover:underline">
+                    <Link href={`/notice?no=${encodeURIComponent(n.houseManageNo)}`} className="font-medium hover:underline">
                       {n.name}
                     </Link>
                     <div className="text-xs text-muted">
@@ -342,15 +239,6 @@ function Section({ title, href, children }: { title: string; href: string; child
       </div>
       {children}
     </section>
-  );
-}
-
-function Line({ label, value }: { label: string; value: string }) {
-  return (
-    <tr className="border-b border-line">
-      <td className="py-2.5">{label}</td>
-      <td className="py-2.5 text-right">{value}</td>
-    </tr>
   );
 }
 
