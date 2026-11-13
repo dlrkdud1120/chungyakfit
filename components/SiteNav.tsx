@@ -29,7 +29,16 @@ export default function SiteNav() {
       {/* 메뉴가 늘어나 좁은 화면에서 넘치면 옆으로 밀어서 볼 수 있게 */}
       <div className="mx-auto flex max-w-5xl items-center gap-3 px-4 sm:px-6">
       <div className="flex min-w-0 flex-1 items-center gap-5 overflow-x-auto whitespace-nowrap sm:gap-6">
-        <Link href="/" className="py-3 text-[15px] font-bold text-brand">
+        <Link href="/" className="flex items-center gap-1.5 py-3 text-[15px] font-bold text-brand">
+          {/* 앱 아이콘 원본(public/icons/icon.svg)과 같은 그림, 24px */}
+          <svg viewBox="0 0 100 100" className="h-6 w-6 shrink-0" aria-hidden>
+            <rect width="100" height="100" rx="22" fill="#1F4E46" />
+            <path d="M20 50 L50 24 L80 50" fill="none" stroke="#F7F6F2" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M29 46 V78 H71 V46" fill="none" stroke="#F7F6F2" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M50 74 V58" stroke="#F4A53F" strokeWidth="5" strokeLinecap="round" />
+            <path d="M50 60 C50 52 44 47 37 47 C37 55 43 60 50 60 Z" fill="#F4A53F" />
+            <path d="M50 62 C50 53 56 48 63 48 C63 56 57 62 50 62 Z" fill="#F4A53F" />
+          </svg>
           청약핏
         </Link>
         {MENU.map((m) => {

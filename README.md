@@ -95,6 +95,16 @@ npm run dev
 환경변수(`.env.local`과 Vercel 둘 다): `AUTH_SECRET`, `AUTH_KAKAO_ID`(비우면 `KAKAO_REST_KEY` 사용), `AUTH_KAKAO_SECRET`, `SUPABASE_URL`, `SUPABASE_SECRET_KEY`.
 카카오 Redirect URI: `http://localhost:3000/api/auth/callback/kakao`, `https://내주소.vercel.app/api/auth/callback/kakao`.
 
+## 앱 아이콘
+
+| 파일 | 역할 |
+| --- | --- |
+| `public/icons/icon.svg` | 아이콘 원본. |
+| `app/icon.svg` | 브라우저 탭 파비콘(작은 크기용, 선이 조금 굵음). |
+| `app/apple-icon.png` | 아이폰 홈 화면 아이콘(180×180). |
+| `app/manifest.ts`, `public/icons/icon-192.png`, `icon-512.png` | 안드로이드 홈 화면 추가용 앱 정보와 아이콘. |
+| `scripts/make-icons.mjs` | 원본 SVG에서 PNG를 다시 만드는 도구 (`node scripts/make-icons.mjs`). 앱 실행과는 무관. |
+
 ## 청약홈 API 설정
 
 분양정보 API는 공고와 공급세대수를, 경쟁률 API(getAptLttotPblancScore)는 주택형·거주구분별 당첨가점을 줍니다. 가능성 확인(/check)과 단지 비교(/compare)·메인·가점 계산의 평균 비교는 둘을 이어 붙인 과거 당첨가점(`/api/complexes`, `lib/useComplexes.ts`)을 쓰고, API가 실패할 때만 `data/complexes.csv`를 씁니다. API에는 가점제·추첨제 세대수가 없어 추첨제 안내는 CSV 데이터에서만 계산됩니다.
