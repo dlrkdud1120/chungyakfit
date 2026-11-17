@@ -2,29 +2,168 @@
   "_설명": "npm run collect-images 가 만드는 파일입니다. 직접 고치지 말고, 고칠 것이 있으면 image-overrides.json에 적으세요.",
   "items": [
     {
+      "name": "경희궁 에피트",
+      "image": "https://brand.hldni.com/gyeonghuigung/image/main/main_visual02_bg.jpg",
+      "homepage": "https://brand.hldni.com/gyeonghuigung/",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "구리갈매역세권 B-1블록 신안인스빌 디센트",
+      "image": "https://guri.ensvil.com/bon/img/mimg01.jpg",
+      "homepage": "https://guri.ensvil.com/",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "부천대장 하우스토리 디센트(부천대장지구 A2BL) 공공분양주택",
+      "image": "https://www.xn--vk1bl3b19f7xexvfwncgul82b1wt8smd2ch4k.com/images/vis-bg2-ver2.jpg",
+      "homepage": "https://www.부천대장하우스토리디센트.com",
+      "checkedAt": "2026-11-17"
+    },
+    {
       "name": "쌍용 더 플래티넘 한강",
       "image": "https://xn--939a18g91b22g78qo8ex2yn1dxua.com/img/main.jpg",
-      "homepage": "http://xn--939a18g91b22g78qo8ex2yn1dxua.com/",
+      "homepage": "http://쌍용더플래티넘한강.com",
       "checkedAt": "2026-11-17"
     },
     {
       "name": "아크메르 동탄 95",
-      "image": "https://xn--2q1b89hgtam35a9rngpa.kr/img/master_img.jpg",
-      "homepage": "https://xn--2q1b89hgtam35a9rngpa.kr/",
+      "image": "https://xn--2q1b89hgtam35a9rngpa.kr/img/unit_bg.png",
+      "homepage": "https://아크메르동탄.kr",
       "checkedAt": "2026-11-17"
     },
     {
       "name": "아크메르 동탄 99",
-      "image": "https://xn--2q1b89hgtam35a9rngpa.kr/img/master_img.jpg",
-      "homepage": "https://xn--2q1b89hgtam35a9rngpa.kr/",
+      "image": "https://xn--2q1b89hgtam35a9rngpa.kr/img/unit_bg.png",
+      "homepage": "https://아크메르동탄.kr",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "엘리프 시흥 더프라임",
+      "image": "https://www.xn--9m1bw2f72b22pdwdr3cdz1bca395c.com/final/assets/img/prime_location_sub.jpg",
+      "homepage": "https://www.엘리프시흥더프라임.com",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "용인 양지 서희스타힐스 하이뷰 (조합원 취소분)",
+      "image": "https://neo233.viahost.co.kr/26seohee_star/images/financial/main1_k5.png",
+      "homepage": "https://www.starhills-yg.co.kr",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "중화역 라온프라이빗 센트로",
+      "image": "https://www.jh-raon.com/assets/images/main/overview-bg-01.jpg",
+      "homepage": "https://www.jh-raon.com",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "image": "https://pg2.lynn.co.kr/upload/editor/e4af458397ef4b81b473eee52aa6f7e3.png",
+      "homepage": "https://pg2.lynn.co.kr/",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "한화포레나 지제역",
+      "image": "https://jije.forena.co.kr/img/main/main4.jpg",
+      "homepage": "https://jije.forena.co.kr/",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "해링턴 플레이스 문래",
+      "image": "https://www.xn--hj2b8hr9b52bo7rgihfns6hhx0a.com/assets/images/main/premium-img-01.jpg",
+      "homepage": "https://www.해링턴플레이스문래.com",
       "checkedAt": "2026-11-17"
     },
     {
       "name": "향남역 그로브 스위첸",
-      "image": "https://xn--q20b245acmc65au2puno.com/img/complex_img01.jpg",
-      "homepage": "https://xn--q20b245acmc65au2puno.com/",
+      "image": "https://xn--q20b245acmc65au2puno.com/img/complex_bg.png",
+      "homepage": "https://향남역스위첸.com",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "화성 향남 롯데캐슬 시그니처",
+      "image": "https://www.hwaseong-lottecastlesignature.com/assets/images/main/visual-frame-01-poster.jpg",
+      "homepage": "https://www.hwaseong-lottecastlesignature.com",
       "checkedAt": "2026-11-17"
     }
   ],
-  "skipped": []
+  "skipped": [
+    {
+      "name": "고덕강일지구 3단지 토지임대부(본청약)",
+      "homepage": "https://www.i-sh.co.kr/main/index.do",
+      "reason": "공용 홈페이지로 보임 (제목 \"서울주택도시개발공사 서울주택도시개발공사\"에 단지명이 없음)",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "광교 자연앤 센트레빌(A17BL) 공공분양주택",
+      "homepage": "http://www.gwanggyo-centreville.com",
+      "reason": "robots.txt가 접근을 막음",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "광교 자연앤 센트레빌(A17BL) 지분적립형 분양주택",
+      "homepage": "http://www.gwanggyo-centreville.com",
+      "reason": "robots.txt가 접근을 막음",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "광명 시티프라디움 에듀하임",
+      "homepage": "https://광명시티프라디움.com",
+      "reason": "크기 기준에 맞는 이미지가 없음",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "남양주왕숙 A-2블록 신혼희망타운(공공분양) 잔여세대 추가입주자모집공고",
+      "homepage": "https://apply.lh.or.kr",
+      "reason": "공용 홈페이지로 보임 (제목 \"LH청약플러스 LH청약플러스\"에 단지명이 없음)",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "시흥거모지구 S-1블록 공공분양(본청약)",
+      "homepage": "https://apply.lh.or.kr/",
+      "reason": "공용 홈페이지로 보임 (제목 \"LH청약플러스 LH청약플러스\"에 단지명이 없음)",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "시흥하중지구 A-4블록 신혼희망타운(공공분양) 추가입주자모집",
+      "homepage": "https://www.apply.lh.or.kr",
+      "reason": "홈페이지가 열리지 않음",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "시흥하중지구 A1블록 신혼희망타운(공공분양) 추가입주자모집공고",
+      "homepage": "https://apply.lh.or.kr/",
+      "reason": "공용 홈페이지로 보임 (제목 \"LH청약플러스 LH청약플러스\"에 단지명이 없음)",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "아르뮤제자이",
+      "homepage": "https://xi.co.kr/armusee",
+      "reason": "robots.txt가 접근을 막음",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "안산신길2 A-6블록 신혼희망타운(공공분양)(본청약)",
+      "homepage": "https://apply.lh.or.kr/",
+      "reason": "공용 홈페이지로 보임 (제목 \"LH청약플러스 LH청약플러스\"에 단지명이 없음)",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "안산신길2지구 B-1블록 공공분양주택(본청약)",
+      "homepage": "https://apply.lh.or.kr",
+      "reason": "공용 홈페이지로 보임 (제목 \"LH청약플러스 LH청약플러스\"에 단지명이 없음)",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "GTX운정중앙역 시티프라디움 3단지(후속사업)",
+      "homepage": "https://www.gtx운정중앙역시티프라디움.com",
+      "reason": "남은 후보가 모두 로고·단색 배경으로 보임",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "GTX운정중앙역 시티프라디움 4단지(후속사업)",
+      "homepage": "https://www.gtx운정중앙역시티프라디움.com",
+      "reason": "남은 후보가 모두 로고·단색 배경으로 보임",
+      "checkedAt": "2026-11-17"
+    }
+  ]
 }
