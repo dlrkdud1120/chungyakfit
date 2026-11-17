@@ -12,7 +12,7 @@ export default function AdminImagesPage() {
       <header className="mb-8 border-b border-line pb-6">
         <h1 className="text-2xl font-bold text-brand sm:text-3xl">이미지 점검</h1>
         <p className="mt-2 text-sm text-muted">
-          분양 공고마다 어떤 대표 이미지가 골라졌는지 봅니다. 순서는 직접 넣은 조감도 → 자동 이미지(조감도 후보 · og:image) → 지도예요.
+          분양 공고마다 어떤 대표 이미지가 골라졌는지 봅니다. 순서는 직접 넣은 조감도 → 자동 이미지 → 지도예요.
         </p>
       </header>
       <AdminImages images={images} />

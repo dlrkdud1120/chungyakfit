@@ -109,20 +109,31 @@ npm run dev
 | `components/NoticeList.tsx`, `components/useNoticeVerdict.ts` | 분양 공고: 목록(`/notice`) → 상세(`/notice?no=…`), 공고별 내 판정. |
 | `components/HomeDashboard.tsx` | 홈: 내 점수 한 줄, 노려볼 단지 3개, 다가오는 분양공고 3개. |
 
-## 단지 대표 이미지 (분양 홈페이지에서 자동으로 고르기)
+## 단지 대표 이미지 (내 컴퓨터에서 모아서 파일로 보관)
 
-썸네일 우선순위: 직접 넣은 조감도(CSV "조감도 파일명") > 자동 이미지 > 위치 지도. 이미지 파일은 저장하지 않고 주소만 보관합니다.
+썸네일 우선순위: 직접 넣은 조감도(CSV "조감도 파일명") > `image-overrides.json` 직접 지정 > 자동 이미지 > 위치 지도. 이미지 파일은 저장하지 않고 주소만 적습니다. 확신이 없는 단지는 자동 이미지를 넣지 않고 지도로 둡니다.
+
+배포된 서버는 분양 홈페이지에 접속하지 않습니다. 내 컴퓨터에서 아래 명령을 실행하면 실제 브라우저로 홈페이지를 열어 이미지를 고르고 `data/auto-images.json`에 적습니다.
+
+```
+npm run collect-images                  새 공고와 30일 지난 결과만 확인
+npm run collect-images -- --all         전부 다시 확인
+npm run collect-images -- --only=스위첸  이름에 이 글자가 들어간 단지만
+```
+
+끝나면 `git add -A` → `git commit -m "이미지 갱신"` → `git push` 로 올려야 사이트에 반영됩니다. Edge나 Chrome이 깔려 있으면 그대로 쓰고, 없으면 `npx playwright install chromium`을 한 번 실행합니다.
 
 | 파일 | 역할 |
 | --- | --- |
-| `lib/image-pick.ts` | 고르는 규칙. 맨 위 `PICK_RULES`에 가산·감점 키워드, 크기 기준(가로 600px 이상, 비율 1.2~2.2)이 있음. 규칙을 바꾸면 `version`을 올리기. |
-| `lib/ogImage.ts` | 홈페이지 HTML을 한 번 읽어 후보(og:image, twitter:image, `<img>`, CSS 배경)를 모으고, 상위 3개의 실제 크기를 확인해 하나를 고름. robots.txt 확인, 결과는 Supabase `og_images` 표에 7일 보관. |
-| `data/image-overrides.json`, `lib/imageOverrides.ts` | 단지별 직접 지정. `"단지명": "hide"`는 지도로, `"단지명": "이미지 주소"`는 그 이미지로. |
-| `app/api/og-image/route.ts` | `/api/og-image?no=주택관리번호` (`&detail=1` 고른 이유, `&refresh=1` 다시 가져오기). |
-| `app/admin/images/page.tsx`, `components/AdminImages.tsx` | 점검 화면 `/admin/images` (메뉴에는 없음). 단지별로 어떤 이미지가 왜 골라졌는지 표로 보고 다시 가져오기. |
+| `scripts/collect-images.ts` | 모으는 도구. 홈페이지를 열고 3초 기다린 뒤 끝까지 스크롤해 실제로 불러온 이미지(img, CSS 배경, 네트워크 응답)를 모아 분석. robots.txt가 막은 곳과 제목에 단지명이 없는 공용 사이트(LH·SH)는 건너뜀. 사이트 사이 2초, 한 사이트 20초 제한. |
+| `lib/image-pick.ts` | 고르는 기준 `PICK_RULES`: 가로 800px 이상, 비율 1.2~2.2, entropy 6.8 이상, 한 가지 색 40% 이하, 남은 것 중 가장 넓은 이미지. 이름(키워드)은 보지 않음. |
+| `data/auto-images.json`, `lib/autoImages.ts` | 결과 파일과 읽는 코드. `items`는 { 단지명, 이미지 주소, 홈페이지 주소, 확인 날짜 }, `skipped`는 지도로 둔 단지와 이유. |
+| `data/image-overrides.json`, `lib/imageOverrides.ts` | 단지별 직접 지정. `"단지명": "hide"`는 지도로, `"단지명": "이미지 주소"`는 그 이미지로. 자동 이미지보다 먼저 적용. |
+| `app/api/og-image/route.ts` | `/api/og-image?no=주택관리번호`. 위 두 파일만 읽어서 답함. |
+| `app/admin/images/page.tsx`, `components/AdminImages.tsx` | 점검 화면 `/admin/images` (메뉴에는 없음). 단지별로 지금 무엇이 보이는지 확인. |
 | `components/ComplexThumb.tsx` | 썸네일. 목록은 80×60px 고정에 출처 글씨 없음, 큰 이미지 아래에만 출처와 홈페이지 링크. |
 
-다시 가져오기: `/admin/images`에서 "다시 가져오기"(한 단지) 또는 "전체 다시 가져오기". 규칙을 바꿨다면 `PICK_RULES.version`을 올려 배포하면 예전 결과는 자동으로 버려짐. 전부 지우려면 Supabase SQL Editor에서 `delete from og_images;`.
+Supabase의 `og_images` 표는 이제 쓰지 않습니다 (지워도 됩니다: `drop table og_images;`).
 
 ## 앱 아이콘
 

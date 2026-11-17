@@ -65,12 +65,3 @@ alter table score_records  enable row level security;
 alter table favorites      enable row level security;
 alter table recent_views   enable row level security;
 alter table calendar_items enable row level security;
-
--- 단지 대표 이미지 주소 보관 (분양 홈페이지의 og:image). 이미지 파일은 저장하지 않고 주소만 7일간 보관합니다.
-create table if not exists og_images (
-  homepage   text primary key,
-  image_url  text,
-  note       text,
-  fetched_at timestamptz not null default now()
-);
-alter table og_images enable row level security;

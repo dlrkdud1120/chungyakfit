@@ -1,0 +1,30 @@
+{
+  "_설명": "npm run collect-images 가 만드는 파일입니다. 직접 고치지 말고, 고칠 것이 있으면 image-overrides.json에 적으세요.",
+  "items": [
+    {
+      "name": "쌍용 더 플래티넘 한강",
+      "image": "https://xn--939a18g91b22g78qo8ex2yn1dxua.com/img/main.jpg",
+      "homepage": "http://xn--939a18g91b22g78qo8ex2yn1dxua.com/",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "아크메르 동탄 95",
+      "image": "https://xn--2q1b89hgtam35a9rngpa.kr/img/master_img.jpg",
+      "homepage": "https://xn--2q1b89hgtam35a9rngpa.kr/",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "아크메르 동탄 99",
+      "image": "https://xn--2q1b89hgtam35a9rngpa.kr/img/master_img.jpg",
+      "homepage": "https://xn--2q1b89hgtam35a9rngpa.kr/",
+      "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "향남역 그로브 스위첸",
+      "image": "https://xn--q20b245acmc65au2puno.com/img/complex_img01.jpg",
+      "homepage": "https://xn--q20b245acmc65au2puno.com/",
+      "checkedAt": "2026-11-17"
+    }
+  ],
+  "skipped": []
+}

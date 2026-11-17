@@ -2,23 +2,21 @@
 
 /**
  * 이미지 점검 표 (/admin/images)
- * 분양 공고마다 /api/og-image?detail=1 을 불러, 어떤 이미지가 왜 골라졌는지 보여줍니다.
- * "다시 가져오기"는 보관해 둔 결과를 무시하고 홈페이지에서 새로 고릅니다(10분 안에는 다시 접속하지 않음).
+ * 분양 공고마다 어떤 이미지가 쓰이는지 보여줍니다.
+ * 자동 이미지는 우리 컴퓨터에서 `npm run collect-images`로 모아 data/auto-images.json에 적어 둔 것입니다.
  */
 
 import { useCallback, useEffect, useState } from "react";
 import type { Notice, NoticeResult } from "@/lib/applyhome";
 import { imageFor, type ComplexImages } from "@/lib/complexImage";
-import { PICK_RULES, type PickKind } from "@/lib/image-pick";
-import type { PickDetail } from "@/lib/ogImage";
+import { PICK_RULES } from "@/lib/image-pick";
 
-type Got = { ok: boolean; image?: string | null; homepage?: string | null; kind?: PickKind; detail?: PickDetail; fetchedAt?: number };
+type Got = { ok: boolean; image?: string | null; homepage?: string | null; kind?: string; note?: string; checkedAt?: string };
 type RowState = { status: "wait" | "loading" } | { status: "done"; got: Got };
 
 const KIND_COLOR: Record<string, string> = {
   "직접 넣은 조감도": "text-brand",
-  "조감도 후보": "text-ok",
-  "og:image": "text-accent-dark",
+  "자동 이미지": "text-ok",
   "직접 지정": "text-brand",
   지도: "text-muted",
   숨김: "text-muted",
@@ -29,9 +27,9 @@ export default function AdminImages({ images }: { images: ComplexImages }) {
   const [failed, setFailed] = useState("");
   const [rows, setRows] = useState<Record<string, RowState>>({});
 
-  const load = useCallback(async (no: string, refresh: boolean) => {
+  const load = useCallback(async (no: string) => {
     setRows((r) => ({ ...r, [no]: { status: "loading" } }));
-    const got = await fetch(`/api/og-image?no=${no}&detail=1${refresh ? "&refresh=1" : ""}`)
+    const got = await fetch(`/api/og-image?no=${no}`)
       .then((r) => r.json() as Promise<Got>)
       .catch((): Got => ({ ok: false }));
     setRows((r) => ({ ...r, [no]: { status: "done", got } }));
@@ -39,11 +37,11 @@ export default function AdminImages({ images }: { images: ComplexImages }) {
 
   // 한꺼번에 몰리지 않게 세 개씩 차례로
   const loadAll = useCallback(
-    async (list: Notice[], refresh: boolean) => {
+    async (list: Notice[]) => {
       const queue = [...list];
       await Promise.all(
         Array.from({ length: 3 }, async () => {
-          for (let n = queue.shift(); n; n = queue.shift()) await load(n.houseManageNo, refresh);
+          for (let n = queue.shift(); n; n = queue.shift()) await load(n.houseManageNo);
         }),
       );
     },
@@ -59,7 +57,7 @@ export default function AdminImages({ images }: { images: ComplexImages }) {
         if (!alive) return;
         if (!res.ok) return setFailed(res.reason);
         setNotices(res.notices);
-        void loadAll(res.notices, false);
+        void loadAll(res.notices);
       });
     return () => {
       alive = false;
@@ -91,16 +89,12 @@ export default function AdminImages({ images }: { images: ComplexImages }) {
               <span className={KIND_COLOR[k] ?? ""}>{k}</span> {c}
             </span>
           ))}
-          <span className="ml-3 text-xs text-muted">규칙 버전 {PICK_RULES.version}</span>
         </span>
-        <button
-          type="button"
-          onClick={() => void loadAll(notices, true)}
-          className="rounded border border-line bg-white px-3 py-1.5 text-xs text-brand hover:border-brand"
-        >
-          전체 다시 가져오기
-        </button>
       </div>
+      <p className="border-b border-line py-2 text-xs leading-relaxed text-muted">
+        자동 이미지 기준: 가로 {PICK_RULES.minWidth}px 이상, 비율 {PICK_RULES.minRatio}~{PICK_RULES.maxRatio}, 복잡도(entropy) {PICK_RULES.minEntropy} 이상, 한 가지 색{" "}
+        {Math.round(PICK_RULES.maxDominant * 100)}% 이하. 새 공고가 생기면 내 컴퓨터에서 npm run collect-images 를 실행한 뒤 올리세요.
+      </p>
 
       <table className="w-full text-sm">
         <thead>
@@ -108,7 +102,6 @@ export default function AdminImages({ images }: { images: ComplexImages }) {
             <th className="py-2 font-normal">단지</th>
             <th className="py-2 font-normal">쓰는 이미지</th>
             <th className="py-2 font-normal">미리보기</th>
-            <th className="py-2 text-right font-normal" />
           </tr>
         </thead>
         <tbody>
@@ -133,35 +126,11 @@ export default function AdminImages({ images }: { images: ComplexImages }) {
                 </td>
                 <td className="py-3 pr-3">
                   {kind ? <span className={`font-semibold ${KIND_COLOR[kind] ?? ""}`}>{kind}</span> : <span className="text-xs text-muted">확인 중…</span>}
-                  {got?.detail && (
+                  {got && (
                     <div className="mt-0.5 text-xs text-muted">
-                      {manual && `자동 결과: ${got.kind} · `}
-                      {got.detail.msg}
-                      {got.detail.score !== undefined && ` · ${got.detail.score}점`}
-                      {got.detail.size && ` · ${got.detail.size}`}
-                    </div>
-                  )}
-                  {got?.detail?.top && got.detail.top.length > 0 && (
-                    <details className="mt-1 text-xs text-muted">
-                      <summary className="cursor-pointer text-brand">크기를 확인한 후보 {got.detail.top.length}개 (전체 {got.detail.count ?? "?"}개)</summary>
-                      <ul className="mt-1 space-y-1">
-                        {got.detail.top.map((t) => (
-                          <li key={t.url} className="break-all">
-                            {t.problem ? "✕" : "○"} {t.score}점 · {t.size}
-                            {t.problem && ` · ${t.problem}`}
-                            <br />
-                            {t.why && <span>{t.why} · </span>}
-                            <a href={t.url} target="_blank" rel="noopener noreferrer" className="underline">
-                              {t.url}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </details>
-                  )}
-                  {got?.fetchedAt && (
-                    <div className="mt-0.5 text-[11px] text-muted">
-                      가져온 때 {new Date(got.fetchedAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}
+                      {manual && got.kind !== "지도" && `조감도가 없었다면: ${got.kind} · `}
+                      {got.note}
+                      {got.checkedAt && ` · 확인 ${got.checkedAt}`}
                     </div>
                   )}
                 </td>
@@ -173,16 +142,6 @@ export default function AdminImages({ images }: { images: ComplexImages }) {
                     <span className="text-xs text-muted">지도</span>
                   )}
                 </td>
-                <td className="py-3 text-right whitespace-nowrap">
-                  <button
-                    type="button"
-                    disabled={r?.status === "loading"}
-                    onClick={() => void load(n.houseManageNo, true)}
-                    className="text-xs text-brand underline underline-offset-2 disabled:text-muted"
-                  >
-                    {r?.status === "loading" ? "가져오는 중…" : "다시 가져오기"}
-                  </button>
-                </td>
               </tr>
             );
           })}
@@ -190,7 +149,7 @@ export default function AdminImages({ images }: { images: ComplexImages }) {
       </table>
       <p className="mt-3 text-xs leading-relaxed text-muted">
         엉뚱한 이미지가 걸린 단지는 data/image-overrides.json에 &ldquo;단지명&rdquo;: &ldquo;hide&rdquo; (지도로) 또는 &ldquo;단지명&rdquo;: &ldquo;이미지
-        주소&rdquo;를 적으세요. 고르는 기준(키워드, 크기)은 lib/image-pick.ts의 PICK_RULES에 있어요.
+        주소&rdquo;를 적으세요. 고르는 기준값은 lib/image-pick.ts의 PICK_RULES에 있어요.
       </p>
     </div>
   );
