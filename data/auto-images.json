@@ -16,11 +16,39 @@
       "source": "분양 홈페이지"
     },
     {
+      "name": "남양주왕숙 A-2블록 신혼희망타운(공공분양) 잔여세대 추가입주자모집공고",
+      "image": "https://apply.lh.or.kr/upload/Files/upload_dec/2026/HSL/10/23/2025072462795203.jpg",
+      "homepage": "https://apply.lh.or.kr/lhapply/apply/wt/wrtanc/selectWrtancList.do?mi=1027",
+      "checkedAt": "2026-11-17",
+      "source": "LH청약플러스"
+    },
+    {
       "name": "부천대장 하우스토리 디센트(부천대장지구 A2BL) 공공분양주택",
       "image": "https://www.xn--vk1bl3b19f7xexvfwncgul82b1wt8smd2ch4k.com/images/vis-bg2-ver2.jpg",
       "homepage": "https://www.부천대장하우스토리디센트.com",
       "checkedAt": "2026-11-17",
       "source": "분양 홈페이지"
+    },
+    {
+      "name": "시흥거모지구 S-1블록 공공분양(본청약)",
+      "image": "https://apply.lh.or.kr/upload/Files/upload_dec/2026/HSL/10/27/2026102269101495.jpg",
+      "homepage": "https://apply.lh.or.kr/lhapply/apply/wt/wrtanc/selectWrtancList.do?mi=1027",
+      "checkedAt": "2026-11-17",
+      "source": "LH청약플러스"
+    },
+    {
+      "name": "시흥하중지구 A-4블록 신혼희망타운(공공분양) 추가입주자모집",
+      "image": "https://apply.lh.or.kr/upload/Files/upload_dec/2026/HSL/09/16/2025091863581999.jpg",
+      "homepage": "https://apply.lh.or.kr/lhapply/apply/wt/wrtanc/selectWrtancList.do?mi=1027",
+      "checkedAt": "2026-11-17",
+      "source": "LH청약플러스"
+    },
+    {
+      "name": "시흥하중지구 A1블록 신혼희망타운(공공분양) 추가입주자모집공고",
+      "image": "https://apply.lh.or.kr/upload/Files/upload_dec/2026/HSL/10/12/2026042866645394.jpg",
+      "homepage": "https://apply.lh.or.kr/lhapply/apply/wt/wrtanc/selectWrtancList.do?mi=1027",
+      "checkedAt": "2026-11-17",
+      "source": "LH청약플러스"
     },
     {
       "name": "쌍용 더 플래티넘 한강",
@@ -42,6 +70,20 @@
       "homepage": "https://아크메르동탄.kr",
       "checkedAt": "2026-11-17",
       "source": "분양 홈페이지"
+    },
+    {
+      "name": "안산신길2 A-6블록 신혼희망타운(공공분양)(본청약)",
+      "image": "https://apply.lh.or.kr/upload/Files/upload_dec/2026/HSL/10/27/2026102769173647.jpg",
+      "homepage": "https://apply.lh.or.kr/lhapply/apply/wt/wrtanc/selectWrtancList.do?mi=1027",
+      "checkedAt": "2026-11-17",
+      "source": "LH청약플러스"
+    },
+    {
+      "name": "안산신길2지구 B-1블록 공공분양주택(본청약)",
+      "image": "https://apply.lh.or.kr/upload/Files/upload_dec/2026/HSL/11/04/2026102969214931.jpg",
+      "homepage": "https://apply.lh.or.kr/lhapply/apply/wt/wrtanc/selectWrtancList.do?mi=1027",
+      "checkedAt": "2026-11-17",
+      "source": "LH청약플러스"
     },
     {
       "name": "엘리프 시흥 더프라임",
@@ -98,35 +140,15 @@
       "homepage": "https://www.hwaseong-lottecastlesignature.com",
       "checkedAt": "2026-11-17",
       "source": "분양 홈페이지"
-    },
-    {
-      "name": "남양주왕숙 A-2블록 신혼희망타운(공공분양) 잔여세대 추가입주자모집공고",
-      "image": "https://apply.lh.or.kr/upload/Files/upload_dec/2026/HSL/10/23/2025072462795203.jpg",
-      "homepage": "https://apply.lh.or.kr/lhapply/apply/wt/wrtanc/selectWrtancList.do?mi=1027",
-      "checkedAt": "2026-11-17",
-      "source": "LH청약플러스"
-    },
-    {
-      "name": "시흥거모지구 S-1블록 공공분양(본청약)",
-      "image": "https://apply.lh.or.kr/upload/Files/upload_dec/2026/HSL/10/27/2026102269101495.jpg",
-      "homepage": "https://apply.lh.or.kr/lhapply/apply/wt/wrtanc/selectWrtancList.do?mi=1027",
-      "checkedAt": "2026-11-17",
-      "source": "LH청약플러스"
-    },
-    {
-      "name": "시흥하중지구 A-4블록 신혼희망타운(공공분양) 추가입주자모집",
-      "image": "https://apply.lh.or.kr/upload/Files/upload_dec/2026/HSL/09/16/2025091863581999.jpg",
-      "homepage": "https://apply.lh.or.kr/lhapply/apply/wt/wrtanc/selectWrtancList.do?mi=1027",
-      "checkedAt": "2026-11-17",
-      "source": "LH청약플러스"
     }
   ],
   "skipped": [
     {
       "name": "고덕강일지구 3단지 토지임대부(본청약)",
-      "homepage": "https://www.i-sh.co.kr/main/index.do",
-      "reason": "공용 홈페이지로 보임 (제목 \"서울주택도시개발공사 서울주택도시개발공사\"에 단지명이 없음)",
-      "checkedAt": "2026-11-17"
+      "homepage": "https://www.i-sh.co.kr/main/lay2/program/S1T294C296/www/brd/m_244/list.do?multi_itm_seq=1",
+      "reason": "SH 서울주택도시개발공사 공고 페이지의 이미지가 기준에 맞지 않음",
+      "checkedAt": "2026-11-17",
+      "agency": "SH"
     },
     {
       "name": "광교 자연앤 센트레빌(A17BL) 공공분양주택",
@@ -147,27 +169,9 @@
       "checkedAt": "2026-11-17"
     },
     {
-      "name": "시흥하중지구 A1블록 신혼희망타운(공공분양) 추가입주자모집공고",
-      "homepage": "https://apply.lh.or.kr/",
-      "reason": "공용 홈페이지로 보임 (제목 \"LH청약플러스 LH청약플러스\"에 단지명이 없음)",
-      "checkedAt": "2026-11-17"
-    },
-    {
       "name": "아르뮤제자이",
       "homepage": "https://xi.co.kr/armusee",
       "reason": "robots.txt가 접근을 막음",
-      "checkedAt": "2026-11-17"
-    },
-    {
-      "name": "안산신길2 A-6블록 신혼희망타운(공공분양)(본청약)",
-      "homepage": "https://apply.lh.or.kr/",
-      "reason": "공용 홈페이지로 보임 (제목 \"LH청약플러스 LH청약플러스\"에 단지명이 없음)",
-      "checkedAt": "2026-11-17"
-    },
-    {
-      "name": "안산신길2지구 B-1블록 공공분양주택(본청약)",
-      "homepage": "https://apply.lh.or.kr",
-      "reason": "공용 홈페이지로 보임 (제목 \"LH청약플러스 LH청약플러스\"에 단지명이 없음)",
       "checkedAt": "2026-11-17"
     },
     {
