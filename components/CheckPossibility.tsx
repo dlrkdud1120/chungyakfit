@@ -188,14 +188,14 @@ export default function CheckPossibility({ images }: { images: ComplexImages }) 
     );
     if (!target) {
       return (
-        <div className="max-w-2xl">
+        <div>
           <Empty>{mode === "notice" && notices.status === "loading" ? "청약홈에서 공고를 불러오는 중…" : "단지를 먼저 골라 주세요."}</Empty>
           {back}
         </div>
       );
     }
     return (
-      <div className="max-w-2xl">
+      <div>
         <Result
           myScore={myScore}
           future={manualScore === "" ? (saved?.future ?? null) : null}
@@ -215,7 +215,7 @@ export default function CheckPossibility({ images }: { images: ComplexImages }) 
 
   // ───────── 1단계: 고르기 ─────────
   return (
-    <div className="max-w-2xl">
+    <div>
         {/* 내 가점과 거주지: 저장된 값을 한 줄로, "수정"을 눌렀을 때만 입력칸 */}
         <div className="flex items-center justify-between gap-3 border-y border-line py-3 text-sm">
           <span className="min-w-0">

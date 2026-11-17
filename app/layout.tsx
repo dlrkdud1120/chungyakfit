@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
+import Container from "@/components/Container";
 import { MigratePrompt } from "@/components/KakaoLogin";
 import Providers from "@/components/Providers";
 import SiteNav from "@/components/SiteNav";
@@ -40,14 +41,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </Suspense>
           <MigratePrompt />
 
-          <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6 sm:py-12">{children}</main>
+          {/* 모든 화면의 내용은 같은 컨테이너(최대 880px, 가운데) 안에 들어갑니다 */}
+          <Container as="main" className="flex-1 py-8 sm:py-12">
+            {children}
+          </Container>
         </Providers>
 
-        <footer className="mx-auto w-full max-w-5xl px-4 pb-24 sm:px-6 sm:pb-10">
+        <Container as="footer" className="pb-24 sm:pb-10">
           <p className="border-t border-line pt-5 text-xs leading-relaxed text-muted">
             실제 청약 자격과 점수는 청약홈 및 입주자모집공고 기준으로 확인하세요.
           </p>
-        </footer>
+        </Container>
       </body>
     </html>
   );

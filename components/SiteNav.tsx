@@ -2,7 +2,7 @@
 
 /**
  * 맨 위 바 + 왼쪽 메뉴 판 + 모바일 하단 탭
- * - 위 바: 왼쪽 메뉴 버튼(≡), 가운데 아이콘과 이름, 오른쪽 카카오 로그인(선택)
+ * - 위 바: 왼쪽 메뉴 버튼(≡), 가운데 아이콘과 이름, 오른쪽 카카오 로그인(선택). 폭은 본문과 같은 컨테이너
  * - 메뉴 판: 메뉴 버튼을 누르면 왼쪽에서 열림. 바깥을 누르거나 ESC를 누르면 닫힘
  * - 하단 탭: 좁은 화면에서만, 자주 쓰는 4개
  */
@@ -10,6 +10,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import Container from "@/components/Container";
 import { AuthMenu } from "@/components/KakaoLogin";
 
 type Item = { href: string; label: string; desc: string; icon: React.ReactNode; tab?: boolean };
@@ -82,14 +83,14 @@ export default function SiteNav() {
     <>
       {/* ───── 위 바 ───── */}
       <nav className="border-b border-line bg-white" aria-label="상단 바">
-        <div className="mx-auto grid h-12 max-w-5xl grid-cols-[1fr_auto_1fr] items-center px-2 sm:px-6">
+        <Container className="grid h-12 grid-cols-[1fr_auto_1fr] items-center">
           <div>
             <button
               type="button"
               onClick={() => setOpen(true)}
               aria-label="메뉴 열기"
               aria-expanded={open}
-              className="-ml-0.5 rounded p-2 text-ink hover:bg-brand/5"
+              className="-ml-2 rounded p-2 text-ink hover:bg-brand/5"
             >
               <svg viewBox="0 0 20 20" className="h-5 w-5" aria-hidden>
                 <path {...P} strokeWidth={1.7} d="M3 5.5h14M3 10h14M3 14.5h14" />
@@ -100,10 +101,10 @@ export default function SiteNav() {
             <Logo />
             청약핏
           </Link>
-          <div className="flex justify-end pr-2 sm:pr-0">
+          <div className="flex justify-end">
             <AuthMenu />
           </div>
-        </div>
+        </Container>
       </nav>
 
       {/* ───── 왼쪽 메뉴 판 ───── */}

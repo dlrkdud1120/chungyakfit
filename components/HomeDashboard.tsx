@@ -43,7 +43,7 @@ export default function HomeDashboard({ fallback }: { fallback: Complex[] }) {
   );
 
   return (
-    <div className="max-w-2xl space-y-10">
+    <div className="space-y-10">
       <ScoreLine saved={saved} />
       <Targets hasScore={saved !== null} rows={rows} />
       <UpcomingNotices />

@@ -8,6 +8,7 @@
  * - MigratePrompt: 처음 로그인했을 때 브라우저에 저장된 점수를 계정으로 옮길지 한 번 묻기
  */
 
+import Container from "@/components/Container";
 import { useState, useSyncExternalStore } from "react";
 import { useMy } from "@/components/Providers";
 import { parseMyHome, readMyHomeRaw } from "@/lib/myHome";
@@ -97,7 +98,7 @@ export function MigratePrompt() {
 
   return (
     <div className="border-b border-line bg-white">
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-3 gap-y-1.5 px-4 py-2.5 text-sm sm:px-6">
+      <Container className="flex flex-wrap items-center gap-x-3 gap-y-1.5 py-2.5 text-sm">
         <span>
           이 브라우저에 저장된 점수 <b className="text-brand">{local.total}점</b>이 있어요. 내 계정으로 옮길까요?
         </span>
@@ -109,7 +110,7 @@ export function MigratePrompt() {
             괜찮아요
           </button>
         </span>
-      </div>
+      </Container>
     </div>
   );
 }

@@ -108,7 +108,7 @@ export default function Calculator({ fallback }: { fallback: Complex[] }) {
   }, [saveKey]);
 
   return (
-    <div className="max-w-xl">
+    <div>
       {/* 진행 표시 */}
       <div className="mb-6">
         <div className="flex items-baseline justify-between text-sm">

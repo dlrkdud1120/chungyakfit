@@ -1,3 +1,4 @@
+import { Narrow } from "@/components/Container";
 import { Suspense } from "react";
 import Calculator from "@/components/Calculator";
 import Fold from "@/components/Fold";
@@ -11,7 +12,8 @@ export default function ScorePage() {
   const fallback = loadComplexes().complexes;
 
   return (
-    <>
+    // 내용이 적은 단계별 화면이라 더 좁은 폭(최대 560px)으로 가운데에 둡니다
+    <Narrow>
       <header className="mb-8 border-b border-line pb-6">
         <h1 className="text-2xl font-bold text-brand sm:text-3xl">청약 가점 계산기</h1>
         <p className="mt-2 text-sm text-muted">
@@ -25,10 +27,10 @@ export default function ScorePage() {
       </Suspense>
 
       {/* 만점과 계산 방법은 접어 두고, 눌렀을 때만 펼침 */}
-      <Fold label="가점 계산 기준 보기" className="mt-10 max-w-xl">
+      <Fold label="가점 계산 기준 보기" className="mt-10">
         <ScoreCriteria />
       </Fold>
-    </>
+    </Narrow>
   );
 }
 
