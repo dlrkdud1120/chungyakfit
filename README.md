@@ -109,15 +109,20 @@ npm run dev
 | `components/NoticeList.tsx`, `components/useNoticeVerdict.ts` | 분양 공고: 목록(`/notice`) → 상세(`/notice?no=…`), 공고별 내 판정. |
 | `components/HomeDashboard.tsx` | 홈: 내 점수 한 줄, 노려볼 단지 3개, 다가오는 분양공고 3개. |
 
-## 단지 대표 이미지 (분양 홈페이지 og:image)
+## 단지 대표 이미지 (분양 홈페이지에서 자동으로 고르기)
 
-썸네일 우선순위: 직접 넣은 조감도(CSV "조감도 파일명") > 분양 홈페이지 대표 이미지 > 위치 지도.
+썸네일 우선순위: 직접 넣은 조감도(CSV "조감도 파일명") > 자동 이미지 > 위치 지도. 이미지 파일은 저장하지 않고 주소만 보관합니다.
 
 | 파일 | 역할 |
 | --- | --- |
-| `lib/ogImage.ts` | 청약홈 분양정보의 홈페이지 주소(`HMPG_ADRES`)에서 og:image(없으면 twitter:image) 주소 찾기. robots.txt 확인, 제한 시간 5초, 결과는 Supabase `og_images` 표에 7일 보관(접속 실패는 하루 뒤 재시도). 이미지 파일은 저장하지 않음. |
-| `app/api/og-image/route.ts` | `/api/og-image?no=주택관리번호`. 브라우저는 공고 번호만 보내고 홈페이지 주소는 서버가 찾음. |
-| `components/ComplexThumb.tsx` | 대표 이미지를 화면에 보일 때만 불러오고, 깨지면 지도로 바꿈. 이미지 아래에 출처와 홈페이지 링크. |
+| `lib/image-pick.ts` | 고르는 규칙. 맨 위 `PICK_RULES`에 가산·감점 키워드, 크기 기준(가로 600px 이상, 비율 1.2~2.2)이 있음. 규칙을 바꾸면 `version`을 올리기. |
+| `lib/ogImage.ts` | 홈페이지 HTML을 한 번 읽어 후보(og:image, twitter:image, `<img>`, CSS 배경)를 모으고, 상위 3개의 실제 크기를 확인해 하나를 고름. robots.txt 확인, 결과는 Supabase `og_images` 표에 7일 보관. |
+| `data/image-overrides.json`, `lib/imageOverrides.ts` | 단지별 직접 지정. `"단지명": "hide"`는 지도로, `"단지명": "이미지 주소"`는 그 이미지로. |
+| `app/api/og-image/route.ts` | `/api/og-image?no=주택관리번호` (`&detail=1` 고른 이유, `&refresh=1` 다시 가져오기). |
+| `app/admin/images/page.tsx`, `components/AdminImages.tsx` | 점검 화면 `/admin/images` (메뉴에는 없음). 단지별로 어떤 이미지가 왜 골라졌는지 표로 보고 다시 가져오기. |
+| `components/ComplexThumb.tsx` | 썸네일. 목록은 80×60px 고정에 출처 글씨 없음, 큰 이미지 아래에만 출처와 홈페이지 링크. |
+
+다시 가져오기: `/admin/images`에서 "다시 가져오기"(한 단지) 또는 "전체 다시 가져오기". 규칙을 바꿨다면 `PICK_RULES.version`을 올려 배포하면 예전 결과는 자동으로 버려짐. 전부 지우려면 Supabase SQL Editor에서 `delete from og_images;`.
 
 ## 앱 아이콘
 

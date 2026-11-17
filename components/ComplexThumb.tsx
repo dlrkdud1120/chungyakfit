@@ -12,7 +12,7 @@
  * 이미지가 깨지면 자동으로 다음 순서(지도)로 넘어갑니다.
  * 화면에 보이기 직전에만 불러옵니다 (lazy loading).
  *
- * size="sm": 목록용 (모바일 56px, 넓은 화면 80px, 4:3)
+ * size="sm": 목록용 (80×60px 고정. 행 높이가 같도록 아래에 출처 글씨를 붙이지 않음)
  * size="lg": 가능성 확인용 (240px, 4:3)
  * size="fill": 부모 칸 너비에 맞춤
  * size="wide": 상세 화면용 (가로 최대 560px, 16:9)
@@ -33,7 +33,7 @@ type Props = {
   size?: "sm" | "lg" | "fill" | "wide";
 };
 
-type Og = { image: string | null; homepage: string } | null;
+type Og = { image: string | null; homepage: string | null } | null;
 const ogCache = new Map<string, Promise<Og>>();
 
 /** 공고 번호 → 대표 이미지 주소 (같은 공고는 한 번만 물어봄) */
@@ -41,8 +41,8 @@ function loadOg(no: string): Promise<Og> {
   let p = ogCache.get(no);
   if (!p) {
     p = fetch(`/api/og-image?no=${encodeURIComponent(no)}`)
-      .then((r) => r.json() as Promise<{ ok: boolean; image?: string | null; homepage?: string }>)
-      .then((r) => (r.ok && r.homepage ? { image: r.image ?? null, homepage: r.homepage } : null))
+      .then((r) => r.json() as Promise<{ ok: boolean; image?: string | null; homepage?: string | null }>)
+      .then((r) => (r.ok ? { image: r.image ?? null, homepage: r.homepage ?? null } : null))
       .catch(() => null);
     ogCache.set(no, p);
   }
@@ -52,7 +52,7 @@ function loadOg(no: string): Promise<Og> {
 type CoordState = { status: "idle" | "loading" } | { status: "ok"; lat: number; lng: number } | { status: "fail" };
 
 const BOX = {
-  sm: "w-14 sm:w-20",
+  sm: "w-20", // 80×60px 고정
   lg: "w-60 max-w-full",
   fill: "w-full",
   wide: "w-full max-w-[560px]",
@@ -146,12 +146,13 @@ export default function ComplexThumb({ name, address, region, image, noticeNo, s
   }, [coord, size]);
 
   const mapCoord = coord.status === "ok" ? { lat: coord.lat, lng: coord.lng } : null;
-  const caption = manual?.source ?? null;
+  // 출처 표기는 큰 이미지 아래에만 (목록 썸네일에는 붙이지 않음)
+  const caption = size !== "sm" ? (manual?.source ?? null) : null;
 
   const frame = (
     <div
       ref={boxRef}
-      className={`relative overflow-hidden rounded-[3px] border border-line bg-[#eef2f0] ${size === "wide" ? "aspect-[16/9]" : "aspect-[4/3]"} ${BOX[size]}`}
+      className={`relative overflow-hidden rounded border border-line bg-[#eef2f0] ${size === "wide" ? "aspect-[16/9]" : "aspect-[4/3]"} ${BOX[size]}`}
     >
       {/* 빈 칸 (불러오는 중이거나 지도를 못 그릴 때) */}
       {!(showImage && imageLoaded) && mapState !== "ok" && <Placeholder big={size !== "sm"} />}
@@ -183,44 +184,27 @@ export default function ComplexThumb({ name, address, region, image, noticeNo, s
 
   return (
     <figure className={`shrink-0 ${BOX[size]}`}>
-      {ogImage ? (
-        <a
-          href={ogImage.homepage}
-          target="_blank"
-          rel="noopener noreferrer"
-          title="분양 홈페이지 열기"
-          aria-label={`${name} 분양 홈페이지 열기`}
-          className="block"
-        >
-          {frame}
-        </a>
-      ) : (
-        <a
-          href={kakaoMapLink(name, mapCoord, address || `${region ?? ""} ${name}`)}
-          target="_blank"
-          rel="noopener noreferrer"
-          title="카카오맵에서 위치 보기"
-          aria-label={`${name} 위치를 카카오맵에서 보기`}
-          className="block"
-        >
-          {frame}
-        </a>
+      {/* 분양 홈페이지 이미지는 누르면 홈페이지가, 조감도·지도는 카카오맵이 새 탭으로 열림 */}
+      <a
+        href={ogImage?.homepage ?? kakaoMapLink(name, mapCoord, address || `${region ?? ""} ${name}`)}
+        target="_blank"
+        rel="noopener noreferrer"
+        title={ogImage?.homepage ? "분양 홈페이지 열기" : "카카오맵에서 위치 보기"}
+        aria-label={ogImage?.homepage ? `${name} 분양 홈페이지 열기` : `${name} 위치를 카카오맵에서 보기`}
+        className="block"
+      >
+        {frame}
+      </a>
+      {ogImage?.homepage && size !== "sm" && (
+        <figcaption className="mt-1 text-[11px] text-muted">
+          이미지 출처: 단지 분양 홈페이지 ·{" "}
+          <a href={ogImage.homepage} target="_blank" rel="noopener noreferrer" className="underline">
+            {hostOf(ogImage.homepage)}
+          </a>
+        </figcaption>
       )}
-      {ogImage &&
-        (size === "sm" ? (
-          <figcaption className="mt-0.5 truncate text-[10px] leading-tight text-muted" title="이미지 출처: 단지 분양 홈페이지">
-            출처: 분양 홈페이지
-          </figcaption>
-        ) : (
-          <figcaption className="mt-1 text-[11px] text-muted">
-            이미지 출처: 단지 분양 홈페이지 ·{" "}
-            <a href={ogImage.homepage} target="_blank" rel="noopener noreferrer" className="underline">
-              {hostOf(ogImage.homepage)}
-            </a>
-          </figcaption>
-        ))}
       {caption && (
-        <figcaption className="mt-0.5 truncate text-[10px] leading-tight text-muted" title={`출처: ${caption}`}>
+        <figcaption className="mt-1 text-[11px] text-muted">
           출처: {caption}
         </figcaption>
       )}

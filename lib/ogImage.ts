@@ -1,26 +1,41 @@
 /**
  * 단지 대표 이미지 찾기 (서버에서만 사용)
  *
- * 청약홈 분양정보의 홈페이지 주소(HMPG_ADRES)에서 HTML만 한 번 읽어
- * <meta property="og:image"> (없으면 twitter:image) 주소를 찾습니다.
- * - 이미지 파일은 내려받지 않고, 찾은 이미지 주소와 홈페이지 주소만 Supabase(og_images 표)에 보관합니다.
+ * 청약홈 분양정보의 홈페이지 주소(HMPG_ADRES)에서 HTML을 한 번 읽어 후보 이미지를 모으고,
+ * lib/image-pick.ts 규칙으로 점수를 매겨 상위 후보의 실제 크기를 확인한 뒤 하나를 고릅니다.
+ * - 이미지 파일은 저장하지 않습니다. 크기 확인도 파일 앞부분만 잠깐 읽고 버립니다.
+ *   고른 이미지 주소와 홈페이지 주소, 고른 이유만 Supabase(og_images 표)에 보관합니다.
  * - 홈페이지의 robots.txt가 막고 있으면 가져오지 않습니다.
- * - 한 홈페이지에는 보관 기간 동안 한 번만 접속합니다. 제한 시간은 5초입니다.
+ * - 한 홈페이지에는 보관 기간 동안 한 번만 접속합니다. HTML 읽기 제한 시간은 5초입니다.
+ * - 고르는 규칙(PICK_RULES.version)이 바뀌면 보관해 둔 결과를 버리고 다시 고릅니다.
  * Supabase가 설정되지 않았거나 표가 없으면 서버 메모리에만 잠시 보관합니다.
  */
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { collectCandidates, kindOf, PICK_RULES, readImageSize, shortlist, sizeProblem, type PickKind } from "./image-pick";
 
 export const OG_SETTINGS = {
   cacheDays: 7, // 찾은 결과(없음 포함)를 다시 확인하기까지
   retryFailDays: 1, // 접속 실패·시간 초과는 하루 뒤 다시 시도
   timeoutMs: 5000,
-  maxHtmlBytes: 400_000, // <head>만 필요하므로 앞부분만 읽음
+  maxHtmlBytes: 900_000, // 본문의 <img>까지 보려고 넉넉히 읽음
+  probeTimeoutMs: 4000, // 후보 이미지 크기 확인(상위 몇 개를 한꺼번에)에 쓰는 시간
+  probeBytes: 262_144, // 크기를 읽으려고 이미지 파일 앞부분만 받는 양
+  refreshMinMinutes: 10, // "다시 가져오기"를 연달아 눌러도 이 시간 안에는 홈페이지에 다시 접속하지 않음
   userAgent: "chungyakfit-bot/1.0 (+https://chungyakfit.vercel.app)",
 };
 
-export type OgResult = { image: string | null; homepage: string; note: string };
-type Stored = OgResult & { fetchedAt: number };
+/** 확인용 화면(/admin/images)에 보여줄 "왜 이렇게 골랐는지" */
+export type PickDetail = {
+  v: number; // 고를 때 쓴 규칙 버전
+  msg: string; // 한 줄 설명
+  score?: number;
+  size?: string; // "1200×630"
+  top?: { url: string; score: number; why: string; size: string; problem: string | null }[]; // 크기를 확인한 후보들
+  count?: number; // 찾은 후보 수
+};
+export type OgResult = { image: string | null; homepage: string; kind: PickKind; detail: PickDetail; fetchedAt: number };
+type Stored = OgResult;
 
 // ───────────────────────── 주소 다듬기 ─────────────────────────
 
@@ -88,34 +103,11 @@ export function robotsBlocks(robots: string, path: string, agent = "chungyakfit-
   return best ? !best.allow : false;
 }
 
-// ───────────────────────── HTML에서 이미지 주소 찾기 ─────────────────────────
-
-export function findOgImage(html: string, base: URL): string | null {
-  const metas = html.match(/<meta\b[^>]*>/gi) ?? [];
-  const attr = (tag: string, name: string) => new RegExp(`\\b${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "i").exec(tag)?.slice(1).find((v) => v !== undefined) ?? null;
-  const pick = (keys: string[]) => {
-    for (const tag of metas) {
-      const key = (attr(tag, "property") ?? attr(tag, "name") ?? "").toLowerCase();
-      const content = attr(tag, "content");
-      if (keys.includes(key) && content) return content;
-    }
-    return null;
-  };
-  const found = pick(["og:image", "og:image:url", "og:image:secure_url"]) ?? pick(["twitter:image", "twitter:image:src"]);
-  if (!found) return null;
-  try {
-    const u = new URL(found.replace(/&amp;/g, "&").trim(), base);
-    return u.protocol === "http:" || u.protocol === "https:" ? u.toString() : null;
-  } catch {
-    return null;
-  }
-}
-
 // ───────────────────────── 홈페이지 한 번 읽기 ─────────────────────────
 
-async function get(url: string, signal: AbortSignal): Promise<Response> {
+async function get(url: string, signal: AbortSignal, extra: Record<string, string> = {}): Promise<Response> {
   return fetch(url, {
-    headers: { "User-Agent": OG_SETTINGS.userAgent, Accept: "text/html,*/*;q=0.5" },
+    headers: { "User-Agent": OG_SETTINGS.userAgent, Accept: "text/html,*/*;q=0.5", ...extra },
     redirect: "follow",
     cache: "no-store",
     signal,
@@ -152,25 +144,87 @@ async function head(res: Response): Promise<string> {
   }
 }
 
-async function scrape(home: URL): Promise<OgResult & { failed: boolean }> {
+/** 응답 앞부분 바이트만 읽기 (이미지 크기 확인용. 읽은 내용은 저장하지 않음) */
+async function firstBytes(res: Response, max: number): Promise<Uint8Array> {
+  const reader = res.body?.getReader();
+  if (!reader) return new Uint8Array();
+  const out = new Uint8Array(max);
+  let size = 0;
+  while (size < max) {
+    const { done, value } = await reader.read();
+    if (done || !value) break;
+    out.set(value.subarray(0, max - size), size);
+    size += Math.min(value.length, max - size);
+  }
+  void reader.cancel().catch(() => null);
+  return out.subarray(0, size);
+}
+
+/** 이미지 주소의 가로·세로 (파일 앞부분만 받아서 읽음). 모르면 null */
+async function probeSize(url: string, signal: AbortSignal): Promise<{ width: number; height: number } | null> {
+  try {
+    const res = await get(url, signal, { Accept: "image/*", Range: `bytes=0-${OG_SETTINGS.probeBytes - 1}` });
+    if (!res.ok) return null;
+    return readImageSize(await firstBytes(res, OG_SETTINGS.probeBytes));
+  } catch {
+    return null;
+  }
+}
+
+type Scraped = { image: string | null; kind: PickKind; detail: PickDetail };
+
+async function scrape(home: URL): Promise<Scraped> {
+  const v = PICK_RULES.version;
+  const none = (msg: string, more: Partial<PickDetail> = {}): Scraped => ({ image: null, kind: "지도", detail: { v, msg, ...more } });
   const homepage = home.toString();
   // robots.txt와 홈페이지를 합쳐서 5초 안에 끝냄
   const signal = AbortSignal.timeout(OG_SETTINGS.timeoutMs);
+  let html: string;
+  let base: URL;
+  let robots: string;
   try {
     // 1) robots.txt (없거나 못 읽으면 막지 않은 것으로 봄)
-    const robots = await get(`${home.origin}/robots.txt`, signal)
+    robots = await get(`${home.origin}/robots.txt`, signal)
       .then((r) => (r.ok ? head(r) : ""))
       .catch(() => "");
-    if (robots && robotsBlocks(robots, home.pathname + home.search)) return { image: null, homepage, note: "robots.txt가 접근을 막음", failed: false };
+    if (robots && robotsBlocks(robots, home.pathname + home.search)) return none("robots.txt가 접근을 막음");
 
-    // 2) 홈페이지 HTML
+    // 2) 홈페이지 HTML (한 번만)
     const res = await get(homepage, signal);
-    if (!res.ok) return { image: null, homepage, note: `홈페이지 응답 ${res.status}`, failed: true };
-    const image = findOgImage(await head(res), new URL(res.url || homepage));
-    return { image, homepage, note: image ? "og:image" : "og:image 없음", failed: false };
+    if (!res.ok) return none(`홈페이지 응답 ${res.status}`);
+    base = new URL(res.url || homepage);
+    html = await head(res);
   } catch (e) {
-    return { image: null, homepage, note: e instanceof Error && e.name === "TimeoutError" ? "시간 초과(5초)" : "접속 실패", failed: true };
+    return none(e instanceof Error && e.name === "TimeoutError" ? "시간 초과(5초)" : "접속 실패");
   }
+
+  // 3) 후보를 모아 점수를 매기고, 상위 후보만 실제 크기를 확인
+  const all = collectCandidates(html, base);
+  const short = shortlist(all).filter((c) => {
+    const u = new URL(c.url);
+    return !(robots && u.origin === base.origin && robotsBlocks(robots, u.pathname + u.search)); // 같은 사이트의 막힌 경로는 건드리지 않음
+  });
+  if (short.length === 0) return none(all.length ? "쓸 만한 후보 없음 (로고·배너만 있음)" : "이미지 후보 없음", { count: all.length });
+
+  const probeSignal = AbortSignal.timeout(OG_SETTINGS.probeTimeoutMs);
+  const sizes = await Promise.all(short.map((c) => probeSize(c.url, probeSignal)));
+  const top = short.map((c, i) => {
+    const size = sizes[i];
+    return {
+      url: c.url,
+      score: c.score,
+      why: c.why.join(", "),
+      size: size ? `${size.width}×${size.height}` : "확인 못 함",
+      problem: size ? sizeProblem(size.width, size.height) : "크기를 확인하지 못함",
+    };
+  });
+  const win = top.findIndex((t) => t.problem === null); // 점수 높은 순이므로 처음 통과한 것이 가장 좋은 후보
+  if (win === -1) return none("상위 후보가 모두 크기 기준에 안 맞음", { top, count: all.length });
+  return {
+    image: top[win].url,
+    kind: kindOf(short[win]),
+    detail: { v, msg: top[win].why || "og:image", score: top[win].score, size: top[win].size, top, count: all.length },
+  };
 }
 
 // ───────────────────────── 보관 (Supabase, 안 되면 메모리) ─────────────────────────
@@ -195,7 +249,15 @@ async function readStored(homepage: string): Promise<Stored | null> {
   const { data, error } = await d.from("og_images").select("image_url, note, fetched_at").eq("homepage", homepage).limit(1);
   if (error || !data?.[0]) return null;
   const row = data[0] as { image_url: string | null; note: string | null; fetched_at: string };
-  return { image: row.image_url, homepage, note: row.note ?? "", fetchedAt: Date.parse(row.fetched_at) };
+  // note 칸에는 고른 이유를 JSON으로 넣어 둠. 예전 형식이면 버리고 다시 가져옴
+  let saved: { kind?: PickKind; detail?: PickDetail };
+  try {
+    saved = JSON.parse(row.note ?? "") as typeof saved;
+  } catch {
+    return null;
+  }
+  if (!saved.kind || !saved.detail) return null;
+  return { image: row.image_url, homepage, kind: saved.kind, detail: saved.detail, fetchedAt: Date.parse(row.fetched_at) };
 }
 
 async function writeStored(s: Stored) {
@@ -205,7 +267,10 @@ async function writeStored(s: Stored) {
   // 표가 없거나 저장에 실패해도 화면은 그대로 동작 (메모리 보관으로 대신함)
   await d
     .from("og_images")
-    .upsert({ homepage: s.homepage, image_url: s.image, note: s.note, fetched_at: new Date(s.fetchedAt).toISOString() }, { onConflict: "homepage" })
+    .upsert(
+      { homepage: s.homepage, image_url: s.image, note: JSON.stringify({ kind: s.kind, detail: s.detail }), fetched_at: new Date(s.fetchedAt).toISOString() },
+      { onConflict: "homepage" },
+    )
     .then(
       () => null,
       () => null,
@@ -213,26 +278,31 @@ async function writeStored(s: Stored) {
 }
 
 const DAY = 86_400_000;
-const FAIL_NOTES = /시간 초과|접속 실패|홈페이지 응답/;
+const FAILED = /시간 초과|접속 실패|홈페이지 응답/;
 
-/** 홈페이지 주소 → 대표 이미지 주소 (보관된 값이 있으면 홈페이지에 접속하지 않음) */
-export async function getOgImage(rawHomepage: string | null | undefined): Promise<OgResult | null> {
+/**
+ * 홈페이지 주소 → 대표 이미지 (보관된 값이 있으면 홈페이지에 접속하지 않음)
+ * refresh: 보관된 값을 무시하고 다시 가져옴 (확인용 화면의 "다시 가져오기". 너무 잦은 접속은 막음)
+ */
+export async function getOgImage(rawHomepage: string | null | undefined, refresh = false): Promise<OgResult | null> {
   const home = cleanHomepage(rawHomepage);
   if (!home) return null;
   const homepage = home.toString();
 
   const stored = await readStored(homepage).catch(() => null);
   if (stored) {
-    const days = FAIL_NOTES.test(stored.note) ? OG_SETTINGS.retryFailDays : OG_SETTINGS.cacheDays;
-    if (Date.now() - stored.fetchedAt < days * DAY) return stored;
+    const age = Date.now() - stored.fetchedAt;
+    const days = FAILED.test(stored.detail.msg) ? OG_SETTINGS.retryFailDays : OG_SETTINGS.cacheDays;
+    const fresh = stored.detail.v === PICK_RULES.version && age < days * DAY;
+    if (refresh ? age < OG_SETTINGS.refreshMinMinutes * 60_000 && stored.detail.v === PICK_RULES.version : fresh) return stored;
   }
 
   // 같은 홈페이지를 동시에 여러 번 읽지 않도록 묶음
   let job = running.get(homepage);
   if (!job) {
     job = scrape(home)
-      .then(async ({ image, note }) => {
-        const result: Stored = { image, homepage, note, fetchedAt: Date.now() };
+      .then(async (r) => {
+        const result: Stored = { ...r, homepage, fetchedAt: Date.now() };
         await writeStored(result);
         return result;
       })
