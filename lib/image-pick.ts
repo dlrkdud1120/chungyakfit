@@ -5,6 +5,7 @@
  *   1) 크기: 너무 작거나, 정사각형(로고)·너무 납작한(배너) 이미지는 제외
  *   2) 복잡도(entropy): 단색 배경 위 로고처럼 단순한 이미지는 제외
  *   3) 가장 많은 한 가지 색의 비율: 로고·단색 배너는 한 색이 화면을 거의 다 차지함
+ *      투명한 부분이 많은 이미지(사진 위에 덮는 그림자)도 제외
  *   4) 남은 것 중 넓이가 가장 큰 이미지. 넓이가 비슷하면 더 복잡한(사진에 가까운) 이미지
  * 기준값은 아래 PICK_RULES만 고치면 됩니다.
  *
@@ -19,6 +20,10 @@ export const PICK_RULES = {
   minWidth: 800,
   minRatio: 1.2, // 가로 ÷ 세로
   maxRatio: 2.2,
+  // 공공기관(LH 등)이 공고 페이지에 "단지조감도"라고 직접 올린 이미지는 정사각형이나 넓은 파노라마가 많아 비율만 넓게 봄
+  // (2026-11-17에 잰 LH 조감도 4장의 비율: 0.98, 1.10, 1.14, 2.51)
+  labeledMinRatio: 0.9,
+  labeledMaxRatio: 2.6,
 
   // 2) 복잡도: sharp의 stats().entropy (0 ~ 8). 이 값보다 낮으면 제외
   minEntropy: 6.8,
@@ -27,6 +32,9 @@ export const PICK_RULES = {
   maxDominant: 0.4,
   sampleSize: 64, // 분석할 때 줄이는 크기 (가로·세로 픽셀)
   colorLevels: 8, // 색을 채널당 몇 단계로 묶어서 "같은 색"으로 볼지
+
+  // 3-1) 투명한 부분이 이 비율을 넘으면 제외 (사진 위에 덮는 반투명 그림자·장식 이미지)
+  maxTransparent: 0.1,
 
   // 4) 넓이가 가장 큰 것의 이 비율 이상이면 "비슷한 넓이"로 보고 복잡도로 정함
   sameAreaRatio: 0.9,
@@ -41,17 +49,19 @@ export type Measured = {
 };
 
 /** 크기 기준에 안 맞으면 이유, 맞으면 null */
-export function sizeProblem(width: number, height: number): string | null {
+export function sizeProblem(width: number, height: number, labeled = false): string | null {
   const R = PICK_RULES;
   if (width < R.minWidth) return `가로 ${width}px (${R.minWidth}px 미만)`;
   const ratio = width / height;
-  if (ratio < R.minRatio || ratio > R.maxRatio) return `비율 ${ratio.toFixed(2)} (${R.minRatio}~${R.maxRatio} 밖)`;
+  const [min, max] = labeled ? [R.labeledMinRatio, R.labeledMaxRatio] : [R.minRatio, R.maxRatio];
+  if (ratio < min || ratio > max) return `비율 ${ratio.toFixed(2)} (${min}~${max} 밖)`;
   return null;
 }
 
 /** 이미지 내용이 로고·단색 배너처럼 보이면 이유, 아니면 null */
-export function lookProblem(entropy: number, dominant: number): string | null {
+export function lookProblem(entropy: number, dominant: number, transparent = 0): string | null {
   const R = PICK_RULES;
+  if (transparent > R.maxTransparent) return `투명한 부분이 ${Math.round(transparent * 100)}% (장식용 이미지)`;
   if (entropy < R.minEntropy) return `단순함 (entropy ${entropy.toFixed(2)} < ${R.minEntropy})`;
   if (dominant > R.maxDominant) return `한 색이 ${Math.round(dominant * 100)}% (${Math.round(R.maxDominant * 100)}% 초과)`;
   return null;

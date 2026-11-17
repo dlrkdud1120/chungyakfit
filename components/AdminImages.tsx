@@ -16,7 +16,8 @@ type RowState = { status: "wait" | "loading" } | { status: "done"; got: Got };
 
 const KIND_COLOR: Record<string, string> = {
   "직접 넣은 조감도": "text-brand",
-  "자동 이미지": "text-ok",
+  "분양 홈페이지": "text-ok",
+  공공기관: "text-ok",
   "직접 지정": "text-brand",
   지도: "text-muted",
   숨김: "text-muted",
@@ -73,27 +74,32 @@ export default function AdminImages({ images }: { images: ComplexImages }) {
     const r = rows[n.houseManageNo];
     return r?.status === "done" ? (r.got.kind ?? "지도") : null;
   };
+  // 맨 위 요약: 이미지 출처별 개수 (직접 넣은 조감도와 image-overrides.json 지정은 "직접 지정", 숨김은 "지도"로 셈)
+  const GROUPS = ["직접 지정", "분양 홈페이지", "공공기관", "지도"] as const;
+  const groupOf = (kind: string): (typeof GROUPS)[number] =>
+    kind === "직접 넣은 조감도" || kind === "직접 지정" ? "직접 지정" : kind === "분양 홈페이지" || kind === "공공기관" ? kind : "지도";
   const counts: Record<string, number> = {};
+  let waiting = 0;
   for (const n of notices) {
     const k = shownKind(n);
-    if (k) counts[k] = (counts[k] ?? 0) + 1;
+    if (k) counts[groupOf(k)] = (counts[groupOf(k)] ?? 0) + 1;
+    else waiting += 1;
   }
 
   return (
     <div>
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-3 text-sm">
-        <span>
-          공고 {notices.length}건
-          {Object.entries(counts).map(([k, c]) => (
-            <span key={k} className="ml-3">
-              <span className={KIND_COLOR[k] ?? ""}>{k}</span> {c}
-            </span>
-          ))}
-        </span>
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-b border-line pb-3 text-sm">
+        <span>공고 {notices.length}건</span>
+        {GROUPS.map((g) => (
+          <span key={g}>
+            <span className={KIND_COLOR[g] ?? ""}>{g}</span> {counts[g] ?? 0}
+          </span>
+        ))}
+        {waiting > 0 && <span className="text-xs text-muted">확인 중 {waiting}</span>}
       </div>
       <p className="border-b border-line py-2 text-xs leading-relaxed text-muted">
         자동 이미지 기준: 가로 {PICK_RULES.minWidth}px 이상, 비율 {PICK_RULES.minRatio}~{PICK_RULES.maxRatio}, 복잡도(entropy) {PICK_RULES.minEntropy} 이상, 한 가지 색{" "}
-        {Math.round(PICK_RULES.maxDominant * 100)}% 이하. 새 공고가 생기면 내 컴퓨터에서 npm run collect-images 를 실행한 뒤 올리세요.
+        {Math.round(PICK_RULES.maxDominant * 100)}% 이하. 공공기관이 올린 조감도는 비율만 {PICK_RULES.labeledMinRatio}~{PICK_RULES.labeledMaxRatio}. 새 공고가 생기면 내 컴퓨터에서 npm run collect-images 를 실행한 뒤 올리세요.
       </p>
 
       <table className="w-full text-sm">

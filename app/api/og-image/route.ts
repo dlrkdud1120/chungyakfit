@@ -3,17 +3,21 @@
  *
  * 서버는 분양 홈페이지에 접속하지 않습니다. 미리 만들어 둔 파일만 읽습니다.
  * 순서: 1) data/image-overrides.json (숨김 또는 직접 넣은 주소)
- *       2) data/auto-images.json (npm run collect-images 로 우리 컴퓨터에서 모은 결과)
+ *       2) data/auto-images.json (npm run collect-images 로 우리 컴퓨터에서 모은 결과.
+ *          분양 홈페이지에서 찾은 것과, 공공분양이라 LH청약플러스 같은 기관 공고 페이지에서 찾은 것이 있음)
  *       3) 없으면 image: null → 화면은 지도 썸네일을 보여줌
- * 응답: { ok: true, image: "https://…" | null, homepage, kind, note?, checkedAt? } 또는 { ok: false }
+ * 응답: { ok: true, image: "https://…" | null, homepage, kind, source?, note?, checkedAt? } 또는 { ok: false }
+ *       source는 공공기관에서 찾은 이미지일 때 출처로 표시할 사이트 이름 (예: "LH청약플러스")
  */
 
 import { connection } from "next/server";
 import { fetchNotices } from "@/lib/applyhome";
 import { autoImageFor, autoSkippedFor } from "@/lib/autoImages";
 import { overrideFor } from "@/lib/imageOverrides";
+import { AGENCIES } from "@/lib/public-source";
 
-export type ImageKind = "직접 지정" | "숨김" | "자동 이미지" | "지도";
+export type ImageKind = "직접 지정" | "숨김" | "분양 홈페이지" | "공공기관" | "지도";
+const AGENCY_SITES = new Set(Object.values(AGENCIES).map((a) => a.site));
 
 export async function GET(req: Request) {
   await connection();
@@ -25,7 +29,7 @@ export async function GET(req: Request) {
   const notice = notices.ok ? notices.notices.find((n) => n.houseManageNo === no) : null;
   if (!notice) return Response.json({ ok: false, reason: "공고를 찾지 못했습니다." }, { headers });
   const homepage = /^https?:\/\//i.test(notice.homepage ?? "") ? notice.homepage : null;
-  const answer = (image: string | null, kind: ImageKind, more: { homepage?: string | null; note?: string; checkedAt?: string } = {}) =>
+  const answer = (image: string | null, kind: ImageKind, more: { homepage?: string | null; source?: string; note?: string; checkedAt?: string } = {}) =>
     Response.json({ ok: true, image, kind, homepage, ...more }, { headers });
 
   // 1) 직접 지정 (숨김 또는 이미지 주소)
@@ -34,7 +38,15 @@ export async function GET(req: Request) {
 
   // 2) 자동으로 모아 둔 이미지
   const auto = autoImageFor(notice.name);
-  if (auto) return answer(auto.image, "자동 이미지", { homepage: auto.homepage, checkedAt: auto.checkedAt });
+  if (auto) {
+    const isPublic = AGENCY_SITES.has(auto.source ?? "");
+    return answer(auto.image, isPublic ? "공공기관" : "분양 홈페이지", {
+      homepage: auto.homepage,
+      source: isPublic ? auto.source : undefined,
+      note: isPublic ? auto.source : undefined,
+      checkedAt: auto.checkedAt,
+    });
+  }
 
   // 3) 없음 → 지도 (모을 때 건너뛴 이유가 있으면 함께)
   const skipped = autoSkippedFor(notice.name);

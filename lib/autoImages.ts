@@ -9,8 +9,9 @@
 import raw from "@/data/auto-images.json";
 import { imageKey } from "./complexImage";
 
-export type AutoImage = { name: string; image: string; homepage: string; checkedAt: string };
-export type AutoSkipped = { name: string; homepage: string | null; reason: string; checkedAt: string };
+// source: 출처 이름 ("분양 홈페이지" 또는 "LH청약플러스" 같은 기관 사이트 이름). 예전 결과에는 없을 수 있음
+export type AutoImage = { name: string; image: string; homepage: string; checkedAt: string; source?: string };
+export type AutoSkipped = { name: string; homepage: string | null; reason: string; checkedAt: string; agency?: string };
 export type AutoImagesFile = { items: AutoImage[]; skipped: AutoSkipped[] };
 
 const file = raw as unknown as Partial<AutoImagesFile>;

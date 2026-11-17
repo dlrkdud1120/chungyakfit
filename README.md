@@ -126,12 +126,23 @@ npm run collect-images -- --only=스위첸  이름에 이 글자가 들어간 �
 | 파일 | 역할 |
 | --- | --- |
 | `scripts/collect-images.ts` | 모으는 도구. 홈페이지를 열고 3초 기다린 뒤 끝까지 스크롤해 실제로 불러온 이미지(img, CSS 배경, 네트워크 응답)를 모아 분석. robots.txt가 막은 곳과 제목에 단지명이 없는 공용 사이트(LH·SH)는 건너뜀. 사이트 사이 2초, 한 사이트 20초 제한. |
-| `lib/image-pick.ts` | 고르는 기준 `PICK_RULES`: 가로 800px 이상, 비율 1.2~2.2, entropy 6.8 이상, 한 가지 색 40% 이하, 남은 것 중 가장 넓은 이미지. 이름(키워드)은 보지 않음. |
-| `data/auto-images.json`, `lib/autoImages.ts` | 결과 파일과 읽는 코드. `items`는 { 단지명, 이미지 주소, 홈페이지 주소, 확인 날짜 }, `skipped`는 지도로 둔 단지와 이유. |
+| `lib/image-pick.ts` | 고르는 기준 `PICK_RULES`: 가로 800px 이상, 비율 1.2~2.2, entropy 6.8 이상, 한 가지 색 40% 이하, 투명한 부분 10% 이하, 남은 것 중 가장 넓은 이미지. 이름(키워드)은 보지 않음. 공공기관이 "단지조감도"로 올린 이미지는 비율만 0.9~2.6. |
+| `lib/public-source.ts` | 공공분양 출처. 청약홈에 적힌 홈페이지가 LH·SH·GH 공용 사이트면 그 기관의 해당 공고 페이지에서 찾음. 공고명에서 "지구 + 블록(단지)"을 뽑아 같은 공고를 찾고, 같은 지구·블록의 다른 공고는 이미지를 같이 씀. |
+| `data/auto-images.json`, `lib/autoImages.ts` | 결과 파일과 읽는 코드. `items`는 { 단지명, 이미지 주소, 홈페이지 주소, 확인 날짜, 출처 }, `skipped`는 지도로 둔 단지와 이유. |
 | `data/image-overrides.json`, `lib/imageOverrides.ts` | 단지별 직접 지정. `"단지명": "hide"`는 지도로, `"단지명": "이미지 주소"`는 그 이미지로. 자동 이미지보다 먼저 적용. |
 | `app/api/og-image/route.ts` | `/api/og-image?no=주택관리번호`. 위 두 파일만 읽어서 답함. |
-| `app/admin/images/page.tsx`, `components/AdminImages.tsx` | 점검 화면 `/admin/images` (메뉴에는 없음). 단지별로 지금 무엇이 보이는지 확인. |
+| `app/admin/images/page.tsx`, `components/AdminImages.tsx` | 점검 화면 `/admin/images` (메뉴에는 없음). 맨 위에 출처별 개수(직접 지정 / 분양 홈페이지 / 공공기관 / 지도), 아래에 단지별로 지금 무엇이 보이는지. |
 | `components/ComplexThumb.tsx` | 썸네일. 목록은 80×60px 고정에 출처 글씨 없음, 큰 이미지 아래에만 출처와 홈페이지 링크. |
+
+공공분양 출처별 동작 (2026-11-17 실제 사이트 확인):
+
+| 기관 | 찾는 곳 | 결과 |
+| --- | --- | --- |
+| LH | LH청약플러스 분양주택 공고 목록 → 해당 공고 → "단지조감도" 탭 | 조감도가 올라와 있으면 사용. 출처 표기 "LH청약플러스" |
+| SH | SH 주택분양 게시판 → 입주자모집공고 글 | 글에 이미지가 있으면 사용. 확인한 글은 첨부 PDF만 있어 지도 |
+| GH | www.gh.or.kr | robots.txt가 모든 접근을 막고 있어 열지 않음 → 지도 |
+
+목록 지도 썸네일(80×60)은 카카오 정적 지도를 두 배 크기로 그려 절반으로 줄여 보여 주고, 위치는 정가운데 점으로 표시합니다 (`components/ComplexThumb.tsx`).
 
 Supabase의 `og_images` 표는 이제 쓰지 않습니다 (지워도 됩니다: `drop table og_images;`).
 
