@@ -109,6 +109,16 @@ npm run dev
 | `components/NoticeList.tsx`, `components/useNoticeVerdict.ts` | 분양 공고: 목록(`/notice`) → 상세(`/notice?no=…`), 공고별 내 판정. |
 | `components/HomeDashboard.tsx` | 홈: 내 점수 한 줄, 노려볼 단지 3개, 다가오는 분양공고 3개. |
 
+## 단지 대표 이미지 (분양 홈페이지 og:image)
+
+썸네일 우선순위: 직접 넣은 조감도(CSV "조감도 파일명") > 분양 홈페이지 대표 이미지 > 위치 지도.
+
+| 파일 | 역할 |
+| --- | --- |
+| `lib/ogImage.ts` | 청약홈 분양정보의 홈페이지 주소(`HMPG_ADRES`)에서 og:image(없으면 twitter:image) 주소 찾기. robots.txt 확인, 제한 시간 5초, 결과는 Supabase `og_images` 표에 7일 보관(접속 실패는 하루 뒤 재시도). 이미지 파일은 저장하지 않음. |
+| `app/api/og-image/route.ts` | `/api/og-image?no=주택관리번호`. 브라우저는 공고 번호만 보내고 홈페이지 주소는 서버가 찾음. |
+| `components/ComplexThumb.tsx` | 대표 이미지를 화면에 보일 때만 불러오고, 깨지면 지도로 바꿈. 이미지 아래에 출처와 홈페이지 링크. |
+
 ## 앱 아이콘
 
 | 파일 | 역할 |

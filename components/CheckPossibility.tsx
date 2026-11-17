@@ -521,6 +521,20 @@ function Result({
         </div>
       )}
 
+      {/* 단지 대표 이미지: 직접 넣은 조감도 > 분양 홈페이지 대표 이미지 > 위치 지도 */}
+      {notice && (
+        <div className="mt-3">
+          <ComplexThumb
+            name={notice.name}
+            address={notice.address}
+            region={`${notice.region} ${notice.unit}`}
+            image={imageFor(images, notice.name)}
+            noticeNo={notice.houseManageNo}
+            size="wide"
+          />
+        </div>
+      )}
+
       {/* 판정 요약 + 점수 위치 막대 */}
       {judgement && stats ? (
         <>
@@ -575,32 +589,7 @@ function Result({
       <Fold label="판정 근거 자세히 보기" className="mt-6">
         {notice && (
           <div className="border-b border-line py-3">
-                {imageFor(images, notice.name) ? (
-                  <div className="grid max-w-[492px] grid-cols-2 gap-3">
-                    <ComplexThumb
-                      size="fill"
-                      name={notice.name}
-                      address={notice.address}
-                      region={`${notice.region} ${notice.unit}`}
-                      image={imageFor(images, notice.name)}
-                    />
-                    <ComplexThumb
-                      size="fill"
-                      name={notice.name}
-                      address={notice.address}
-                      region={`${notice.region} ${notice.unit}`}
-                      image={null}
-                    />
-                  </div>
-                ) : (
-                  <ComplexThumb
-                    size="lg"
-                    name={notice.name}
-                    address={notice.address}
-                    region={`${notice.region} ${notice.unit}`}
-                    image={null}
-                  />
-                )}
+            <ComplexThumb name={notice.name} address={notice.address} region={`${notice.region} ${notice.unit}`} size="lg" />
           </div>
         )}
         {result.level === "sido" && (

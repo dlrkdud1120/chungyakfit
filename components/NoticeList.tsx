@@ -161,7 +161,14 @@ function ListRow({ n, images }: { n: Notice; images: ComplexImages }) {
   const next = nextEvent(n.schedule, todayKST());
   return (
     <li ref={ref} className="flex items-center gap-3 border-b border-line py-3">
-      <ComplexThumb name={n.name} address={n.address} region={`${n.region} ${n.unit}`} image={imageFor(images, n.name)} />
+      {/* 썸네일: 직접 넣은 조감도 > 분양 홈페이지 대표 이미지 > 위치 지도 */}
+      <ComplexThumb
+        name={n.name}
+        address={n.address}
+        region={`${n.region} ${n.unit}`}
+        image={imageFor(images, n.name)}
+        noticeNo={n.houseManageNo}
+      />
       <Link href={`/notice?no=${encodeURIComponent(n.houseManageNo)}`} className="group flex min-w-0 flex-1 items-center gap-3">
         <span className="min-w-0 flex-1">
           <span className="line-clamp-2 text-sm leading-snug font-medium group-hover:underline">{n.name}</span>
@@ -214,10 +221,9 @@ function NoticeDetail({ n, images, location }: { n: Notice; images: ComplexImage
   }, [n.houseManageNo, loggedIn]);
   return (
     <div className="py-4">
-      {/* 왼쪽 썸네일(조감도 또는 위치 지도) + 오른쪽 공고 정보 */}
-      <div className="flex gap-3">
-        <ComplexThumb name={n.name} address={n.address} region={`${n.region} ${n.unit}`} image={imageFor(images, n.name)} />
-        <div className="min-w-0 flex-1">
+      {/* 공고 정보. 단지명 아래에 대표 이미지(조감도 > 분양 홈페이지 이미지 > 위치 지도) */}
+      <div>
+        <div>
           <div className="flex flex-wrap items-baseline justify-between gap-x-3">
             <span className="line-clamp-2 leading-snug font-semibold">
               {n.url ? (
@@ -235,7 +241,17 @@ function NoticeDetail({ n, images, location }: { n: Notice; images: ComplexImage
             </span>
             <span className="text-xs text-muted">공고일 {dot(n.noticeDate)}</span>
           </div>
-          <div className="mt-0.5 text-xs text-muted">{n.address || n.region}</div>
+          <div className="mt-3">
+            <ComplexThumb
+              name={n.name}
+              address={n.address}
+              region={`${n.region} ${n.unit}`}
+              image={imageFor(images, n.name)}
+              noticeNo={n.houseManageNo}
+              size="wide"
+            />
+          </div>
+          <div className="mt-3 text-xs text-muted">{n.address || n.region}</div>
           <div className="mt-1 text-xs text-muted">
             청약접수 {dot(n.receiptStart)} ~ {dot(n.receiptEnd)} · 당첨자 발표 {dot(n.winnerDate)}
             {n.homepage && (
