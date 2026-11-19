@@ -48,7 +48,8 @@ async function getPage(path: string, params: Record<string, string>, cacheSec: n
     res = await fetch(`${BASE_URL}/${path}?${qs}`, {
       signal: AbortSignal.timeout(NOTICE_SETTINGS.timeoutMs),
       // Vercel에서는 이 캐시가 요청 사이에도 유지되어, 같은 요청을 cacheSec 동안 다시 보내지 않습니다
-      next: { revalidate: cacheSec },
+      // cacheSec가 0이면 캐시를 쓰지 않고 새로 받습니다
+      ...(cacheSec > 0 ? { next: { revalidate: cacheSec } } : { cache: "no-store" as const }),
     });
   } catch {
     throw new Error("청약홈 API에 연결하지 못했습니다 (네트워크 오류 또는 시간 초과).");
@@ -162,11 +163,12 @@ export type NoticeResult =
 export async function fetchNotices(): Promise<NoticeResult> {
   let details: Raw[];
   try {
-    details = await getAll(
-      `${DETAIL}/getAPTLttotPblancDetail`,
-      { "cond[RCRIT_PBLANC_DE::GTE]": daysAgo(NOTICE_SETTINGS.daysBack) },
-      NOTICE_SETTINGS.noticeCacheSec,
-    );
+    const cond = { "cond[RCRIT_PBLANC_DE::GTE]": daysAgo(NOTICE_SETTINGS.daysBack) };
+    details = await getAll(`${DETAIL}/getAPTLttotPblancDetail`, cond, NOTICE_SETTINGS.noticeCacheSec);
+    // 청약홈 API가 자료를 갱신하는 동안(주로 자정 무렵) 빈 목록을 돌려줄 때가 있습니다.
+    // 그 빈 답이 1시간 동안 캐시에 남지 않도록, 비어 있으면 캐시 없이 한 번 더 받습니다.
+    if (details.length === 0) details = await getAll(`${DETAIL}/getAPTLttotPblancDetail`, cond, 0);
+    if (details.length === 0) throw new Error("청약홈 API가 빈 목록을 돌려주었습니다. 자료를 갱신하는 중일 수 있으니 잠시 후 다시 열어 주세요.");
   } catch (e) {
     return { ok: false, reason: (e as Error).message };
   }
