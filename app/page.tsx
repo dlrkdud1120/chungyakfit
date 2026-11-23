@@ -5,6 +5,7 @@
  */
 
 import HomeDashboard from "@/components/HomeDashboard";
+import WeeklyPopup from "@/components/WeeklyPopup";
 import { loadComplexes } from "@/lib/complexes";
 
 export default function Home() {
@@ -16,6 +17,8 @@ export default function Home() {
         <p className="mt-2 text-sm text-muted">내 청약 가점으로 관심 단지에 당첨 가능성이 있는지 한눈에 봅니다.</p>
       </header>
       <HomeDashboard fallback={complexes} />
+      {/* 홈에서만 띄우는 "이번 주 청약 소식" 팝업 (CSV는 추첨제 비율 계산용) */}
+      <WeeklyPopup csv={complexes} />
     </>
   );
 }

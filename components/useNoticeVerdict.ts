@@ -17,7 +17,8 @@ import { areaOf, bandOf, type SimilarResult } from "@/lib/similar";
 type SimilarResponse = { ok: true; result: SimilarResult } | { ok: false; reason: string };
 const cache = new Map<string, Promise<SimilarResponse>>();
 
-function load(qs: string): Promise<SimilarResponse> {
+/** /api/similar 결과 (같은 조건은 한 번만 부름. 홈 팝업도 같은 캐시를 씀) */
+export function loadSimilar(qs: string): Promise<SimilarResponse> {
   let p = cache.get(qs);
   if (!p) {
     p = fetch(`/api/similar?${qs}`)
@@ -51,7 +52,7 @@ export function useNoticeVerdict(n: Notice, enabled: boolean): NoticeVerdict {
   useEffect(() => {
     if (!qs || !enabled) return;
     let alive = true;
-    load(qs).then((res) => alive && setGot({ qs, res }));
+    loadSimilar(qs).then((res) => alive && setGot({ qs, res }));
     return () => {
       alive = false;
     };

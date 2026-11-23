@@ -224,6 +224,58 @@ export async function fetchNotices(): Promise<NoticeResult> {
   return { ok: true, notices, fetchedAt: new Date().toISOString(), typesLoaded };
 }
 
+// ───────────────────────── 1-2. 무순위·잔여세대 공고 ─────────────────────────
+
+/**
+ * 무순위·잔여세대·재공급 공고 (getRemndrLttotPblancDetail)
+ * 실제 응답에서 확인한 필드 (2026-11-23):
+ *   HOUSE_SECD_NM  "무순위", "불법행위 재공급" 등
+ *   SUBSCRPT_RCEPT_BGNDE / _ENDDE  청약접수 시작·종료일
+ *   PRZWNER_PRESNATN_DE  당첨자 발표일 · TOT_SUPLY_HSHLDCO  공급세대수 · PBLANC_URL  청약홈 공고
+ * 분양 공고(fetchNotices)와는 따로 부르고, 실패해도 다른 기능에 영향이 없습니다.
+ */
+export type RemndrNotice = {
+  houseManageNo: string;
+  name: string;
+  region: string;
+  unit: string;
+  kind: string; // 무순위, 불법행위 재공급 …
+  receiptStart: string | null;
+  receiptEnd: string | null;
+  winnerDate: string | null;
+  supply: number | null;
+  url: string | null;
+};
+
+export type RemndrResult = { ok: true; notices: RemndrNotice[]; fetchedAt: string } | { ok: false; reason: string };
+
+export async function fetchRemndrNotices(daysBack = 30): Promise<RemndrResult> {
+  try {
+    const rows = await getAll(
+      `${DETAIL}/getRemndrLttotPblancDetail`,
+      { "cond[RCRIT_PBLANC_DE::GTE]": daysAgo(daysBack) },
+      NOTICE_SETTINGS.noticeCacheSec,
+    );
+    const notices: RemndrNotice[] = rows
+      .map((d) => ({
+        houseManageNo: str(d.HOUSE_MANAGE_NO) ?? "",
+        name: str(d.HOUSE_NM) ?? "(이름 없음)",
+        region: str(d.SUBSCRPT_AREA_CODE_NM) ?? "",
+        unit: unitFromAddress(str(d.HSSPLY_ADRES) ?? ""),
+        kind: str(d.HOUSE_SECD_NM) ?? "",
+        receiptStart: str(d.SUBSCRPT_RCEPT_BGNDE),
+        receiptEnd: str(d.SUBSCRPT_RCEPT_ENDDE),
+        winnerDate: str(d.PRZWNER_PRESNATN_DE),
+        supply: num(d.TOT_SUPLY_HSHLDCO),
+        url: str(d.PBLANC_URL),
+      }))
+      .filter((n) => n.houseManageNo && NOTICE_SETTINGS.regions.includes(n.region));
+    return { ok: true, notices, fetchedAt: new Date().toISOString() };
+  } catch (e) {
+    return { ok: false, reason: (e as Error).message };
+  }
+}
+
 // ───────────────────────── 2. 과거 당첨가점 이력 ─────────────────────────
 
 export type HistoryResult =
