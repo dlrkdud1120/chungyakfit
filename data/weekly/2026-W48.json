@@ -1,0 +1,7012 @@
+{
+  "_설명": "scripts/weekly-data.ts(GitHub Actions)가 매주 만드는 파일입니다. 직접 고치지 마세요. 홈 '이번 주 청약 소식' 팝업이 이 파일을 먼저 읽습니다.",
+  "week": "2026-W48",
+  "start": "2026-11-23",
+  "end": "2026-11-29",
+  "generatedAt": "2026-11-23T02:03:42.958Z",
+  "tipIndex": 7,
+  "notices": [
+    {
+      "houseManageNo": "2026000560",
+      "name": "해링턴 플레이스 문래",
+      "region": "서울",
+      "unit": "영등포구",
+      "address": "서울특별시 영등포구 문래동3가 27-1번지 일원",
+      "kind": "APT",
+      "supplyKind": "민영",
+      "noticeDate": "2026-11-13",
+      "receiptStart": "2026-11-23",
+      "receiptEnd": "2026-11-26",
+      "winnerDate": "2026-12-02",
+      "overheated": true,
+      "schedule": {
+        "special": {
+          "start": "2026-11-23",
+          "end": "2026-11-23"
+        },
+        "rank1": {
+          "start": "2026-11-24",
+          "end": "2026-11-25"
+        },
+        "rank1Areas": [
+          "해당지역 11.24",
+          "기타지역 11.25"
+        ],
+        "rank2": {
+          "start": "2026-11-26",
+          "end": "2026-11-26"
+        },
+        "rank2Areas": [
+          "해당지역 11.26",
+          "기타지역 11.26"
+        ],
+        "winner": "2026-12-02",
+        "contract": "2026-12-14"
+      },
+      "regulations": {
+        "투기과열지구": true,
+        "조정대상지역": true,
+        "분양가상한제": false,
+        "정비사업": false,
+        "공공주택지구": false,
+        "대규모택지개발지구": false,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "https://www.해링턴플레이스문래.com",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000560&pblancNo=2026000560",
+      "types": [
+        {
+          "type": "084.9409A",
+          "supply": 51,
+          "special": 59,
+          "topAmount": 182700
+        },
+        {
+          "type": "084.9708B",
+          "supply": 25,
+          "special": 29,
+          "topAmount": 178500
+        },
+        {
+          "type": "084.9894C",
+          "supply": 25,
+          "special": 29,
+          "topAmount": 177500
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000505",
+      "name": "경희궁 에피트",
+      "region": "서울",
+      "unit": "종로구",
+      "address": "서울특별시 종로구 교남동 28번지 일원",
+      "kind": "APT",
+      "supplyKind": "민영",
+      "noticeDate": "2026-11-13",
+      "receiptStart": "2026-11-25",
+      "receiptEnd": "2026-11-30",
+      "winnerDate": "2026-12-04",
+      "overheated": true,
+      "schedule": {
+        "special": {
+          "start": "2026-11-25",
+          "end": "2026-11-25"
+        },
+        "rank1": {
+          "start": "2026-11-26",
+          "end": "2026-11-27"
+        },
+        "rank1Areas": [
+          "해당지역 11.26",
+          "기타지역 11.27"
+        ],
+        "rank2": {
+          "start": "2026-11-30",
+          "end": "2026-11-30"
+        },
+        "rank2Areas": [
+          "해당지역 11.30",
+          "기타지역 11.30"
+        ],
+        "winner": "2026-12-04",
+        "contract": "2026-12-16"
+      },
+      "regulations": {
+        "투기과열지구": true,
+        "조정대상지역": true,
+        "분양가상한제": false,
+        "정비사업": true,
+        "공공주택지구": false,
+        "대규모택지개발지구": false,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "https://brand.hldni.com/gyeonghuigung/",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000505&pblancNo=2026000505",
+      "types": [
+        {
+          "type": "039.9342",
+          "supply": 5,
+          "special": 0,
+          "topAmount": 118241
+        },
+        {
+          "type": "059.9926",
+          "supply": 13,
+          "special": 18,
+          "topAmount": 189843
+        },
+        {
+          "type": "084.9794A",
+          "supply": 25,
+          "special": 28,
+          "topAmount": 257484
+        },
+        {
+          "type": "084.9940B",
+          "supply": 19,
+          "special": 26,
+          "topAmount": 251744
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000576",
+      "name": "아르뮤제자이",
+      "region": "경기",
+      "unit": "안산시",
+      "address": "경기도 안산시 상록구 성포동 586번지 일원",
+      "kind": "APT",
+      "supplyKind": "민영",
+      "noticeDate": "2026-11-12",
+      "receiptStart": "2026-11-23",
+      "receiptEnd": "2026-11-25",
+      "winnerDate": "2026-12-01",
+      "overheated": false,
+      "schedule": {
+        "special": {
+          "start": "2026-11-23",
+          "end": "2026-11-23"
+        },
+        "rank1": {
+          "start": "2026-11-24",
+          "end": "2026-11-24"
+        },
+        "rank1Areas": [
+          "해당지역 11.24",
+          "기타지역 11.24"
+        ],
+        "rank2": {
+          "start": "2026-11-25",
+          "end": "2026-11-25"
+        },
+        "rank2Areas": [
+          "해당지역 11.25",
+          "기타지역 11.25"
+        ],
+        "winner": "2026-12-01",
+        "contract": "2026-12-13"
+      },
+      "regulations": {
+        "투기과열지구": false,
+        "조정대상지역": false,
+        "분양가상한제": false,
+        "정비사업": false,
+        "공공주택지구": false,
+        "대규모택지개발지구": false,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "https://xi.co.kr/armusee",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000576&pblancNo=2026000576",
+      "types": [
+        {
+          "type": "084.8861A",
+          "supply": 82,
+          "special": 98,
+          "topAmount": 110500
+        },
+        {
+          "type": "084.9580B",
+          "supply": 43,
+          "special": 45,
+          "topAmount": 110500
+        },
+        {
+          "type": "084.8700C",
+          "supply": 42,
+          "special": 48,
+          "topAmount": 109900
+        },
+        {
+          "type": "099.9001A",
+          "supply": 157,
+          "special": 23,
+          "topAmount": 127200
+        },
+        {
+          "type": "099.9015B",
+          "supply": 237,
+          "special": 35,
+          "topAmount": 124200
+        },
+        {
+          "type": "104.8286",
+          "supply": 152,
+          "special": 22,
+          "topAmount": 140840
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000457",
+      "name": "부천대장 하우스토리 디센트(부천대장지구 A2BL) 공공분양주택",
+      "region": "경기",
+      "unit": "부천시",
+      "address": "경기도 부천시 오정구 대장동, 오정동, 원종동, 삼정동 일원 부천대장 공공주택지구 내 A2블록",
+      "kind": "APT",
+      "supplyKind": "국민",
+      "noticeDate": "2026-11-12",
+      "receiptStart": "2026-11-23",
+      "receiptEnd": "2026-11-25",
+      "winnerDate": "2026-12-01",
+      "overheated": false,
+      "schedule": {
+        "special": {
+          "start": "2026-11-23",
+          "end": "2026-11-23"
+        },
+        "rank1": {
+          "start": "2026-11-24",
+          "end": "2026-11-24"
+        },
+        "rank1Areas": [
+          "해당지역 11.24",
+          "기타경기 11.24",
+          "기타지역 11.24"
+        ],
+        "rank2": {
+          "start": "2026-11-25",
+          "end": "2026-11-25"
+        },
+        "rank2Areas": [
+          "해당지역 11.25",
+          "기타경기 11.25",
+          "기타지역 11.25"
+        ],
+        "winner": "2026-12-01",
+        "contract": "2027-01-25"
+      },
+      "regulations": {
+        "투기과열지구": false,
+        "조정대상지역": false,
+        "분양가상한제": true,
+        "정비사업": false,
+        "공공주택지구": true,
+        "대규모택지개발지구": true,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "https://www.부천대장하우스토리디센트.com",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000457&pblancNo=2026000457",
+      "types": [
+        {
+          "type": "059.7100A",
+          "supply": 37,
+          "special": 205,
+          "topAmount": 61345
+        },
+        {
+          "type": "059.9900B",
+          "supply": 18,
+          "special": 108,
+          "topAmount": 61520
+        },
+        {
+          "type": "059.9900C",
+          "supply": 3,
+          "special": 11,
+          "topAmount": 61515
+        },
+        {
+          "type": "074.9800A",
+          "supply": 8,
+          "special": 42,
+          "topAmount": 75423
+        },
+        {
+          "type": "084.9500A",
+          "supply": 16,
+          "special": 100,
+          "topAmount": 85406
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026820015",
+      "name": "시흥 거모 아테라(시흥거모 A-6BL) 신혼희망타운(공공분양)(본청약)",
+      "region": "경기",
+      "unit": "시흥시",
+      "address": "경기도 시흥시 거모지구 내 A-6블록",
+      "kind": "신혼희망타운",
+      "supplyKind": "국민",
+      "noticeDate": "2026-11-06",
+      "receiptStart": "2026-11-16",
+      "receiptEnd": "2026-11-27",
+      "winnerDate": "2026-12-08",
+      "overheated": false,
+      "schedule": {
+        "special": null,
+        "rank1": {
+          "start": "2026-11-16",
+          "end": "2026-11-26"
+        },
+        "rank1Areas": [
+          "해당지역 11.16~11.26",
+          "기타경기 11.16~11.26",
+          "기타지역 11.16~11.26"
+        ],
+        "rank2": {
+          "start": "2026-11-27",
+          "end": "2026-11-27"
+        },
+        "rank2Areas": [
+          "해당지역 11.27",
+          "기타경기 11.27",
+          "기타지역 11.27"
+        ],
+        "winner": "2026-12-08",
+        "contract": "2027-03-11"
+      },
+      "regulations": {
+        "투기과열지구": false,
+        "조정대상지역": false,
+        "분양가상한제": true,
+        "정비사업": false,
+        "공공주택지구": true,
+        "대규모택지개발지구": true,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "https://apply.lh.or.kr",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026820015&pblancNo=2026820015",
+      "types": [
+        {
+          "type": "055.0000A",
+          "supply": 0,
+          "special": 277,
+          "topAmount": 43390
+        },
+        {
+          "type": "059.0000A",
+          "supply": 0,
+          "special": 26,
+          "topAmount": 46436
+        },
+        {
+          "type": "059.0000B",
+          "supply": 0,
+          "special": 24,
+          "topAmount": 46359
+        },
+        {
+          "type": "059.0000C",
+          "supply": 0,
+          "special": 29,
+          "topAmount": 46328
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000557",
+      "name": "제일풍경채 광주 포에듀",
+      "region": "경기",
+      "unit": "광주시",
+      "address": "경기도 광주시 탄벌동 203-4번지 일원 (탄벌A지구 A5블럭)",
+      "kind": "APT",
+      "supplyKind": "민영",
+      "noticeDate": "2026-11-06",
+      "receiptStart": "2026-11-16",
+      "receiptEnd": "2026-11-18",
+      "winnerDate": "2026-11-24",
+      "overheated": false,
+      "schedule": {
+        "special": {
+          "start": "2026-11-16",
+          "end": "2026-11-16"
+        },
+        "rank1": {
+          "start": "2026-11-17",
+          "end": "2026-11-17"
+        },
+        "rank1Areas": [
+          "해당지역 11.17",
+          "기타지역 11.17"
+        ],
+        "rank2": {
+          "start": "2026-11-18",
+          "end": "2026-11-18"
+        },
+        "rank2Areas": [
+          "해당지역 11.18",
+          "기타지역 11.18"
+        ],
+        "winner": "2026-11-24",
+        "contract": "2026-12-07"
+      },
+      "regulations": {
+        "투기과열지구": false,
+        "조정대상지역": false,
+        "분양가상한제": false,
+        "정비사업": false,
+        "공공주택지구": false,
+        "대규모택지개발지구": false,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "http://jeil-foredu.co.kr",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000557&pblancNo=2026000557",
+      "types": [
+        {
+          "type": "084.9904A",
+          "supply": 193,
+          "special": 226,
+          "topAmount": 69100
+        },
+        {
+          "type": "084.9732B",
+          "supply": 72,
+          "special": 81,
+          "topAmount": 69100
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000553",
+      "name": "의정부역 펠리스타워 양우내안애",
+      "region": "경기",
+      "unit": "의정부시",
+      "address": "경기도 의정부시 의정부동 424번지 일원",
+      "kind": "APT",
+      "supplyKind": "민영",
+      "noticeDate": "2026-11-06",
+      "receiptStart": "2026-11-16",
+      "receiptEnd": "2026-11-18",
+      "winnerDate": "2026-11-24",
+      "overheated": false,
+      "schedule": {
+        "special": {
+          "start": "2026-11-16",
+          "end": "2026-11-16"
+        },
+        "rank1": {
+          "start": "2026-11-17",
+          "end": "2026-11-17"
+        },
+        "rank1Areas": [
+          "해당지역 11.17",
+          "기타지역 11.17"
+        ],
+        "rank2": {
+          "start": "2026-11-18",
+          "end": "2026-11-18"
+        },
+        "rank2Areas": [
+          "해당지역 11.18",
+          "기타지역 11.18"
+        ],
+        "winner": "2026-11-24",
+        "contract": "2026-12-07"
+      },
+      "regulations": {
+        "투기과열지구": false,
+        "조정대상지역": false,
+        "분양가상한제": false,
+        "정비사업": false,
+        "공공주택지구": false,
+        "대규모택지개발지구": false,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "https://feliztower-yangwoo.co.kr",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000553&pblancNo=2026000553",
+      "types": [
+        {
+          "type": "059.9777",
+          "supply": 6,
+          "special": 20,
+          "topAmount": 63720
+        },
+        {
+          "type": "084.7415A",
+          "supply": 85,
+          "special": 92,
+          "topAmount": 85692
+        },
+        {
+          "type": "084.8836B",
+          "supply": 58,
+          "special": 65,
+          "topAmount": 83678
+        },
+        {
+          "type": "084.9911C",
+          "supply": 39,
+          "special": 49,
+          "topAmount": 86314
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000497",
+      "name": "중화역 라온프라이빗 센트로",
+      "region": "서울",
+      "unit": "중랑구",
+      "address": "서울특별시 중랑구 중화동 303-9번지 일원",
+      "kind": "APT",
+      "supplyKind": "민영",
+      "noticeDate": "2026-11-06",
+      "receiptStart": "2026-11-16",
+      "receiptEnd": "2026-11-19",
+      "winnerDate": "2026-11-25",
+      "overheated": true,
+      "schedule": {
+        "special": {
+          "start": "2026-11-16",
+          "end": "2026-11-16"
+        },
+        "rank1": {
+          "start": "2026-11-17",
+          "end": "2026-11-18"
+        },
+        "rank1Areas": [
+          "해당지역 11.17",
+          "기타지역 11.18"
+        ],
+        "rank2": {
+          "start": "2026-11-19",
+          "end": "2026-11-19"
+        },
+        "rank2Areas": [
+          "해당지역 11.19",
+          "기타지역 11.19"
+        ],
+        "winner": "2026-11-25",
+        "contract": "2026-12-07"
+      },
+      "regulations": {
+        "투기과열지구": true,
+        "조정대상지역": true,
+        "분양가상한제": false,
+        "정비사업": true,
+        "공공주택지구": false,
+        "대규모택지개발지구": false,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "https://www.jh-raon.com",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000497&pblancNo=2026000497",
+      "types": [
+        {
+          "type": "045.0210",
+          "supply": 4,
+          "special": 3,
+          "topAmount": 65800
+        },
+        {
+          "type": "058.3650",
+          "supply": 7,
+          "special": 10,
+          "topAmount": 86200
+        },
+        {
+          "type": "059.9740",
+          "supply": 9,
+          "special": 11,
+          "topAmount": 95600
+        },
+        {
+          "type": "070.9640",
+          "supply": 10,
+          "special": 16,
+          "topAmount": 110100
+        },
+        {
+          "type": "073.4730T",
+          "supply": 1,
+          "special": 0,
+          "topAmount": 119200
+        },
+        {
+          "type": "084.9940",
+          "supply": 15,
+          "special": 20,
+          "topAmount": 127700
+        },
+        {
+          "type": "084.9400T",
+          "supply": 2,
+          "special": 0,
+          "topAmount": 139100
+        },
+        {
+          "type": "093.5970T",
+          "supply": 1,
+          "special": 0,
+          "topAmount": 150600
+        },
+        {
+          "type": "098.9000T",
+          "supply": 2,
+          "special": 0,
+          "topAmount": 160900
+        },
+        {
+          "type": "126.8090T",
+          "supply": 2,
+          "special": 0,
+          "topAmount": 202100
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026820014",
+      "name": "남양주왕숙 A-2블록 신혼희망타운(공공분양) 잔여세대 추가입주자모집공고",
+      "region": "경기",
+      "unit": "남양주시",
+      "address": "경기도 남양주시 진접읍, 진건읍, 퇴계원읍 일원, 남양주왕숙 공공주택지구 내 A-2블록",
+      "kind": "신혼희망타운",
+      "supplyKind": "국민",
+      "noticeDate": "2026-11-03",
+      "receiptStart": "2026-11-11",
+      "receiptEnd": "2026-11-12",
+      "winnerDate": "2026-11-19",
+      "overheated": false,
+      "schedule": {
+        "special": null,
+        "rank1": {
+          "start": "2026-11-11",
+          "end": "2026-11-11"
+        },
+        "rank1Areas": [
+          "해당지역 11.11",
+          "기타경기 11.11",
+          "기타지역 11.11"
+        ],
+        "rank2": {
+          "start": "2026-11-12",
+          "end": "2026-11-12"
+        },
+        "rank2Areas": [
+          "해당지역 11.12",
+          "기타경기 11.12",
+          "기타지역 11.12"
+        ],
+        "winner": "2026-11-19",
+        "contract": "2027-02-01"
+      },
+      "regulations": {
+        "투기과열지구": false,
+        "조정대상지역": false,
+        "분양가상한제": true,
+        "정비사업": false,
+        "공공주택지구": true,
+        "대규모택지개발지구": true,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "https://apply.lh.or.kr",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026820014&pblancNo=2026820014",
+      "types": [
+        {
+          "type": "046.0000O",
+          "supply": 0,
+          "special": 18,
+          "topAmount": 35276
+        },
+        {
+          "type": "055.0000O",
+          "supply": 0,
+          "special": 14,
+          "topAmount": 41908
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026820013",
+      "name": "안산신길2 A-6블록 신혼희망타운(공공분양)(본청약)",
+      "region": "경기",
+      "unit": "안산시",
+      "address": "경기도 안산시 단원구 신길동 일원 안산신길2 공공주택지구 내 A-6블록",
+      "kind": "신혼희망타운",
+      "supplyKind": "국민",
+      "noticeDate": "2026-10-30",
+      "receiptStart": "2026-11-16",
+      "receiptEnd": "2026-11-24",
+      "winnerDate": "2026-12-04",
+      "overheated": false,
+      "schedule": {
+        "special": null,
+        "rank1": {
+          "start": "2026-11-16",
+          "end": "2026-11-23"
+        },
+        "rank1Areas": [
+          "해당지역 11.16~11.23",
+          "기타경기 11.16~11.23",
+          "기타지역 11.16~11.23"
+        ],
+        "rank2": {
+          "start": "2026-11-24",
+          "end": "2026-11-24"
+        },
+        "rank2Areas": [
+          "해당지역 11.24",
+          "기타경기 11.24",
+          "기타지역 11.24"
+        ],
+        "winner": "2026-12-04",
+        "contract": "2027-03-30"
+      },
+      "regulations": {
+        "투기과열지구": false,
+        "조정대상지역": false,
+        "분양가상한제": true,
+        "정비사업": false,
+        "공공주택지구": true,
+        "대규모택지개발지구": true,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "https://apply.lh.or.kr/",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026820013&pblancNo=2026820013",
+      "types": [
+        {
+          "type": "055.0000A",
+          "supply": 0,
+          "special": 200,
+          "topAmount": 46658
+        },
+        {
+          "type": "055.0000B",
+          "supply": 0,
+          "special": 20,
+          "topAmount": 45692
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000528",
+      "name": "광교 자연앤 센트레빌(A17BL) 공공분양주택",
+      "region": "경기",
+      "unit": "수원시",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "kind": "APT",
+      "supplyKind": "국민",
+      "noticeDate": "2026-10-30",
+      "receiptStart": "2026-11-09",
+      "receiptEnd": "2026-11-11",
+      "winnerDate": "2026-11-17",
+      "overheated": true,
+      "schedule": {
+        "special": {
+          "start": "2026-11-09",
+          "end": "2026-11-09"
+        },
+        "rank1": {
+          "start": "2026-11-10",
+          "end": "2026-11-10"
+        },
+        "rank1Areas": [
+          "해당지역 11.10",
+          "기타경기 11.10",
+          "기타지역 11.10"
+        ],
+        "rank2": {
+          "start": "2026-11-11",
+          "end": "2026-11-11"
+        },
+        "rank2Areas": [
+          "해당지역 11.11",
+          "기타경기 11.11",
+          "기타지역 11.11"
+        ],
+        "winner": "2026-11-17",
+        "contract": "2026-12-21"
+      },
+      "regulations": {
+        "투기과열지구": true,
+        "조정대상지역": true,
+        "분양가상한제": true,
+        "정비사업": false,
+        "공공주택지구": false,
+        "대규모택지개발지구": true,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "http://www.gwanggyo-centreville.com",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000528&pblancNo=2026000528",
+      "types": [
+        {
+          "type": "084.7637A",
+          "supply": 10,
+          "special": 30,
+          "topAmount": 94930
+        },
+        {
+          "type": "084.8159B",
+          "supply": 70,
+          "special": 208,
+          "topAmount": 94890
+        },
+        {
+          "type": "084.6192C",
+          "supply": 10,
+          "special": 32,
+          "topAmount": 93860
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000527",
+      "name": "광교 자연앤 센트레빌(A17BL) 지분적립형 분양주택",
+      "region": "경기",
+      "unit": "수원시",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "kind": "APT",
+      "supplyKind": "국민",
+      "noticeDate": "2026-10-30",
+      "receiptStart": "2026-11-09",
+      "receiptEnd": "2026-11-11",
+      "winnerDate": "2026-11-18",
+      "overheated": true,
+      "schedule": {
+        "special": {
+          "start": "2026-11-09",
+          "end": "2026-11-09"
+        },
+        "rank1": {
+          "start": "2026-11-10",
+          "end": "2026-11-10"
+        },
+        "rank1Areas": [
+          "해당지역 11.10",
+          "기타경기 11.10",
+          "기타지역 11.10"
+        ],
+        "rank2": {
+          "start": "2026-11-11",
+          "end": "2026-11-11"
+        },
+        "rank2Areas": [
+          "해당지역 11.11",
+          "기타경기 11.11",
+          "기타지역 11.11"
+        ],
+        "winner": "2026-11-18",
+        "contract": "2027-01-25"
+      },
+      "regulations": {
+        "투기과열지구": true,
+        "조정대상지역": true,
+        "분양가상한제": true,
+        "정비사업": false,
+        "공공주택지구": false,
+        "대규모택지개발지구": true,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "http://www.gwanggyo-centreville.com",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000527&pblancNo=2026000527",
+      "types": [
+        {
+          "type": "059.8958A",
+          "supply": 13,
+          "special": 30,
+          "topAmount": 68440
+        },
+        {
+          "type": "059.9657B",
+          "supply": 43,
+          "special": 100,
+          "topAmount": 68590
+        },
+        {
+          "type": "059.7232C",
+          "supply": 13,
+          "special": 29,
+          "topAmount": 66790
+        },
+        {
+          "type": "059.9593D",
+          "supply": 3,
+          "special": 9,
+          "topAmount": 67850
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "region": "경기",
+      "unit": "평택시",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "kind": "APT",
+      "supplyKind": "민영",
+      "noticeDate": "2026-10-30",
+      "receiptStart": "2026-11-09",
+      "receiptEnd": "2026-11-11",
+      "winnerDate": "2026-11-17",
+      "overheated": false,
+      "schedule": {
+        "special": {
+          "start": "2026-11-09",
+          "end": "2026-11-09"
+        },
+        "rank1": {
+          "start": "2026-11-10",
+          "end": "2026-11-10"
+        },
+        "rank1Areas": [
+          "해당지역 11.10",
+          "기타경기 11.10",
+          "기타지역 11.10"
+        ],
+        "rank2": {
+          "start": "2026-11-11",
+          "end": "2026-11-11"
+        },
+        "rank2Areas": [
+          "해당지역 11.11",
+          "기타경기 11.11",
+          "기타지역 11.11"
+        ],
+        "winner": "2026-11-17",
+        "contract": "2026-11-29"
+      },
+      "regulations": {
+        "투기과열지구": false,
+        "조정대상지역": false,
+        "분양가상한제": true,
+        "정비사업": false,
+        "공공주택지구": false,
+        "대규모택지개발지구": true,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "https://pg2.lynn.co.kr/",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "types": [
+        {
+          "type": "084.9343A",
+          "supply": 109,
+          "special": 200,
+          "topAmount": 59130
+        },
+        {
+          "type": "084.9075B",
+          "supply": 21,
+          "special": 40,
+          "topAmount": 59130
+        },
+        {
+          "type": "084.8505D",
+          "supply": 10,
+          "special": 20,
+          "topAmount": 57890
+        },
+        {
+          "type": "094.3143A",
+          "supply": 42,
+          "special": 7,
+          "topAmount": 62010
+        },
+        {
+          "type": "094.2875B",
+          "supply": 20,
+          "special": 4,
+          "topAmount": 62010
+        },
+        {
+          "type": "094.3805D",
+          "supply": 5,
+          "special": 1,
+          "topAmount": 56790
+        },
+        {
+          "type": "101.8311A",
+          "supply": 65,
+          "special": 10,
+          "topAmount": 68190
+        },
+        {
+          "type": "101.8531B",
+          "supply": 48,
+          "special": 6,
+          "topAmount": 68100
+        },
+        {
+          "type": "111.5911A",
+          "supply": 6,
+          "special": 0,
+          "topAmount": 66760
+        },
+        {
+          "type": "111.4331B",
+          "supply": 9,
+          "special": 0,
+          "topAmount": 68100
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000472",
+      "name": "구리갈매역세권 B-1블록 신안인스빌 디센트",
+      "region": "경기",
+      "unit": "구리시",
+      "address": "경기도 구리시 구리갈매역세권 B-1블록",
+      "kind": "APT",
+      "supplyKind": "민영",
+      "noticeDate": "2026-10-30",
+      "receiptStart": "2026-11-09",
+      "receiptEnd": "2026-11-11",
+      "winnerDate": "2026-11-17",
+      "overheated": true,
+      "schedule": {
+        "special": {
+          "start": "2026-11-09",
+          "end": "2026-11-09"
+        },
+        "rank1": {
+          "start": "2026-11-10",
+          "end": "2026-11-10"
+        },
+        "rank1Areas": [
+          "해당지역 11.10",
+          "기타경기 11.10",
+          "기타지역 11.10"
+        ],
+        "rank2": {
+          "start": "2026-11-11",
+          "end": "2026-11-11"
+        },
+        "rank2Areas": [
+          "해당지역 11.11",
+          "기타경기 11.11",
+          "기타지역 11.11"
+        ],
+        "winner": "2026-11-17",
+        "contract": "2026-11-30"
+      },
+      "regulations": {
+        "투기과열지구": true,
+        "조정대상지역": true,
+        "분양가상한제": true,
+        "정비사업": false,
+        "공공주택지구": true,
+        "대규모택지개발지구": true,
+        "수도권내민영공공주택지구": true
+      },
+      "homepage": "https://guri.ensvil.com/",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000472&pblancNo=2026000472",
+      "types": [
+        {
+          "type": "075.7770",
+          "supply": 38,
+          "special": 70,
+          "topAmount": 69580
+        },
+        {
+          "type": "084.6686",
+          "supply": 35,
+          "special": 70,
+          "topAmount": 78500
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000535",
+      "name": "중앙하이츠 구성 플랫폼시티",
+      "region": "경기",
+      "unit": "용인시",
+      "address": "경기도 용인시 기흥구 마북동 298-1번지 일원",
+      "kind": "APT",
+      "supplyKind": "민영",
+      "noticeDate": "2026-10-29",
+      "receiptStart": "2026-11-09",
+      "receiptEnd": "2026-11-12",
+      "winnerDate": "2026-11-18",
+      "overheated": true,
+      "schedule": {
+        "special": {
+          "start": "2026-11-09",
+          "end": "2026-11-09"
+        },
+        "rank1": {
+          "start": "2026-11-10",
+          "end": "2026-11-11"
+        },
+        "rank1Areas": [
+          "해당지역 11.10",
+          "기타지역 11.11"
+        ],
+        "rank2": {
+          "start": "2026-11-12",
+          "end": "2026-11-12"
+        },
+        "rank2Areas": [
+          "해당지역 11.12",
+          "기타지역 11.12"
+        ],
+        "winner": "2026-11-18",
+        "contract": "2026-11-30"
+      },
+      "regulations": {
+        "투기과열지구": true,
+        "조정대상지역": true,
+        "분양가상한제": false,
+        "정비사업": false,
+        "공공주택지구": false,
+        "대규모택지개발지구": false,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "https://www.중앙하이츠구성플랫폼시티.com",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000535&pblancNo=2026000535",
+      "types": [
+        {
+          "type": "059.9670A",
+          "supply": 7,
+          "special": 11,
+          "topAmount": 62500
+        },
+        {
+          "type": "059.9898B",
+          "supply": 7,
+          "special": 6,
+          "topAmount": 62530
+        },
+        {
+          "type": "068.9683",
+          "supply": 4,
+          "special": 1,
+          "topAmount": 71680
+        },
+        {
+          "type": "074.9857",
+          "supply": 12,
+          "special": 11,
+          "topAmount": 77110
+        },
+        {
+          "type": "079.9780",
+          "supply": 7,
+          "special": 5,
+          "topAmount": 82270
+        },
+        {
+          "type": "084.9932",
+          "supply": 4,
+          "special": 1,
+          "topAmount": 85210
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000525",
+      "name": "엘리프 시흥 더프라임",
+      "region": "경기",
+      "unit": "시흥시",
+      "address": "경기도 시흥시 거모동 시흥거모지구 B-5블록",
+      "kind": "APT",
+      "supplyKind": "민영",
+      "noticeDate": "2026-10-29",
+      "receiptStart": "2026-11-09",
+      "receiptEnd": "2026-11-11",
+      "winnerDate": "2026-11-17",
+      "overheated": false,
+      "schedule": {
+        "special": {
+          "start": "2026-11-09",
+          "end": "2026-11-09"
+        },
+        "rank1": {
+          "start": "2026-11-10",
+          "end": "2026-11-10"
+        },
+        "rank1Areas": [
+          "해당지역 11.10",
+          "기타경기 11.10",
+          "기타지역 11.10"
+        ],
+        "rank2": {
+          "start": "2026-11-11",
+          "end": "2026-11-11"
+        },
+        "rank2Areas": [
+          "해당지역 11.11",
+          "기타경기 11.11",
+          "기타지역 11.11"
+        ],
+        "winner": "2026-11-17",
+        "contract": "2026-11-28"
+      },
+      "regulations": {
+        "투기과열지구": false,
+        "조정대상지역": false,
+        "분양가상한제": true,
+        "정비사업": false,
+        "공공주택지구": true,
+        "대규모택지개발지구": true,
+        "수도권내민영공공주택지구": true
+      },
+      "homepage": "https://www.엘리프시흥더프라임.com",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000525&pblancNo=2026000525",
+      "types": [
+        {
+          "type": "084.9607A",
+          "supply": 95,
+          "special": 164,
+          "topAmount": 59930
+        },
+        {
+          "type": "084.9236B",
+          "supply": 19,
+          "special": 26,
+          "topAmount": 59910
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000499",
+      "name": "한화포레나 지제역",
+      "region": "경기",
+      "unit": "평택시",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "kind": "APT",
+      "supplyKind": "민영",
+      "noticeDate": "2026-10-29",
+      "receiptStart": "2026-11-09",
+      "receiptEnd": "2026-11-11",
+      "winnerDate": "2026-11-18",
+      "overheated": false,
+      "schedule": {
+        "special": {
+          "start": "2026-11-09",
+          "end": "2026-11-09"
+        },
+        "rank1": {
+          "start": "2026-11-10",
+          "end": "2026-11-10"
+        },
+        "rank1Areas": [
+          "해당지역 11.10",
+          "기타지역 11.10"
+        ],
+        "rank2": {
+          "start": "2026-11-11",
+          "end": "2026-11-11"
+        },
+        "rank2Areas": [
+          "해당지역 11.11",
+          "기타지역 11.11"
+        ],
+        "winner": "2026-11-18",
+        "contract": "2026-11-29"
+      },
+      "regulations": {
+        "투기과열지구": false,
+        "조정대상지역": false,
+        "분양가상한제": false,
+        "정비사업": false,
+        "공공주택지구": false,
+        "대규모택지개발지구": false,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "https://jije.forena.co.kr/",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "types": [
+        {
+          "type": "084.9424A",
+          "supply": 207,
+          "special": 245,
+          "topAmount": 70875
+        },
+        {
+          "type": "084.9927B",
+          "supply": 97,
+          "special": 111,
+          "topAmount": 70095
+        },
+        {
+          "type": "084.9839C",
+          "supply": 79,
+          "special": 89,
+          "topAmount": 72450
+        },
+        {
+          "type": "084.9199D",
+          "supply": 57,
+          "special": 65,
+          "topAmount": 72350
+        },
+        {
+          "type": "116.9134",
+          "supply": 130,
+          "special": 18,
+          "topAmount": 96845
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000531",
+      "name": "시흥거모지구 S-1블록 공공분양(본청약)",
+      "region": "경기",
+      "unit": "시흥시",
+      "address": "경기도 시흥시 거모동, 군자동 일원 시흥거모 공공주택지구 내 S-1블록",
+      "kind": "APT",
+      "supplyKind": "국민",
+      "noticeDate": "2026-10-23",
+      "receiptStart": "2026-11-02",
+      "receiptEnd": "2026-11-17",
+      "winnerDate": "2026-11-26",
+      "overheated": false,
+      "schedule": {
+        "special": null,
+        "rank1": {
+          "start": "2026-11-02",
+          "end": "2026-11-16"
+        },
+        "rank1Areas": [
+          "해당지역 11.2~11.16",
+          "기타경기 11.2~11.16",
+          "기타지역 11.2~11.16"
+        ],
+        "rank2": {
+          "start": "2026-11-17",
+          "end": "2026-11-17"
+        },
+        "rank2Areas": [
+          "해당지역 11.17",
+          "기타경기 11.17",
+          "기타지역 11.17"
+        ],
+        "winner": "2026-11-26",
+        "contract": "2027-02-01"
+      },
+      "regulations": {
+        "투기과열지구": false,
+        "조정대상지역": false,
+        "분양가상한제": true,
+        "정비사업": false,
+        "공공주택지구": true,
+        "대규모택지개발지구": true,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "https://apply.lh.or.kr/",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000531&pblancNo=2026000531",
+      "types": [
+        {
+          "type": "059.9000A",
+          "supply": 3,
+          "special": 10,
+          "topAmount": 41110
+        },
+        {
+          "type": "059.8000B",
+          "supply": 5,
+          "special": 15,
+          "topAmount": 41042
+        },
+        {
+          "type": "084.8900A",
+          "supply": 19,
+          "special": 53,
+          "topAmount": 57026
+        }
+      ]
+    },
+    {
+      "houseManageNo": "2026000373",
+      "name": "고덕강일지구 3단지 토지임대부(본청약)",
+      "region": "서울",
+      "unit": "강동구",
+      "address": "서울특별시 강동구 강일동 174 일원(고덕강일공공주택지구 3단지)",
+      "kind": "APT",
+      "supplyKind": "국민",
+      "noticeDate": "2026-10-16",
+      "receiptStart": "2026-10-26",
+      "receiptEnd": "2026-11-06",
+      "winnerDate": "2026-11-26",
+      "overheated": true,
+      "schedule": {
+        "special": null,
+        "rank1": {
+          "start": "2026-10-26",
+          "end": "2026-11-05"
+        },
+        "rank1Areas": [
+          "해당지역 10.26~11.4",
+          "기타지역 11.5"
+        ],
+        "rank2": {
+          "start": "2026-11-06",
+          "end": "2026-11-06"
+        },
+        "rank2Areas": [
+          "해당지역 11.6",
+          "기타지역 11.6"
+        ],
+        "winner": "2026-11-26",
+        "contract": "2027-03-22"
+      },
+      "regulations": {
+        "투기과열지구": true,
+        "조정대상지역": true,
+        "분양가상한제": true,
+        "정비사업": false,
+        "공공주택지구": true,
+        "대규모택지개발지구": true,
+        "수도권내민영공공주택지구": false
+      },
+      "homepage": "https://www.i-sh.co.kr/main/index.do",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000373&pblancNo=2026000373",
+      "types": [
+        {
+          "type": "049.0000A",
+          "supply": 5,
+          "special": 18,
+          "topAmount": 30800
+        },
+        {
+          "type": "049.0000B",
+          "supply": 2,
+          "special": 6,
+          "topAmount": 30800
+        },
+        {
+          "type": "049.0000C",
+          "supply": 19,
+          "special": 74,
+          "topAmount": 31416
+        },
+        {
+          "type": "049.0000D",
+          "supply": 3,
+          "special": 10,
+          "topAmount": 30800
+        },
+        {
+          "type": "049.0000E",
+          "supply": 4,
+          "special": 20,
+          "topAmount": 30800
+        },
+        {
+          "type": "049.0000F",
+          "supply": 14,
+          "special": 58,
+          "topAmount": 31724
+        },
+        {
+          "type": "049.0000G",
+          "supply": 2,
+          "special": 5,
+          "topAmount": 31724
+        },
+        {
+          "type": "049.0000H",
+          "supply": 8,
+          "special": 31,
+          "topAmount": 29567
+        },
+        {
+          "type": "049.0000I",
+          "supply": 2,
+          "special": 7,
+          "topAmount": 31416
+        },
+        {
+          "type": "049.0000J",
+          "supply": 2,
+          "special": 5,
+          "topAmount": 31416
+        },
+        {
+          "type": "049.0000K",
+          "supply": 3,
+          "special": 11,
+          "topAmount": 30184
+        },
+        {
+          "type": "059.0000A",
+          "supply": 6,
+          "special": 18,
+          "topAmount": 38670
+        },
+        {
+          "type": "059.0000B",
+          "supply": 12,
+          "special": 48,
+          "topAmount": 39050
+        },
+        {
+          "type": "059.0000C",
+          "supply": 1,
+          "special": 2,
+          "topAmount": 38670
+        },
+        {
+          "type": "059.0000D",
+          "supply": 16,
+          "special": 60,
+          "topAmount": 39050
+        },
+        {
+          "type": "059.0000E",
+          "supply": 9,
+          "special": 35,
+          "topAmount": 38670
+        },
+        {
+          "type": "059.0000F",
+          "supply": 9,
+          "special": 37,
+          "topAmount": 37154
+        },
+        {
+          "type": "059.0000G",
+          "supply": 25,
+          "special": 95,
+          "topAmount": 37912
+        },
+        {
+          "type": "059.0000H",
+          "supply": 4,
+          "special": 20,
+          "topAmount": 37154
+        },
+        {
+          "type": "059.0000I",
+          "supply": 1,
+          "special": 6,
+          "topAmount": 39050
+        }
+      ]
+    }
+  ],
+  "remndr": [
+    {
+      "houseManageNo": "2026930046",
+      "name": "광주 송정 중흥S-클래스 파크뷰",
+      "region": "경기",
+      "unit": "광주시",
+      "kind": "불법행위 재공급",
+      "receiptStart": "2026-11-23",
+      "receiptEnd": "2026-11-23",
+      "winnerDate": "2026-11-26",
+      "supply": 2,
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTRemndrLttotPblancDetailView.do?houseManageNo=2026930046&pblancNo=2026930046"
+    },
+    {
+      "houseManageNo": "2026930045",
+      "name": "잠실 래미안아이파크",
+      "region": "서울",
+      "unit": "송파구",
+      "kind": "불법행위 재공급",
+      "receiptStart": "2026-11-23",
+      "receiptEnd": "2026-11-24",
+      "winnerDate": "2026-11-27",
+      "supply": 3,
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTRemndrLttotPblancDetailView.do?houseManageNo=2026930045&pblancNo=2026930045"
+    }
+  ],
+  "lastWeekRows": [
+    {
+      "no": "2026000535",
+      "name": "중앙하이츠 구성 플랫폼시티",
+      "sido": "경기",
+      "unit": "용인시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000535&pblancNo=2026000535",
+      "address": "경기도 용인시 기흥구 마북동 298-1번지 일원",
+      "houseTy": "059.9670A",
+      "band": "s",
+      "reside": "해당지역",
+      "min": 47,
+      "avg": 49.67,
+      "max": 53,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 7,
+          "req": 29,
+          "rate": 4.14,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 7,
+          "req": 41,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 7,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 7,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000535",
+      "name": "중앙하이츠 구성 플랫폼시티",
+      "sido": "경기",
+      "unit": "용인시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000535&pblancNo=2026000535",
+      "address": "경기도 용인시 기흥구 마북동 298-1번지 일원",
+      "houseTy": "059.9670A",
+      "band": "s",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 7,
+          "req": 29,
+          "rate": 4.14,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 7,
+          "req": 41,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 7,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 7,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000535",
+      "name": "중앙하이츠 구성 플랫폼시티",
+      "sido": "경기",
+      "unit": "용인시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000535&pblancNo=2026000535",
+      "address": "경기도 용인시 기흥구 마북동 298-1번지 일원",
+      "houseTy": "059.9898B",
+      "band": "s",
+      "reside": "해당지역",
+      "min": 35,
+      "avg": 37,
+      "max": 38,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 7,
+          "req": 9,
+          "rate": 1.29,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 7,
+          "req": 33,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 7,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 7,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000535",
+      "name": "중앙하이츠 구성 플랫폼시티",
+      "sido": "경기",
+      "unit": "용인시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000535&pblancNo=2026000535",
+      "address": "경기도 용인시 기흥구 마북동 298-1번지 일원",
+      "houseTy": "059.9898B",
+      "band": "s",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 7,
+          "req": 9,
+          "rate": 1.29,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 7,
+          "req": 33,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 7,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 7,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000535",
+      "name": "중앙하이츠 구성 플랫폼시티",
+      "sido": "경기",
+      "unit": "용인시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000535&pblancNo=2026000535",
+      "address": "경기도 용인시 기흥구 마북동 298-1번지 일원",
+      "houseTy": "068.9683",
+      "band": "m",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 4,
+          "req": 0,
+          "rate": null,
+          "shortage": 4
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 4,
+          "req": 15,
+          "rate": 3.75,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 4,
+          "req": 6,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 4,
+          "req": 16,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000535",
+      "name": "중앙하이츠 구성 플랫폼시티",
+      "sido": "경기",
+      "unit": "용인시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000535&pblancNo=2026000535",
+      "address": "경기도 용인시 기흥구 마북동 298-1번지 일원",
+      "houseTy": "068.9683",
+      "band": "m",
+      "reside": "기타지역",
+      "min": 30,
+      "avg": 40.33,
+      "max": 52,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 4,
+          "req": 0,
+          "rate": null,
+          "shortage": 4
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 4,
+          "req": 15,
+          "rate": 3.75,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 4,
+          "req": 6,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 4,
+          "req": 16,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000535",
+      "name": "중앙하이츠 구성 플랫폼시티",
+      "sido": "경기",
+      "unit": "용인시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000535&pblancNo=2026000535",
+      "address": "경기도 용인시 기흥구 마북동 298-1번지 일원",
+      "houseTy": "074.9857",
+      "band": "m",
+      "reside": "해당지역",
+      "min": 22,
+      "avg": 33.89,
+      "max": 59,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 12,
+          "req": 18,
+          "rate": 1.5,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 12,
+          "req": 34,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 12,
+          "req": 12,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 12,
+          "req": 23,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000535",
+      "name": "중앙하이츠 구성 플랫폼시티",
+      "sido": "경기",
+      "unit": "용인시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000535&pblancNo=2026000535",
+      "address": "경기도 용인시 기흥구 마북동 298-1번지 일원",
+      "houseTy": "074.9857",
+      "band": "m",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 12,
+          "req": 18,
+          "rate": 1.5,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 12,
+          "req": 34,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 12,
+          "req": 12,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 12,
+          "req": 23,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000535",
+      "name": "중앙하이츠 구성 플랫폼시티",
+      "sido": "경기",
+      "unit": "용인시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000535&pblancNo=2026000535",
+      "address": "경기도 용인시 기흥구 마북동 298-1번지 일원",
+      "houseTy": "079.9780",
+      "band": "m",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 7,
+          "req": 4,
+          "rate": null,
+          "shortage": 3
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 7,
+          "req": 11,
+          "rate": 3.67,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 7,
+          "req": 7,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 7,
+          "req": 12,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000535",
+      "name": "중앙하이츠 구성 플랫폼시티",
+      "sido": "경기",
+      "unit": "용인시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000535&pblancNo=2026000535",
+      "address": "경기도 용인시 기흥구 마북동 298-1번지 일원",
+      "houseTy": "079.9780",
+      "band": "m",
+      "reside": "기타지역",
+      "min": 54,
+      "avg": 62.33,
+      "max": 69,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 7,
+          "req": 4,
+          "rate": null,
+          "shortage": 3
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 7,
+          "req": 11,
+          "rate": 3.67,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 7,
+          "req": 7,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 7,
+          "req": 12,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000535",
+      "name": "중앙하이츠 구성 플랫폼시티",
+      "sido": "경기",
+      "unit": "용인시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000535&pblancNo=2026000535",
+      "address": "경기도 용인시 기흥구 마북동 298-1번지 일원",
+      "houseTy": "084.9932",
+      "band": "m",
+      "reside": "해당지역",
+      "min": 45,
+      "avg": 55.33,
+      "max": 63,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 4,
+          "req": 12,
+          "rate": 3,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 4,
+          "req": 22,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 4,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 4,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000535",
+      "name": "중앙하이츠 구성 플랫폼시티",
+      "sido": "경기",
+      "unit": "용인시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000535&pblancNo=2026000535",
+      "address": "경기도 용인시 기흥구 마북동 298-1번지 일원",
+      "houseTy": "084.9932",
+      "band": "m",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 4,
+          "req": 12,
+          "rate": 3,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 4,
+          "req": 22,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 4,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 4,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000528",
+      "name": "광교 자연앤 센트레빌(A17BL) 공공분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000528&pblancNo=2026000528",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "084.7637A",
+      "band": "m",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 10,
+          "req": 610,
+          "rate": 203.33,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 10,
+          "req": 682,
+          "rate": 520.2,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 10,
+          "req": 1314,
+          "rate": 960.5,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 10,
+          "req": 203,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 10,
+          "req": 175,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 10,
+          "req": 368,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000528",
+      "name": "광교 자연앤 센트레빌(A17BL) 공공분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000528&pblancNo=2026000528",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "084.7637A",
+      "band": "m",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 10,
+          "req": 610,
+          "rate": 203.33,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 10,
+          "req": 682,
+          "rate": 520.2,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 10,
+          "req": 1314,
+          "rate": 960.5,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 10,
+          "req": 203,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 10,
+          "req": 175,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 10,
+          "req": 368,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000528",
+      "name": "광교 자연앤 센트레빌(A17BL) 공공분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000528&pblancNo=2026000528",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "084.7637A",
+      "band": "m",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 10,
+          "req": 610,
+          "rate": 203.33,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 10,
+          "req": 682,
+          "rate": 520.2,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 10,
+          "req": 1314,
+          "rate": 960.5,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 10,
+          "req": 203,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 10,
+          "req": 175,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 10,
+          "req": 368,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000528",
+      "name": "광교 자연앤 센트레빌(A17BL) 공공분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000528&pblancNo=2026000528",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "084.8159B",
+      "band": "m",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 70,
+          "req": 2875,
+          "rate": 136.9,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 70,
+          "req": 3627,
+          "rate": 356.6,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 70,
+          "req": 6014,
+          "rate": 633.43,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 70,
+          "req": 671,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 70,
+          "req": 736,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 70,
+          "req": 1159,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000528",
+      "name": "광교 자연앤 센트레빌(A17BL) 공공분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000528&pblancNo=2026000528",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "084.8159B",
+      "band": "m",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 70,
+          "req": 2875,
+          "rate": 136.9,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 70,
+          "req": 3627,
+          "rate": 356.6,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 70,
+          "req": 6014,
+          "rate": 633.43,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 70,
+          "req": 671,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 70,
+          "req": 736,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 70,
+          "req": 1159,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000528",
+      "name": "광교 자연앤 센트레빌(A17BL) 공공분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000528&pblancNo=2026000528",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "084.8159B",
+      "band": "m",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 70,
+          "req": 2875,
+          "rate": 136.9,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 70,
+          "req": 3627,
+          "rate": 356.6,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 70,
+          "req": 6014,
+          "rate": 633.43,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 70,
+          "req": 671,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 70,
+          "req": 736,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 70,
+          "req": 1159,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000528",
+      "name": "광교 자연앤 센트레빌(A17BL) 공공분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000528&pblancNo=2026000528",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "084.6192C",
+      "band": "m",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 10,
+          "req": 426,
+          "rate": 142,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 10,
+          "req": 373,
+          "rate": 292,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 10,
+          "req": 666,
+          "rate": 544.5,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 10,
+          "req": 105,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 10,
+          "req": 123,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 10,
+          "req": 208,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000528",
+      "name": "광교 자연앤 센트레빌(A17BL) 공공분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000528&pblancNo=2026000528",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "084.6192C",
+      "band": "m",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 10,
+          "req": 426,
+          "rate": 142,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 10,
+          "req": 373,
+          "rate": 292,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 10,
+          "req": 666,
+          "rate": 544.5,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 10,
+          "req": 105,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 10,
+          "req": 123,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 10,
+          "req": 208,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000528",
+      "name": "광교 자연앤 센트레빌(A17BL) 공공분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000528&pblancNo=2026000528",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "084.6192C",
+      "band": "m",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 10,
+          "req": 426,
+          "rate": 142,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 10,
+          "req": 373,
+          "rate": 292,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 10,
+          "req": 666,
+          "rate": 544.5,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 10,
+          "req": 105,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 10,
+          "req": 123,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 10,
+          "req": 208,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000527",
+      "name": "광교 자연앤 센트레빌(A17BL) 지분적립형 분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000527&pblancNo=2026000527",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "059.8958A",
+      "band": "s",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 13,
+          "req": 348,
+          "rate": 87,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 13,
+          "req": 261,
+          "rate": 177.83,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 13,
+          "req": 465,
+          "rate": 269.67,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 13,
+          "req": 75,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 13,
+          "req": 77,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 13,
+          "req": 152,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000527",
+      "name": "광교 자연앤 센트레빌(A17BL) 지분적립형 분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000527&pblancNo=2026000527",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "059.8958A",
+      "band": "s",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 13,
+          "req": 348,
+          "rate": 87,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 13,
+          "req": 261,
+          "rate": 177.83,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 13,
+          "req": 465,
+          "rate": 269.67,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 13,
+          "req": 75,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 13,
+          "req": 77,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 13,
+          "req": 152,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000527",
+      "name": "광교 자연앤 센트레빌(A17BL) 지분적립형 분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000527&pblancNo=2026000527",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "059.8958A",
+      "band": "s",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 13,
+          "req": 348,
+          "rate": 87,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 13,
+          "req": 261,
+          "rate": 177.83,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 13,
+          "req": 465,
+          "rate": 269.67,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 13,
+          "req": 75,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 13,
+          "req": 77,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 13,
+          "req": 152,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000527",
+      "name": "광교 자연앤 센트레빌(A17BL) 지분적립형 분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000527&pblancNo=2026000527",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "059.9657B",
+      "band": "s",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 43,
+          "req": 1447,
+          "rate": 111.31,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 43,
+          "req": 1351,
+          "rate": 233.33,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 43,
+          "req": 2124,
+          "rate": 395.33,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 43,
+          "req": 328,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 43,
+          "req": 298,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 43,
+          "req": 426,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000527",
+      "name": "광교 자연앤 센트레빌(A17BL) 지분적립형 분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000527&pblancNo=2026000527",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "059.9657B",
+      "band": "s",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 43,
+          "req": 1447,
+          "rate": 111.31,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 43,
+          "req": 1351,
+          "rate": 233.33,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 43,
+          "req": 2124,
+          "rate": 395.33,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 43,
+          "req": 328,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 43,
+          "req": 298,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 43,
+          "req": 426,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000527",
+      "name": "광교 자연앤 센트레빌(A17BL) 지분적립형 분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000527&pblancNo=2026000527",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "059.9657B",
+      "band": "s",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 43,
+          "req": 1447,
+          "rate": 111.31,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 43,
+          "req": 1351,
+          "rate": 233.33,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 43,
+          "req": 2124,
+          "rate": 395.33,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 43,
+          "req": 328,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 43,
+          "req": 298,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 43,
+          "req": 426,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000527",
+      "name": "광교 자연앤 센트레빌(A17BL) 지분적립형 분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000527&pblancNo=2026000527",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "059.7232C",
+      "band": "s",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 13,
+          "req": 301,
+          "rate": 75.25,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 13,
+          "req": 228,
+          "rate": 153.17,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 13,
+          "req": 397,
+          "rate": 231.33,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 13,
+          "req": 80,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 13,
+          "req": 84,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 13,
+          "req": 103,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000527",
+      "name": "광교 자연앤 센트레빌(A17BL) 지분적립형 분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000527&pblancNo=2026000527",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "059.7232C",
+      "band": "s",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 13,
+          "req": 301,
+          "rate": 75.25,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 13,
+          "req": 228,
+          "rate": 153.17,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 13,
+          "req": 397,
+          "rate": 231.33,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 13,
+          "req": 80,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 13,
+          "req": 84,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 13,
+          "req": 103,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000527",
+      "name": "광교 자연앤 센트레빌(A17BL) 지분적립형 분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000527&pblancNo=2026000527",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "059.7232C",
+      "band": "s",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 13,
+          "req": 301,
+          "rate": 75.25,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 13,
+          "req": 228,
+          "rate": 153.17,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 13,
+          "req": 397,
+          "rate": 231.33,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 13,
+          "req": 80,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 13,
+          "req": 84,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 13,
+          "req": 103,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000527",
+      "name": "광교 자연앤 센트레빌(A17BL) 지분적립형 분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000527&pblancNo=2026000527",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "059.9593D",
+      "band": "s",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 3,
+          "req": 94,
+          "rate": 94,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 3,
+          "req": 86,
+          "rate": 309,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 3,
+          "req": 131,
+          "rate": 224,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 3,
+          "req": 34,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 3,
+          "req": 29,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 3,
+          "req": 42,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000527",
+      "name": "광교 자연앤 센트레빌(A17BL) 지분적립형 분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000527&pblancNo=2026000527",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "059.9593D",
+      "band": "s",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 3,
+          "req": 94,
+          "rate": 94,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 3,
+          "req": 86,
+          "rate": 309,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 3,
+          "req": 131,
+          "rate": 224,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 3,
+          "req": 34,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 3,
+          "req": 29,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 3,
+          "req": 42,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000527",
+      "name": "광교 자연앤 센트레빌(A17BL) 지분적립형 분양주택",
+      "sido": "경기",
+      "unit": "수원시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000527&pblancNo=2026000527",
+      "address": "경기도 수원시 영통구 원천동 633번지 일원",
+      "houseTy": "059.9593D",
+      "band": "s",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 3,
+          "req": 94,
+          "rate": 94,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 3,
+          "req": 86,
+          "rate": 309,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 3,
+          "req": 131,
+          "rate": 224,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 3,
+          "req": 34,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 3,
+          "req": 29,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 3,
+          "req": 42,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000525",
+      "name": "엘리프 시흥 더프라임",
+      "sido": "경기",
+      "unit": "시흥시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000525&pblancNo=2026000525",
+      "address": "경기도 시흥시 거모동 시흥거모지구 B-5블록",
+      "houseTy": "084.9607A",
+      "band": "m",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 243,
+          "req": 16,
+          "rate": null,
+          "shortage": 57
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 243,
+          "req": 4,
+          "rate": null,
+          "shortage": 210
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 243,
+          "req": 13,
+          "rate": null,
+          "shortage": 93
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 243,
+          "req": 1,
+          "rate": null,
+          "shortage": 62
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 243,
+          "req": 6,
+          "rate": null,
+          "shortage": 195
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 243,
+          "req": 8,
+          "rate": null,
+          "shortage": 96
+        }
+      ]
+    },
+    {
+      "no": "2026000525",
+      "name": "엘리프 시흥 더프라임",
+      "sido": "경기",
+      "unit": "시흥시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000525&pblancNo=2026000525",
+      "address": "경기도 시흥시 거모동 시흥거모지구 B-5블록",
+      "houseTy": "084.9607A",
+      "band": "m",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 243,
+          "req": 16,
+          "rate": null,
+          "shortage": 57
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 243,
+          "req": 4,
+          "rate": null,
+          "shortage": 210
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 243,
+          "req": 13,
+          "rate": null,
+          "shortage": 93
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 243,
+          "req": 1,
+          "rate": null,
+          "shortage": 62
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 243,
+          "req": 6,
+          "rate": null,
+          "shortage": 195
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 243,
+          "req": 8,
+          "rate": null,
+          "shortage": 96
+        }
+      ]
+    },
+    {
+      "no": "2026000525",
+      "name": "엘리프 시흥 더프라임",
+      "sido": "경기",
+      "unit": "시흥시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000525&pblancNo=2026000525",
+      "address": "경기도 시흥시 거모동 시흥거모지구 B-5블록",
+      "houseTy": "084.9607A",
+      "band": "m",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 243,
+          "req": 16,
+          "rate": null,
+          "shortage": 57
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 243,
+          "req": 4,
+          "rate": null,
+          "shortage": 210
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 243,
+          "req": 13,
+          "rate": null,
+          "shortage": 93
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 243,
+          "req": 1,
+          "rate": null,
+          "shortage": 62
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 243,
+          "req": 6,
+          "rate": null,
+          "shortage": 195
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 243,
+          "req": 8,
+          "rate": null,
+          "shortage": 96
+        }
+      ]
+    },
+    {
+      "no": "2026000525",
+      "name": "엘리프 시흥 더프라임",
+      "sido": "경기",
+      "unit": "시흥시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000525&pblancNo=2026000525",
+      "address": "경기도 시흥시 거모동 시흥거모지구 B-5블록",
+      "houseTy": "084.9236B",
+      "band": "m",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 43,
+          "req": 0,
+          "rate": null,
+          "shortage": 13
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 43,
+          "req": 2,
+          "rate": null,
+          "shortage": 40
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 43,
+          "req": 1,
+          "rate": null,
+          "shortage": 21
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 43,
+          "req": 1,
+          "rate": null,
+          "shortage": 11
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 43,
+          "req": 1,
+          "rate": null,
+          "shortage": 36
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 43,
+          "req": 2,
+          "rate": null,
+          "shortage": 17
+        }
+      ]
+    },
+    {
+      "no": "2026000525",
+      "name": "엘리프 시흥 더프라임",
+      "sido": "경기",
+      "unit": "시흥시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000525&pblancNo=2026000525",
+      "address": "경기도 시흥시 거모동 시흥거모지구 B-5블록",
+      "houseTy": "084.9236B",
+      "band": "m",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 43,
+          "req": 0,
+          "rate": null,
+          "shortage": 13
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 43,
+          "req": 2,
+          "rate": null,
+          "shortage": 40
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 43,
+          "req": 1,
+          "rate": null,
+          "shortage": 21
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 43,
+          "req": 1,
+          "rate": null,
+          "shortage": 11
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 43,
+          "req": 1,
+          "rate": null,
+          "shortage": 36
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 43,
+          "req": 2,
+          "rate": null,
+          "shortage": 17
+        }
+      ]
+    },
+    {
+      "no": "2026000525",
+      "name": "엘리프 시흥 더프라임",
+      "sido": "경기",
+      "unit": "시흥시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000525&pblancNo=2026000525",
+      "address": "경기도 시흥시 거모동 시흥거모지구 B-5블록",
+      "houseTy": "084.9236B",
+      "band": "m",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 43,
+          "req": 0,
+          "rate": null,
+          "shortage": 13
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 43,
+          "req": 2,
+          "rate": null,
+          "shortage": 40
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 43,
+          "req": 1,
+          "rate": null,
+          "shortage": 21
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 43,
+          "req": 1,
+          "rate": null,
+          "shortage": 11
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 43,
+          "req": 1,
+          "rate": null,
+          "shortage": 36
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 43,
+          "req": 2,
+          "rate": null,
+          "shortage": 17
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "084.9343A",
+      "band": "m",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 277,
+          "req": 66,
+          "rate": null,
+          "shortage": 17
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 277,
+          "req": 13,
+          "rate": null,
+          "shortage": 159
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 277,
+          "req": 39,
+          "rate": null,
+          "shortage": 33
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 277,
+          "req": 13,
+          "rate": null,
+          "shortage": 35
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 277,
+          "req": 8,
+          "rate": null,
+          "shortage": 136
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 277,
+          "req": 2,
+          "rate": null,
+          "shortage": 65
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "084.9343A",
+      "band": "m",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 277,
+          "req": 66,
+          "rate": null,
+          "shortage": 17
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 277,
+          "req": 13,
+          "rate": null,
+          "shortage": 159
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 277,
+          "req": 39,
+          "rate": null,
+          "shortage": 33
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 277,
+          "req": 13,
+          "rate": null,
+          "shortage": 35
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 277,
+          "req": 8,
+          "rate": null,
+          "shortage": 136
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 277,
+          "req": 2,
+          "rate": null,
+          "shortage": 65
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "084.9343A",
+      "band": "m",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 277,
+          "req": 66,
+          "rate": null,
+          "shortage": 17
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 277,
+          "req": 13,
+          "rate": null,
+          "shortage": 159
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 277,
+          "req": 39,
+          "rate": null,
+          "shortage": 33
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 277,
+          "req": 13,
+          "rate": null,
+          "shortage": 35
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 277,
+          "req": 8,
+          "rate": null,
+          "shortage": 136
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 277,
+          "req": 2,
+          "rate": null,
+          "shortage": 65
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "084.9075B",
+      "band": "m",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 60,
+          "req": 3,
+          "rate": null,
+          "shortage": 15
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 60,
+          "req": 0,
+          "rate": null,
+          "shortage": 54
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 60,
+          "req": 3,
+          "rate": null,
+          "shortage": 24
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 60,
+          "req": 1,
+          "rate": null,
+          "shortage": 15
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 60,
+          "req": 0,
+          "rate": null,
+          "shortage": 51
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 60,
+          "req": 2,
+          "rate": null,
+          "shortage": 24
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "084.9075B",
+      "band": "m",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 60,
+          "req": 3,
+          "rate": null,
+          "shortage": 15
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 60,
+          "req": 0,
+          "rate": null,
+          "shortage": 54
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 60,
+          "req": 3,
+          "rate": null,
+          "shortage": 24
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 60,
+          "req": 1,
+          "rate": null,
+          "shortage": 15
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 60,
+          "req": 0,
+          "rate": null,
+          "shortage": 51
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 60,
+          "req": 2,
+          "rate": null,
+          "shortage": 24
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "084.9075B",
+      "band": "m",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 60,
+          "req": 3,
+          "rate": null,
+          "shortage": 15
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 60,
+          "req": 0,
+          "rate": null,
+          "shortage": 54
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 60,
+          "req": 3,
+          "rate": null,
+          "shortage": 24
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 60,
+          "req": 1,
+          "rate": null,
+          "shortage": 15
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 60,
+          "req": 0,
+          "rate": null,
+          "shortage": 51
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 60,
+          "req": 2,
+          "rate": null,
+          "shortage": 24
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "084.8505D",
+      "band": "m",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 29,
+          "req": 6,
+          "rate": null,
+          "shortage": 3
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 29,
+          "req": 0,
+          "rate": null,
+          "shortage": 21
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 29,
+          "req": 2,
+          "rate": null,
+          "shortage": 7
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 29,
+          "req": 3,
+          "rate": null,
+          "shortage": 3
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 29,
+          "req": 2,
+          "rate": null,
+          "shortage": 16
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 29,
+          "req": 0,
+          "rate": null,
+          "shortage": 7
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "084.8505D",
+      "band": "m",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 29,
+          "req": 6,
+          "rate": null,
+          "shortage": 3
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 29,
+          "req": 0,
+          "rate": null,
+          "shortage": 21
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 29,
+          "req": 2,
+          "rate": null,
+          "shortage": 7
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 29,
+          "req": 3,
+          "rate": null,
+          "shortage": 3
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 29,
+          "req": 2,
+          "rate": null,
+          "shortage": 16
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 29,
+          "req": 0,
+          "rate": null,
+          "shortage": 7
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "084.8505D",
+      "band": "m",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 29,
+          "req": 6,
+          "rate": null,
+          "shortage": 3
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 29,
+          "req": 0,
+          "rate": null,
+          "shortage": 21
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 29,
+          "req": 2,
+          "rate": null,
+          "shortage": 7
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 29,
+          "req": 3,
+          "rate": null,
+          "shortage": 3
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 29,
+          "req": 2,
+          "rate": null,
+          "shortage": 16
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 29,
+          "req": 0,
+          "rate": null,
+          "shortage": 7
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "094.3143A",
+      "band": "l",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 48,
+          "req": 17,
+          "rate": 1.21,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 48,
+          "req": 9,
+          "rate": null,
+          "shortage": 17
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 48,
+          "req": 5,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 48,
+          "req": 1,
+          "rate": null,
+          "shortage": 4
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 48,
+          "req": 2,
+          "rate": null,
+          "shortage": 14
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 48,
+          "req": 0,
+          "rate": null,
+          "shortage": 7
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "094.3143A",
+      "band": "l",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 48,
+          "req": 17,
+          "rate": 1.21,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 48,
+          "req": 9,
+          "rate": null,
+          "shortage": 17
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 48,
+          "req": 5,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 48,
+          "req": 1,
+          "rate": null,
+          "shortage": 4
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 48,
+          "req": 2,
+          "rate": null,
+          "shortage": 14
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 48,
+          "req": 0,
+          "rate": null,
+          "shortage": 7
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "094.3143A",
+      "band": "l",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 48,
+          "req": 17,
+          "rate": 1.21,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 48,
+          "req": 9,
+          "rate": null,
+          "shortage": 17
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 48,
+          "req": 5,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 48,
+          "req": 1,
+          "rate": null,
+          "shortage": 4
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 48,
+          "req": 2,
+          "rate": null,
+          "shortage": 14
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 48,
+          "req": 0,
+          "rate": null,
+          "shortage": 7
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "094.2875B",
+      "band": "l",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 24,
+          "req": 1,
+          "rate": null,
+          "shortage": 6
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 24,
+          "req": 1,
+          "rate": null,
+          "shortage": 22
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 24,
+          "req": 0,
+          "rate": null,
+          "shortage": 11
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 24,
+          "req": 0,
+          "rate": null,
+          "shortage": 7
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 24,
+          "req": 0,
+          "rate": null,
+          "shortage": 22
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 24,
+          "req": 0,
+          "rate": null,
+          "shortage": 11
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "094.2875B",
+      "band": "l",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 24,
+          "req": 1,
+          "rate": null,
+          "shortage": 6
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 24,
+          "req": 1,
+          "rate": null,
+          "shortage": 22
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 24,
+          "req": 0,
+          "rate": null,
+          "shortage": 11
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 24,
+          "req": 0,
+          "rate": null,
+          "shortage": 7
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 24,
+          "req": 0,
+          "rate": null,
+          "shortage": 22
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 24,
+          "req": 0,
+          "rate": null,
+          "shortage": 11
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "094.2875B",
+      "band": "l",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 24,
+          "req": 1,
+          "rate": null,
+          "shortage": 6
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 24,
+          "req": 1,
+          "rate": null,
+          "shortage": 22
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 24,
+          "req": 0,
+          "rate": null,
+          "shortage": 11
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 24,
+          "req": 0,
+          "rate": null,
+          "shortage": 7
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 24,
+          "req": 0,
+          "rate": null,
+          "shortage": 22
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 24,
+          "req": 0,
+          "rate": null,
+          "shortage": 11
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "094.3805D",
+      "band": "l",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 5
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 6,
+          "req": 1,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 5
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 3
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "094.3805D",
+      "band": "l",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 5
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 6,
+          "req": 1,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 5
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 3
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "094.3805D",
+      "band": "l",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 5
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 6,
+          "req": 1,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 5
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 6,
+          "req": 0,
+          "rate": null,
+          "shortage": 3
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "101.8311A",
+      "band": "l",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 74,
+          "req": 14,
+          "rate": null,
+          "shortage": 8
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 74,
+          "req": 0,
+          "rate": null,
+          "shortage": 57
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 74,
+          "req": 3,
+          "rate": null,
+          "shortage": 20
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 74,
+          "req": 2,
+          "rate": null,
+          "shortage": 15
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 74,
+          "req": 0,
+          "rate": null,
+          "shortage": 54
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 74,
+          "req": 1,
+          "rate": null,
+          "shortage": 25
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "101.8311A",
+      "band": "l",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 74,
+          "req": 14,
+          "rate": null,
+          "shortage": 8
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 74,
+          "req": 0,
+          "rate": null,
+          "shortage": 57
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 74,
+          "req": 3,
+          "rate": null,
+          "shortage": 20
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 74,
+          "req": 2,
+          "rate": null,
+          "shortage": 15
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 74,
+          "req": 0,
+          "rate": null,
+          "shortage": 54
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 74,
+          "req": 1,
+          "rate": null,
+          "shortage": 25
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "101.8311A",
+      "band": "l",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 74,
+          "req": 14,
+          "rate": null,
+          "shortage": 8
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 74,
+          "req": 0,
+          "rate": null,
+          "shortage": 57
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 74,
+          "req": 3,
+          "rate": null,
+          "shortage": 20
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 74,
+          "req": 2,
+          "rate": null,
+          "shortage": 15
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 74,
+          "req": 0,
+          "rate": null,
+          "shortage": 54
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 74,
+          "req": 1,
+          "rate": null,
+          "shortage": 25
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "101.8531B",
+      "band": "l",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 52,
+          "req": 1,
+          "rate": null,
+          "shortage": 15
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 52,
+          "req": 0,
+          "rate": null,
+          "shortage": 51
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 52,
+          "req": 0,
+          "rate": null,
+          "shortage": 25
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 52,
+          "req": 1,
+          "rate": null,
+          "shortage": 14
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 52,
+          "req": 0,
+          "rate": null,
+          "shortage": 50
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 52,
+          "req": 0,
+          "rate": null,
+          "shortage": 24
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "101.8531B",
+      "band": "l",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 52,
+          "req": 1,
+          "rate": null,
+          "shortage": 15
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 52,
+          "req": 0,
+          "rate": null,
+          "shortage": 51
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 52,
+          "req": 0,
+          "rate": null,
+          "shortage": 25
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 52,
+          "req": 1,
+          "rate": null,
+          "shortage": 14
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 52,
+          "req": 0,
+          "rate": null,
+          "shortage": 50
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 52,
+          "req": 0,
+          "rate": null,
+          "shortage": 24
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "101.8531B",
+      "band": "l",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 52,
+          "req": 1,
+          "rate": null,
+          "shortage": 15
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 52,
+          "req": 0,
+          "rate": null,
+          "shortage": 51
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 52,
+          "req": 0,
+          "rate": null,
+          "shortage": 25
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 52,
+          "req": 1,
+          "rate": null,
+          "shortage": 14
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 52,
+          "req": 0,
+          "rate": null,
+          "shortage": 50
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 52,
+          "req": 0,
+          "rate": null,
+          "shortage": 24
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "111.5911A",
+      "band": "l",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 6,
+          "req": 5,
+          "rate": 2.5,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 6,
+          "req": 0,
+          "rate": 1,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 6,
+          "req": 1,
+          "rate": 4,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 6,
+          "req": 3,
+          "rate": 3,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 6,
+          "req": 3,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 6,
+          "req": 1,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "111.5911A",
+      "band": "l",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 6,
+          "req": 5,
+          "rate": 2.5,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 6,
+          "req": 0,
+          "rate": 1,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 6,
+          "req": 1,
+          "rate": 4,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 6,
+          "req": 3,
+          "rate": 3,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 6,
+          "req": 3,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 6,
+          "req": 1,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "111.5911A",
+      "band": "l",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 6,
+          "req": 5,
+          "rate": 2.5,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 6,
+          "req": 0,
+          "rate": 1,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 6,
+          "req": 1,
+          "rate": 4,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 6,
+          "req": 3,
+          "rate": 3,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 6,
+          "req": 3,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 6,
+          "req": 1,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "111.4331B",
+      "band": "l",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 9,
+          "req": 2,
+          "rate": null,
+          "shortage": 1
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 9,
+          "req": 0,
+          "rate": null,
+          "shortage": 5
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 9,
+          "req": 2,
+          "rate": null,
+          "shortage": 1
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 9,
+          "req": 0,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 9,
+          "req": 1,
+          "rate": null,
+          "shortage": 3
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 9,
+          "req": 1,
+          "rate": null,
+          "shortage": 2
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "111.4331B",
+      "band": "l",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 9,
+          "req": 2,
+          "rate": null,
+          "shortage": 1
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 9,
+          "req": 0,
+          "rate": null,
+          "shortage": 5
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 9,
+          "req": 2,
+          "rate": null,
+          "shortage": 1
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 9,
+          "req": 0,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 9,
+          "req": 1,
+          "rate": null,
+          "shortage": 3
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 9,
+          "req": 1,
+          "rate": null,
+          "shortage": 2
+        }
+      ]
+    },
+    {
+      "no": "2026000515",
+      "name": "평택 고덕 우미 린 더 프리미어",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000515&pblancNo=2026000515",
+      "address": "경기도 평택시 고덕 국제화계획지구 내 Abc-33블록",
+      "houseTy": "111.4331B",
+      "band": "l",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 9,
+          "req": 2,
+          "rate": null,
+          "shortage": 1
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 9,
+          "req": 0,
+          "rate": null,
+          "shortage": 5
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 9,
+          "req": 2,
+          "rate": null,
+          "shortage": 1
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 9,
+          "req": 0,
+          "rate": null,
+          "shortage": 2
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 9,
+          "req": 1,
+          "rate": null,
+          "shortage": 3
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 9,
+          "req": 1,
+          "rate": null,
+          "shortage": 2
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "084.9424A",
+      "band": "m",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 403,
+          "req": 139,
+          "rate": null,
+          "shortage": 264
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 403,
+          "req": 67,
+          "rate": null,
+          "shortage": 197
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 403,
+          "req": 20,
+          "rate": null,
+          "shortage": 177
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 403,
+          "req": 11,
+          "rate": null,
+          "shortage": 166
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "084.9424A",
+      "band": "m",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 403,
+          "req": 139,
+          "rate": null,
+          "shortage": 264
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 403,
+          "req": 67,
+          "rate": null,
+          "shortage": 197
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 403,
+          "req": 20,
+          "rate": null,
+          "shortage": 177
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 403,
+          "req": 11,
+          "rate": null,
+          "shortage": 166
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "084.9424A",
+      "band": "m",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 403,
+          "req": 139,
+          "rate": null,
+          "shortage": 264
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 403,
+          "req": 67,
+          "rate": null,
+          "shortage": 197
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 403,
+          "req": 20,
+          "rate": null,
+          "shortage": 177
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 403,
+          "req": 11,
+          "rate": null,
+          "shortage": 166
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "084.9927B",
+      "band": "m",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 198,
+          "req": 10,
+          "rate": null,
+          "shortage": 188
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 198,
+          "req": 10,
+          "rate": null,
+          "shortage": 178
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 198,
+          "req": 7,
+          "rate": null,
+          "shortage": 171
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 198,
+          "req": 4,
+          "rate": null,
+          "shortage": 167
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "084.9927B",
+      "band": "m",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 198,
+          "req": 10,
+          "rate": null,
+          "shortage": 188
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 198,
+          "req": 10,
+          "rate": null,
+          "shortage": 178
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 198,
+          "req": 7,
+          "rate": null,
+          "shortage": 171
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 198,
+          "req": 4,
+          "rate": null,
+          "shortage": 167
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "084.9927B",
+      "band": "m",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 198,
+          "req": 10,
+          "rate": null,
+          "shortage": 188
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 198,
+          "req": 10,
+          "rate": null,
+          "shortage": 178
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 198,
+          "req": 7,
+          "rate": null,
+          "shortage": 171
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 198,
+          "req": 4,
+          "rate": null,
+          "shortage": 167
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "084.9839C",
+      "band": "m",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 157,
+          "req": 19,
+          "rate": null,
+          "shortage": 138
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 157,
+          "req": 7,
+          "rate": null,
+          "shortage": 131
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 157,
+          "req": 2,
+          "rate": null,
+          "shortage": 129
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 157,
+          "req": 2,
+          "rate": null,
+          "shortage": 127
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "084.9839C",
+      "band": "m",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 157,
+          "req": 19,
+          "rate": null,
+          "shortage": 138
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 157,
+          "req": 7,
+          "rate": null,
+          "shortage": 131
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 157,
+          "req": 2,
+          "rate": null,
+          "shortage": 129
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 157,
+          "req": 2,
+          "rate": null,
+          "shortage": 127
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "084.9839C",
+      "band": "m",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 157,
+          "req": 19,
+          "rate": null,
+          "shortage": 138
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 157,
+          "req": 7,
+          "rate": null,
+          "shortage": 131
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 157,
+          "req": 2,
+          "rate": null,
+          "shortage": 129
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 157,
+          "req": 2,
+          "rate": null,
+          "shortage": 127
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "084.9199D",
+      "band": "m",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 117,
+          "req": 11,
+          "rate": null,
+          "shortage": 106
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 117,
+          "req": 7,
+          "rate": null,
+          "shortage": 99
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 117,
+          "req": 0,
+          "rate": null,
+          "shortage": 99
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 117,
+          "req": 0,
+          "rate": null,
+          "shortage": 99
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "084.9199D",
+      "band": "m",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 117,
+          "req": 11,
+          "rate": null,
+          "shortage": 106
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 117,
+          "req": 7,
+          "rate": null,
+          "shortage": 99
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 117,
+          "req": 0,
+          "rate": null,
+          "shortage": 99
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 117,
+          "req": 0,
+          "rate": null,
+          "shortage": 99
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "084.9199D",
+      "band": "m",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 117,
+          "req": 11,
+          "rate": null,
+          "shortage": 106
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 117,
+          "req": 7,
+          "rate": null,
+          "shortage": 99
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 117,
+          "req": 0,
+          "rate": null,
+          "shortage": 99
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 117,
+          "req": 0,
+          "rate": null,
+          "shortage": 99
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "116.9134",
+      "band": "l",
+      "reside": "해당지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 147,
+          "req": 8,
+          "rate": null,
+          "shortage": 139
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 147,
+          "req": 4,
+          "rate": null,
+          "shortage": 135
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 147,
+          "req": 4,
+          "rate": null,
+          "shortage": 131
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 147,
+          "req": 4,
+          "rate": null,
+          "shortage": 127
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "116.9134",
+      "band": "l",
+      "reside": "기타지역",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 147,
+          "req": 8,
+          "rate": null,
+          "shortage": 139
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 147,
+          "req": 4,
+          "rate": null,
+          "shortage": 135
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 147,
+          "req": 4,
+          "rate": null,
+          "shortage": 131
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 147,
+          "req": 4,
+          "rate": null,
+          "shortage": 127
+        }
+      ]
+    },
+    {
+      "no": "2026000499",
+      "name": "한화포레나 지제역",
+      "sido": "경기",
+      "unit": "평택시",
+      "noticeDate": "2026-10-29",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000499&pblancNo=2026000499",
+      "address": "경기도 평택시 세교동 725번지 일원",
+      "houseTy": "116.9134",
+      "band": "l",
+      "reside": "기타경기",
+      "min": null,
+      "avg": null,
+      "max": null,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 147,
+          "req": 8,
+          "rate": null,
+          "shortage": 139
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 147,
+          "req": 4,
+          "rate": null,
+          "shortage": 135
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 147,
+          "req": 4,
+          "rate": null,
+          "shortage": 131
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 147,
+          "req": 4,
+          "rate": null,
+          "shortage": 127
+        }
+      ]
+    },
+    {
+      "no": "2026000472",
+      "name": "구리갈매역세권 B-1블록 신안인스빌 디센트",
+      "sido": "경기",
+      "unit": "구리시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000472&pblancNo=2026000472",
+      "address": "경기도 구리시 구리갈매역세권 B-1블록",
+      "houseTy": "075.7770",
+      "band": "m",
+      "reside": "해당지역",
+      "min": 60,
+      "avg": 65.63,
+      "max": 69,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 38,
+          "req": 96,
+          "rate": 8.73,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 38,
+          "req": 501,
+          "rate": 50.26,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 38,
+          "req": 377,
+          "rate": 57.75,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 38,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 38,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 38,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000472",
+      "name": "구리갈매역세권 B-1블록 신안인스빌 디센트",
+      "sido": "경기",
+      "unit": "구리시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000472&pblancNo=2026000472",
+      "address": "경기도 구리시 구리갈매역세권 B-1블록",
+      "houseTy": "075.7770",
+      "band": "m",
+      "reside": "기타지역",
+      "min": 66,
+      "avg": 67.93,
+      "max": 69,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 38,
+          "req": 96,
+          "rate": 8.73,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 38,
+          "req": 501,
+          "rate": 50.26,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 38,
+          "req": 377,
+          "rate": 57.75,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 38,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 38,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 38,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000472",
+      "name": "구리갈매역세권 B-1블록 신안인스빌 디센트",
+      "sido": "경기",
+      "unit": "구리시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000472&pblancNo=2026000472",
+      "address": "경기도 구리시 구리갈매역세권 B-1블록",
+      "houseTy": "075.7770",
+      "band": "m",
+      "reside": "기타경기",
+      "min": 64,
+      "avg": 67,
+      "max": 69,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 38,
+          "req": 96,
+          "rate": 8.73,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 38,
+          "req": 501,
+          "rate": 50.26,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 38,
+          "req": 377,
+          "rate": 57.75,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 38,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 38,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 38,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000472",
+      "name": "구리갈매역세권 B-1블록 신안인스빌 디센트",
+      "sido": "경기",
+      "unit": "구리시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000472&pblancNo=2026000472",
+      "address": "경기도 구리시 구리갈매역세권 B-1블록",
+      "houseTy": "084.6686",
+      "band": "m",
+      "reside": "해당지역",
+      "min": 60,
+      "avg": 64.25,
+      "max": 69,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 35,
+          "req": 118,
+          "rate": 10.73,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 35,
+          "req": 329,
+          "rate": 42.94,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 35,
+          "req": 301,
+          "rate": 58.29,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 35,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 35,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 35,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000472",
+      "name": "구리갈매역세권 B-1블록 신안인스빌 디센트",
+      "sido": "경기",
+      "unit": "구리시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000472&pblancNo=2026000472",
+      "address": "경기도 구리시 구리갈매역세권 B-1블록",
+      "houseTy": "084.6686",
+      "band": "m",
+      "reside": "기타지역",
+      "min": 67,
+      "avg": 68.25,
+      "max": 70,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 35,
+          "req": 118,
+          "rate": 10.73,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 35,
+          "req": 329,
+          "rate": 42.94,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 35,
+          "req": 301,
+          "rate": 58.29,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 35,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 35,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 35,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    },
+    {
+      "no": "2026000472",
+      "name": "구리갈매역세권 B-1블록 신안인스빌 디센트",
+      "sido": "경기",
+      "unit": "구리시",
+      "noticeDate": "2026-10-30",
+      "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo=2026000472&pblancNo=2026000472",
+      "address": "경기도 구리시 구리갈매역세권 B-1블록",
+      "houseTy": "084.6686",
+      "band": "m",
+      "reside": "기타경기",
+      "min": 66,
+      "avg": 68.2,
+      "max": 69,
+      "cmpet": [
+        {
+          "rank": 1,
+          "reside": "해당지역",
+          "supply": 35,
+          "req": 118,
+          "rate": 10.73,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타지역",
+          "supply": 35,
+          "req": 329,
+          "rate": 42.94,
+          "shortage": null
+        },
+        {
+          "rank": 1,
+          "reside": "기타경기",
+          "supply": 35,
+          "req": 301,
+          "rate": 58.29,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "해당지역",
+          "supply": 35,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타지역",
+          "supply": 35,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        },
+        {
+          "rank": 2,
+          "reside": "기타경기",
+          "supply": 35,
+          "req": 0,
+          "rate": null,
+          "shortage": null
+        }
+      ]
+    }
+  ]
+}
