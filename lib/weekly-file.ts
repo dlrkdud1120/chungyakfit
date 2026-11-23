@@ -7,7 +7,29 @@
 
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
+import { autoImageFor } from "./autoImages";
+import type { ComplexImages } from "./complexImage";
+import { overrideFor } from "./imageOverrides";
 import type { WeeklyFile } from "./weekly-cards";
+
+/**
+ * 주차별 파일 공고의 대표 이미지를 배포할 때 미리 정함 (주택관리번호 → 이미지)
+ * /api/og-image와 같은 순서(image-overrides.json → auto-images.json)지만, 청약홈 API를 부르지 않아
+ * 미리보기처럼 API 키가 없는 환경에서도 팝업 이미지가 나옵니다. 없거나 "hide"면 빼서 지도로 대신합니다.
+ */
+export function weeklyNoticeImages(files: WeeklyFile[]): ComplexImages {
+  const out: ComplexImages = {};
+  for (const n of files.flatMap((f) => f.notices)) {
+    const over = overrideFor(n.name);
+    if (over) {
+      if (over.type === "url") out[n.houseManageNo] = { src: over.url, source: null };
+      continue;
+    }
+    const auto = autoImageFor(n.name);
+    if (auto) out[n.houseManageNo] = { src: auto.image, source: auto.source ?? null };
+  }
+  return out;
+}
 
 const DIR = path.join(process.cwd(), "data", "weekly");
 // 가장 최근 파일 하나만 넘김 (화면에 실리는 양을 줄이기 위해).

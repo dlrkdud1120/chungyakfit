@@ -80,7 +80,17 @@ const RIGHT_TONE: Record<NonNullable<CardRow["rightTone"]>, string> = {
   muted: "text-muted",
 };
 
-export default function WeeklyPopup({ csv, images, weekly }: { csv: Complex[]; images: ComplexImages; weekly: WeeklyFile[] }) {
+export default function WeeklyPopup({
+  csv,
+  images,
+  noticeImages,
+  weekly,
+}: {
+  csv: Complex[];
+  images: ComplexImages; // complexes.csv 조감도 (단지명 기준)
+  noticeImages: ComplexImages; // 주차별 파일 공고의 대표 이미지 (주택관리번호 기준, 배포할 때 미리 정함)
+  weekly: WeeklyFile[];
+}) {
   // 날짜와 "오늘 하루 보지 않기" 여부는 브라우저에서만 읽음 (서버에서 그릴 때는 null → 팝업 없음)
   const clientToday = useSyncExternalStore(noSubscribe, todayKST, () => null);
   const today = clientToday ?? "";
@@ -90,10 +100,17 @@ export default function WeeklyPopup({ csv, images, weekly }: { csv: Complex[]; i
     () => null,
   );
   const [closed, setClosed] = useState(false);
-  const [notices, setNotices] = useState<Loaded<NoticeResult & { ok: true }>>({ status: "loading" });
-  const [remndr, setRemndr] = useState<Loaded<RemndrResult & { ok: true }>>({ status: "loading" });
+  const [notices, setNotices] = useState<Loaded<NoticeResult & { ok: true }>>({
+    status: "loading",
+  });
+  const [remndr, setRemndr] = useState<Loaded<RemndrResult & { ok: true }>>({
+    status: "loading",
+  });
   const [timedOut, setTimedOut] = useState(false);
-  const [verdicts, setVerdicts] = useState<{ key: string; map: Record<string, Verdict | null> } | null>(null);
+  const [verdicts, setVerdicts] = useState<{
+    key: string;
+    map: Record<string, Verdict | null>;
+  } | null>(null);
 
   const scoreRaw = useSyncExternalStore(subscribeMyScore, readMyScoreRaw, () => null);
   const homeRaw = useSyncExternalStore(subscribeMyHome, readMyHomeRaw, () => null);
@@ -130,12 +147,7 @@ export default function WeeklyPopup({ csv, images, weekly }: { csv: Complex[]; i
   const remndrList = file ? file.remndr : remndr.status === "done" ? (remndr.value?.notices ?? null) : null;
   // 지난주 당첨 결과: 파일이 있으면 파일의 당첨가점을 내 거주 구분 기준으로 고름 (단지 비교와 같은 방법)
   const history = useMemo(
-    () =>
-      file
-        ? historyToComplexes(file.lastWeekRows, home.sido ? home : null, file.generatedAt)
-        : cs.source === "api"
-          ? cs.complexes
-          : null,
+    () => (file ? historyToComplexes(file.lastWeekRows, home.sido ? home : null, file.generatedAt) : cs.source === "api" ? cs.complexes : null),
     [file, home, cs.source, cs.complexes],
   );
   const judgeTargets = useMemo(() => {
@@ -165,19 +177,21 @@ export default function WeeklyPopup({ csv, images, weekly }: { csv: Complex[]; i
 
   const cards = useMemo(
     () =>
-      !today ? [] : buildWeeklyCards({
-        today,
-        notices: noticeList,
-        remndr: remndrList,
-        history,
-        csv,
-        score,
-        home,
-        verdicts: judgeTargets.length === 0 ? {} : verdicts?.key === verdictKey ? verdicts.map : null,
-        favorites: my.status === "user" && my.data ? my.data.favorites : null,
-        tips: TIPS,
-        tipIndex: file?.tipIndex,
-      }),
+      !today
+        ? []
+        : buildWeeklyCards({
+            today,
+            notices: noticeList,
+            remndr: remndrList,
+            history,
+            csv,
+            score,
+            home,
+            verdicts: judgeTargets.length === 0 ? {} : verdicts?.key === verdictKey ? verdicts.map : null,
+            favorites: my.status === "user" && my.data ? my.data.favorites : null,
+            tips: TIPS,
+            tipIndex: file?.tipIndex,
+          }),
     [today, noticeList, remndrList, history, csv, score, home, judgeTargets.length, verdicts, verdictKey, my.status, my.data, file],
   );
 
@@ -185,7 +199,15 @@ export default function WeeklyPopup({ csv, images, weekly }: { csv: Complex[]; i
   const open = blocked === false && !closed && ready && cards.length > 0;
 
   if (!open) return null;
-  return <Dialog cards={cards} images={images} onClose={() => setClosed(true)} onHideToday={() => (hideToday(today), setClosed(true))} />;
+  return (
+    <Dialog
+      cards={cards}
+      images={images}
+      noticeImages={noticeImages}
+      onClose={() => setClosed(true)}
+      onHideToday={() => (hideToday(today), setClosed(true))}
+    />
+  );
 }
 
 // ───────────────────────── 팝업 창 ─────────────────────────
@@ -193,11 +215,13 @@ export default function WeeklyPopup({ csv, images, weekly }: { csv: Complex[]; i
 function Dialog({
   cards,
   images,
+  noticeImages,
   onClose,
   onHideToday,
 }: {
   cards: WeeklyCard[];
   images: ComplexImages;
+  noticeImages: ComplexImages;
   onClose: () => void;
   onHideToday: () => void;
 }) {
@@ -270,7 +294,6 @@ function Dialog({
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [go, index, onClose]);
 
-
   return (
     <div
       className="menu-fade fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
@@ -329,7 +352,7 @@ function Dialog({
           </div>
 
           {card.id === "schedule" && <ScheduleBody card={card} onNavigate={onClose} />}
-          {card.id === "featured" && <FeaturedBody card={card} images={images} onNavigate={onClose} />}
+          {card.id === "featured" && <FeaturedBody card={card} images={images} noticeImages={noticeImages} onNavigate={onClose} />}
           {card.id === "results" && <ResultsBody card={card} onNavigate={onClose} />}
           {(card.id === "mine" || card.id === "favorites") && <ListBody card={card} onNavigate={onClose} />}
           {card.id === "tip" && <TipBody card={card} onNavigate={onClose} />}
@@ -378,7 +401,10 @@ function Dialog({
 
 // ───────────────────────── 카드별 내용 ─────────────────────────
 
-type Body<K extends WeeklyCard["id"]> = { card: Extract<WeeklyCard, { id: K }>; onNavigate: () => void };
+type Body<K extends WeeklyCard["id"]> = {
+  card: Extract<WeeklyCard, { id: K }>;
+  onNavigate: () => void;
+};
 
 const TAG_STYLE: Record<ScheduleTag, { bar: string; text: string }> = {
   특별공급: { bar: "bg-accent", text: "text-accent-dark" },
@@ -395,7 +421,14 @@ function ScheduleBody({ card, onNavigate }: Body<"schedule">) {
     <>
       <p className="mt-3 inline-flex rounded-full border border-brand/50 px-3 py-1 text-sm text-ink tabular-nums">{card.range}</p>
 
-      <div className="mt-4 grid gap-1.5" style={{ gridTemplateColumns: `repeat(${card.days.length}, minmax(0, 1fr))` }} role="group" aria-label="요일 선택">
+      <div
+        className="mt-4 grid gap-1.5"
+        style={{
+          gridTemplateColumns: `repeat(${card.days.length}, minmax(0, 1fr))`,
+        }}
+        role="group"
+        aria-label="요일 선택"
+      >
         {card.days.map((d) => {
           const on = d.date === current.date;
           return (
@@ -441,13 +474,20 @@ function ScheduleBody({ card, onNavigate }: Body<"schedule">) {
 }
 
 /** 2장: 단지마다 같은 배치 (대표 이미지 | 이름·지역·일정·타입별 가격) */
-function FeaturedBody({ card, images, onNavigate }: Body<"featured"> & { images: ComplexImages }) {
+function FeaturedBody({ card, images, noticeImages, onNavigate }: Body<"featured"> & { images: ComplexImages; noticeImages: ComplexImages }) {
   return (
     <>
       <ul className="mt-3 border-t border-line">
         {card.items.map((it) => (
           <li key={it.no} className="flex gap-3 border-b border-line py-3">
-            <ComplexThumb name={it.name} address={it.address} region={`${it.region} ${it.unit}`} image={imageFor(images, it.name)} noticeNo={it.no} size="md" />
+            <ComplexThumb
+              name={it.name}
+              address={it.address}
+              region={`${it.region} ${it.unit}`}
+              image={imageFor(images, it.name) ?? noticeImages[it.no] ?? null}
+              noticeNo={it.no}
+              size="md"
+            />
             <div className="min-w-0 flex-1">
               {it.capped && (
                 <div className="mb-1">
@@ -546,7 +586,11 @@ function TipBody({ card, onNavigate }: Body<"tip">) {
 
 /** 라벨: 주황 테두리 알약 (THIS WEEK, RESULT, TIP …) */
 function Label({ children }: { children: React.ReactNode }) {
-  return <span className={`inline-flex rounded-full border border-accent px-2.5 py-0.5 text-xs tracking-wide text-accent-dark ${DISPLAY}`}>{children}</span>;
+  return (
+    <span className={`inline-flex rounded-full border border-accent px-2.5 py-0.5 text-xs tracking-wide text-accent-dark ${DISPLAY}`}>
+      {children}
+    </span>
+  );
 }
 
 /** 꼬리표: 오른쪽이 V자로 파인 모양 */
@@ -554,7 +598,9 @@ function Ribbon({ tone, children }: { tone: "beige" | "accent"; children: React.
   return (
     <span
       className={`inline-block shrink-0 py-0.5 pr-3 pl-2 text-xs ${tone === "accent" ? "bg-accent text-white" : "bg-[#F1ECDF] text-ink"}`}
-      style={{ clipPath: "polygon(0 0, 100% 0, calc(100% - 6px) 50%, 100% 100%, 0 100%)" }}
+      style={{
+        clipPath: "polygon(0 0, 100% 0, calc(100% - 6px) 50%, 100% 100%, 0 100%)",
+      }}
     >
       {children}
     </span>
@@ -622,7 +668,14 @@ function Arrow({ dir, disabled, onClick }: { dir: "prev" | "next"; disabled: boo
       className="flex h-8 w-8 items-center justify-center rounded text-brand hover:bg-black/5 disabled:text-line disabled:hover:bg-transparent"
     >
       <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden="true">
-        <path d={dir === "prev" ? "M12 4l-6 6 6 6" : "M8 4l6 6-6 6"} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d={dir === "prev" ? "M12 4l-6 6 6 6" : "M8 4l6 6-6 6"}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     </button>
   );
