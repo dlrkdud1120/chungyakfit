@@ -19,7 +19,7 @@ import { favoriteFromNotice, type Favorite } from "./meTypes";
 import type { MyHome } from "./myHome";
 import type { SavedScore } from "./myScore";
 import { addDays, daysBetween, ddayText, md, nextEvent } from "./mySchedule";
-import { areaOf, bandOf } from "./similar";
+import { areaOf, bandOf, type PastRow } from "./similar";
 
 export const WEEKLY_SETTINGS = {
   scheduleMax: 6, // 이번 주 일정 최대 줄 수 (넘치면 "외 N건")
@@ -67,7 +67,46 @@ export type WeeklyInput = {
   verdicts: Record<string, Verdict | null> | null; // 이번 주 공고별 내 판정 (불러오는 중이면 null)
   favorites: Favorite[] | null; // 로그인하지 않았으면 null
   tips: Tip[];
+  tipIndex?: number; // 주차별 파일에 적힌 이번 주 팁 번호 (없으면 날짜로 계산)
 };
+
+// ───────────────────────── 주차별 파일 (data/weekly/2026-W48.json) ─────────────────────────
+
+/**
+ * 매주 GitHub Actions(scripts/weekly-data.ts)가 만드는 파일 모양
+ * 팝업은 이번 주 파일이 있으면 공고 API를 부르지 않고 이 파일을 씁니다.
+ */
+export type WeeklyFile = {
+  week: string; // "2026-W48"
+  start: string; // 월요일
+  end: string; // 일요일
+  generatedAt: string;
+  tipIndex: number;
+  notices: Notice[]; // 이번 주 일정이 있거나 지난주 당첨자 발표가 있는 공고
+  remndr: RemndrNotice[]; // 이번 주 접수하는 무순위·잔여세대
+  lastWeekRows: PastRow[]; // 지난주 당첨자 발표 공고의 당첨가점 (거주 구분별)
+};
+
+/** 이번 주(한국시간)에 맞는 파일만 고름. 없으면 null → API를 직접 부름 */
+export function pickWeeklyFile(files: WeeklyFile[], today: string): WeeklyFile | null {
+  const { start } = weekOf(today);
+  return files.find((f) => f.start === start) ?? null;
+}
+
+/** ISO 주차 이름 ("2026-W48"). 그 주의 목요일이 속한 해를 씀 */
+export function isoWeekId(today: string): string {
+  const thu = addDays(weekOf(today).start, 3);
+  const year = Number(thu.slice(0, 4));
+  const week = Math.floor(daysBetween(`${year}-01-01`, thu) / 7) + 1;
+  return `${year}-W${String(week).padStart(2, "0")}`;
+}
+
+/** 이번 주 팁 번호 (주마다 하나씩 차례로) */
+export function tipIndexFor(today: string, count: number): number {
+  if (count <= 0) return 0;
+  const weekNo = Math.floor(daysBetween("1970-01-05", weekOf(today).start) / 7); // 1970-01-05는 월요일
+  return ((weekNo % count) + count) % count;
+}
 
 // ───────────────────────── 주간 계산 ─────────────────────────
 
@@ -132,11 +171,12 @@ export function buildWeeklyCards(i: WeeklyInput): WeeklyCard[] {
   );
 }
 
-/** 1. 이번 주 청약 일정 */
-function scheduleCard({ notices, today }: WeeklyInput): WeeklyCard | null {
-  if (!notices) return null;
+export type WeekEvent = CardRow & { date: string; order: number };
+
+/** 이번 주 특별공급·1순위 접수, 당첨자 발표 일정 (날짜순). 주간 자동화의 점검에도 씀 */
+export function weekScheduleEvents(notices: Notice[], today: string): WeekEvent[] {
   const w = weekOf(today);
-  const events: (CardRow & { date: string; order: number })[] = [];
+  const events: WeekEvent[] = [];
   for (const n of notices) {
     for (const e of scheduleEvents(n.schedule)) {
       if (e.key !== "special" && e.key !== "rank1" && e.key !== "winner") continue;
@@ -154,8 +194,15 @@ function scheduleCard({ notices, today }: WeeklyInput): WeeklyCard | null {
       });
     }
   }
+  return events.sort((a, b) => a.date.localeCompare(b.date) || a.order - b.order || a.title.localeCompare(b.title, "ko"));
+}
+
+/** 1. 이번 주 청약 일정 */
+function scheduleCard({ notices, today }: WeeklyInput): WeeklyCard | null {
+  if (!notices) return null;
+  const w = weekOf(today);
+  const events = weekScheduleEvents(notices, today);
   if (!events.length) return null;
-  events.sort((a, b) => a.date.localeCompare(b.date) || a.order - b.order || a.title.localeCompare(b.title, "ko"));
   const max = WEEKLY_SETTINGS.scheduleMax;
   return {
     id: "schedule",
@@ -344,10 +391,9 @@ function favoritesCard({ favorites, today }: WeeklyInput): WeeklyCard | null {
 }
 
 /** 6. 청약 상식 (주마다 하나씩 돌아가며) */
-function tipCard({ tips, today }: WeeklyInput): WeeklyCard | null {
+function tipCard({ tips, today, tipIndex }: WeeklyInput): WeeklyCard | null {
   if (!tips.length) return null;
-  const weekNo = Math.floor(daysBetween("1970-01-05", weekOf(today).start) / 7); // 1970-01-05는 월요일
-  const tip = tips[((weekNo % tips.length) + tips.length) % tips.length];
+  const tip = tips[tipIndex !== undefined && tipIndex >= 0 && tipIndex < tips.length ? tipIndex : tipIndexFor(today, tips.length)];
   return {
     id: "tip",
     tone: "beige",

@@ -10,6 +10,7 @@
  * - 열려 있는 동안 키보드 포커스는 팝업 안에서만 돌고, 닫으면 원래 자리로 돌아갑니다.
  * - 동작 줄이기 설정이면 넘김 효과 없이 바로 바뀝니다 (globals.css의 step-next/step-prev가 그 설정을 따름).
  * - 보여줄 카드가 하나도 없으면 띄우지 않습니다.
+ * - 이번 주 파일(data/weekly, 매주 GitHub Actions가 만듦)이 있으면 공고 API 대신 그 파일을 읽고, 없으면 API를 직접 부릅니다.
  */
 
 import Link from "next/link";
@@ -17,7 +18,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore
 import tipsData from "@/data/tips.json";
 import { useMy } from "@/components/Providers";
 import { loadSimilar } from "@/components/useNoticeVerdict";
-import type { NoticeResult, RemndrResult } from "@/lib/applyhome";
+import { historyToComplexes, type NoticeResult, type RemndrResult } from "@/lib/applyhome";
 import type { Complex } from "@/lib/complexes";
 import { judge, type Verdict } from "@/lib/judge";
 import { parseMyHome, readMyHomeRaw, subscribeMyHome } from "@/lib/myHome";
@@ -27,11 +28,13 @@ import { useComplexes } from "@/lib/useComplexes";
 import {
   buildWeeklyCards,
   noticesReceivingThisWeek,
+  pickWeeklyFile,
   similarQuery,
   type CardRow,
   type CardTone,
   type Tip,
   type WeeklyCard,
+  type WeeklyFile,
 } from "@/lib/weekly-cards";
 
 const HIDE_KEY = "chungyakfit:weeklyPopupHiddenOn"; // 값: "오늘 하루 보지 않기"를 누른 날 (YYYY-MM-DD)
@@ -74,7 +77,7 @@ const RIGHT_TONE: Record<NonNullable<CardRow["rightTone"]>, string> = {
   muted: "text-muted",
 };
 
-export default function WeeklyPopup({ csv }: { csv: Complex[] }) {
+export default function WeeklyPopup({ csv, weekly }: { csv: Complex[]; weekly: WeeklyFile[] }) {
   // 날짜와 "오늘 하루 보지 않기" 여부는 브라우저에서만 읽음 (서버에서 그릴 때는 null → 팝업 없음)
   const clientToday = useSyncExternalStore(noSubscribe, todayKST, () => null);
   const today = clientToday ?? "";
@@ -96,9 +99,13 @@ export default function WeeklyPopup({ csv }: { csv: Complex[] }) {
   const cs = useComplexes(csv);
   const my = useMy();
 
+  // 매주 자동으로 만든 이번 주 파일이 있으면 공고 API를 부르지 않고 그 파일을 씀
+  const file = useMemo(() => (today ? pickWeeklyFile(weekly, today) : null), [weekly, today]);
+  const hasFile = file !== null;
+
   // 공고 불러오기 (보지 않기로 한 날은 부르지 않음)
   useEffect(() => {
-    if (blocked !== false) return;
+    if (blocked !== false || !today || hasFile) return;
     let alive = true;
     fetch("/api/notices")
       .then((r) => r.json() as Promise<NoticeResult>)
@@ -113,10 +120,21 @@ export default function WeeklyPopup({ csv }: { csv: Complex[] }) {
       alive = false;
       clearTimeout(t);
     };
-  }, [blocked]);
+  }, [blocked, today, hasFile]);
 
   // 내 점수 맞춤: 이번 주 공고마다 분양 공고 목록과 같은 방법(/api/similar + lib/judge.ts)으로 판정
-  const noticeList = notices.status === "done" ? (notices.value?.notices ?? null) : null;
+  const noticeList = file ? file.notices : notices.status === "done" ? (notices.value?.notices ?? null) : null;
+  const remndrList = file ? file.remndr : remndr.status === "done" ? (remndr.value?.notices ?? null) : null;
+  // 지난주 당첨 결과: 파일이 있으면 파일의 당첨가점을 내 거주 구분 기준으로 고름 (단지 비교와 같은 방법)
+  const history = useMemo(
+    () =>
+      file
+        ? historyToComplexes(file.lastWeekRows, home.sido ? home : null, file.generatedAt)
+        : cs.source === "api"
+          ? cs.complexes
+          : null,
+    [file, home, cs.source, cs.complexes],
+  );
   const judgeTargets = useMemo(() => {
     if (!score || !noticeList || !today) return [];
     return noticesReceivingThisWeek(noticeList, today)
@@ -147,19 +165,20 @@ export default function WeeklyPopup({ csv }: { csv: Complex[] }) {
       !today ? [] : buildWeeklyCards({
         today,
         notices: noticeList,
-        remndr: remndr.status === "done" ? (remndr.value?.notices ?? null) : null,
-        history: cs.source === "api" ? cs.complexes : null,
+        remndr: remndrList,
+        history,
         csv,
         score,
         home,
         verdicts: judgeTargets.length === 0 ? {} : verdicts?.key === verdictKey ? verdicts.map : null,
         favorites: my.status === "user" && my.data ? my.data.favorites : null,
         tips: TIPS,
+        tipIndex: file?.tipIndex,
       }),
-    [today, noticeList, remndr, cs.source, cs.complexes, csv, score, home, judgeTargets.length, verdicts, verdictKey, my.status, my.data],
+    [today, noticeList, remndrList, history, csv, score, home, judgeTargets.length, verdicts, verdictKey, my.status, my.data, file],
   );
 
-  const ready = timedOut || (notices.status === "done" && remndr.status === "done" && !cs.loading);
+  const ready = hasFile || timedOut || (notices.status === "done" && remndr.status === "done" && !cs.loading);
   const open = blocked === false && !closed && ready && cards.length > 0;
 
   if (!open) return null;

@@ -1,0 +1,85 @@
+# 주간 청약 데이터 자동 준비
+#
+# 매주 월요일 오전 6시(한국시간)에 scripts/weekly-data.ts를 돌려
+#   data/weekly/<주차>.json  (홈 팝업이 먼저 읽는 파일)
+#   data/auto-images.json    (이번 주 새 공고 이미지)
+# 를 만들고, main에 바로 넣지 않고 Pull Request로 올립니다. 미리보기(Vercel)를 보고 직접 병합하세요.
+# 실패하면 PR을 만들지 않고 실행 요약에 실패 내용만 남깁니다. (지난주 파일은 그대로 → 사이트는 지금처럼 동작)
+#
+# 필요한 설정 (저장소 Settings)
+#   Secrets and variables > Actions > New repository secret : APPLYHOME_API_KEY
+#   Actions > General > Workflow permissions : "Allow GitHub Actions to create and approve pull requests" 체크
+
+name: 주간 청약 데이터
+
+on:
+  schedule:
+    - cron: "0 21 * * 0" # UTC 일요일 21시 = 한국시간 월요일 오전 6시
+  workflow_dispatch: # Actions 화면의 "Run workflow" 버튼으로 바로 실행
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: weekly-data
+  cancel-in-progress: false
+
+jobs:
+  weekly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: 코드 받기
+        uses: actions/checkout@v4
+
+      - name: Node.js 준비
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: 패키지 설치
+        run: npm ci
+
+      - name: Playwright 브라우저 설치 (이미지 수집용)
+        run: npx playwright install --with-deps chromium
+
+      - name: 주간 데이터 만들기
+        id: data
+        env:
+          APPLYHOME_API_KEY: ${{ secrets.APPLYHOME_API_KEY }}
+        run: npx tsx scripts/weekly-data.ts
+
+      - name: 실행 요약에 결과 남기기
+        if: success()
+        run: cat .weekly/summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Pull Request 만들기
+        if: success()
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: auto/weekly-${{ steps.data.outputs.week }}
+          base: main
+          title: "[자동] ${{ steps.data.outputs.week }} 주간 청약 데이터"
+          body-path: .weekly/summary.md
+          commit-message: "[자동] ${{ steps.data.outputs.week }} 주간 청약 데이터"
+          add-paths: |
+            data/weekly/*.json
+            data/auto-images.json
+          delete-branch: true
+
+      - name: 실패 내용 남기기 (PR은 만들지 않음)
+        if: failure()
+        run: |
+          {
+            echo "## 주간 청약 데이터 만들기 실패"
+            echo ""
+            echo "PR을 만들지 않았습니다. 사이트는 지난주 파일과 API로 지금처럼 동작합니다."
+            echo ""
+            if [ -f .weekly/error.txt ]; then
+              echo "**원인:** $(cat .weekly/error.txt)"
+            else
+              echo "**원인:** 위 단계의 로그를 확인하세요."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

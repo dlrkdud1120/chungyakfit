@@ -42,3 +42,6 @@ yarn-error.log*
 next-env.d.ts
 check-result.txt
 check-cmpet-result.txt
+
+# 주간 자동화 요약 (scripts/weekly-data.ts)
+.weekly/

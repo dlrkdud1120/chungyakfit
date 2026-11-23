@@ -4,6 +4,7 @@
  * 실행:  npm run collect-images            새 공고와 오래된 결과만 다시 확인
  *        npm run collect-images -- --all    전부 다시 확인
  *        npm run collect-images -- --only=스위첸   이름에 이 글자가 들어간 단지만
+ *        npm run collect-images -- --new-only --nos=2026000560,…   (주간 자동화용) 이 공고 중 처음 보는 단지만
  *
  * 하는 일
  *  1) 청약홈 분양정보에서 공고 목록과 홈페이지 주소를 받음 (.env.local의 APPLYHOME_API_KEY 사용)
@@ -52,6 +53,9 @@ type Skipped = { name: string; homepage: string | null; reason: string; checkedA
 const args = process.argv.slice(2);
 const ALL = args.includes("--all");
 const ONLY = args.find((a) => a.startsWith("--only="))?.slice(7) ?? "";
+// 주간 자동화(scripts/weekly-data.ts)용: --nos=주택관리번호,… 이 공고만 / --new-only 한 번도 확인하지 않은 단지만 (30일 재확인 안 함)
+const NOS = new Set((args.find((a) => a.startsWith("--nos="))?.slice(6) ?? "").split(",").filter(Boolean));
+const NEW_ONLY = args.includes("--new-only");
 const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -451,6 +455,8 @@ async function main() {
   for (const n of res.notices) {
     const key = imageKey(n.name);
     if (ONLY && !n.name.includes(ONLY)) continue;
+    if (NOS.size && !NOS.has(n.houseManageNo)) continue;
+    if (NEW_ONLY && (items.has(key) || skipped.has(key))) continue;
     if (imageFor(manual, n.name) || overrides.has(key)) {
       untouched += 1; // 직접 넣은 조감도나 직접 지정이 먼저라 자동 이미지가 필요 없음
       items.delete(key);
