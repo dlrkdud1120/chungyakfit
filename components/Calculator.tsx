@@ -8,7 +8,7 @@
  */
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import DateWheel from "@/components/DateWheel";
 import Fold from "@/components/Fold";
@@ -20,6 +20,7 @@ import { growthStage } from "@/lib/growth";
 import { useComplexes } from "@/lib/useComplexes";
 import {
   calcScore,
+  RULES,
   fmt,
   FUTURE_ASSUMPTIONS,
   projectScores,
@@ -135,7 +136,7 @@ export default function Calculator({ fallback }: { fallback: Complex[] }) {
                 <DateWheel label="혼인신고일" kind="past" value={marriageDate} onChange={(v) => set({ marriageDate: v })} />
               </Row>
             )}
-            <Row label="계산 기준일" hint="보통 입주자모집공고일. 모르면 오늘 그대로">
+            <Row label="계산 기준일" hint="보통 입주자모집공고일. 모르면 오늘 그대로" help={HELP.baseDate}>
               <DateWheel label="계산 기준일" kind="base" value={baseDate} onChange={(v) => set({ baseDate: v || null })} />
             </Row>
           </div>
@@ -143,7 +144,7 @@ export default function Calculator({ fallback }: { fallback: Complex[] }) {
 
         {step === 2 && (
           <div className="border-t border-line">
-            <Row label="주택 소유 이력" hint="본인과 배우자 기준">
+            <Row label="주택 소유 이력" hint="본인과 배우자 기준" help={HELP.homeless}>
               <Segment
                 value={houseHistory}
                 options={[["never", "없음"], ["sold", "있었지만 처분"], ["owning", "현재 소유"]]}
@@ -163,7 +164,7 @@ export default function Calculator({ fallback }: { fallback: Complex[] }) {
 
         {step === 3 && (
           <div className="border-t border-line">
-            <Row label="배우자" hint="본인은 세지 않아요">
+            <Row label="배우자" hint="본인은 세지 않아요" help={HELP.dependents}>
               <span className="text-sm text-muted">{married ? "기혼으로 선택해 자동 포함" : "미혼이라 해당 없음"}</span>
             </Row>
 
@@ -219,7 +220,7 @@ export default function Calculator({ fallback }: { fallback: Complex[] }) {
 
         {step === 4 && (
           <div className="border-t border-line">
-            <Row label="본인 통장">
+            <Row label="본인 통장" help={HELP.account}>
               <Segment value={hasAccount ? "y" : "n"} options={[["y", "있음"], ["n", "없음"]]} onChange={(v) => set({ hasAccount: v === "y" })} />
             </Row>
             {hasAccount && (
@@ -344,17 +345,96 @@ function ResultView({ result, future, gap }: { result: ReturnType<typeof calcSco
 
 // ───────────────────────── 작은 부품들 ─────────────────────────
 
-function Row({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
+/**
+ * 질문 한 줄. help를 주면 질문 옆 "?"를 눌렀을 때 그 줄 아래에 용어 설명이 펼쳐집니다
+ * (마우스 올림 대신 누르기 방식이라 휴대폰에서도 쓰고, 다시 누르거나 Esc로 닫음)
+ */
+function Row({ label, hint, help, children }: { label: string; hint?: string; help?: Help; children: React.ReactNode }) {
+  const [open, setOpen] = useState(false);
+  const id = useId();
   return (
-    <div className="flex flex-col gap-2 border-b border-line py-3 sm:flex-row sm:items-center sm:justify-between">
-      <div className="text-sm">
-        {label}
-        {hint && <span className="ml-2 text-xs text-muted">{hint}</span>}
+    <div className="border-b border-line py-3" onKeyDown={(e) => open && e.key === "Escape" && setOpen(false)}>
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center text-sm">
+          <span>
+            {label}
+            {hint && <span className="ml-2 text-xs text-muted">{hint}</span>}
+          </span>
+          {help && (
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-controls={id}
+              aria-label={`${help.term} 설명 ${open ? "닫기" : "보기"}`}
+              className="-my-2 ml-0.5 flex h-8 w-8 shrink-0 items-center justify-center text-muted hover:text-brand"
+            >
+              <span
+                aria-hidden
+                className={`flex h-[18px] w-[18px] items-center justify-center rounded-full border text-[11px] font-semibold ${open ? "border-brand bg-brand text-white" : "border-current"}`}
+              >
+                ?
+              </span>
+            </button>
+          )}
+        </div>
+        <div>{children}</div>
       </div>
-      <div>{children}</div>
+      {help && open && (
+        <div id={id} role="region" aria-label={`${help.term} 설명`} className="menu-fade mt-2 border-l-2 border-brand/40 pl-3 text-[13px] leading-relaxed text-muted">
+          <p className="font-semibold text-ink">{help.term}</p>
+          <ul className="mt-1 space-y-0.5">
+            {help.lines.map((l) => (
+              <li key={l}>· {l}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
+
+type Help = { term: string; lines: string[] };
+
+/** 용어 설명 (점수 숫자는 lib/score.ts의 RULES에서 가져와 계산 규칙과 어긋나지 않게) */
+const H = RULES.homeless;
+const D = RULES.dependents;
+const A = RULES.account;
+const HELP: Record<"homeless" | "dependents" | "account" | "baseDate", Help> = {
+  homeless: {
+    term: "무주택기간",
+    lines: [
+      "본인과 배우자 모두 집이 없던 기간이에요.",
+      `만 ${H.startAge}세가 되는 날부터 세고, 그 전에 혼인신고를 했다면 혼인신고일부터 세요. 집을 처분했다면 그 뒤 처분일부터 다시 셉니다.`,
+      `1년 미만 ${H.base}점, 1년마다 ${H.perYear}점씩 늘어 최대 ${H.max}점이에요. 만 ${H.startAge}세 전 미혼이면 0점이에요.`,
+      "소형·저가 주택 등 무주택으로 보는 예외는 입주자모집공고에서 확인하세요.",
+    ],
+  },
+  dependents: {
+    term: "부양가족",
+    lines: [
+      "본인은 세지 않고, 배우자·직계존속·자녀(직계비속)를 셉니다.",
+      `부모·조부모(직계존속)는 ${D.parentSameHouseholdYears}년 이상 같은 주민등록 세대여야 하고, 집을 가지고 있으면 빠져요.`,
+      `자녀는 미혼이어야 하고, 만 ${D.adultChildAge}세 이상이면 ${D.adultChildSameHouseholdYears}년 이상 같은 세대여야 인정돼요.`,
+      `0명 ${D.base}점, 1명마다 ${D.perPerson}점씩 늘어 최대 ${D.max}점이에요.`,
+    ],
+  },
+  account: {
+    term: "청약통장 가입기간",
+    lines: [
+      "청약통장에 가입한 날부터 계산 기준일까지의 기간이에요.",
+      `6개월 미만 ${A.under6Months}점, 1년 미만 ${A.under1Year}점, 1~2년 ${A.base1Year}점, 그 뒤 1년마다 ${A.perYear}점씩 늘어 최대 ${A.max}점이에요.`,
+      `배우자 통장이 있으면 배우자 기간 점수의 ${A.spouseRatio * 100}%를 최대 ${A.spouseMax}점까지 더해요.`,
+    ],
+  },
+  baseDate: {
+    term: "계산 기준일",
+    lines: [
+      "가점은 입주자모집공고일을 기준으로 계산해요. 같은 사람도 기준일에 따라 기간 점수가 달라져요.",
+      "넣을 공고가 정해지지 않았다면 오늘 날짜로 두면 돼요.",
+    ],
+  },
+};
 
 function Segment({
   value,

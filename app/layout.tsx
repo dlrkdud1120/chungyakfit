@@ -4,6 +4,7 @@ import Container from "@/components/Container";
 import { MigratePrompt } from "@/components/KakaoLogin";
 import Providers from "@/components/Providers";
 import SiteNav from "@/components/SiteNav";
+import Toaster from "@/components/Toast";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -45,6 +46,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Container as="main" className="flex-1 py-8 sm:py-12">
             {children}
           </Container>
+          {/* 짧은 알림(관심 공고 담기, 캘린더 추가 등) */}
+          <Toaster />
         </Providers>
 
         <Container as="footer" className="pb-24 sm:pb-10">

@@ -28,6 +28,7 @@ import { shortSido } from "@/lib/similar";
 import { scheduleEvents } from "@/lib/calendar";
 import { locationKey } from "@/lib/location";
 import { ddayText, md, nextEvent, todayKST } from "@/lib/mySchedule";
+import SkeletonRows from "@/components/SkeletonRows";
 
 type State = { status: "loading" } | { status: "done"; result: NoticeResult };
 
@@ -87,7 +88,7 @@ export default function NoticeList({
   }, []);
 
   if (state.status === "loading") {
-    return <p className="py-10 text-sm text-muted">청약홈에서 공고를 불러오는 중…</p>;
+    return <SkeletonRows label="청약홈에서 공고를 불러오는 중" rows={6} className="mt-6" />;
   }
 
   const { result } = state;
@@ -117,32 +118,54 @@ export default function NoticeList({
   // ───────── 목록 ─────────
   const regions = [...new Set(result.notices.map((n) => n.region))];
   const query = makeQuery(q);
-  const rows = result.notices
-    .filter((n) => region === "전체" || n.region === region)
-    .filter((n) => !regionTags.length || regionTags.some((t) => n.region === t.region && (!t.unit || n.unit === t.unit)))
-    .filter((n) => !builder || buildersOf(n).includes(builder))
-    .map((n) => ({ n, match: query ? matchNotice(n, query) : null }))
-    .filter((r) => !query || r.match);
-  // 일정·공급·판정 필터 (판정은 불러온 뒤에만 거름)
   const today = todayKST();
   const verdictMap = verdicts.status === "done" ? verdicts.map : null;
-  const shown = rows
-    .filter(({ n }) => {
-      const s = noticeStatus(n, today);
-      if (hideClosed && s === "마감") return false;
-      if (statusF.length && !statusF.includes(s as OpenStatus)) return false;
-      if (categoryF.length && !categoryF.includes(noticeCategory(n))) return false;
-      if (verdictF.length && verdictMap) {
-        const v = verdictMap[n.houseManageNo] ?? null;
-        if (!v || !verdictF.includes(v)) return false;
-      }
-      return true;
-    })
-    .sort(sortBy(sort, today, verdictMap));
+  // 지금 조건 (빈 결과에서 "이 조건을 빼면 몇 건"을 미리 세려고 한 묶음으로 둠)
+  const cond: Cond = { region, regionTags, builder, query, statusF, hideClosed, categoryF, verdictF };
+  const applyCond = (c: Cond) =>
+    result.notices
+      .filter((n) => c.region === "전체" || n.region === c.region)
+      .filter((n) => !c.regionTags.length || c.regionTags.some((t) => n.region === t.region && (!t.unit || n.unit === t.unit)))
+      .filter((n) => !c.builder || buildersOf(n).includes(c.builder))
+      .map((n) => ({ n, match: c.query ? matchNotice(n, c.query) : null }))
+      .filter((r) => !c.query || r.match)
+      // 일정·공급·판정 필터 (판정은 불러온 뒤에만 거름)
+      .filter(({ n }) => {
+        const s = noticeStatus(n, today);
+        if (c.hideClosed && s === "마감") return false;
+        if (c.statusF.length && !c.statusF.includes(s as OpenStatus)) return false;
+        if (c.categoryF.length && !c.categoryF.includes(noticeCategory(n))) return false;
+        if (c.verdictF.length && verdictMap) {
+          const v = verdictMap[n.houseManageNo] ?? null;
+          if (!v || !c.verdictF.includes(v)) return false;
+        }
+        return true;
+      });
+  const shown = applyCond(cond).sort(sortBy(sort, today, verdictMap));
   const filterN = statusF.length + (hideClosed ? 1 : 0) + categoryF.length + verdictF.length + (region !== "전체" ? 1 : 0) + (sort !== "notice" ? 1 : 0);
   const filtered = region !== "전체" || !!query || regionTags.length > 0 || builder !== null || filterN > 0;
   const toggle = <T,>(list: T[], v: T) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
   const rowHref = (no: string) => `/notice?${new URLSearchParams(q ? { no, q } : { no })}`;
+
+  // 결과가 0건일 때: 걸려 있는 조건을 하나씩 뺐을 때 몇 건이 되는지 (많은 순, 1건 이상만, 최대 4개)
+  const relax: { label: string; count: number; undo: () => void }[] = [];
+  if (shown.length === 0) {
+    const tryOff = (label: string, next: Partial<Cond>, undo: () => void) => {
+      const count = applyCond({ ...cond, ...next }).length;
+      if (count > 0) relax.push({ label, count, undo });
+    };
+    if (q) tryOff(`검색어 '${q}'`, { query: null }, () => setQ(""));
+    if (region !== "전체") tryOff(region, { region: "전체" }, () => setRegion("전체"));
+    for (const t of regionTags) {
+      tryOff(`${t.region} ${t.unit}`.trim(), { regionTags: regionTags.filter((x) => x !== t) }, () => setRegionTags((l) => l.filter((x) => x !== t)));
+    }
+    if (builder) tryOff(`건설사 ${builder}`, { builder: null }, () => setBuilder(null));
+    if (statusF.length) tryOff(`일정 '${statusF.join("·")}'`, { statusF: [] }, () => setStatusF([]));
+    if (hideClosed) tryOff("마감 제외", { hideClosed: false }, () => setHideClosed(false));
+    if (categoryF.length) tryOff(`공급 '${categoryF.map((c) => CATEGORY_TEXT[c]).join(", ")}'`, { categoryF: [] }, () => setCategoryF([]));
+    if (verdictF.length) tryOff(`판정 '${verdictF.join("·")}'`, { verdictF: [] }, () => setVerdictF([]));
+    relax.sort((a, b) => b.count - a.count).splice(4);
+  }
 
   return (
     <div>
@@ -252,9 +275,24 @@ export default function NoticeList({
       {shown.length === 0 ? (
         <div className="py-10 text-center text-sm text-muted">
           <p>{query ? `'${q}'에 맞는 공고가 없어요` : filtered ? "조건에 맞는 공고가 없습니다." : "기간 안에 서울·경기 APT 분양 공고가 없습니다."}</p>
+          {relax.length > 0 && (
+            <>
+              <p className="mt-2 text-xs">조건을 하나만 빼 보면</p>
+              <ul className="mx-auto mt-2 max-w-sm divide-y divide-line border-y border-line text-left">
+                {relax.map((r) => (
+                  <li key={r.label}>
+                    <button type="button" onClick={r.undo} className="flex w-full items-center justify-between gap-3 px-1 py-2.5 text-sm text-ink hover:bg-brand/5">
+                      <span className="min-w-0 truncate">{r.label} 빼기</span>
+                      <span className="shrink-0 text-brand tabular-nums">{r.count}건 보기 →</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
           {filtered && (
             <button type="button" onClick={resetAll} className="mt-3 rounded border border-brand px-3 py-1.5 text-xs text-brand hover:bg-brand/5">
-              검색·필터 초기화
+              검색·필터 모두 초기화
             </button>
           )}
         </div>
@@ -636,3 +674,18 @@ function sum(list: (number | null)[]): number | null {
   if (list.length === 0 || list.some((v) => v === null)) return null;
   return (list as number[]).reduce((a, b) => a + b, 0);
 }
+
+/** 공급 구분 화면 이름 (필터 칩과 같은 글자) */
+const CATEGORY_TEXT: Record<Category, string> = { 민영: "민영", 공공: "공공·신혼희망타운", 무순위: "무순위·잔여세대" };
+
+/** 목록 거르기 조건 한 묶음 (빈 결과에서 조건별 건수를 미리 셀 때 씀) */
+type Cond = {
+  region: string;
+  regionTags: { region: string; unit: string }[];
+  builder: string | null;
+  query: ReturnType<typeof makeQuery>;
+  statusF: OpenStatus[];
+  hideClosed: boolean;
+  categoryF: Category[];
+  verdictF: Verdict[];
+};

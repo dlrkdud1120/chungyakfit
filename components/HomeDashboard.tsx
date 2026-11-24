@@ -17,6 +17,7 @@ import type { Complex, HouseType } from "@/lib/complexes";
 import { judge, VERDICT_ORDER, type Verdict } from "@/lib/judge";
 import { parseMyScore, readMyScoreRaw, subscribeMyScore } from "@/lib/myScore";
 import { useComplexes } from "@/lib/useComplexes";
+import SkeletonRows from "@/components/SkeletonRows";
 
 const TOP_N = 3; // 노려볼 단지·분양공고를 몇 개까지 보여줄지
 
@@ -189,7 +190,7 @@ function UpcomingNotices() {
     <Section title="다가오는 분양공고" href="/notice">
       {/* 로그인한 사용자: 내 관심 공고의 다음 일정 한 줄 */}
       <MyNextEvent />
-      {state.status === "loading" && <Empty>청약홈에서 공고를 불러오는 중…</Empty>}
+      {state.status === "loading" && <SkeletonRows label="청약홈에서 공고를 불러오는 중" rows={3} thumb={false} />}
       {state.status === "fail" && <Empty>공고를 불러오지 못했습니다. ({state.reason})</Empty>}
       {state.status === "ok" &&
         (state.list.length === 0 ? (

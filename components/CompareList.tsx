@@ -27,6 +27,7 @@ import ComplexThumb from "@/components/ComplexThumb";
 import Fold from "@/components/Fold";
 import FavoriteStar from "@/components/FavoriteStar";
 import { isShort, NO_CMPET, rankText, rateText } from "@/lib/competition";
+import SkeletonRows from "@/components/SkeletonRows";
 
 const NO_DATA = "데이터 없음";
 type Filter = "전체" | Verdict | typeof NO_DATA;
@@ -177,7 +178,7 @@ export default function CompareList({
           ← 목록
         </Link>
         {loading ? (
-          <p className="py-10 text-sm text-muted">청약홈에서 과거 당첨 가점을 불러오는 중…</p>
+          <SkeletonRows label="청약홈에서 과거 당첨 가점을 불러오는 중" rows={4} thumb={false} className="mt-6" />
         ) : mine.length === 0 ? (
           <p className="py-10 text-sm text-muted">이 단지를 찾지 못했어요. 거주지를 바꾸면 보이는 단지가 달라질 수 있어요.</p>
         ) : (
@@ -351,7 +352,7 @@ export default function CompareList({
 
 
       {loading ? (
-        <p className="py-10 text-sm text-muted">청약홈에서 과거 당첨 가점을 불러오는 중… (처음엔 몇 초 걸릴 수 있어요)</p>
+        <SkeletonRows label="청약홈에서 과거 당첨 가점을 불러오는 중 (처음엔 몇 초 걸릴 수 있어요)" rows={6} className="mt-4" />
       ) : data.complexes.length === 0 ? (
         <EmptyState />
       ) : (

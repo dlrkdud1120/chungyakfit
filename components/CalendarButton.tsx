@@ -7,6 +7,7 @@
  */
 
 import { useMy } from "@/components/Providers";
+import { toast } from "@/components/Toast";
 import type { Notice } from "@/lib/applyhome";
 import { downloadIcs, scheduleEvents } from "@/lib/calendar";
 
@@ -19,7 +20,11 @@ export default function CalendarButton({ notice, className = "" }: { notice: Not
     <button
       type="button"
       onClick={() => {
-        if (!downloadIcs(notice)) return;
+        if (!downloadIcs(notice)) {
+          toast("캘린더 파일을 만들지 못했어요. 잠시 뒤 다시 눌러 주세요");
+          return;
+        }
+        toast(`일정 ${count}개를 캘린더 파일(.ics)로 받았어요. 파일을 열면 캘린더에 추가돼요`);
         // 로그인한 경우에만 "캘린더에 담은 일정"으로 기록 (로그인 전에는 서버로 아무것도 보내지 않음)
         if (my.status === "user") {
           my.saveCalendar(events.map((e) => ({ no: notice.houseManageNo, key: e.key, label: e.label, start: e.range.start, end: e.range.end })));
