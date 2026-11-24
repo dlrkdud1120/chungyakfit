@@ -593,7 +593,7 @@ async function main() {
   // ── 수집 대상: 분양 공고 + (scope=all이면) 무순위·잔여세대 + 단지 비교에 나오는 지난 공고 ──
   const targets: Target[] = res.notices.map((n) => ({ no: n.houseManageNo, name: n.name, homepage: n.homepage, noticeUrl: n.url, group: "분양 공고" }));
   if (SCOPE === "all") {
-    const rem = await fetchRemndrNotices(30);
+    const rem = await fetchRemndrNotices();
     if (rem.ok) for (const n of rem.notices) targets.push({ no: n.houseManageNo, name: n.name, homepage: n.homepage ?? null, noticeUrl: n.url, group: "무순위" });
     const hist = await fetchHistory(SIMILAR_RULES.yearsBack);
     if (hist.ok) {

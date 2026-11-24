@@ -154,6 +154,7 @@ export type Notice = {
   homepage: string | null;
   url: string | null; // 청약홈 공고 페이지
   types: NoticeType[];
+  remndr?: boolean; // 무순위·잔여세대·재공급 공고 (분양 공고 목록에 함께 보여줄 때)
   builder?: string | null; // 시공사 CNSTRCT_ENTRPS_NM (여러 곳이면 쉼표로 이어짐. 예전 주차 파일에는 없을 수 있음)
   developer?: string | null; // 사업주체 BSNS_MBY_NM (LH·GH·SH 같은 공급기관 구분에 씀)
 };
@@ -246,16 +247,18 @@ export type RemndrNotice = {
   address?: string; // 공급 위치 (지도용. 예전 주차 파일에는 없을 수 있음)
   homepage?: string | null; // 분양 홈페이지 (대표 이미지 수집용)
   kind: string; // 무순위, 불법행위 재공급 …
+  noticeDate?: string | null; // 모집공고일
   receiptStart: string | null;
   receiptEnd: string | null;
   winnerDate: string | null;
+  contractDate?: string | null; // 계약 시작일
   supply: number | null;
   url: string | null;
 };
 
 export type RemndrResult = { ok: true; notices: RemndrNotice[]; fetchedAt: string } | { ok: false; reason: string };
 
-export async function fetchRemndrNotices(daysBack = 30): Promise<RemndrResult> {
+export async function fetchRemndrNotices(daysBack = NOTICE_SETTINGS.daysBack): Promise<RemndrResult> {
   try {
     const rows = await getAll(
       `${DETAIL}/getRemndrLttotPblancDetail`,
@@ -271,9 +274,11 @@ export async function fetchRemndrNotices(daysBack = 30): Promise<RemndrResult> {
         address: str(d.HSSPLY_ADRES) ?? "",
         homepage: str(d.HMPG_ADRES),
         kind: str(d.HOUSE_SECD_NM) ?? "",
+        noticeDate: str(d.RCRIT_PBLANC_DE),
         receiptStart: str(d.SUBSCRPT_RCEPT_BGNDE),
         receiptEnd: str(d.SUBSCRPT_RCEPT_ENDDE),
         winnerDate: str(d.PRZWNER_PRESNATN_DE),
+        contractDate: str(d.CNTRCT_CNCLS_BGNDE),
         supply: num(d.TOT_SUPLY_HSHLDCO),
         url: str(d.PBLANC_URL),
       }))
@@ -282,6 +287,34 @@ export async function fetchRemndrNotices(daysBack = 30): Promise<RemndrResult> {
   } catch (e) {
     return { ok: false, reason: (e as Error).message };
   }
+}
+
+/**
+ * 무순위·잔여세대 공고를 분양 공고(Notice) 모양으로 (분양 공고 목록에 함께 보여줄 때)
+ * 주택형·규제 정보는 이 API에 없어 비워 둡니다. 판정은 하지 않습니다(추첨으로 뽑는 공고).
+ */
+export function remndrToNotice(r: RemndrNotice): Notice {
+  const receipt = r.receiptStart ? { start: r.receiptStart, end: r.receiptEnd && r.receiptEnd >= r.receiptStart ? r.receiptEnd : r.receiptStart } : null;
+  return {
+    houseManageNo: r.houseManageNo,
+    name: r.name,
+    region: r.region,
+    unit: r.unit,
+    address: r.address ?? "",
+    kind: r.kind || "무순위",
+    supplyKind: "",
+    noticeDate: r.noticeDate ?? null,
+    receiptStart: r.receiptStart,
+    receiptEnd: r.receiptEnd,
+    winnerDate: r.winnerDate,
+    overheated: false,
+    schedule: { special: null, rank1: null, rank1Areas: [], rank2: null, rank2Areas: [], winner: r.winnerDate, contract: r.contractDate ?? null, receipt },
+    regulations: null,
+    homepage: r.homepage ?? null,
+    url: r.url,
+    types: [],
+    remndr: true,
+  };
 }
 
 // ───────────────────────── 1-3. 공고 목록 (이미지 수집용) ─────────────────────────

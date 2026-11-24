@@ -7,12 +7,22 @@
  */
 
 import { connection } from "next/server";
-import { fetchNotices } from "@/lib/applyhome";
+import { fetchNotices, fetchRemndrNotices, remndrToNotice } from "@/lib/applyhome";
 
-export async function GET() {
+export async function GET(req: Request) {
   // 요청이 올 때마다 실행되게 합니다 (빌드할 때 한 번 실행한 결과로 굳지 않도록)
   await connection();
   const result = await fetchNotices();
+  // ?include=remndr: 무순위·잔여세대 공고도 함께 (최근 분양 공고 화면, 지도로 찾기와 같은 범위). 못 받으면 분양 공고만
+  if (result.ok && new URL(req.url).searchParams.get("include") === "remndr") {
+    const rem = await fetchRemndrNotices();
+    if (rem.ok) {
+      const seen = new Set(result.notices.map((n) => n.houseManageNo));
+      result.notices = [...result.notices, ...rem.notices.filter((r) => !seen.has(r.houseManageNo)).map(remndrToNotice)].sort((a, b) =>
+        (b.noticeDate ?? "").localeCompare(a.noticeDate ?? ""),
+      );
+    }
+  }
   // 실패해도 200으로 돌려주고, 화면이 ok 값을 보고 CSV로 대신 보여줍니다
   return Response.json(result, {
     headers: {

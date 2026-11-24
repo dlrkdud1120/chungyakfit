@@ -834,22 +834,10 @@ function Summary({
             가능성 확인하기
           </Link>
         )}
-        {item.source === "apt" ? (
-          <Link href={`/notice?no=${encodeURIComponent(item.id)}`} className="flex-1 rounded border border-brand py-2.5 text-center text-sm font-semibold text-brand hover:bg-brand/5">
-            공고 상세
-          </Link>
-        ) : (
-          item.url && (
-            <a
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 rounded border border-brand py-2.5 text-center text-sm font-semibold text-brand hover:bg-brand/5"
-            >
-              공고 상세 (청약홈) ↗
-            </a>
-          )
-        )}
+        {/* 무순위 공고도 최근 분양 공고에 함께 있으므로 모두 앱 안의 공고 상세로 */}
+        <Link href={`/notice?no=${encodeURIComponent(item.id)}`} className="flex-1 rounded border border-brand py-2.5 text-center text-sm font-semibold text-brand hover:bg-brand/5">
+          공고 상세
+        </Link>
         {my.status === "user" && fav && <FavoriteStar item={fav} />}
       </div>
     </div>

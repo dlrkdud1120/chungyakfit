@@ -22,6 +22,7 @@ export type NoticeSchedule = {
   rank2Areas: string[];
   winner: string | null;
   contract: string | null;
+  receipt?: DateRange | null; // 무순위·잔여세대 공고의 청약 접수 (일반 분양 공고에는 없음)
 };
 
 const AREAS = [
@@ -84,6 +85,7 @@ type CalEvent = { key: string; label: string; range: DateRange; memo?: string };
 export function scheduleEvents(s: NoticeSchedule): CalEvent[] {
   const one = (d: string | null): DateRange | null => (d ? { start: d, end: d } : null);
   const list: (CalEvent | null)[] = [
+    s.receipt ? { key: "receipt", label: "청약 접수", range: s.receipt } : null,
     s.special && { key: "special", label: "특별공급 접수", range: s.special },
     s.rank1 && { key: "rank1", label: "1순위 접수", range: s.rank1, memo: s.rank1Areas.join(", ") },
     s.rank2 && { key: "rank2", label: "2순위 접수", range: s.rank2, memo: s.rank2Areas.join(", ") },

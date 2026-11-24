@@ -112,6 +112,7 @@ const AGENCY_NAME = { LH: "LH 한국토지주택공사", GH: "GH 경기주택도
 export function kindsOf(n: Notice): string[] {
   const out = [n.kind, n.supplyKind].filter(Boolean);
   if (n.supplyKind === "국민") out.push("공공분양");
+  if (n.remndr) out.push("무순위", "잔여세대");
   return out;
 }
 

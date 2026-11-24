@@ -51,7 +51,7 @@ function eventsOf(n: MapNotice): MapEvent[] {
       short: SHORT[e.key] ?? e.label,
       start: e.range.start,
       end: e.range.end,
-      receipt: e.key === "special" || e.key === "rank1" || e.key === "rank2",
+      receipt: e.key === "special" || e.key === "rank1" || e.key === "rank2" || e.key === "receipt",
     }));
   }
   const list: MapEvent[] = [];
@@ -73,7 +73,7 @@ export function statusOf(events: MapEvent[], today: string): Status {
 export const noticeStatus = (n: Notice, today: string): Status => statusOf(eventsOf({ ...n, source: "apt" }), today);
 
 /** 공급 구분: 민영 APT는 "민영", 국민주택·신혼희망타운 등은 "공공" (지도와 같은 규칙) */
-export const noticeCategory = (n: Notice): Category => (n.supplyKind === "민영" && n.kind === "APT" ? "민영" : "공공");
+export const noticeCategory = (n: Notice): Category => (n.remndr ? "무순위" : n.supplyKind === "민영" && n.kind === "APT" ? "민영" : "공공");
 
 export function toMapItem(n: MapNotice & { coord: Coord | null }, today: string): MapItem {
   const events = eventsOf(n);

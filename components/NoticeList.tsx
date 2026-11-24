@@ -2,7 +2,7 @@
 
 /**
  * 분양 공고 — 목록 → 상세 두 화면
- *  목록(/notice): 맨 위 검색창(단지명·지역·건설사, 자동완성·최근 검색어, ?q=), 행마다 썸네일·단지명·지역·내 판정·다음 일정.
+ *  목록(/notice): 일반 분양 + 무순위·잔여세대 공고(지도로 찾기와 같은 범위, 최근 60일). 맨 위 검색창(단지명·지역·건설사, 자동완성·최근 검색어, ?q=), 행마다 썸네일·단지명·지역·내 판정·다음 일정.
  *                 "필터"를 누르면 시·도, 일정(접수 중·접수 예정·발표 대기·마감 제외), 공급, 내 판정, 정렬. 검색 규칙은 lib/notice-search.ts
  *  상세(/notice?no=주택관리번호): 공급세대, 일정 전체, 규제, 입지 점수, 캘린더 추가, 관심 공고 별
  * /api/notices(서버)를 불러 청약홈 공고를 보여주고, 실패하면 data/complexes.csv의 단지 목록을 대신 보여줍니다.
@@ -74,7 +74,8 @@ export default function NoticeList({
 
   useEffect(() => {
     let alive = true;
-    fetch("/api/notices")
+    // 무순위·잔여세대 공고도 함께 (지도로 찾기와 같은 범위)
+    fetch("/api/notices?include=remndr")
       .then((r) => r.json() as Promise<NoticeResult>)
       .catch((): NoticeResult => ({ ok: false, reason: "서버(/api/notices)에 연결하지 못했습니다." }))
       .then((result) => {
@@ -202,6 +203,7 @@ export default function NoticeList({
               [
                 ["민영", "민영"],
                 ["공공", "공공·신혼희망타운"],
+                ["무순위", "무순위·잔여세대"],
               ] as [Category, string][]
             ).map(([v, text]) => (
               <Chip key={v} on={categoryF.includes(v)} onClick={() => setCategoryF((l) => toggle(l, v))}>
