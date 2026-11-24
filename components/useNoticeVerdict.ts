@@ -67,3 +67,52 @@ export function useNoticeVerdict(n: Notice, enabled: boolean): NoticeVerdict {
 }
 
 export const VERDICT_COLOR: Record<Verdict, string> = { 안정: "text-ok", 도전: "text-accent-dark", 어려움: "text-bad" };
+
+export type VerdictsState = { status: "none"; reason: "점수 필요" | "거주지 필요" } | { status: "loading" } | { status: "done"; map: Record<string, Verdict | null> };
+
+/**
+ * 공고 여러 건의 "내 판정"을 한꺼번에 (분양 공고 목록의 판정 필터·정렬용)
+ * 한 건짜리(useNoticeVerdict)와 같은 조건·같은 캐시로 부르므로 목록 행과 결과가 같습니다.
+ * enabled가 true일 때만 불러옵니다 (필터·정렬에 판정을 쓸 때).
+ */
+export function useNoticeVerdicts(notices: Notice[], enabled: boolean): VerdictsState {
+  const scoreRaw = useSyncExternalStore(subscribeMyScore, readMyScoreRaw, () => null);
+  const homeRaw = useSyncExternalStore(subscribeMyHome, readMyHomeRaw, () => null);
+  const score = parseMyScore(scoreRaw)?.total ?? null;
+  const home = parseMyHome(homeRaw);
+
+  const targets = notices.map((n) => ({ no: n.houseManageNo, qs: queryFor(n, home) }));
+  const key = `${score}|${targets.map((t) => t.qs ?? "-").join(",")}`;
+  const [got, setGot] = useState<{ key: string; map: Record<string, Verdict | null> } | null>(null);
+
+  useEffect(() => {
+    if (!enabled || score === null || !home.sido) return;
+    let alive = true;
+    Promise.all(
+      targets.map(async (t) => {
+        if (!t.qs) return [t.no, null] as const;
+        const res = await loadSimilar(t.qs);
+        return [t.no, res.ok && res.result.stats ? (judge(score, res.result.stats)?.verdict ?? null) : null] as const;
+      }),
+    ).then((pairs) => alive && setGot({ key, map: Object.fromEntries(pairs) }));
+    return () => {
+      alive = false;
+    };
+    // key가 점수와 대상 조건을 모두 담고 있음
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key, enabled]);
+
+  if (score === null) return { status: "none", reason: "점수 필요" };
+  if (!home.sido) return { status: "none", reason: "거주지 필요" };
+  if (!got || got.key !== key) return { status: "loading" };
+  return { status: "done", map: got.map };
+}
+
+/** 한 건짜리와 같은 /api/similar 조건 (판정할 수 없는 공고는 null) */
+function queryFor(n: Notice, home: { sido: string; unit: string }): string | null {
+  if (n.kind !== "APT" || !home.sido) return null;
+  const fav = favoriteFromNotice(n);
+  const area = fav.houseTy ? areaOf(fav.houseTy) : null;
+  if (area === null || !fav.sido || !fav.unit) return null;
+  return new URLSearchParams({ sido: fav.sido, unit: fav.unit, band: bandOf(area), homeSido: home.sido, homeUnit: home.unit, exclude: n.houseManageNo }).toString();
+}

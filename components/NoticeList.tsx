@@ -3,7 +3,7 @@
 /**
  * 분양 공고 — 목록 → 상세 두 화면
  *  목록(/notice): 맨 위 검색창(단지명·지역·건설사, 자동완성·최근 검색어, ?q=), 행마다 썸네일·단지명·지역·내 판정·다음 일정.
- *                 시·도 필터는 "필터"를 눌러야 펼쳐짐. 검색 규칙은 lib/notice-search.ts
+ *                 "필터"를 누르면 시·도, 일정(접수 중·접수 예정·발표 대기·마감 제외), 공급, 내 판정, 정렬. 검색 규칙은 lib/notice-search.ts
  *  상세(/notice?no=주택관리번호): 공급세대, 일정 전체, 규제, 입지 점수, 캘린더 추가, 관심 공고 별
  * /api/notices(서버)를 불러 청약홈 공고를 보여주고, 실패하면 data/complexes.csv의 단지 목록을 대신 보여줍니다.
  */
@@ -22,7 +22,9 @@ import NoticeSearch, { Highlight } from "@/components/NoticeSearch";
 import { buildersOf, makeQuery, matchNotice, type Match, type MatchField } from "@/lib/notice-search";
 import type { LocationBrief } from "@/components/CompareList";
 import { useMy } from "@/components/Providers";
-import { useNoticeVerdict, VERDICT_COLOR } from "@/components/useNoticeVerdict";
+import { useNoticeVerdict, useNoticeVerdicts, VERDICT_COLOR } from "@/components/useNoticeVerdict";
+import type { Verdict } from "@/lib/judge";
+import { noticeCategory, noticeStatus, type Category, type Status } from "@/lib/map-items";
 import { shortSido } from "@/lib/similar";
 import { scheduleEvents } from "@/lib/calendar";
 import { locationKey } from "@/lib/location";
@@ -50,6 +52,14 @@ export default function NoticeList({
   // 자동완성에서 고른 지역 태그와 건설사
   const [regionTags, setRegionTags] = useState<{ region: string; unit: string }[]>([]);
   const [builder, setBuilder] = useState<string | null>(null);
+  // 일정·공급·판정 필터와 정렬 (지도로 찾기와 같은 규칙)
+  const [statusF, setStatusF] = useState<OpenStatus[]>([]);
+  const [hideClosed, setHideClosed] = useState(false);
+  const [categoryF, setCategoryF] = useState<Category[]>([]);
+  const [verdictF, setVerdictF] = useState<Verdict[]>([]);
+  const [sort, setSort] = useState<SortKey>("notice");
+  const notices = state.status === "done" && state.result.ok ? state.result.notices : NO_NOTICES;
+  const verdicts = useNoticeVerdicts(notices, verdictF.length > 0 || sort === "verdict");
 
   /** 검색어를 주소창에 담기 (기록은 쌓지 않음) */
   const setQ = (text: string) => window.history.replaceState(null, "", text ? `/notice?${new URLSearchParams({ q: text })}` : "/notice");
@@ -58,6 +68,11 @@ export default function NoticeList({
     setRegion("전체");
     setRegionTags([]);
     setBuilder(null);
+    setStatusF([]);
+    setHideClosed(false);
+    setCategoryF([]);
+    setVerdictF([]);
+    setSort("notice");
   };
 
   useEffect(() => {
@@ -110,7 +125,25 @@ export default function NoticeList({
     .filter((n) => !builder || buildersOf(n).includes(builder))
     .map((n) => ({ n, match: query ? matchNotice(n, query) : null }))
     .filter((r) => !query || r.match);
-  const filtered = region !== "전체" || !!query || regionTags.length > 0 || builder !== null;
+  // 일정·공급·판정 필터 (판정은 불러온 뒤에만 거름)
+  const today = todayKST();
+  const verdictMap = verdicts.status === "done" ? verdicts.map : null;
+  const shown = rows
+    .filter(({ n }) => {
+      const s = noticeStatus(n, today);
+      if (hideClosed && s === "마감") return false;
+      if (statusF.length && !statusF.includes(s as OpenStatus)) return false;
+      if (categoryF.length && !categoryF.includes(noticeCategory(n))) return false;
+      if (verdictF.length && verdictMap) {
+        const v = verdictMap[n.houseManageNo] ?? null;
+        if (!v || !verdictF.includes(v)) return false;
+      }
+      return true;
+    })
+    .sort(sortBy(sort, today, verdictMap));
+  const filterN = statusF.length + (hideClosed ? 1 : 0) + categoryF.length + verdictF.length + (region !== "전체" ? 1 : 0) + (sort !== "notice" ? 1 : 0);
+  const filtered = region !== "전체" || !!query || regionTags.length > 0 || builder !== null || filterN > 0;
+  const toggle = <T,>(list: T[], v: T) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
   const rowHref = (no: string) => `/notice?${new URLSearchParams(q ? { no, q } : { no })}`;
 
   return (
@@ -137,26 +170,87 @@ export default function NoticeList({
       {/* 한 줄: 건수와 "필터" */}
       <div className="flex items-center justify-between border-b border-line pb-3 text-sm">
         <span className="text-muted">
-          {filtered ? `${rows.length}건 (전체 ${result.notices.length}건)` : `${result.notices.length}건`}
+          {filtered ? `${shown.length}건 (전체 ${result.notices.length}건)` : `${result.notices.length}건`}
           {!result.typesLoaded && " · 주택형별 정보는 불러오지 못했습니다"}
+          {(verdictF.length > 0 || sort === "verdict") && verdicts.status === "loading" && " · 판정 불러오는 중…"}
         </span>
         <button type="button" onClick={() => setFilterOpen((v) => !v)} aria-expanded={filterOpen} className="text-brand underline underline-offset-2">
           {filterOpen ? "필터 닫기" : "필터"}
+          {filterN > 0 && <span className="ml-0.5 text-accent-dark no-underline">({filterN})</span>}
         </button>
       </div>
       {filterOpen && (
-        <div className="flex flex-wrap items-center gap-2 border-b border-line py-3">
-          <select value={region} onChange={(e) => setRegion(e.target.value)} aria-label="지역" className="rounded border border-line bg-white px-2 py-1.5 text-sm">
-            <option>전체</option>
-            {regions.map((r) => (
-              <option key={r}>{r}</option>
+        <div className="space-y-2.5 border-b border-line py-3 text-xs">
+          <FilterRow label="지역">
+            <select value={region} onChange={(e) => setRegion(e.target.value)} aria-label="시·도" className="rounded border border-line bg-white px-2 py-1 text-sm">
+              <option>전체</option>
+              {regions.map((r) => (
+                <option key={r}>{r}</option>
+              ))}
+            </select>
+            <span className="self-center text-muted">시·군·구와 건설사는 위 검색창에서 골라요.</span>
+          </FilterRow>
+          <FilterRow label="일정">
+            {OPEN_STATUSES.map((s) => (
+              <Chip key={s} on={statusF.includes(s)} onClick={() => setStatusF((l) => toggle(l, s))}>
+                {s}
+              </Chip>
             ))}
-          </select>
-          <span className="text-xs text-muted">단지명·지역·건설사 검색은 위 검색창에서 해요.</span>
+            <Chip on={hideClosed} onClick={() => setHideClosed((v) => !v)}>
+              마감 제외
+            </Chip>
+          </FilterRow>
+          <FilterRow label="공급">
+            {(
+              [
+                ["민영", "민영"],
+                ["공공", "공공·신혼희망타운"],
+              ] as [Category, string][]
+            ).map(([v, text]) => (
+              <Chip key={v} on={categoryF.includes(v)} onClick={() => setCategoryF((l) => toggle(l, v))}>
+                {text}
+              </Chip>
+            ))}
+          </FilterRow>
+          <FilterRow label="내 판정">
+            {(["안정", "도전", "어려움"] as Verdict[]).map((v) => (
+              <Chip key={v} on={verdictF.includes(v)} disabled={verdicts.status === "none"} onClick={() => setVerdictF((l) => toggle(l, v))}>
+                {v}
+              </Chip>
+            ))}
+            {verdicts.status === "none" && (
+              <span className="self-center text-muted">
+                {verdicts.reason === "점수 필요" ? (
+                  <Link href="/score" className="text-brand underline">
+                    가점을 저장하면
+                  </Link>
+                ) : (
+                  <Link href="/check" className="text-brand underline">
+                    거주지를 정하면
+                  </Link>
+                )}{" "}
+                쓸 수 있어요
+              </span>
+            )}
+          </FilterRow>
+          <FilterRow label="정렬">
+            <select value={sort} onChange={(e) => setSort(e.target.value as SortKey)} aria-label="정렬" className="rounded border border-line bg-white px-2 py-1 text-sm">
+              <option value="notice">최근 공고순</option>
+              <option value="next">다음 일정 가까운 순</option>
+              <option value="verdict" disabled={verdicts.status === "none"}>
+                내 판정 좋은 순
+              </option>
+            </select>
+            {filterN > 0 && (
+              <button type="button" onClick={resetAll} className="self-center text-muted underline hover:text-brand">
+                초기화
+              </button>
+            )}
+          </FilterRow>
         </div>
       )}
 
-      {rows.length === 0 ? (
+      {shown.length === 0 ? (
         <div className="py-10 text-center text-sm text-muted">
           <p>{query ? `'${q}'에 맞는 공고가 없어요` : filtered ? "조건에 맞는 공고가 없습니다." : "기간 안에 서울·경기 APT 분양 공고가 없습니다."}</p>
           {filtered && (
@@ -167,7 +261,7 @@ export default function NoticeList({
         </div>
       ) : (
         <ul>
-          {rows.map(({ n, match }) => (
+          {shown.map(({ n, match }) => (
             <ListRow key={n.houseManageNo || n.name} n={n} images={images} match={match} href={rowHref(n.houseManageNo)} />
           ))}
         </ul>
@@ -177,6 +271,52 @@ export default function NoticeList({
         출처: 한국부동산원 청약홈 분양정보 API · {new Date(result.fetchedAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })} 기준
       </p>
     </div>
+  );
+}
+
+// ───────── 일정·공급·판정 필터와 정렬 ─────────
+
+type OpenStatus = Exclude<Status, "마감">;
+type SortKey = "notice" | "next" | "verdict";
+const OPEN_STATUSES: OpenStatus[] = ["접수 중", "접수 예정", "발표 대기"];
+const NO_NOTICES: Notice[] = [];
+const VERDICT_RANK: Record<Verdict, number> = { 안정: 0, 도전: 1, 어려움: 2 };
+
+/** 정렬: 최근 공고순(원래 순서) / 다음 일정 가까운 순(마감은 맨 뒤) / 내 판정 좋은 순(같으면 다음 일정 순) */
+function sortBy(key: SortKey, today: string, verdicts: Record<string, Verdict | null> | null) {
+  const nextStart = (n: Notice) => nextEvent(n.schedule, today)?.start ?? "9999";
+  return (a: { n: Notice }, b: { n: Notice }) => {
+    if (key === "notice") return 0; // 청약홈 공고일 최신순 그대로
+    const byNext = nextStart(a.n).localeCompare(nextStart(b.n));
+    if (key === "next") return byNext;
+    const rank = (n: Notice) => {
+      const v = verdicts?.[n.houseManageNo] ?? null;
+      return v ? VERDICT_RANK[v] : 9;
+    };
+    return rank(a.n) - rank(b.n) || byNext;
+  };
+}
+
+function FilterRow({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="flex items-start gap-2">
+      <span className="w-12 shrink-0 pt-1 text-muted">{label}</span>
+      <div className="flex flex-wrap gap-1.5">{children}</div>
+    </div>
+  );
+}
+
+function Chip({ on, onClick, disabled = false, children }: { on: boolean; onClick: () => void; disabled?: boolean; children: React.ReactNode }) {
+  return (
+    <button
+      type="button"
+      aria-pressed={on}
+      disabled={disabled}
+      onClick={onClick}
+      className={`rounded-full border px-2.5 py-1 ${on ? "border-brand bg-brand text-white" : "border-line bg-white text-ink hover:border-brand"} disabled:opacity-40`}
+    >
+      {children}
+    </button>
   );
 }
 
