@@ -239,6 +239,7 @@ export type RemndrNotice = {
   name: string;
   region: string;
   unit: string;
+  address?: string; // 공급 위치 (지도용. 예전 주차 파일에는 없을 수 있음)
   kind: string; // 무순위, 불법행위 재공급 …
   receiptStart: string | null;
   receiptEnd: string | null;
@@ -262,6 +263,7 @@ export async function fetchRemndrNotices(daysBack = 30): Promise<RemndrResult> {
         name: str(d.HOUSE_NM) ?? "(이름 없음)",
         region: str(d.SUBSCRPT_AREA_CODE_NM) ?? "",
         unit: unitFromAddress(str(d.HSSPLY_ADRES) ?? ""),
+        address: str(d.HSSPLY_ADRES) ?? "",
         kind: str(d.HOUSE_SECD_NM) ?? "",
         receiptStart: str(d.SUBSCRPT_RCEPT_BGNDE),
         receiptEnd: str(d.SUBSCRPT_RCEPT_ENDDE),

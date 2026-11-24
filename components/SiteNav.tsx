@@ -4,7 +4,7 @@
  * 맨 위 바 + 왼쪽 메뉴 판 + 모바일 하단 탭
  * - 위 바: 왼쪽 메뉴 버튼(≡), 가운데 아이콘과 이름, 오른쪽 카카오 로그인(선택). 폭은 본문과 같은 컨테이너
  * - 메뉴 판: 메뉴 버튼을 누르면 왼쪽에서 열림. 바깥을 누르거나 ESC를 누르면 닫힘
- * - 하단 탭: 좁은 화면에서만, 자주 쓰는 4개
+ * - 하단 탭: 좁은 화면에서만, 자주 쓰는 4개 (홈, 지도, 가점 계산, 마이페이지)
  */
 
 import Link from "next/link";
@@ -13,12 +13,20 @@ import { useEffect, useState } from "react";
 import Container from "@/components/Container";
 import { AuthMenu } from "@/components/KakaoLogin";
 
-type Item = { href: string; label: string; desc: string; icon: React.ReactNode; tab?: boolean };
+type Item = { href: string; label: string; desc: string; icon: React.ReactNode; tab?: boolean; tabLabel?: string };
 
 const P = { fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round", strokeLinejoin: "round" } as const;
 
 const MENU: Item[] = [
   { href: "/", label: "홈", desc: "내 점수와 노려볼 단지 한눈에", tab: true, icon: <path {...P} d="M3 9.5 10 3l7 6.5M5 8.5V17h10V8.5" /> },
+  {
+    href: "/map",
+    label: "지도로 찾기",
+    tabLabel: "지도",
+    desc: "분양 공고를 지도에서 찾기",
+    tab: true,
+    icon: <path {...P} d="M3 5.5 7.5 3.5l5 2 4.5-2v11l-4.5 2-5-2L3 16.5zM7.5 3.5v11M12.5 5.5v11" />,
+  },
   {
     href: "/score",
     label: "가점 계산",
@@ -30,7 +38,6 @@ const MENU: Item[] = [
     href: "/check",
     label: "가능성 확인",
     desc: "원하는 단지에 당첨될 수 있을지",
-    tab: true,
     icon: <path {...P} d="M10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14ZM7 10l2 2 4-4.5" />,
   },
   { href: "/compare", label: "단지 비교", desc: "과거 당첨 가점과 내 점수 비교", icon: <path {...P} d="M4 16V9M10 16V4M16 16v-5" /> },
@@ -167,7 +174,7 @@ export default function SiteNav() {
               className={`flex flex-col items-center gap-0.5 py-1.5 text-[11px] ${active ? "font-semibold text-brand" : "text-muted"}`}
             >
               <Icon>{m.icon}</Icon>
-              {m.label}
+              {m.tabLabel ?? m.label}
             </Link>
           );
         })}

@@ -34,7 +34,8 @@ export function loadKakaoMaps(): Promise<KakaoMaps> {
     const ready = () => window.kakao!.maps.load(() => resolve(window.kakao!.maps));
     if (window.kakao?.maps) return ready();
     const s = document.createElement("script");
-    s.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(JS_KEY)}&autoload=false`;
+    // services(장소 검색)·clusterer(마커 묶기)는 지도로 찾기 화면에서 씀. 다른 화면에는 영향 없음
+    s.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(JS_KEY)}&autoload=false&libraries=services,clusterer`;
     s.async = true;
     s.onload = () => (window.kakao?.maps ? ready() : reject(new Error("카카오 SDK를 불러오지 못했습니다.")));
     s.onerror = () => reject(new Error("카카오 SDK를 불러오지 못했습니다."));
