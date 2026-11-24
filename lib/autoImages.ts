@@ -10,7 +10,8 @@ import raw from "@/data/auto-images.json";
 import { imageKey } from "./complexImage";
 
 // source: 출처 이름 ("분양 홈페이지" 또는 "LH청약플러스" 같은 기관 사이트 이름). 예전 결과에는 없을 수 있음
-export type AutoImage = { name: string; image: string; homepage: string; checkedAt: string; source?: string };
+// review: 2단계(낮춘) 기준으로 고른 이미지라 사람이 한 번 확인해야 함
+export type AutoImage = { name: string; image: string; homepage: string; checkedAt: string; source?: string; review?: boolean };
 export type AutoSkipped = { name: string; homepage: string | null; reason: string; checkedAt: string; agency?: string };
 export type AutoImagesFile = { items: AutoImage[]; skipped: AutoSkipped[] };
 

@@ -13,7 +13,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { Notice, NoticeResult } from "@/lib/applyhome";
 import type { Complex } from "@/lib/complexes";
-import { imageFor, type ComplexImages } from "@/lib/complexImage";
 import CalendarButton from "@/components/CalendarButton";
 import FavoriteStar from "@/components/FavoriteStar";
 import { favoriteFromNotice } from "@/lib/meTypes";
@@ -34,11 +33,9 @@ type State = { status: "loading" } | { status: "done"; result: NoticeResult };
 
 export default function NoticeList({
   fallback,
-  images,
   locations,
 }: {
   fallback: Complex[];
-  images: ComplexImages;
   locations: Record<string, LocationBrief>; // 키: locationKey(단지명, 지역)
 }) {
   const [state, setState] = useState<State>({ status: "loading" });
@@ -93,7 +90,7 @@ export default function NoticeList({
   }
 
   const { result } = state;
-  if (!result.ok) return <Fallback reason={result.reason} complexes={fallback} images={images} />;
+  if (!result.ok) return <Fallback reason={result.reason} complexes={fallback} />;
 
   // ───────── 상세 ─────────
   if (detailNo) {
@@ -107,7 +104,7 @@ export default function NoticeList({
           ← 목록
         </Link>
         {n ? (
-          <NoticeDetail n={n} images={images} location={locations[locationKey(n.name, `${n.region} ${n.unit}`)]} />
+          <NoticeDetail n={n} location={locations[locationKey(n.name, `${n.region} ${n.unit}`)]} />
         ) : (
           <p className="py-10 text-sm text-muted">이 공고를 찾지 못했어요. 접수 기간이 지나 목록에서 빠졌을 수 있어요.</p>
         )}
@@ -262,7 +259,7 @@ export default function NoticeList({
       ) : (
         <ul>
           {shown.map(({ n, match }) => (
-            <ListRow key={n.houseManageNo || n.name} n={n} images={images} match={match} href={rowHref(n.houseManageNo)} />
+            <ListRow key={n.houseManageNo || n.name} n={n} match={match} href={rowHref(n.houseManageNo)} />
           ))}
         </ul>
       )}
@@ -337,7 +334,7 @@ function Tag({ label, onRemove }: { label: string; onRemove: () => void }) {
   );
 }
 
-function ListRow({ n, images, match, href }: { n: Notice; images: ComplexImages; match: Match | null; href: string }) {
+function ListRow({ n, match, href }: { n: Notice; match: Match | null; href: string }) {
   // 화면에 보일 때만 판정을 불러옴
   const ref = useRef<HTMLLIElement>(null);
   const [seen, setSeen] = useState(false);
@@ -364,8 +361,6 @@ function ListRow({ n, images, match, href }: { n: Notice; images: ComplexImages;
         name={n.name}
         address={n.address}
         region={`${n.region} ${n.unit}`}
-        image={imageFor(images, n.name)}
-        noticeNo={n.houseManageNo}
       />
       <Link href={href} className="group flex min-w-0 flex-1 items-center gap-3">
         <span className="min-w-0 flex-1">
@@ -412,7 +407,7 @@ function VerdictText({ n, enabled }: { n: Notice; enabled: boolean }) {
 }
 
 /** 상세: 공고 정보, 내 판정, 일정 전체, 주택형별 공급세대 */
-function NoticeDetail({ n, images, location }: { n: Notice; images: ComplexImages; location: LocationBrief | undefined }) {
+function NoticeDetail({ n, location }: { n: Notice; location: LocationBrief | undefined }) {
   const totalSupply = sum(n.types.map((t) => t.supply));
   const totalSpecial = sum(n.types.map((t) => t.special));
   const events = scheduleEvents(n.schedule);
@@ -452,8 +447,6 @@ function NoticeDetail({ n, images, location }: { n: Notice; images: ComplexImage
               name={n.name}
               address={n.address}
               region={`${n.region} ${n.unit}`}
-              image={imageFor(images, n.name)}
-              noticeNo={n.houseManageNo}
               size="wide"
             />
           </div>
@@ -586,7 +579,7 @@ function NoticeDetail({ n, images, location }: { n: Notice; images: ComplexImage
   );
 }
 
-function Fallback({ reason, complexes, images }: { reason: string; complexes: Complex[]; images: ComplexImages }) {
+function Fallback({ reason, complexes }: { reason: string; complexes: Complex[] }) {
   return (
     <div>
       <p className="mb-4 border-l-2 border-accent bg-accent/10 px-3 py-2 text-[13px] leading-relaxed">
@@ -600,7 +593,7 @@ function Fallback({ reason, complexes, images }: { reason: string; complexes: Co
         <ul>
           {complexes.map((c) => (
             <li key={c.id} className="flex gap-3 border-b border-line py-3">
-              <ComplexThumb name={c.name} address={c.address} region={`${c.sido} ${c.sigungu}`} image={imageFor(images, c.name)} />
+              <ComplexThumb name={c.name} address={c.address} region={`${c.sido} ${c.sigungu}`} />
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-baseline justify-between gap-x-3">
                   <span className="line-clamp-2 leading-snug font-semibold">{c.name}</span>

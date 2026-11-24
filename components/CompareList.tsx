@@ -23,7 +23,6 @@ import { locationKey } from "@/lib/location";
 import { saveMyHome } from "@/lib/myHome";
 import { SIDO_LIST } from "@/lib/similar";
 import { useComplexes } from "@/lib/useComplexes";
-import { imageFor, type ComplexImages } from "@/lib/complexImage";
 import ComplexThumb from "@/components/ComplexThumb";
 import Fold from "@/components/Fold";
 import FavoriteStar from "@/components/FavoriteStar";
@@ -191,7 +190,7 @@ export default function CompareList({
                   myScore={myScore}
                   location={locations[locationKey(r.complex.name, `${r.complex.sido} ${r.complex.sigungu}`)]}
                   scale={scale}
-                  images={fallback.images}
+                 
                 />
               ))}
             </ul>
@@ -362,7 +361,7 @@ export default function CompareList({
           ) : (
             <ul>
               {rows.map((r, i) => (
-                <ListRow key={`${r.complex.id}-${r.type.type}-${i}`} row={r} hasScore={myScore !== null} images={fallback.images} />
+                <ListRow key={`${r.complex.id}-${r.type.type}-${i}`} row={r} hasScore={myScore !== null} />
               ))}
             </ul>
           )}
@@ -392,11 +391,11 @@ export default function CompareList({
 }
 
 /** 목록 한 줄: 썸네일, 단지명·주택형, 지역, 내 판정, 공고일. 누르면 상세로 */
-function ListRow({ row, hasScore, images }: { row: Row; hasScore: boolean; images: ComplexImages }) {
+function ListRow({ row, hasScore }: { row: Row; hasScore: boolean }) {
   const { complex, type, judgement, lotteryOnly } = row;
   return (
     <li className="flex items-center gap-3 border-b border-line py-3">
-      <ComplexThumb name={complex.name} address={complex.address} region={`${complex.sido} ${complex.sigungu}`} image={imageFor(images, complex.name)} />
+      <ComplexThumb name={complex.name} address={complex.address} region={`${complex.sido} ${complex.sigungu}`} />
       <Link href={`/compare?${new URLSearchParams({ id: complex.id, t: type.type })}`} className="group flex min-w-0 flex-1 items-center gap-3">
         <span className="min-w-0 flex-1">
           <span className="line-clamp-2 text-sm leading-snug font-medium group-hover:underline">
@@ -680,13 +679,11 @@ function ResultRow({
   myScore,
   location,
   scale,
-  images,
 }: {
   row: Row;
   myScore: number | null;
   location: LocationBrief | undefined;
   scale: Scale;
-  images: ComplexImages;
 }) {
   const { complex, type, judgement, lotteryOnly } = row;
   return (
@@ -700,7 +697,6 @@ function ResultRow({
           name={complex.name}
           address={complex.address}
           region={`${complex.sido} ${complex.sigungu}`}
-          image={imageFor(images, complex.name)}
         />
         <div className="min-w-0">
           <div className="line-clamp-2 text-[15px] leading-snug font-semibold">

@@ -40,6 +40,14 @@ export const PICK_RULES = {
   sameAreaRatio: 0.9,
 };
 
+/**
+ * 2단계 기준: 위 기준으로 하나도 못 찾은 단지만 크기·비율을 조금 낮춰 다시 고름.
+ * 이렇게 고른 이미지는 "확인 필요"로 표시해 /admin/images에서 사람이 한 번 봄. 복잡도·한 색 기준은 그대로.
+ */
+export const RELAXED_RULES = { ...PICK_RULES, minWidth: 600, minRatio: 1.1, maxRatio: 2.5 };
+
+type SizeRules = Pick<typeof PICK_RULES, "minWidth" | "minRatio" | "maxRatio" | "labeledMinRatio" | "labeledMaxRatio">;
+
 export type Measured = {
   url: string;
   width: number;
@@ -49,8 +57,7 @@ export type Measured = {
 };
 
 /** 크기 기준에 안 맞으면 이유, 맞으면 null */
-export function sizeProblem(width: number, height: number, labeled = false): string | null {
-  const R = PICK_RULES;
+export function sizeProblem(width: number, height: number, labeled = false, R: SizeRules = PICK_RULES): string | null {
   if (width < R.minWidth) return `가로 ${width}px (${R.minWidth}px 미만)`;
   const ratio = width / height;
   const [min, max] = labeled ? [R.labeledMinRatio, R.labeledMaxRatio] : [R.minRatio, R.maxRatio];

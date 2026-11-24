@@ -22,7 +22,7 @@ export default function NoticesPage() {
       </header>
       {/* 주소의 ?no=… (상세 화면)를 읽기 때문에 화면에서 그립니다 */}
       <Suspense fallback={<p className="py-10 text-sm text-muted">불러오는 중…</p>}>
-        <NoticeList fallback={fallback.complexes} images={fallback.images} locations={locations} />
+        <NoticeList fallback={fallback.complexes} locations={locations} />
       </Suspense>
     </>
   );

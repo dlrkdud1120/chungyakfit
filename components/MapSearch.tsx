@@ -661,7 +661,7 @@ function ListRow({
       onMouseLeave={() => onHover(null)}
       className={`flex items-center gap-3 border-b border-line px-4 py-2.5 ${active ? "bg-brand/5" : ""} ${item.status === "마감" ? "opacity-60" : ""}`}
     >
-      <ComplexThumb name={item.name} address={item.address} region={`${item.region} ${item.unit}`} noticeNo={item.source === "apt" ? item.id : null} size="sm" />
+      <ComplexThumb name={item.name} address={item.address} region={`${item.region} ${item.unit}`} size="sm" />
       <button type="button" onClick={onPick} onFocus={() => onHover(item.id)} onBlur={() => onHover(null)} className="min-w-0 flex-1 text-left">
         <span className="block truncate text-sm font-medium text-ink">{item.name}</span>
         <span className="block truncate text-xs text-muted">
@@ -763,7 +763,7 @@ function Summary({
       <button type="button" onClick={onBack} className="py-3 text-sm text-brand hover:underline">
         ← 목록
       </button>
-      <ComplexThumb name={item.name} address={item.address} region={`${item.region} ${item.unit}`} noticeNo={item.source === "apt" ? item.id : null} size="wide" />
+      <ComplexThumb name={item.name} address={item.address} region={`${item.region} ${item.unit}`} size="wide" />
       <h2 className="mt-3 text-lg font-bold text-brand">{item.name}</h2>
       <p className="mt-0.5 text-xs text-muted">{item.address || `${item.region} ${item.unit}`}</p>
       <p className="mt-1 flex flex-wrap items-center gap-1.5 text-xs">

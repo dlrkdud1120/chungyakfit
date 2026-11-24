@@ -67,6 +67,9 @@ jobs:
           add-paths: |
             data/weekly/*.json
             data/auto-images.json
+            data/image-candidates.json
+            data/complexes.csv
+            public/images/complexes/*.jpg
           delete-branch: true
 
       - name: 실패 내용 남기기 (PR은 만들지 않음)

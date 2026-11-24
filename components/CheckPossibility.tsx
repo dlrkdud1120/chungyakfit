@@ -13,7 +13,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import type { Notice, NoticeResult } from "@/lib/applyhome";
 import { FUTURE_SECTION_ID } from "@/lib/anchors";
-import { imageFor, type ComplexImages } from "@/lib/complexImage";
 import CalendarButton from "@/components/CalendarButton";
 import FavoriteStar from "@/components/FavoriteStar";
 import Fold from "@/components/Fold";
@@ -44,8 +43,7 @@ type SimilarResponse =
   | { ok: true; result: SimilarResult; targetCmpet?: CmpetRow[] | null; fetchedAt: string; totalRows: number }
   | { ok: false; reason: string };
 
-/** images: complexes.csv에 등록한 조감도 (app/check/page.tsx가 넘겨줌) */
-export default function CheckPossibility({ images }: { images: ComplexImages }) {
+export default function CheckPossibility() {
   const params = useSearchParams();
   const router = useRouter();
   // 2단계(결과) 화면인지. 다른 화면에서 /check?no=… 로 들어오면 바로 결과를 보여줌
@@ -207,7 +205,6 @@ export default function CheckPossibility({ images }: { images: ComplexImages }) 
           notice={mode === "notice" ? notice : null}
           selectedType={selectedType?.type ?? null}
           back={back}
-          images={images}
         />
       </div>
     );
@@ -451,7 +448,6 @@ function Result({
   notice,
   selectedType,
   back,
-  images,
 }: {
   myScore: number | null;
   future: SavedFuture[] | null;
@@ -463,7 +459,6 @@ function Result({
   notice: Notice | null;
   selectedType: string | null;
   back: React.ReactNode; // "다른 단지 보기" 버튼
-  images: ComplexImages;
 }) {
   // 맨 위: 고른 단지 이름과 "다른 단지 보기"
   const head = (basis?: string) => (
@@ -528,8 +523,6 @@ function Result({
             name={notice.name}
             address={notice.address}
             region={`${notice.region} ${notice.unit}`}
-            image={imageFor(images, notice.name)}
-            noticeNo={notice.houseManageNo}
             size="wide"
           />
         </div>

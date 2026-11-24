@@ -244,6 +244,7 @@ export type RemndrNotice = {
   region: string;
   unit: string;
   address?: string; // 공급 위치 (지도용. 예전 주차 파일에는 없을 수 있음)
+  homepage?: string | null; // 분양 홈페이지 (대표 이미지 수집용)
   kind: string; // 무순위, 불법행위 재공급 …
   receiptStart: string | null;
   receiptEnd: string | null;
@@ -268,6 +269,7 @@ export async function fetchRemndrNotices(daysBack = 30): Promise<RemndrResult> {
         region: str(d.SUBSCRPT_AREA_CODE_NM) ?? "",
         unit: unitFromAddress(str(d.HSSPLY_ADRES) ?? ""),
         address: str(d.HSSPLY_ADRES) ?? "",
+        homepage: str(d.HMPG_ADRES),
         kind: str(d.HOUSE_SECD_NM) ?? "",
         receiptStart: str(d.SUBSCRPT_RCEPT_BGNDE),
         receiptEnd: str(d.SUBSCRPT_RCEPT_ENDDE),
@@ -280,6 +282,32 @@ export async function fetchRemndrNotices(daysBack = 30): Promise<RemndrResult> {
   } catch (e) {
     return { ok: false, reason: (e as Error).message };
   }
+}
+
+// ───────────────────────── 1-3. 공고 목록 (이미지 수집용) ─────────────────────────
+
+export type NoticeEntry = { houseManageNo: string; name: string; region: string; unit: string; address: string; homepage: string | null; url: string | null };
+
+/**
+ * 최근 N일 동안의 서울·경기 분양 공고 이름·홈페이지·청약홈 주소만 (주택형은 부르지 않아 가벼움)
+ * 단지 비교에 나오는 지난 공고의 대표 이미지를 모을 때 씁니다 (scripts/collect-images.ts).
+ */
+export async function fetchNoticeEntries(daysBack: number): Promise<NoticeEntry[]> {
+  const rows = await getAll(`${DETAIL}/getAPTLttotPblancDetail`, { "cond[RCRIT_PBLANC_DE::GTE]": daysAgo(daysBack) }, NOTICE_SETTINGS.historyCacheSec);
+  return rows
+    .map((d) => {
+      const address = str(d.HSSPLY_ADRES) ?? "";
+      return {
+        houseManageNo: str(d.HOUSE_MANAGE_NO) ?? "",
+        name: str(d.HOUSE_NM) ?? "",
+        region: str(d.SUBSCRPT_AREA_CODE_NM) ?? "",
+        unit: unitFromAddress(address),
+        address,
+        homepage: str(d.HMPG_ADRES),
+        url: str(d.PBLANC_URL),
+      };
+    })
+    .filter((n) => n.houseManageNo && n.name && NOTICE_SETTINGS.regions.includes(n.region));
 }
 
 // ───────────────────────── 2. 과거 당첨가점 이력 ─────────────────────────

@@ -20,7 +20,6 @@ import ComplexThumb from "@/components/ComplexThumb";
 import { useMy } from "@/components/Providers";
 import { loadSimilar } from "@/components/useNoticeVerdict";
 import { historyToComplexes, type NoticeResult, type RemndrResult } from "@/lib/applyhome";
-import { imageFor, type ComplexImages } from "@/lib/complexImage";
 import type { Complex } from "@/lib/complexes";
 import { judge, type Verdict } from "@/lib/judge";
 import { parseMyHome, readMyHomeRaw, subscribeMyHome } from "@/lib/myHome";
@@ -82,13 +81,9 @@ const RIGHT_TONE: Record<NonNullable<CardRow["rightTone"]>, string> = {
 
 export default function WeeklyPopup({
   csv,
-  images,
-  noticeImages,
   weekly,
 }: {
   csv: Complex[];
-  images: ComplexImages; // complexes.csv 조감도 (단지명 기준)
-  noticeImages: ComplexImages; // 주차별 파일 공고의 대표 이미지 (주택관리번호 기준, 배포할 때 미리 정함)
   weekly: WeeklyFile[];
 }) {
   // 날짜와 "오늘 하루 보지 않기" 여부는 브라우저에서만 읽음 (서버에서 그릴 때는 null → 팝업 없음)
@@ -202,8 +197,6 @@ export default function WeeklyPopup({
   return (
     <Dialog
       cards={cards}
-      images={images}
-      noticeImages={noticeImages}
       onClose={() => setClosed(true)}
       onHideToday={() => (hideToday(today), setClosed(true))}
     />
@@ -214,14 +207,10 @@ export default function WeeklyPopup({
 
 function Dialog({
   cards,
-  images,
-  noticeImages,
   onClose,
   onHideToday,
 }: {
   cards: WeeklyCard[];
-  images: ComplexImages;
-  noticeImages: ComplexImages;
   onClose: () => void;
   onHideToday: () => void;
 }) {
@@ -352,7 +341,7 @@ function Dialog({
           </div>
 
           {card.id === "schedule" && <ScheduleBody card={card} onNavigate={onClose} />}
-          {card.id === "featured" && <FeaturedBody card={card} images={images} noticeImages={noticeImages} onNavigate={onClose} />}
+          {card.id === "featured" && <FeaturedBody card={card} onNavigate={onClose} />}
           {card.id === "results" && <ResultsBody card={card} onNavigate={onClose} />}
           {(card.id === "mine" || card.id === "favorites") && <ListBody card={card} onNavigate={onClose} />}
           {card.id === "tip" && <TipBody card={card} onNavigate={onClose} />}
@@ -474,7 +463,7 @@ function ScheduleBody({ card, onNavigate }: Body<"schedule">) {
 }
 
 /** 2장: 단지마다 같은 배치 (대표 이미지 | 이름·지역·일정·타입별 가격) */
-function FeaturedBody({ card, images, noticeImages, onNavigate }: Body<"featured"> & { images: ComplexImages; noticeImages: ComplexImages }) {
+function FeaturedBody({ card, onNavigate }: Body<"featured">) {
   return (
     <>
       <ul className="mt-3 border-t border-line">
@@ -484,8 +473,6 @@ function FeaturedBody({ card, images, noticeImages, onNavigate }: Body<"featured
               name={it.name}
               address={it.address}
               region={`${it.region} ${it.unit}`}
-              image={imageFor(images, it.name) ?? noticeImages[it.no] ?? null}
-              noticeNo={it.no}
               size="md"
             />
             <div className="min-w-0 flex-1">

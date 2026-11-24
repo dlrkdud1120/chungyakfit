@@ -1,11 +1,67 @@
 {
-  "_설명": "npm run collect-images 가 만드는 파일입니다. 직접 고치지 말고, 고칠 것이 있으면 image-overrides.json에 적으세요.",
+  "_설명": "npm run collect-images 가 만드는 파일입니다. 직접 고치지 말고, 고칠 것이 있으면 image-overrides.json에 적으세요 (/admin/images에서 고를 수 있음).",
   "items": [
+    {
+      "name": "경기광주역 롯데캐슬 시그니처 1단지",
+      "image": "https://www.lottecastle.co.kr/files/etc/2026/8/202608200955171820.jpg",
+      "homepage": "https://www.lottecastle.co.kr/APT/AT00427/main/index.do",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
     {
       "name": "경희궁 에피트",
       "image": "https://brand.hldni.com/gyeonghuigung/image/main/main_visual02_bg.jpg",
       "homepage": "https://brand.hldni.com/gyeonghuigung/",
       "checkedAt": "2026-11-17",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "고강역 신원아침도시 퍼스티지",
+      "image": "https://www.xn--939a1ox4ovzqsa687a07a61c685a.com/images/vis-bg.jpg?ver=7",
+      "homepage": "https://www.고강역신원아침도시.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "고덕강일 대성베르힐",
+      "image": "https://www.gd-verthill.co.kr/img/location_img03.jpg",
+      "homepage": "https://www.gd-verthill.co.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "고양 한신더휴 퍼스트원",
+      "image": "https://i.ytimg.com/vi/xIezKZZPpLE/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGEMgUShlMA8=&rs=AOn4CLArcQAduttGinUOwGLsffQA6Q7CVA",
+      "homepage": "https://gy-thehue.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "고척 푸르지오 힐스테이트",
+      "image": "https://prugio.com/hb/2025/gocheok/assets/images/main/premium-bg-03.jpg",
+      "homepage": "https://prugio.com/hb/2025/gocheok/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "곤지암역 제일풍경채",
+      "image": "https://www.jeil-gs.co.kr/img/location_img06.jpg",
+      "homepage": "https://www.jeil-gs.co.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "공덕역자이르네",
+      "image": "https://xn--ob0bj3fc3bd9jeorbfcuf.com/resources/img/common/gnb_bg.jpg",
+      "homepage": "http://공덕역자이르네.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "광명 유승한내들 라포레",
+      "image": "https://gm.hndapt.co.kr/image/visual_bg.png",
+      "homepage": "https://gm.hndapt.co.kr",
+      "checkedAt": "2026-11-24",
       "source": "분양 홈페이지"
     },
     {
@@ -16,6 +72,20 @@
       "source": "분양 홈페이지"
     },
     {
+      "name": "김포 풍무역세권 B5블록 호반써밋",
+      "image": "https://hobansummit-pungmu.co.kr/final/assets/images/main/img_visual_si2.png",
+      "homepage": "http://hobansummit-pungmu.co.kr/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "남양주 진접 서한이다음(S1BL)",
+      "image": "https://nj-seohan.com/images/main/visual2.jpg",
+      "homepage": "https://nj-seohan.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
       "name": "남양주왕숙 A-2블록 신혼희망타운(공공분양) 잔여세대 추가입주자모집공고",
       "image": "https://apply.lh.or.kr/upload/Files/upload_dec/2026/HSL/10/23/2025072462795203.jpg",
       "homepage": "https://apply.lh.or.kr/lhapply/apply/wt/wrtanc/selectWrtancList.do?mi=1027",
@@ -23,10 +93,172 @@
       "source": "LH청약플러스"
     },
     {
+      "name": "더 리치먼드 미아",
+      "image": "https://www.xn--9m1b22au9hqqan3e93vy4o.com/img/main/main_visual3.jpg",
+      "homepage": "https://www.더리치먼드미아.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "더샵 분당센트로",
+      "image": "https://xn--ok1btg31l29f3zeimw42h.kr/resources/img/main/vision04.webp",
+      "homepage": "http://더샵분당센트로.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "더샵 분당티에르원",
+      "image": "https://xn--ok1btg31o2se37ef3iiybo89b.kr/img/community_bg.jpg",
+      "homepage": "https://더샵분당티에르원.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "더샵 분당하이스트",
+      "image": "https://xn--ok1btgm3zxqdwrcgyl3jvsze.kr/img/location_bg01.jpg",
+      "homepage": "https://더샵분당하이스트.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "더샵 분당하이스트(2차)",
+      "image": "https://xn--ok1btgm3zxqdwrcgyl3jvsze.kr/img/location_bg01.jpg",
+      "homepage": "https://더샵분당하이스트.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "동작 센트럴 동문 디 이스트",
+      "image": "https://dongjak-dmapt.co.kr/image/main/main_img.jpg",
+      "homepage": "https://dongjak-dmapt.co.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "동탄신도시 금강펜테리움 7차 센트럴파크 불법행위재공급",
+      "image": "https://postfiles.pstatic.net/MjAyNjExMjNfMjAw/MDAxNzk1NDAyNzY4MzA3.JaV5rE37_-l1QwAVqOL09rNnDtuxxueiMZsrRpvtWP4g.zgS-j6u7W9gYguLIcMEolf-9fvoz1CIzJM7NgGlzncAg.JPEG/DJI_0031_a1b4a.jpg?type=w966",
+      "homepage": "https://blog.naver.com/kkvista",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "동탄신도시 금강펜테리움 7차 센트럴파크(2차)",
+      "image": "https://postfiles.pstatic.net/MjAyNjExMjNfMjAw/MDAxNzk1NDAyNzY4MzA3.JaV5rE37_-l1QwAVqOL09rNnDtuxxueiMZsrRpvtWP4g.zgS-j6u7W9gYguLIcMEolf-9fvoz1CIzJM7NgGlzncAg.JPEG/DJI_0031_a1b4a.jpg?type=w966",
+      "homepage": "https://blog.naver.com/kkvista",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "두산위브 더센트럴 수원",
+      "image": "https://xn--9m1brsn1gisitsdcyab8beyshnar08g.com/assets/images/main/visual-new-bg_01.jpg",
+      "homepage": "https://두산위브더센트럴수원.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "두산위브더제니스 부천",
+      "image": "https://xn--9i1bjk9y42y6tax0kd8d5ylcqcixr.com/assets/images/main/visual-bg-new1.jpg",
+      "homepage": "https://두산위브더제니스부천.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "두산위브더제니스 평내호평역 N49",
+      "image": "https://xn--n49-hk1m96f8xan4cv30b2nf7rfmykrldcyext0dba180h.com/assets/images/main/visual-bg-new-02.jpg",
+      "homepage": "https://두산위브더제니스평내호평역n49.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "드파인 아르티아",
+      "image": "https://i.vimeocdn.com/video/2205824699-f2985fa4ae1a7ce1afedd3d428686f04073a6d0dff7fba2b5c99f18aa0416d0e-d?mw=2200&mh=1238",
+      "homepage": "https://altia.skdefine.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "드파인 연희",
+      "image": "https://yh.skdefine.com/img/comm_img01.jpg",
+      "homepage": "https://yh.skdefine.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "디에이치 아델스타",
+      "image": "https://dh-adelstar.co.kr/images/intro4_bg1.jpg?2",
+      "homepage": "http://dh-adelstar.co.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "리버센트 푸르지오 위브",
+      "image": "https://prugio.com/hb/2025/rivercent/assets/images/main/premium-bg-02.jpg",
+      "homepage": "https://prugio.com/hb/2025/rivercent/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "망포역 푸르지오 르마크",
+      "image": "https://www.prugio.com/hb/2025/mangpo/assets/images/main/visual-bg-new3.jpg",
+      "homepage": "https://www.prugio.com/hb/2025/mangpo/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "부천 중앙하이츠 심곡 102동",
+      "image": "https://blogfiles.pstatic.net/MjAyNDA5MDlfMTky/MDAxNzI1ODQ0OTEzNjM1.wM8mfFaUHdoGGIZC0FNYGr0TkQhhaZ5QILiXj5ClArIg.3AokUJ0_ghLUlVu40ymhdEyr0H8CPpaj5Gozul3X2Xog.JPEG/%EC%A1%B0%EA%B0%90%EB%8F%84.jpg/backtop?type=w3000_q70",
+      "homepage": "https://blog.naver.com/hankipo",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
       "name": "부천대장 하우스토리 디센트(부천대장지구 A2BL) 공공분양주택",
       "image": "https://www.xn--vk1bl3b19f7xexvfwncgul82b1wt8smd2ch4k.com/images/vis-bg2-ver2.jpg",
       "homepage": "https://www.부천대장하우스토리디센트.com",
       "checkedAt": "2026-11-17",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "부천역 에피트 어바닉",
+      "image": "https://brand.hldni.com/bucheon-urbanic/image/main/premium_slide_2.jpg",
+      "homepage": "https://brand.hldni.com/bucheon-urbanic/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지",
+      "review": true
+    },
+    {
+      "name": "빌리브센트하이(2차)",
+      "image": "https://cent.villiv.co.kr/resources/img/gate/gate_bg.jpg",
+      "homepage": "https://cent.villiv.co.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "상동역 롯데캐슬 시그니처",
+      "image": "https://www.lottecastle.co.kr/files/etc/2026/8/202608120448055020.jpg",
+      "homepage": "https://www.lottecastle.co.kr/APT/AT00430/main/index.do",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "상봉 센트럴 아이파크",
+      "image": "https://www.sangbong-ipark.com/images/main/main_mobile_slide.jpg",
+      "homepage": "https://www.sangbong-ipark.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "서울원 아이파크",
+      "image": "https://seoulone-ipark.co.kr/images/vis-bg05-m.jpg",
+      "homepage": "https://seoulone-ipark.co.kr/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "수원역 아너스빌 타임원",
+      "image": "https://www.xn--h50bp5wj1cbqa48h72an9b.com/img/main_img03.jpg",
+      "homepage": "https://www.수원역아너스빌.com",
+      "checkedAt": "2026-11-24",
       "source": "분양 홈페이지"
     },
     {
@@ -51,10 +283,45 @@
       "source": "LH청약플러스"
     },
     {
+      "name": "식사 푸르지오 파크센트",
+      "image": "https://siksaprugio.com/assets/images/main/visual-bg.jpg",
+      "homepage": "https://siksaprugio.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "식사 푸르지오 파크센트(조합원 취소분)",
+      "image": "https://siksaprugio.com/assets/images/main/visual-bg.jpg",
+      "homepage": "https://siksaprugio.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "쌍용 더 플래티넘 서대문",
+      "image": "https://www.xn--x50b59afhs4mwmfqskkpdhwjjz3aiwe.com/img/premium_img05.jpg",
+      "homepage": "https://www.쌍용더플래티넘서대문.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "쌍용 더 플래티넘 온수역",
+      "image": "https://xn--x50bj6bv2fivnfueckm77en1d.com/assets/images/main/visual-bg-new-01.jpg",
+      "homepage": "https://더플래티넘온수역.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
       "name": "쌍용 더 플래티넘 한강",
       "image": "https://xn--939a18g91b22g78qo8ex2yn1dxua.com/img/main.jpg",
       "homepage": "http://쌍용더플래티넘한강.com",
       "checkedAt": "2026-11-17",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "써밋 클라비온",
+      "image": "https://summitclavion.com/bon/img/msumm_img.jpg",
+      "homepage": "https://summitclavion.com/",
+      "checkedAt": "2026-11-24",
       "source": "분양 홈페이지"
     },
     {
@@ -86,10 +353,94 @@
       "source": "LH청약플러스"
     },
     {
+      "name": "야목역 서희스타힐스 그랜드힐",
+      "image": "https://www.xn--2i0bs4kloch9d4zkhlca439cd3a150f0iqomae.com/img/main/section01_bg_n2.jpg?new",
+      "homepage": "https://www.야목역서희스타힐스그랜드힐.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
       "name": "엘리프 시흥 더프라임",
       "image": "https://www.xn--9m1bw2f72b22pdwdr3cdz1bca395c.com/final/assets/img/prime_location_sub.jpg",
       "homepage": "https://www.엘리프시흥더프라임.com",
       "checkedAt": "2026-11-17",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "엘리프 역곡",
+      "image": "https://xn--399ap6vcpjpc887g.kr/images/vis-bg02.jpg",
+      "homepage": "https://엘리프역곡.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "엘리프 원종",
+      "image": "https://xn--oy2bp6tkva73c7y1a.com/open/images/slide_01.jpg",
+      "homepage": "https://엘리프원종.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "엘리프 한신더휴 수원 C3블록(본청약)",
+      "image": "https://i.vimeocdn.com/video/2134432599-4b90804708cc99408fb68a7f011f3d4365d221c99fbbb8cf64a0734b67284461-d?mw=1600&mh=900",
+      "homepage": "http://www.엘리프한신더휴수원.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "엘리프 한신더휴 수원 D3블록(본청약)",
+      "image": "https://i.vimeocdn.com/video/2134432599-4b90804708cc99408fb68a7f011f3d4365d221c99fbbb8cf64a0734b67284461-d?mw=1600&mh=900",
+      "homepage": "http://www.엘리프한신더휴수원.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "오남역 서희스타힐스 여의재 3단지",
+      "image": "https://i.vimeocdn.com/video/2137553090-bbfeea72881855bed522856fa7f8716437dfb4f76ac2dc5ab187fa424018d6e4-d?mw=1600&mh=900",
+      "homepage": "http://www.오남역서희스타힐스여의재.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "오남역 서희스타힐스 여의재 3단지 (조합원 취소분)",
+      "image": "https://i.vimeocdn.com/video/2137553090-bbfeea72881855bed522856fa7f8716437dfb4f76ac2dc5ab187fa424018d6e4-d?mw=1600&mh=900",
+      "homepage": "https://www.오남역서희스타힐스여의재.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "오산 세교 우미 린 레이크시티",
+      "image": "https://ow2.lynn.co.kr/upload/editor/c76c073ab53443c19599ef78f655ff70.png",
+      "homepage": "https://ow2.lynn.co.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "오정 해모로 스마트시티(조합원 취소분)",
+      "image": "https://xn--2o2b2zft01wbias7oo1ds82apoaq1s.com/images/mv_bg02.jpg?ver=2",
+      "homepage": "https://오정해모로스마트시티.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "옥정중앙역 대방 디에트르(중상1, 복합1BL)",
+      "image": "https://detre-oj.co.kr/img/mcontact_bg03.jpg",
+      "homepage": "http://www.detre-oj.co.kr/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "왕숙 한신더휴 센텀(남양주 왕숙 A-17BL) 공공분양주택",
+      "image": "https://ws-thehue.com/home/design/images/new/complex01_bg2.jpg",
+      "homepage": "https://ws-thehue.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "용인 고림 동문 디 이스트",
+      "image": "https://www.yongin-dmapt.co.kr/image/main/main_img_260405_1.jpg",
+      "homepage": "https://yongin-dmapt.co.kr/",
+      "checkedAt": "2026-11-24",
       "source": "분양 홈페이지"
     },
     {
@@ -100,10 +451,143 @@
       "source": "분양 홈페이지"
     },
     {
+      "name": "용인 푸르지오 원클러스터 2단지",
+      "image": "https://www.prugio.com/hb/2025/onecluster/assets/images/main/premium-bg-02.jpg",
+      "homepage": "https://www.prugio.com/hb/2025/onecluster",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "용인 푸르지오 원클러스터파크",
+      "image": "https://www.prugio.com/hb/2025/oneclusterpark/assets/images/main/visual-bg-02.jpg",
+      "homepage": "https://www.prugio.com/hb/2025/oneclusterpark",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "용인 플랫폼시티 라온프라이빗 아르디에",
+      "image": "https://www.yp-raon.com/images/main/location_bg04.jpg",
+      "homepage": "https://www.yp-raon.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "용인반도체클러스터 동일하이빌 파크밸리(D1-1블록)",
+      "image": "https://xn--2q1bm4i47b10c27q38a0a7a938p85fz2g.com/img/sum_bg.jpg",
+      "homepage": "https://용인동일하이빌파크밸리.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "운정 아이파크 시티",
+      "image": "https://unjeong-iparkcity.com/images/complexplan_zoom.jpg",
+      "homepage": "https://unjeong-iparkcity.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "월계 중흥S-클래스 리비에르",
+      "image": "https://wg-sclass.com/module/index_visual/slide/img/visual1.jpg",
+      "homepage": "https://wg-sclass.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "의왕시청역 SK VIEW IPARK",
+      "image": "https://uw.skview.co.kr/img/sub_top01.jpg",
+      "homepage": "http://uw.skview.co.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "의왕역 한신더휴",
+      "image": "https://xn--9m1bv80a6ic4lx5bf49bq4c.kr/theme/theme06/img/section1.jpg",
+      "homepage": "https://의왕역한신더휴.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "의왕역 SK VIEW",
+      "image": "https://uws.skview.co.kr/img/main.jpg",
+      "homepage": "https://uws.skview.co.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "이천 중리지구 B3블록 금성백조 예미지",
+      "image": "https://ic-yemizi.com/assets/images/main/visual-bg-02.jpg",
+      "homepage": "https://ic-yemizi.com/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "장위 푸르지오 마크원",
+      "image": "https://prugio.com/hb/2026/markone/assets/images/main/schedule-bg.jpg",
+      "homepage": "https://prugio.com/hb/2026/markone/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "제일풍경채 의왕고천(본청약)",
+      "image": "https://www.gc-jeil.co.kr/module/_pc/index_visual/img/visual1.jpg",
+      "homepage": "https://www.gc-jeil.co.kr/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "중앙하이츠 원종역",
+      "image": "https://www.xn--2e5bqkuw2tw6b5xac3xm4o.com/img/main/station_bg.jpg",
+      "homepage": "https://www.중앙하이츠원종역.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
       "name": "중화역 라온프라이빗 센트로",
       "image": "https://www.jh-raon.com/assets/images/main/overview-bg-01.jpg",
       "homepage": "https://www.jh-raon.com",
       "checkedAt": "2026-11-17",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "중흥S-클래스 힐더포레",
+      "image": "https://hf-sclass.com/sub/complex_zoom.jpg",
+      "homepage": "http://hf-sclass.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "창경궁 롯데캐슬 시그니처",
+      "image": "https://www.lottecastle.co.kr/files/etc/2022/10/202210280831196910.jpg",
+      "homepage": "https://www.lottecastle.co.kr/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "청계 노르웨이숲",
+      "image": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/visual-bg-new-01.jpg",
+      "homepage": "https://청계노르웨이숲.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "청계 노르웨이숲(14차)",
+      "image": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/visual-bg-new-01.jpg",
+      "homepage": "https://청계노르웨이숲.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "충정로역자이르네",
+      "image": "https://xn--950bx0l9xa587a4zb1e20bn04a.com/grand/images/mainVisual_bg.jpg?v=2",
+      "homepage": "https://충정로역자이르네.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "파주금촌 금호어울림(조합원 취소분)",
+      "image": "https://pjkhapt.com/bon_subpage/sub_img/special_design/special_design03.jpg",
+      "homepage": "https://pjkhapt.com",
+      "checkedAt": "2026-11-24",
       "source": "분양 홈페이지"
     },
     {
@@ -112,6 +596,56 @@
       "homepage": "https://pg2.lynn.co.kr/",
       "checkedAt": "2026-11-17",
       "source": "분양 홈페이지"
+    },
+    {
+      "name": "평택 고덕 우미 린 프레스티지(Abc-36BL)",
+      "image": "https://pg1.lynn.co.kr/resources/assets/v4/images/main/premium_poster01.jpg",
+      "homepage": "https://pg1.lynn.co.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "평택역 더센트럴45",
+      "image": "https://thecentral45.com/img/main02.png?ver=4",
+      "homepage": "http://thecentral45.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "평택청북 사랑으로 부영 2차 아파트 우선분양 전환 후 잔여세대",
+      "image": "https://sarangeuro.co.kr/apt/files/10_apt_pic_airview.jpg",
+      "homepage": "https://sarangeuro.co.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "풍무역 롯데캐슬 시그니처",
+      "image": "https://www.lottecastle.co.kr/files/etc/2022/10/202210280831196910.jpg",
+      "homepage": "https://www.lottecastle.co.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "풍무역 푸르지오 더 마크",
+      "image": "https://www.prugio.com/hb/2025/themark/assets/images/main/visual-bg-new-01.jpg",
+      "homepage": "https://www.prugio.com/hb/2025/themark/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "풍무역세권 수자인 그라센트 2차",
+      "image": "https://www.sujain-pm2.co.kr/img/main.jpg",
+      "homepage": "https://www.sujain-pm2.co.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "한신더휴 하이엔에듀포레",
+      "image": "https://gc-thehue.com/images/main/img_premium2_7.jpg",
+      "homepage": "http://gc-thehue.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지",
+      "review": true
     },
     {
       "name": "한화포레나 지제역",
@@ -128,10 +662,45 @@
       "source": "분양 홈페이지"
     },
     {
+      "name": "해링턴플레이스 노원 센트럴",
+      "image": "https://www.harrington495.kr/images/main/visual-2.jpg",
+      "homepage": "https://www.harrington495.kr",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
       "name": "향남역 그로브 스위첸",
       "image": "https://xn--q20b245acmc65au2puno.com/img/complex_img01.jpg",
       "homepage": "https://향남역스위첸.com",
       "checkedAt": "2026-11-17",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "호반써밋 풍무Ⅱ",
+      "image": "https://hobansummit-pungmu2.com/final/assets/images/main/img_visual_si1.png",
+      "homepage": "https://hobansummit-pungmu2.com/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "호반써밋 풍무Ⅲ",
+      "image": "https://hobansummit-pungmu3.co.kr/final/assets/images/main/260706/img_visual_si1.png",
+      "homepage": "https://hobansummit-pungmu3.co.kr/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "홍대입구역 센트럴 아르떼 해모로",
+      "image": "https://xn--vk1bx5cx7b6l88b30cyvv6zhtv6aezf8pc.com/resources/img/main/sec03_01.jpg",
+      "homepage": "https://홍대센트럴아르떼해모로.com/",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "화서역 호수공원 아너스빌",
+      "image": "https://www.xn--h50bp5wx7b30b79e72a035f.com/assets/images/main/visual-bg-261110.jpg",
+      "homepage": "https://www.화서역아너스빌.com",
+      "checkedAt": "2026-11-24",
       "source": "분양 홈페이지"
     },
     {
@@ -140,15 +709,41 @@
       "homepage": "https://www.hwaseong-lottecastlesignature.com",
       "checkedAt": "2026-11-17",
       "source": "분양 홈페이지"
+    },
+    {
+      "name": "회천중앙역 로제비앙 그랜드센텀",
+      "image": "https://xn--2i0bs4kloc5va99snwepsica34k01l50c7wqu9obpr.com/final/assets/images/main/img_visual_bg3.png",
+      "homepage": "https://회천중앙역로제비앙그랜드센텀.com",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "힐스테이트 회룡역파크뷰",
+      "image": "https://hillstate.co.kr/upload/2026/04/20260428021717010807.jpg",
+      "homepage": "https://hillstate.co.kr/s/hoeryong",
+      "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
     }
   ],
   "skipped": [
     {
       "name": "고덕강일지구 3단지 토지임대부(본청약)",
       "homepage": "https://www.i-sh.co.kr/main/lay2/program/S1T294C296/www/brd/m_244/list.do?multi_itm_seq=1",
-      "reason": "SH 서울주택도시개발공사 공고 페이지의 이미지가 기준에 맞지 않음",
-      "checkedAt": "2026-11-17",
+      "reason": "SH 서울주택도시개발공사 공고 페이지의 이미지가 기준에 맞지 않음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 690×924: 비율 0.75 (1.1~2.5 밖))",
+      "checkedAt": "2026-11-24",
       "agency": "SH"
+    },
+    {
+      "name": "고양 더샵포레나",
+      "homepage": "https://고양더샵포레나.kr",
+      "reason": "공용 홈페이지로 보임 (제목 \"호스팅 서비스 이용 기간이 만료되었습니다 | Cafe2\"에 단지명이 없음) · 모집공고 PDF 앞쪽 5쪽에 이미지가 없음",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "과천 디에트르 퍼스티지(S2BL)",
+      "homepage": "http://www.detre-gc.co.kr/",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
     },
     {
       "name": "광교 자연앤 센트레빌(A17BL) 공공분양주택",
@@ -169,10 +764,526 @@
       "checkedAt": "2026-11-17"
     },
     {
+      "name": "광주 송정 중흥S-클래스 파크뷰",
+      "homepage": "https://www.s-class.co.kr/",
+      "reason": "공용 홈페이지로 보임 (제목 \"중흥S-클래스 중흥S-클래스 중흥S-클래스\"에 단지명이 없음) · 모집공고 PDF 앞쪽 5쪽에 이미지가 없음",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "구리 한양립스",
+      "homepage": "https://jmadd1022.iwinv.net/",
+      "reason": "홈페이지가 열리지 않음 (접속 실패·시간 초과) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "구리역 하이니티 리버파크",
+      "homepage": "https://www.elife.co.kr/guri",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 511×480: 가로 511px (600px 미만)) · 모집공고 PDF 앞쪽 5쪽에 이미지가 없음",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "군포대야미 대방 디에트르 시그니처(B3BL)",
+      "homepage": "http://www.detre-gp.co.kr/",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "대방역 여의도 더로드캐슬",
+      "homepage": "http://www.여의도더로드캐슬.com",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "대야미역 금강펜테리움 레이크포레(B1BL)",
+      "homepage": "http://대야미역금강펜테리움레이크포레.com",
+      "reason": "공용 홈페이지로 보임 (제목 \"403 Forbidden\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "더샵 신길센트럴시티",
+      "homepage": "https://더샵신길센트럴시티.kr",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 640×480: 단순함 (entropy 5.68 < 6.8)) · 모집공고 PDF 앞쪽 5쪽에 이미지가 없음",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "더샵 신길센트럴시티(조합원 취소분)",
+      "homepage": "https://더샵신길센트럴시티.kr",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 640×480: 단순함 (entropy 5.68 < 6.8)) · 모집공고 PDF 앞쪽 5쪽에 이미지가 없음",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "더샵 퍼스트월드",
+      "homepage": "https://www.더샵퍼스트월드.kr/",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1066×865: 투명한 부분이 99% (장식용 이미지)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "더샵 프리엘라",
+      "homepage": "https://더샵프리엘라.kr",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 380×540: 가로 380px (600px 미만)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "덕소역 라온프라이빗 리버포레",
+      "homepage": "https://www.ds2-raon.com/",
+      "reason": "공용 홈페이지로 보임 (제목 \"ds2-raon.com\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "동백호수공원 두산위브더제니스(조합원 취소분)",
+      "homepage": "http://동백호수공원두산위브더제니스.com",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×339: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "디 아테온(THE ATHEON)",
+      "homepage": "http://www.디아테온.com",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "라클라체자이드파인",
+      "homepage": "https://xi.co.kr/lxd",
+      "reason": "robots.txt가 접근을 막음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "래미안 엘라비네",
+      "homepage": "https://www.raemian.co.kr",
+      "reason": "robots.txt가 접근을 막음 · 모집공고 PDF 앞쪽 5쪽에 이미지가 없음",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "래미안 원페를라",
+      "homepage": "https://www.raemian.co.kr",
+      "reason": "robots.txt가 접근을 막음 · 모집공고 PDF 앞쪽 5쪽에 이미지가 없음",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "리버센 SK VIEW 롯데캐슬",
+      "homepage": "https://www.rivercen-sk-lotte.co.kr",
+      "reason": "홈페이지가 열리지 않음 (접속 실패·시간 초과) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "만안역 중앙하이츠 포레",
+      "homepage": "https://만안역중앙하이츠포레.com",
+      "reason": "홈페이지가 열리지 않음 (접속 실패·시간 초과) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "반포 래미안 트리니원",
+      "homepage": "https://www.raemian.co.kr",
+      "reason": "robots.txt가 접근을 막음 · 모집공고 PDF 앞쪽 5쪽에 이미지가 없음",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "봉담자이 프라이드시티",
+      "homepage": "https://www.idsd.co.kr",
+      "reason": "공용 홈페이지로 보임 (제목 \"디에스디삼호(주) DSD SAMHO\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "부천 JY 포에시아",
+      "homepage": "https://cafe.daum.net/JY8168834",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 870×360: 단순함 (entropy 3.26 < 6.8)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "북서울자이 폴라리스(보류지)",
+      "homepage": "https://xi.co.kr/mi3",
+      "reason": "robots.txt가 접근을 막음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 1403×992: 단순함 (entropy 5.48 < 6.8))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "북오산자이 리버블시티",
+      "homepage": "https://www.xi.co.kr/osan",
+      "reason": "robots.txt가 접근을 막음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "브라운스톤 월곡 센트럴",
+      "homepage": "https://www.브라운스톤월곡센트럴.com",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 380×540: 가로 380px (600px 미만)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "성남복정1지구 B1블록 복정역 에피트",
+      "homepage": "https://brand.hldni.com/bokjeong-station",
+      "reason": "공용 홈페이지로 보임 (제목 \"복정역 에피트 복정역 에피트\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "소사 휴먼빌",
+      "homepage": "https://www.소사휴먼빌.com",
+      "reason": "홈페이지가 열리지 않음 (접속 실패·시간 초과) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "수지자이 에디시온",
+      "homepage": "https://www.xi.co.kr/SJX",
+      "reason": "robots.txt가 접근을 막음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "시흥 은계 에피트",
+      "homepage": "https://shefete.isweb.co.kr/",
+      "reason": "공용 홈페이지로 보임 (제목 \"잠시만 기다리십시오…\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "시흥 은계 에피트(조합원 취소분)",
+      "homepage": "http://efete-eungye.com/",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "시흥거모 엘가 로제비앙",
+      "homepage": "http://시흥거모-엘가로제비앙.com",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "써밋 더힐",
+      "homepage": "http://summitthehill.com/",
+      "reason": "공용 홈페이지로 보임 (제목 \"SUMMIT THE HILL\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
       "name": "아르뮤제자이",
       "homepage": "https://xi.co.kr/armusee",
       "reason": "robots.txt가 접근을 막음",
       "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "아크로 드 서초",
+      "homepage": "https://www.acro.co.kr",
+      "reason": "공용 홈페이지로 보임 (제목 \"ACRO l THE ONLY ONE ACRO l THE\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "아크로 리버스카이",
+      "homepage": "https://www.acro.co.kr",
+      "reason": "공용 홈페이지로 보임 (제목 \"ACRO l THE ONLY ONE ACRO l THE\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "아크로 리츠카운티",
+      "homepage": "https://www.acro.co.kr",
+      "reason": "공용 홈페이지로 보임 (제목 \"ACRO l THE ONLY ONE ACRO l THE\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "아크로 베스티뉴",
+      "homepage": "https://www.acro.co.kr",
+      "reason": "공용 홈페이지로 보임 (제목 \"ACRO l THE ONLY ONE ACRO l THE\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "안양 에버포레 자연앤 e편한세상(A1BL)",
+      "homepage": "https://www.elife.co.kr",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 78×37: 가로 78px (600px 미만)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 1242×600: 단순함 (entropy 2.24 < 6.8))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "안양역 센트럴 아이파크 수자인",
+      "homepage": "https://www.i-park.com/anyangyeok",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1×1: 가로 1px (600px 미만)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "안양자이 더 포레스트",
+      "homepage": "https://xi.co.kr/YYH",
+      "reason": "robots.txt가 접근을 막음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "안양자이 헤리티온",
+      "homepage": "https://www.xi.co.kr/AYX",
+      "reason": "robots.txt가 접근을 막음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "양주역 제일풍경채 위너스카이",
+      "homepage": "http://jeil-yj.co.kr",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "엠타워 디루체",
+      "homepage": "https://blog.naver.com/nsh0307",
+      "reason": "공용 홈페이지로 보임 (제목 \"네이버 블로그 네이버 블로그\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 1086×778: 단순함 (entropy 5.84 < 6.8))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "역북 서희스타힐스 프라임시티(조합원 취소분)",
+      "homepage": "http://www.역북프라임시티.com",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 앞쪽 5쪽에 이미지가 없음",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "역삼센트럴자이",
+      "homepage": "https://xi.co.kr/ysxi",
+      "reason": "robots.txt가 접근을 막음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "오티에르 반포",
+      "homepage": "https://오티에르반포.kr",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1499×752: 단순함 (entropy 2.21 < 6.8)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 786×691: 단순함 (entropy 0.83 < 6.8))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "오티에르 포레",
+      "homepage": "https://오티에르포레.kr",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 2144×1434: 단순함 (entropy 6.72 < 6.8)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "오퍼스 한강 스위첸",
+      "homepage": "https://opus-switzen.com/",
+      "reason": "공용 홈페이지로 보임 (제목 \"403 Forbidden\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "원종 휴먼빌 클라츠",
+      "homepage": "http://www.원종휴먼빌클라츠.com",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "의왕 월암지구 대방 디에트르 레이크파크",
+      "homepage": "http://www.detre-wa.co.kr",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "의왕고천지구 대방 디에트르 센트럴(B1BL)",
+      "homepage": "http://www.detre-eg.co.kr",
+      "reason": "홈페이지가 열리지 않음 (접속 실패·시간 초과) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "의정부역 센트럴 아이파크",
+      "homepage": "https://www.i-park.com/uijeongbucentral",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1×1: 가로 1px (600px 미만)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "이천 서희스타힐스 SKY (조합원 취소분)",
+      "homepage": "http://www.이천서희스타힐스스카이.com",
+      "reason": "홈페이지가 열리지 않음 (접속 실패·시간 초과) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "이천자이 더 리체",
+      "homepage": "https://xi.co.kr/irc",
+      "reason": "robots.txt가 접근을 막음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "이촌 르엘",
+      "homepage": "https://www.lottecastle.co.kr",
+      "reason": "홈페이지 제목에 단지명이 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "잠실 래미안아이파크",
+      "homepage": "https://www.raemian.co.kr/sales/s/jamsiljinju",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1×1: 가로 1px (600px 미만)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "잠실 르엘",
+      "homepage": "https://www.lottecastle.co.kr",
+      "reason": "홈페이지 제목에 단지명이 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "제기동역 아이파크",
+      "homepage": "http://jegidongstation-ipark.com",
+      "reason": "공용 홈페이지로 보임 (제목 \"LAMBO777 x Jegidongstationipar\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "중동역 다채로움 더원",
+      "homepage": "http://중동역다채로움더원.com",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "진위역 서희스타힐스 더 파크뷰(3차)",
+      "homepage": "http://www.starhills-jinwi.co.kr",
+      "reason": "공용 홈페이지로 보임 (제목 \"Default Web Site Page\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "철산역자이",
+      "homepage": "https://www.xi.co.kr/chsyxi",
+      "reason": "robots.txt가 접근을 막음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "파주 운정신도시 우미 린 더 센텀",
+      "homepage": "https://www.lynn.co.kr",
+      "reason": "공용 홈페이지로 보임 (제목 \"우미 린 우미 린\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "판교TH212(2차)",
+      "homepage": "https://blog.naver.com/kkvista",
+      "reason": "홈페이지 제목에 단지명이 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "평촌자이 퍼스니티",
+      "homepage": "https://www.xi.co.kr/pchxi",
+      "reason": "robots.txt가 접근을 막음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "평택 고덕 국제신도시 A-55 대광로제비앙 모아엘가(4차)",
+      "homepage": "http://평택고덕대광로제비앙모아엘가.com",
+      "reason": "홈페이지가 열리지 않음 (접속 실패·시간 초과) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "평택 고덕국제신도시 A48블록 금성백조 예미지",
+      "homepage": "https://go-yemizi.com/",
+      "reason": "공용 홈페이지로 보임 (제목 \"403 Forbidden\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "평택 고덕국제신도시 A50블록 미래도 파밀리에(본청약)",
+      "homepage": "http://www.고덕미래도파밀리에.kr",
+      "reason": "홈페이지가 열리지 않음 (접속 실패·시간 초과) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "평택 브레인시티 한신더휴",
+      "homepage": "http://pt-thehue.com/",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "평택화양 서희스타힐스 센트럴파크(조합원 취소분)",
+      "homepage": "https://www.평택화양서희스타힐스1차.com",
+      "reason": "홈페이지가 열리지 않음 (접속 실패·시간 초과) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "풍무역세권 수자인 그라센트 1차",
+      "homepage": "https://www.sujain-pm.co.kr",
+      "reason": "공용 홈페이지로 보임 (제목 \"호스팅 서비스 이용 기간이 만료되었습니다 | Cafe2\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "한강 푸르지오 리버프론트",
+      "homepage": "https://prugio-riverfront.com/",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1×1: 가로 1px (600px 미만)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "한화포레나 영흥숲(4차)",
+      "homepage": null,
+      "reason": "홈페이지 주소 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "해링턴 스퀘어 리버파크",
+      "homepage": "http://해링턴스퀘어리버파크.com",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "해링턴플레이스 풍무(3BL)",
+      "homepage": "http://www.해링턴플레이스풍무.com",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "호현 센트럴 아이파크",
+      "homepage": "https://www.i-park.com/hohyeoncentral",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1×1: 가로 1px (600px 미만)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "화성 비봉지구 B1블록 금성백조 예미지2차",
+      "homepage": "https://bb2-yemizi.com/",
+      "reason": "홈페이지가 열리지 않음 (접속 실패·시간 초과) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "힐스테이트 광명 11",
+      "homepage": "https://hillstate.co.kr/s/GM11R",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1920×980: 단순함 (entropy 4.66 < 6.8)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "힐스테이트 등촌역",
+      "homepage": "https://hillstate.co.kr/s/deungchon",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1920×980: 단순함 (entropy 4.66 < 6.8)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "힐스테이트 메디알레",
+      "homepage": "https://hillstate.co.kr/s/mediale",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1920×980: 단순함 (entropy 4.66 < 6.8)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "힐스테이트 안양펠루스",
+      "homepage": "https://www.힐스테이트안양펠루스.com",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1920×870: 단순함 (entropy 6.76 < 6.8)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "힐스테이트 오산 더퍼스트(조합원 자격상실 및 제명세대)",
+      "homepage": "http://www.osan-hillstate.co.kr",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 앞쪽 5쪽에 이미지가 없음",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "힐스테이트 오산 더퍼스트(조합원 자격상실 및 제명세대)(2회차)",
+      "homepage": "http://www.osan-hillstate.co.kr",
+      "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 앞쪽 5쪽에 이미지가 없음",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "힐스테이트 이수역센트럴",
+      "homepage": "https://hillstate.co.kr/s/isu_central",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1920×980: 단순함 (entropy 4.66 < 6.8)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "힐스테이트 평택역센트럴시티",
+      "homepage": "https://hillstate.co.kr/s/ptcentralcity",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1920×980: 단순함 (entropy 4.66 < 6.8)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "e편한세상 당산 리버파크",
+      "homepage": "https://www.elife.co.kr/Posm_list01.action?commonMap.CD_BIZ_LND=200160",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 511×480: 가로 511px (600px 미만)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "e편한세상 부천 어반스퀘어",
+      "homepage": "https://www.elife.co.kr/",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 78×37: 가로 78px (600px 미만)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 334×334: 가로 334px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "e편한세상 일산 메이포레 1단지",
+      "homepage": "https://www.elife.co.kr/",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 78×37: 가로 78px (600px 미만)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "e편한세상 일산 메이포레 3단지",
+      "homepage": "https://www.elife.co.kr",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 78×37: 가로 78px (600px 미만)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
     },
     {
       "name": "GTX운정중앙역 시티프라디움 3단지(후속사업)",
@@ -185,6 +1296,12 @@
       "homepage": "https://www.gtx운정중앙역시티프라디움.com",
       "reason": "남은 후보가 모두 로고·단색 배경으로 보임",
       "checkedAt": "2026-11-17"
+    },
+    {
+      "name": "VIORR(비오르)",
+      "homepage": "https://www.viorr.co.kr/",
+      "reason": "공용 홈페이지로 보임 (제목 \"비오르\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-24"
     }
   ]
 }

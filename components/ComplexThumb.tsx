@@ -1,73 +1,62 @@
 "use client";
 
 /**
- * 단지 썸네일 (단지 비교·분양 공고·가능성 확인 공용)
+ * 단지 썸네일 (모든 화면 공용: 지도로 찾기, 단지 비교, 분양 공고, 가능성 확인, 홈 팝업)
  *
- * 보여주는 순서
- *  1) 조감도 — complexes.csv에 적고 public/images/complexes/ 에 넣은 이미지 (아래에 출처 표시)
- *  2) 분양 홈페이지(공공분양은 LH청약플러스 같은 기관 공고 페이지) 대표 이미지 — noticeNo를 넘긴 경우만. /api/og-image가 data/auto-images.json에 적힌 주소를 알려 주고,
- *     이미지는 그 홈페이지에서 바로 불러옵니다(우리 서버에 저장하지 않음). 누르면 분양 홈페이지가 새 탭으로 열림
- *  3) 위치 지도 — 카카오 정적 지도. 좌표는 /api/coords에서 매번 받아옵니다
- *     (목록 썸네일은 두 배 크기로 그려 절반으로 줄이고, 위치는 정가운데 점으로 표시)
- *  4) 빈 칸 — 키가 없거나 위치를 못 찾으면 연한 바탕에 핀 모양만 (깨진 이미지 아이콘 없음)
- * 이미지가 깨지면 자동으로 다음 순서(지도)로 넘어갑니다.
- * 화면에 보이기 직전에만 불러옵니다 (lazy loading).
+ * 이미지는 단지명 하나로 /api/og-image?name= 에 물어 정합니다 (규칙은 lib/image-resolve.ts 한 곳).
+ *  1) image-overrides.json 직접 지정  2) 직접 넣은 조감도·모집공고 PDF 조감도  3) 자동 수집(분양 홈페이지·공공기관)
+ *  4) 없으면 위치 지도 — 카카오 정적 지도 가운데에 핀 하나만 (지명 글자 위에 다른 표시를 얹지 않음)
+ *  5) 지도도 못 그리면 연한 바탕에 핀 모양만 (깨진 이미지 아이콘 없음)
+ * 이미지가 깨지면 자동으로 지도로 넘어갑니다. 화면에 보이기 직전에만 불러옵니다 (lazy loading).
  *
- * size="sm": 목록용 (80×60px 고정. 행 높이가 같도록 아래에 출처 글씨를 붙이지 않음)
- * size="lg": 가능성 확인용 (240px, 4:3)
- * size="fill": 부모 칸 너비에 맞춤
- * size="wide": 상세 화면용 (가로 최대 560px, 16:9)
- * 조감도·지도는 누르면 카카오맵에서 위치가, 분양 홈페이지 이미지는 누르면 분양 홈페이지가 새 탭으로 열립니다.
+ * size="sm": 목록용 80×60px · "md": 팝업용 112×84px (둘 다 출처 글씨 없음)
+ * size="lg": 240px, 4:3 · "fill": 부모 너비 · "wide": 상세용 최대 560px, 16:9
+ * 분양 홈페이지 이미지는 누르면 그 홈페이지가, 조감도·지도는 카카오맵 위치가 새 탭으로 열립니다.
  */
 
 import { useEffect, useRef, useState } from "react";
-import type { ComplexImage } from "@/lib/complexImage";
 import { hasKakaoKey, kakaoMapLink, loadKakaoMaps } from "@/lib/kakaoMap";
 
 type Props = {
   name: string;
   address?: string | null;
   region?: string;
-  image?: ComplexImage | null;
-  /** 청약홈 주택관리번호. 넘기면 조감도가 없을 때 분양 홈페이지 대표 이미지를 찾아 봄 */
-  noticeNo?: string | null;
   size?: "sm" | "md" | "lg" | "fill" | "wide";
 };
 
-// source: 공공기관 공고 페이지에서 찾은 이미지면 그 사이트 이름 (예: "LH청약플러스"), 분양 홈페이지면 null
-type Og = { image: string | null; homepage: string | null; source: string | null } | null;
-const ogCache = new Map<string, Promise<Og>>();
+type Resolved = { image: string | null; homepage: string | null; source: string | null; kind: string } | null;
+const cache = new Map<string, Promise<Resolved>>();
 
-/** 공고 번호 → 대표 이미지 주소 (같은 공고는 한 번만 물어봄) */
-function loadOg(no: string): Promise<Og> {
-  let p = ogCache.get(no);
+/** 단지명 → 대표 이미지 (같은 단지는 한 번만 물어봄) */
+function loadImage(name: string): Promise<Resolved> {
+  let p = cache.get(name);
   if (!p) {
-    p = fetch(`/api/og-image?no=${encodeURIComponent(no)}`)
-      .then((r) => r.json() as Promise<{ ok: boolean; image?: string | null; homepage?: string | null; source?: string }>)
-      .then((r) => (r.ok ? { image: r.image ?? null, homepage: r.homepage ?? null, source: r.source ?? null } : null))
+    p = fetch(`/api/og-image?${new URLSearchParams({ name })}`)
+      .then((r) => r.json() as Promise<{ ok: boolean; image?: string | null; homepage?: string | null; source?: string | null; kind?: string }>)
+      .then((r) => (r.ok ? { image: r.image ?? null, homepage: r.homepage ?? null, source: r.source ?? null, kind: r.kind ?? "" } : null))
       .catch(() => null);
-    ogCache.set(no, p);
+    cache.set(name, p);
   }
   return p;
 }
 
-// 목록 썸네일 지도의 확대 수준 (숫자가 클수록 넓게 보임). 두 배 크기로 그려 절반으로 줄이므로 화면에는 6단계만큼 넓게 보임
+// 작은 썸네일 지도의 확대 수준 (숫자가 클수록 넓게 보임). 두 배 크기로 그려 절반으로 줄이므로 화면에는 한 단계 넓게 보임
 const SMALL_MAP_LEVEL = 5;
 
 type CoordState = { status: "idle" | "loading" } | { status: "ok"; lat: number; lng: number } | { status: "fail" };
 
 const BOX = {
-  sm: "w-20", // 80×60px 고정
-  md: "w-28", // 112×84px 고정 (홈 팝업 카드용, sm처럼 출처 글씨 없음)
+  sm: "w-20",
+  md: "w-28",
   lg: "w-60 max-w-full",
   fill: "w-full",
   wide: "w-full max-w-[560px]",
 } as const;
 
-export default function ComplexThumb({ name, address, region, image, noticeNo, size = "sm" }: Props) {
+export default function ComplexThumb({ name, address, region, size = "sm" }: Props) {
+  const compact = size === "sm" || size === "md";
   const [imageFailed, setImageFailed] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
-  const manual = image && !imageFailed ? image : null;
 
   // 화면에 들어오는지 지켜보기 (lazy loading)
   const boxRef = useRef<HTMLDivElement>(null);
@@ -88,29 +77,23 @@ export default function ComplexThumb({ name, address, region, image, noticeNo, s
     return () => io.disconnect();
   }, []);
 
-  // 조감도가 없으면 분양 홈페이지 대표 이미지 주소를 물어봄 (화면에 보일 때만)
-  const wantOg = !!noticeNo && !manual && visible;
-  const [og, setOg] = useState<{ no: string; value: Og } | null>(null);
-  const [ogFailed, setOgFailed] = useState(false);
+  // 대표 이미지 물어보기 (화면에 보일 때만)
+  const [got, setGot] = useState<{ name: string; value: Resolved } | null>(null);
   useEffect(() => {
-    if (!wantOg || !noticeNo) return;
+    if (!visible) return;
     let alive = true;
-    loadOg(noticeNo).then((value) => alive && setOg({ no: noticeNo, value }));
+    loadImage(name).then((value) => alive && setGot({ name, value }));
     return () => {
       alive = false;
     };
-  }, [wantOg, noticeNo]);
-  const answered = og !== null && og.no === noticeNo;
-  const ogReady = !noticeNo || manual !== null || answered; // 물어볼 필요가 없거나 답이 옴
-  const ogValue = answered ? og.value : null;
-  const ogImage = !manual && ogValue?.image && !ogFailed ? { src: ogValue.image, homepage: ogValue.homepage, source: ogValue.source } : null;
+  }, [visible, name]);
+  const answered = got !== null && got.name === name;
+  const resolved = answered ? got.value : null;
+  const showImage = resolved?.image && !imageFailed ? resolved : null;
 
-  // 화면에 실제로 쓸 이미지: 직접 넣은 조감도 > 분양 홈페이지 대표 이미지
-  const showImage = manual ?? ogImage;
-
-  // 지도가 필요할 때만 좌표 받기 (카카오 결과는 저장하지 않음). 대표 이미지 답을 기다린 뒤에 시작
+  // 지도가 필요할 때만 좌표 받기 (카카오 결과는 저장하지 않음). 이미지 답을 기다린 뒤에 시작
   const [coord, setCoord] = useState<CoordState>({ status: "idle" });
-  const needMap = !showImage && ogReady && visible && hasKakaoKey;
+  const needMap = !showImage && answered && visible && hasKakaoKey;
   const query = `${name}|${address ?? ""}|${region ?? ""}`;
   useEffect(() => {
     if (!needMap) return;
@@ -130,7 +113,7 @@ export default function ComplexThumb({ name, address, region, image, noticeNo, s
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [needMap, query]);
 
-  // 좌표가 오면 정적 지도 그리기
+  // 좌표가 오면 정적 지도 그리기 (카카오 기본 마커 없이, 핀은 아래에서 가운데에 직접 그림)
   const mapRef = useRef<HTMLDivElement>(null);
   const [mapState, setMapState] = useState<"none" | "ok" | "fail">("none");
   useEffect(() => {
@@ -141,23 +124,18 @@ export default function ComplexThumb({ name, address, region, image, noticeNo, s
       .then((maps) => {
         if (!alive) return;
         el.innerHTML = "";
-        const center = new maps.LatLng(coord.lat, coord.lng);
-        // 목록 썸네일은 두 배 크기(160×120)로 그린 뒤 절반으로 줄여 보여줌 → 예전보다 한 단계 넓은 범위가 보이고 글자가 덜 뭉개짐
-        // 핀은 카카오 기본 핀 대신 아래에서 정가운데에 직접 그림 (기본 핀은 끝이 가운데라 그림이 위로 치우쳐 보임)
-        if (size === "sm") new maps.StaticMap(el, { center, level: SMALL_MAP_LEVEL });
-        else new maps.StaticMap(el, { center, level: 4, marker: { position: center } });
+        new maps.StaticMap(el, { center: new maps.LatLng(coord.lat, coord.lng), level: compact ? SMALL_MAP_LEVEL : 4 });
         setMapState("ok");
       })
       .catch(() => alive && setMapState("fail"));
     return () => {
       alive = false;
     };
-  }, [coord, size]);
+  }, [coord, compact]);
 
   const mapCoord = coord.status === "ok" ? { lat: coord.lat, lng: coord.lng } : null;
-  // 출처 표기는 큰 이미지 아래에만 (목록·팝업 썸네일에는 붙이지 않음)
-  const compact = size === "sm" || size === "md";
-  const caption = !compact ? (manual?.source ?? null) : null;
+  const fromHomepage = !!showImage?.homepage;
+  const altText = showImage ? `${name} ${showImage.kind === "분양 홈페이지" ? "분양 홈페이지 대표 이미지" : "조감도"}` : "";
 
   const frame = (
     <div
@@ -165,29 +143,26 @@ export default function ComplexThumb({ name, address, region, image, noticeNo, s
       className={`relative overflow-hidden rounded border border-line bg-[#eef2f0] ${size === "wide" ? "aspect-[16/9]" : "aspect-[4/3]"} ${BOX[size]}`}
     >
       {/* 빈 칸 (불러오는 중이거나 지도를 못 그릴 때) */}
-      {!(showImage && imageLoaded) && mapState !== "ok" && <Placeholder big={size !== "sm"} />}
+      {!(showImage && imageLoaded) && mapState !== "ok" && <Pin big={!compact} soft />}
 
       {showImage ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          key={showImage.src}
-          src={showImage.src}
-          alt={manual ? `${name} 조감도` : `${name} ${ogImage?.source ?? "분양 홈페이지"} 대표 이미지`}
+          key={showImage.image!}
+          src={showImage.image!}
+          alt={altText}
           loading="lazy"
           decoding="async"
           referrerPolicy="no-referrer"
           onLoad={() => setImageLoaded(true)}
-          // 깨지면 다음 순서(대표 이미지 → 지도)로 넘어감
-          onError={() => (manual ? setImageFailed(true) : setOgFailed(true))}
+          onError={() => setImageFailed(true)} // 깨지면 지도로
           className={`absolute inset-0 h-full w-full object-cover ${imageLoaded ? "" : "opacity-0"}`}
         />
       ) : (
         // 카카오 정적 지도가 이 안에 그려짐. 클릭은 바깥 링크가 받도록 지도 자체의 클릭은 막음
         <div aria-label={`${name} 위치 지도`} className={`pointer-events-none absolute inset-0 ${mapState === "ok" ? "" : "opacity-0"}`}>
-          <div ref={mapRef} className={`absolute top-0 left-0 [&_img]:max-w-none ${size === "sm" ? "h-[200%] w-[200%] origin-top-left scale-50" : "h-full w-full"}`} />
-          {size === "sm" && (
-            <span aria-hidden className="absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-accent shadow-[0_0_0_1px_rgba(0,0,0,0.25)]" />
-          )}
+          <div ref={mapRef} className={`absolute top-0 left-0 [&_img]:max-w-none ${compact ? "h-[200%] w-[200%] origin-top-left scale-50" : "h-full w-full"}`} />
+          {mapState === "ok" && <Pin big={!compact} />}
         </div>
       )}
     </div>
@@ -195,34 +170,32 @@ export default function ComplexThumb({ name, address, region, image, noticeNo, s
 
   return (
     <figure className={`shrink-0 ${BOX[size]}`}>
-      {/* 분양 홈페이지 이미지는 누르면 홈페이지가, 조감도·지도는 카카오맵이 새 탭으로 열림 */}
       <a
-        href={ogImage?.homepage ?? kakaoMapLink(name, mapCoord, address || `${region ?? ""} ${name}`)}
+        href={fromHomepage ? showImage!.homepage! : kakaoMapLink(name, mapCoord, address || `${region ?? ""} ${name}`)}
         target="_blank"
         rel="noopener noreferrer"
-        title={ogImage?.homepage ? `${ogImage.source ?? "분양 홈페이지"} 열기` : "카카오맵에서 위치 보기"}
-        aria-label={ogImage?.homepage ? `${name} ${ogImage.source ?? "분양 홈페이지"} 열기` : `${name} 위치를 카카오맵에서 보기`}
+        title={fromHomepage ? `${showImage!.source ?? "분양 홈페이지"} 열기` : "카카오맵에서 위치 보기"}
+        aria-label={fromHomepage ? `${name} ${showImage!.source ?? "분양 홈페이지"} 열기` : `${name} 위치를 카카오맵에서 보기`}
         className="block"
       >
         {frame}
       </a>
-      {ogImage?.homepage && !compact && (
+      {/* 출처는 큰 이미지 아래에만 (목록·팝업 썸네일에는 붙이지 않음) */}
+      {!compact && showImage && (fromHomepage || showImage.source) && (
         <figcaption className="mt-1 text-[11px] text-muted">
-          {/* 공공기관에서 찾은 이미지는 기관 사이트 이름으로, 분양 홈페이지는 주소로 표시 */}
-          이미지 출처: {ogImage.source ? "" : "단지 분양 홈페이지 · "}
-          <a href={ogImage.homepage} target="_blank" rel="noopener noreferrer" className="underline">
-            {ogImage.source ?? hostOf(ogImage.homepage)}
-          </a>
+          {fromHomepage ? (
+            <>
+              이미지 출처: {showImage.source ? "" : "단지 분양 홈페이지 · "}
+              <a href={showImage.homepage!} target="_blank" rel="noopener noreferrer" className="underline">
+                {showImage.source ?? hostOf(showImage.homepage!)}
+              </a>
+            </>
+          ) : (
+            <>출처: {showImage.source}</>
+          )}
         </figcaption>
       )}
-      {caption && (
-        <figcaption className="mt-1 text-[11px] text-muted">
-          출처: {caption}
-        </figcaption>
-      )}
-      {!compact && !caption && !ogImage && (
-        <figcaption className="mt-1 text-[11px] text-muted">누르면 카카오맵에서 위치가 열려요</figcaption>
-      )}
+      {!compact && !showImage && answered && <figcaption className="mt-1 text-[11px] text-muted">누르면 카카오맵에서 위치가 열려요</figcaption>}
     </figure>
   );
 }
@@ -235,11 +208,18 @@ function hostOf(url: string): string {
   }
 }
 
-function Placeholder({ big }: { big: boolean }) {
+/** 가운데 핀 하나 (soft: 지도 없이 빈 칸일 때 연하게) */
+function Pin({ big, soft = false }: { big: boolean; soft?: boolean }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center text-muted/50" aria-hidden>
-      <svg viewBox="0 0 24 24" className={big ? "h-8 w-8" : "h-4 w-4"} fill="currentColor">
-        <path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" />
+    <div className="absolute inset-0 flex items-center justify-center" aria-hidden>
+      <svg viewBox="0 0 24 24" className={`${big ? "h-8 w-8" : "h-5 w-5"} -translate-y-[30%] drop-shadow-sm`}>
+        <path
+          d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Z"
+          fill={soft ? "rgba(107,118,114,0.45)" : "#f4a53f"}
+          stroke={soft ? "none" : "#ffffff"}
+          strokeWidth="1.5"
+        />
+        <circle cx="12" cy="9" r="2.6" fill="#ffffff" />
       </svg>
     </div>
   );

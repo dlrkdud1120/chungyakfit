@@ -142,6 +142,8 @@ async function main() {
     });
     if (run.status !== 0) warnings.push("이미지 수집 도구가 중간에 멈췄습니다. 이번 주 새 이미지는 반영되지 않았을 수 있습니다.");
     const after = readJson<Img>(AUTO_IMAGES, {});
+    // 모집공고 PDF에서 찾은 조감도는 complexes.csv에 적히므로 새로 읽음
+    const csvNow = loadComplexes().images;
     const items = new Set((after.items ?? []).map((x) => imageKey(x.name)));
     const skipped = new Map((after.skipped ?? []).map((x) => [imageKey(x.name), x.reason]));
     for (const no of targets) {
@@ -149,6 +151,9 @@ async function main() {
       const key = imageKey(n.name);
       if (items.has(key)) {
         status.set(no, "성공");
+        imageOk += 1;
+      } else if ((csvNow[key]?.source ?? "").startsWith("입주자모집공고")) {
+        status.set(no, "성공 (모집공고 PDF)");
         imageOk += 1;
       } else if (skipped.has(key)) {
         status.set(no, `지도 대체 (${skipped.get(key)})`);

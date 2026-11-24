@@ -1,0 +1,4617 @@
+{
+  "_설명": "npm run collect-images 가 만드는 고르기 화면(/admin/images)용 후보 목록입니다. 사이트에서는 쓰지 않습니다.",
+  "byName": {
+    "경기광주역 롯데캐슬 시그니처 1단지": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.lottecastle.co.kr/APT/AT00427/main/index.do",
+      "candidates": [
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/8/202608200955171820.jpg",
+          "width": 1920,
+          "height": 1356
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/10/202610220203367900.jpg",
+          "width": 1160,
+          "height": 640
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/10/202610220203368051.jpg",
+          "width": 1160,
+          "height": 640
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/10/202610301028247500.jpg",
+          "width": 675,
+          "height": 580,
+          "note": "가로 675px (800px 미만)"
+        }
+      ]
+    },
+    "고강역 신원아침도시 퍼스티지": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.고강역신원아침도시.com",
+      "candidates": [
+        {
+          "url": "https://www.xn--939a1ox4ovzqsa687a07a61c685a.com/images/vis-bg.jpg?ver=7",
+          "width": 3000,
+          "height": 1439
+        },
+        {
+          "url": "https://www.xn--939a1ox4ovzqsa687a07a61c685a.com/images/brand-bg.jpg",
+          "width": 2000,
+          "height": 960,
+          "note": "단순함 (entropy 5.38 < 6.8)"
+        },
+        {
+          "url": "https://www.xn--939a1ox4ovzqsa687a07a61c685a.com/images/contact-bg.jpg",
+          "width": 2000,
+          "height": 960,
+          "note": "한 색이 42% (40% 초과)"
+        },
+        {
+          "url": "https://www.xn--939a1ox4ovzqsa687a07a61c685a.com/images/sub31.jpg?ver=6",
+          "width": 1200,
+          "height": 756
+        },
+        {
+          "url": "https://www.xn--939a1ox4ovzqsa687a07a61c685a.com/images/sub-top-bg.jpg?ver=3",
+          "width": 2000,
+          "height": 418,
+          "note": "비율 4.78 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--939a1ox4ovzqsa687a07a61c685a.com/images/pre6-bg1.jpg",
+          "width": 724,
+          "height": 850,
+          "note": "가로 724px (800px 미만)"
+        }
+      ]
+    },
+    "고덕강일 대성베르힐": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.gd-verthill.co.kr",
+      "candidates": [
+        {
+          "url": "https://www.gd-verthill.co.kr/sub/location_map.jpg",
+          "width": 2000,
+          "height": 1440,
+          "note": "단순함 (entropy 5.66 < 6.8)"
+        },
+        {
+          "url": "https://www.gd-verthill.co.kr/sub/complex.jpg",
+          "width": 1100,
+          "height": 1857,
+          "note": "비율 0.59 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.gd-verthill.co.kr/img/main_line.png",
+          "width": 1920,
+          "height": 1000,
+          "note": "투명한 부분이 100% (장식용 이미지)"
+        },
+        {
+          "url": "https://www.gd-verthill.co.kr/img/main.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://www.gd-verthill.co.kr/img/location_img03.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://www.gd-verthill.co.kr/img/location_img04.jpg",
+          "width": 1920,
+          "height": 1000
+        }
+      ]
+    },
+    "고덕강일지구 3단지 토지임대부(본청약)": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 690×924: 비율 0.75 (1.1~2.5 밖))"
+    },
+    "고양 더샵포레나": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 앞쪽 5쪽에 이미지가 없음"
+    },
+    "고양 한신더휴 퍼스트원": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://gy-thehue.com",
+      "candidates": [
+        {
+          "url": "https://gy-thehue.com/img/sub/location_info6_2440.jpg?v=1",
+          "width": 2440,
+          "height": 2636,
+          "note": "비율 0.93 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://gy-thehue.com/img/sub/location_map_zoom.jpg?v=4",
+          "width": 3000,
+          "height": 1756,
+          "note": "단순함 (entropy 5.45 < 6.8)"
+        },
+        {
+          "url": "https://gy-thehue.com/img/main02.jpg",
+          "width": 1976,
+          "height": 1981,
+          "note": "비율 1.00 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://gy-thehue.com/img/sub/location_area_bg8_2440_n2.png?v=2",
+          "width": 2440,
+          "height": 1350,
+          "note": "단순함 (entropy 4.23 < 6.8)"
+        },
+        {
+          "url": "https://gy-thehue.com/img/sub/location_line7_2440.png?v=1",
+          "width": 2440,
+          "height": 1188,
+          "note": "단순함 (entropy 3.92 < 6.8)"
+        },
+        {
+          "url": "https://gy-thehue.com/img/m/m_location_n16.jpg?v=1",
+          "width": 753,
+          "height": 3658,
+          "note": "가로 753px (800px 미만)"
+        }
+      ]
+    },
+    "고척 푸르지오 힐스테이트": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://prugio.com/hb/2025/gocheok/",
+      "candidates": [
+        {
+          "url": "https://prugio.com/hb/2025/gocheok/assets/images/sub/complex.jpg?v=1",
+          "width": 1408,
+          "height": 2146,
+          "note": "비율 0.66 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://prugio.com/hb/2025/gocheok/assets/images/sub/place.jpg?v=1",
+          "width": 1408,
+          "height": 1414,
+          "note": "비율 1.00 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://prugio.com/hb/2025/gocheok/assets/images/main/visual-bg-new-03.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://prugio.com/hb/2025/gocheok/assets/images/main/premium-bg-01.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://prugio.com/hb/2025/gocheok/assets/images/main/premium-bg-02.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://prugio.com/hb/2025/gocheok/assets/images/main/premium-bg-03.jpg",
+          "width": 1920,
+          "height": 970
+        }
+      ]
+    },
+    "곤지암역 제일풍경채": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.jeil-gs.co.kr",
+      "candidates": [
+        {
+          "url": "https://www.jeil-gs.co.kr/sub/location_zoom.jpg",
+          "width": 2500,
+          "height": 2115,
+          "note": "비율 1.18 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.jeil-gs.co.kr/img/brand_bg.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 1.09 < 6.8)"
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2047497944-e35eca3c6d225d7dbd461a98d338ed98c747bfef9f057acb765948332161fa4c-d?mw=2880&mh=1620",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 3.40 < 6.8)"
+        },
+        {
+          "url": "https://www.jeil-gs.co.kr/img/main01.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://www.jeil-gs.co.kr/img/main02.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://www.jeil-gs.co.kr/img/pr_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 5.70 < 6.8)"
+        }
+      ]
+    },
+    "공덕역자이르네": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://공덕역자이르네.com",
+      "candidates": [
+        {
+          "url": "https://xn--ob0bj3fc3bd9jeorbfcuf.com/resources/img/common/gnb_bg.jpg",
+          "width": 1938,
+          "height": 1090
+        },
+        {
+          "url": "https://xn--ob0bj3fc3bd9jeorbfcuf.com/resources/img/main/intro_visual01.jpg",
+          "width": 610,
+          "height": 740,
+          "note": "가로 610px (800px 미만)"
+        },
+        {
+          "url": "https://xn--ob0bj3fc3bd9jeorbfcuf.com/resources/img/main/intro_visual02.jpg",
+          "width": 610,
+          "height": 740,
+          "note": "가로 610px (800px 미만)"
+        }
+      ]
+    },
+    "과천 디에트르 퍼스티지(S2BL)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://www.detre-gc.co.kr/",
+      "candidates": [
+        {
+          "url": "http://www.detre-gc.co.kr/html/images/sub/community_img.jpg",
+          "width": 1200,
+          "height": 1745,
+          "note": "비율 0.69 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.detre-gc.co.kr/html/images/main/n_visual001.jpg",
+          "width": 2000,
+          "height": 990
+        },
+        {
+          "url": "http://www.detre-gc.co.kr/html/images/main/n_visual02.jpg",
+          "width": 2000,
+          "height": 990
+        },
+        {
+          "url": "http://www.detre-gc.co.kr/html/images/main/n_visual03.jpg",
+          "width": 2000,
+          "height": 990,
+          "note": "단순함 (entropy 6.67 < 6.8)"
+        },
+        {
+          "url": "http://www.detre-gc.co.kr/html/images/main/n_visual04.jpg",
+          "width": 2000,
+          "height": 990
+        },
+        {
+          "url": "http://www.detre-gc.co.kr/html/images/main/section03_img1.png",
+          "width": 2000,
+          "height": 879,
+          "note": "비율 2.28 (1.2~2.2 밖)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))"
+    },
+    "광명 유승한내들 라포레": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://gm.hndapt.co.kr",
+      "candidates": [
+        {
+          "url": "https://gm.hndapt.co.kr/sub/bon/pc/location.jpg",
+          "width": 1299,
+          "height": 2133,
+          "note": "비율 0.61 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://gm.hndapt.co.kr/image/sub/s_big_map.jpg",
+          "width": 1700,
+          "height": 1491,
+          "note": "비율 1.14 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://gm.hndapt.co.kr/image/visual_bg.png",
+          "width": 1820,
+          "height": 950
+        },
+        {
+          "url": "https://gm.hndapt.co.kr/image/inquiry_bg.png",
+          "width": 1920,
+          "height": 760,
+          "note": "비율 2.53 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://gm.hndapt.co.kr/image/brand_bg.png",
+          "width": 1920,
+          "height": 558,
+          "note": "비율 3.44 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://gm.hndapt.co.kr/sub/bon/pc/complex.jpg",
+          "width": 1300,
+          "height": 785
+        }
+      ]
+    },
+    "광주 송정 중흥S-클래스 파크뷰": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 앞쪽 5쪽에 이미지가 없음"
+    },
+    "구리 한양립스": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "구리역 하이니티 리버파크": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.elife.co.kr/guri",
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 앞쪽 5쪽에 이미지가 없음"
+    },
+    "군포대야미 대방 디에트르 시그니처(B3BL)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://www.detre-gp.co.kr/",
+      "candidates": [
+        {
+          "url": "http://www.detre-gp.co.kr/html/images/sub/planinfo_img.jpg",
+          "width": 1200,
+          "height": 1681,
+          "note": "비율 0.71 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.detre-gp.co.kr/html/images/main/visual02.jpg",
+          "width": 2000,
+          "height": 990,
+          "note": "단순함 (entropy 6.40 < 6.8)"
+        },
+        {
+          "url": "http://www.detre-gp.co.kr/html/images/main/visual01.jpg",
+          "width": 2000,
+          "height": 990
+        },
+        {
+          "url": "http://www.detre-gp.co.kr/html/images/sub/plan_img.jpg",
+          "width": 1200,
+          "height": 1575,
+          "note": "비율 0.76 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.detre-gp.co.kr/html/images/main/section03_img1.png",
+          "width": 2000,
+          "height": 879,
+          "note": "비율 2.28 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.detre-gp.co.kr/html/images/main/section03_img3.png",
+          "width": 2000,
+          "height": 879,
+          "note": "비율 2.28 (1.2~2.2 밖)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "김포 풍무역세권 B5블록 호반써밋": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://hobansummit-pungmu.co.kr/",
+      "candidates": [
+        {
+          "url": "http://hobansummit-pungmu.co.kr/final/assets/images/sub/img_location2.png",
+          "width": 2400,
+          "height": 2346,
+          "note": "비율 1.02 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://hobansummit-pungmu.co.kr/final/assets/images/sub/img_plan.png",
+          "width": 1880,
+          "height": 2801,
+          "note": "비율 0.67 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://hobansummit-pungmu.co.kr/final/assets/images/main/bg_sec2.png",
+          "width": 1920,
+          "height": 1579,
+          "note": "투명한 부분이 36% (장식용 이미지)"
+        },
+        {
+          "url": "http://hobansummit-pungmu.co.kr/final/assets/images/sub/img_location3.png",
+          "width": 1200,
+          "height": 2484,
+          "note": "비율 0.48 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://hobansummit-pungmu.co.kr/final/assets/images/main/bg_sec4.png",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "http://hobansummit-pungmu.co.kr/final/assets/images/main/img_visual_si3.png",
+          "width": 1920,
+          "height": 1000
+        }
+      ]
+    },
+    "남양주 진접 서한이다음(S1BL)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://nj-seohan.com",
+      "candidates": [
+        {
+          "url": "https://nj-seohan.com/images/premium/location-environment_view_260702.jpg",
+          "width": 2600,
+          "height": 1781,
+          "note": "단순함 (entropy 5.12 < 6.8)"
+        },
+        {
+          "url": "https://nj-seohan.com/images/premium/location-environment1_2_260709.jpg",
+          "width": 1300,
+          "height": 2646,
+          "note": "비율 0.49 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://nj-seohan.com/images/complex-info/plan1.jpg",
+          "width": 1300,
+          "height": 2250,
+          "note": "비율 0.58 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://nj-seohan.com/images/complex-info/layout1.jpg?v=1",
+          "width": 1300,
+          "height": 1860,
+          "note": "비율 0.70 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://nj-seohan.com/images/main/visual2.jpg",
+          "width": 2000,
+          "height": 1000
+        },
+        {
+          "url": "https://nj-seohan.com/images/main/visual3.jpg",
+          "width": 2000,
+          "height": 1000
+        }
+      ]
+    },
+    "대방역 여의도 더로드캐슬": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://www.여의도더로드캐슬.com",
+      "candidates": [
+        {
+          "url": "https://rockdesign23.mycafe24.com/db/img1.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 6.42 < 6.8)"
+        },
+        {
+          "url": "http://www.xn--9m1b8h32an6hgzqrwe2ycs0w.com/theme/castle/img/main/img2.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 6.58 < 6.8)"
+        },
+        {
+          "url": "http://www.xn--9m1b8h32an6hgzqrwe2ycs0w.com/theme/castle/img/main/bg_unit.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 5.93 < 6.8)"
+        },
+        {
+          "url": "http://www.xn--9m1b8h32an6hgzqrwe2ycs0w.com/theme/castle/img/main/bg_house.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 5.81 < 6.8)"
+        },
+        {
+          "url": "http://www.xn--9m1b8h32an6hgzqrwe2ycs0w.com/theme/castle/img/main/bg_premium.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 4.90 < 6.8)"
+        },
+        {
+          "url": "http://www.xn--9m1b8h32an6hgzqrwe2ycs0w.com/theme/castle/img/sub/03/01_01.jpg",
+          "width": 1300,
+          "height": 900
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "대야미역 금강펜테리움 레이크포레(B1BL)": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "더 리치먼드 미아": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.더리치먼드미아.com",
+      "candidates": [
+        {
+          "url": "https://www.xn--9m1b22au9hqqan3e93vy4o.com/img/main/main_visual3.jpg",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "url": "https://www.xn--9m1b22au9hqqan3e93vy4o.com/img/main/main_visual1.jpg",
+          "width": 3839,
+          "height": 1980
+        },
+        {
+          "url": "https://www.xn--9m1b22au9hqqan3e93vy4o.com/img/main/main_section3_bg.jpg",
+          "width": 3839,
+          "height": 1669,
+          "note": "비율 2.30 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--9m1b22au9hqqan3e93vy4o.com/img/sub/location_map.jpg",
+          "width": 3427,
+          "height": 1819,
+          "note": "단순함 (entropy 5.18 < 6.8)"
+        },
+        {
+          "url": "https://www.xn--9m1b22au9hqqan3e93vy4o.com/img/sub/preminfo_img02.jpg?date=20260423",
+          "width": 1643,
+          "height": 2043,
+          "note": "비율 0.80 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--9m1b22au9hqqan3e93vy4o.com/img/sub/preminfo_img01.jpg?date=20260409",
+          "width": 1646,
+          "height": 1270
+        }
+      ]
+    },
+    "더샵 분당센트로": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://더샵분당센트로.kr",
+      "candidates": [
+        {
+          "url": "https://xn--ok1btg31l29f3zeimw42h.kr/resources/img/main/intro_bg.webp",
+          "width": 1920,
+          "height": 2850,
+          "note": "비율 0.67 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--ok1btg31l29f3zeimw42h.kr/resources/img/main/contact01.png",
+          "width": 1440,
+          "height": 1620,
+          "note": "비율 0.89 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--ok1btg31l29f3zeimw42h.kr/resources/img/main/visual_01.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://xn--ok1btg31l29f3zeimw42h.kr/resources/img/main/vision02.webp",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://xn--ok1btg31l29f3zeimw42h.kr/resources/img/main/vision01.webp",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 6.30 < 6.8)"
+        },
+        {
+          "url": "https://xn--ok1btg31l29f3zeimw42h.kr/resources/img/main/vision04.webp",
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    "더샵 분당티에르원": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://더샵분당티에르원.kr",
+      "candidates": [
+        {
+          "url": "https://xn--ok1btg31o2se37ef3iiybo89b.kr/sub/plan.jpg",
+          "width": 1100,
+          "height": 5257,
+          "note": "비율 0.21 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--ok1btg31o2se37ef3iiybo89b.kr/img/main.jpg",
+          "width": 1920,
+          "height": 2879,
+          "note": "비율 0.67 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--ok1btg31o2se37ef3iiybo89b.kr/sub/m/plan.jpg",
+          "width": 720,
+          "height": 6092,
+          "note": "가로 720px (800px 미만)"
+        },
+        {
+          "url": "https://xn--ok1btg31o2se37ef3iiybo89b.kr/sub/location.jpg",
+          "width": 1100,
+          "height": 3328,
+          "note": "비율 0.33 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--ok1btg31o2se37ef3iiybo89b.kr/img/community_bg.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://xn--ok1btg31o2se37ef3iiybo89b.kr/img/unit_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 5.72 < 6.8)"
+        }
+      ]
+    },
+    "더샵 분당하이스트": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://더샵분당하이스트.kr",
+      "candidates": [
+        {
+          "url": "https://xn--ok1btgm3zxqdwrcgyl3jvsze.kr/img/intro_bg.png",
+          "width": 10000,
+          "height": 5208,
+          "note": "단순함 (entropy 0.91 < 6.8)"
+        },
+        {
+          "url": "https://xn--ok1btgm3zxqdwrcgyl3jvsze.kr/sub/location.jpg",
+          "width": 1100,
+          "height": 2745,
+          "note": "비율 0.40 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2205822093-f263361713534a5e7bc855b7d0c314d726b17ea2be9d5b3a5458ab66edf71ccc-d?mw=2200&mh=1238",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://xn--ok1btgm3zxqdwrcgyl3jvsze.kr/img/sum_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 5.41 < 6.8)"
+        },
+        {
+          "url": "https://xn--ok1btgm3zxqdwrcgyl3jvsze.kr/img/location_bg01.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://xn--ok1btgm3zxqdwrcgyl3jvsze.kr/img/location_bg02.jpg",
+          "width": 1920,
+          "height": 1000
+        }
+      ]
+    },
+    "더샵 분당하이스트(2차)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://더샵분당하이스트.kr",
+      "candidates": [
+        {
+          "url": "https://xn--ok1btgm3zxqdwrcgyl3jvsze.kr/img/intro_bg.png",
+          "width": 10000,
+          "height": 5208,
+          "note": "단순함 (entropy 0.91 < 6.8)"
+        },
+        {
+          "url": "https://xn--ok1btgm3zxqdwrcgyl3jvsze.kr/sub/location.jpg",
+          "width": 1100,
+          "height": 2745,
+          "note": "비율 0.40 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2205822093-f263361713534a5e7bc855b7d0c314d726b17ea2be9d5b3a5458ab66edf71ccc-d?mw=2200&mh=1238",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://xn--ok1btgm3zxqdwrcgyl3jvsze.kr/img/sum_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 5.41 < 6.8)"
+        },
+        {
+          "url": "https://xn--ok1btgm3zxqdwrcgyl3jvsze.kr/img/location_bg01.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://xn--ok1btgm3zxqdwrcgyl3jvsze.kr/img/location_bg02.jpg",
+          "width": 1920,
+          "height": 1000
+        }
+      ]
+    },
+    "더샵 신길센트럴시티": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://더샵신길센트럴시티.kr",
+      "candidates": [
+        {
+          "url": "https://i.ytimg.com/vi_webp/vcazdao58as/sddefault.webp",
+          "width": 640,
+          "height": 480,
+          "note": "가로 640px (800px 미만)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 앞쪽 5쪽에 이미지가 없음"
+    },
+    "더샵 신길센트럴시티(조합원 취소분)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://더샵신길센트럴시티.kr",
+      "candidates": [
+        {
+          "url": "https://i.ytimg.com/vi_webp/vcazdao58as/sddefault.webp",
+          "width": 640,
+          "height": 480,
+          "note": "가로 640px (800px 미만)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 앞쪽 5쪽에 이미지가 없음"
+    },
+    "더샵 퍼스트월드": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.더샵퍼스트월드.kr/",
+      "candidates": [
+        {
+          "url": "https://bucket-apt.s3.dualstack.ap-northeast-2.amazonaws.com/2024/sangbong/resources/img/transport_map_01.png",
+          "width": 1066,
+          "height": 865,
+          "note": "투명한 부분이 99% (장식용 이미지)"
+        },
+        {
+          "url": "https://bucket-apt.s3.dualstack.ap-northeast-2.amazonaws.com/2024/sangbong/resources/img/transport_map_02.png",
+          "width": 1066,
+          "height": 865,
+          "note": "투명한 부분이 99% (장식용 이미지)"
+        },
+        {
+          "url": "https://bucket-apt.s3.dualstack.ap-northeast-2.amazonaws.com/2024/sangbong/resources/img/premium01.jpg",
+          "width": 640,
+          "height": 1080,
+          "note": "가로 640px (800px 미만)"
+        },
+        {
+          "url": "https://bucket-apt.s3.dualstack.ap-northeast-2.amazonaws.com/2024/sangbong/resources/img/premium04.jpg",
+          "width": 640,
+          "height": 1080,
+          "note": "가로 640px (800px 미만)"
+        },
+        {
+          "url": "https://bucket-apt.s3.dualstack.ap-northeast-2.amazonaws.com/2024/sangbong/resources/img/premium03.jpg",
+          "width": 640,
+          "height": 1080,
+          "note": "가로 640px (800px 미만)"
+        },
+        {
+          "url": "https://bucket-apt.s3.ap-northeast-2.amazonaws.com/2024/first_world/resources/img/main_renew/modal_subway.png",
+          "width": 1361,
+          "height": 376,
+          "note": "비율 3.62 (1.2~2.2 밖)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "더샵 프리엘라": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://더샵프리엘라.kr",
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "덕소역 라온프라이빗 리버포레": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "동백호수공원 두산위브더제니스(조합원 취소분)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://동백호수공원두산위브더제니스.com",
+      "candidates": [
+        {
+          "url": "http://xn--ob0bm4i8l8quse29ac9cr2grudgubrxy5ra07itq2e.com/images/sub/sub03_01_img01_260813.jpg",
+          "width": 1711,
+          "height": 1500,
+          "note": "비율 1.14 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://xn--ob0bm4i8l8quse29ac9cr2grudgubrxy5ra07itq2e.com/images/main/cont3_bg_250616.jpg",
+          "width": 2000,
+          "height": 1009
+        },
+        {
+          "url": "http://xn--ob0bm4i8l8quse29ac9cr2grudgubrxy5ra07itq2e.com/images/main/mv1_02.jpg",
+          "width": 1920,
+          "height": 850,
+          "note": "비율 2.26 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://xn--ob0bm4i8l8quse29ac9cr2grudgubrxy5ra07itq2e.com/images/main/mv1_03_250409.jpg",
+          "width": 1920,
+          "height": 850,
+          "note": "비율 2.26 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://xn--ob0bm4i8l8quse29ac9cr2grudgubrxy5ra07itq2e.com/images/main/mv1_01.jpg",
+          "width": 1920,
+          "height": 849,
+          "note": "비율 2.26 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://xn--ob0bm4i8l8quse29ac9cr2grudgubrxy5ra07itq2e.com/images/main/bg.png",
+          "width": 755,
+          "height": 1942,
+          "note": "가로 755px (800px 미만)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×339: 가로 335px (600px 미만))"
+    },
+    "동작 센트럴 동문 디 이스트": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://dongjak-dmapt.co.kr",
+      "candidates": [
+        {
+          "url": "https://dongjak-dmapt.co.kr/image/main/main_img.jpg",
+          "width": 2560,
+          "height": 1440
+        },
+        {
+          "url": "https://dongjak-dmapt.co.kr/image/main/section2_bg.jpg",
+          "width": 2560,
+          "height": 1440,
+          "note": "단순함 (entropy 4.70 < 6.8)"
+        },
+        {
+          "url": "https://dongjak-dmapt.co.kr/image/sub/danji/dong_img1.jpg",
+          "width": 1300,
+          "height": 2720,
+          "note": "비율 0.48 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://dongjak-dmapt.co.kr/image/main/section5_bg.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 1.87 < 6.8)"
+        },
+        {
+          "url": "https://dongjak-dmapt.co.kr/image/main/section4_bg.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 0.03 < 6.8)"
+        },
+        {
+          "url": "https://dongjak-dmapt.co.kr/image/main/section3_bg.png",
+          "width": 8362,
+          "height": 240,
+          "note": "비율 34.84 (1.2~2.2 밖)"
+        }
+      ]
+    },
+    "동탄신도시 금강펜테리움 7차 센트럴파크 불법행위재공급": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://blog.naver.com/kkvista",
+      "candidates": [
+        {
+          "url": "https://blogfiles.pstatic.net/MjAxODAzMTJfMzUg/MDAxNTIwODE0NTEwMzMx.G3txscREi881zZplJbHblRDxjoqhV-99MS6Ccr1uNMUg.9EgQRa32KvdeKp749zGDdm6JOv9OyCBDDrghw8gUZTIg.JPEG.kkvista/%ED%8E%9C%ED%84%B0%EB%A6%AC%EC%9B%80_%EB%A9%94%EC%9D%B8%EC%8B%9C%EC%95%88_500kb_%EC%84%B8%EB%A1%9C+%EC%A1%B0%EC%A0%88_2_%EC%B5%9C%EC%A2%85.jpg",
+          "width": 1890,
+          "height": 725,
+          "note": "비율 2.61 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://editor-static.pstatic.net/v/basic/1.78.1/img/se-sp-viewer.ee5afa38.png",
+          "width": 932,
+          "height": 836,
+          "note": "비율 1.11 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://postfiles.pstatic.net/MjAyNjExMjNfMjAw/MDAxNzk1NDAyNzY4MzA3.JaV5rE37_-l1QwAVqOL09rNnDtuxxueiMZsrRpvtWP4g.zgS-j6u7W9gYguLIcMEolf-9fvoz1CIzJM7NgGlzncAg.JPEG/DJI_0031_a1b4a.jpg?type=w966",
+          "width": 966,
+          "height": 724
+        }
+      ]
+    },
+    "동탄신도시 금강펜테리움 7차 센트럴파크(2차)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://blog.naver.com/kkvista",
+      "candidates": [
+        {
+          "url": "https://blogfiles.pstatic.net/MjAxODAzMTJfMzUg/MDAxNTIwODE0NTEwMzMx.G3txscREi881zZplJbHblRDxjoqhV-99MS6Ccr1uNMUg.9EgQRa32KvdeKp749zGDdm6JOv9OyCBDDrghw8gUZTIg.JPEG.kkvista/%ED%8E%9C%ED%84%B0%EB%A6%AC%EC%9B%80_%EB%A9%94%EC%9D%B8%EC%8B%9C%EC%95%88_500kb_%EC%84%B8%EB%A1%9C+%EC%A1%B0%EC%A0%88_2_%EC%B5%9C%EC%A2%85.jpg",
+          "width": 1890,
+          "height": 725,
+          "note": "비율 2.61 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://editor-static.pstatic.net/v/basic/1.78.1/img/se-sp-viewer.ee5afa38.png",
+          "width": 932,
+          "height": 836,
+          "note": "비율 1.11 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://postfiles.pstatic.net/MjAyNjExMjNfMjAw/MDAxNzk1NDAyNzY4MzA3.JaV5rE37_-l1QwAVqOL09rNnDtuxxueiMZsrRpvtWP4g.zgS-j6u7W9gYguLIcMEolf-9fvoz1CIzJM7NgGlzncAg.JPEG/DJI_0031_a1b4a.jpg?type=w966",
+          "width": 966,
+          "height": 724
+        }
+      ]
+    },
+    "두산위브 더센트럴 수원": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://두산위브더센트럴수원.com",
+      "candidates": [
+        {
+          "url": "https://xn--9m1brsn1gisitsdcyab8beyshnar08g.com/assets/images/main/visual-new-bg_02.jpg",
+          "width": 3840,
+          "height": 1940
+        },
+        {
+          "url": "https://xn--9m1brsn1gisitsdcyab8beyshnar08g.com/assets/images/main/visual-new-bg_01.jpg",
+          "width": 3840,
+          "height": 1940
+        },
+        {
+          "url": "https://xn--9m1brsn1gisitsdcyab8beyshnar08g.com/assets/images/intro/intro-bg.png",
+          "width": 1291,
+          "height": 970,
+          "note": "투명한 부분이 77% (장식용 이미지)"
+        },
+        {
+          "url": "https://xn--9m1brsn1gisitsdcyab8beyshnar08g.com/assets/images/intro/intro-bg-02.png",
+          "width": 1291,
+          "height": 970,
+          "note": "투명한 부분이 77% (장식용 이미지)"
+        },
+        {
+          "url": "https://xn--9m1brsn1gisitsdcyab8beyshnar08g.com/assets/images/sub/place.jpg",
+          "width": 1200,
+          "height": 844
+        },
+        {
+          "url": "https://xn--9m1brsn1gisitsdcyab8beyshnar08g.com/assets/images/sub/sub-title-bg.png",
+          "width": 1920,
+          "height": 350,
+          "note": "비율 5.49 (1.2~2.2 밖)"
+        }
+      ]
+    },
+    "두산위브더제니스 부천": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://두산위브더제니스부천.com",
+      "candidates": [
+        {
+          "url": "https://xn--9i1bjk9y42y6tax0kd8d5ylcqcixr.com/assets/images/sub/place.jpg",
+          "width": 1200,
+          "height": 2006,
+          "note": "비율 0.60 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--9i1bjk9y42y6tax0kd8d5ylcqcixr.com/assets/images/main/visual-bg-new3.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://xn--9i1bjk9y42y6tax0kd8d5ylcqcixr.com/assets/images/main/visual-bg-new1.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://xn--9i1bjk9y42y6tax0kd8d5ylcqcixr.com/assets/images/main/visual-bg-new2.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://xn--9i1bjk9y42y6tax0kd8d5ylcqcixr.com/assets/images/main/map-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 4.80 < 6.8)"
+        },
+        {
+          "url": "https://xn--9i1bjk9y42y6tax0kd8d5ylcqcixr.com/assets/images/main/contact-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 3.22 < 6.8)"
+        }
+      ]
+    },
+    "두산위브더제니스 평내호평역 N49": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://두산위브더제니스평내호평역n49.com",
+      "candidates": [
+        {
+          "url": "https://xn--n49-hk1m96f8xan4cv30b2nf7rfmykrldcyext0dba180h.com/assets/images/main/visual-bg-new-long.jpg?v=1",
+          "width": 1920,
+          "height": 2774,
+          "note": "비율 0.69 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--n49-hk1m96f8xan4cv30b2nf7rfmykrldcyext0dba180h.com/assets/images/main/visual-bg-new-02.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://xn--n49-hk1m96f8xan4cv30b2nf7rfmykrldcyext0dba180h.com/assets/images/main/visual-bg-new-01.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://xn--n49-hk1m96f8xan4cv30b2nf7rfmykrldcyext0dba180h.com/assets/images/main/premium-bg.jpg?v=1",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 4.60 < 6.8)"
+        },
+        {
+          "url": "https://xn--n49-hk1m96f8xan4cv30b2nf7rfmykrldcyext0dba180h.com/assets/images/main/visual-dim.jpg?v=1",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 1.54 < 6.8)"
+        },
+        {
+          "url": "https://xn--n49-hk1m96f8xan4cv30b2nf7rfmykrldcyext0dba180h.com/assets/images/sub/complex.jpg",
+          "width": 1200,
+          "height": 1495,
+          "note": "비율 0.80 (1.2~2.2 밖)"
+        }
+      ]
+    },
+    "드파인 아르티아": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://altia.skdefine.com",
+      "candidates": [
+        {
+          "url": "https://altia.skdefine.com/sub/location_map.jpg",
+          "width": 2000,
+          "height": 1401,
+          "note": "단순함 (entropy 5.52 < 6.8)"
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2205824670-49c0b5dc3006e4c7620c092f91819984942d96448cce4cea69a73b514d870576-d?mw=2200&mh=1238",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://altia.skdefine.com/img/intro_vd.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2205824711-fc79db8bf50162b143772e077035bbc3951320bc5f9f4e411fcd9bade2efbd4e-d?mw=2200&mh=1238",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2205824677-768d9d220c3b625560769a3cba7be60a8450442ac62d84059ccb4fa64b917e5c-d?mw=2200&mh=1238",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2205824699-f2985fa4ae1a7ce1afedd3d428686f04073a6d0dff7fba2b5c99f18aa0416d0e-d?mw=2200&mh=1238",
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    "드파인 연희": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://yh.skdefine.com",
+      "candidates": [
+        {
+          "url": "https://yh.skdefine.com/sub/complex_zoom.jpg",
+          "width": 2400,
+          "height": 1319,
+          "note": "단순함 (entropy 6.33 < 6.8)"
+        },
+        {
+          "url": "https://yh.skdefine.com/sub/complex.jpg",
+          "width": 1100,
+          "height": 2323,
+          "note": "비율 0.47 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://yh.skdefine.com/img/main.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://yh.skdefine.com/img/comm_img05.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://yh.skdefine.com/img/comm_img01.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://yh.skdefine.com/img/comm_img02.jpg",
+          "width": 1920,
+          "height": 1000
+        }
+      ]
+    },
+    "디 아테온(THE ATHEON)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://www.디아테온.com",
+      "candidates": [
+        {
+          "url": "http://atheon.mycafe24.com/assets/img/bg.jpg",
+          "width": 1920,
+          "height": 1365,
+          "note": "단순함 (entropy 1.97 < 6.8)"
+        },
+        {
+          "url": "http://www.xn--2z1b002atta693a.com/assets/img/main/1.jpg",
+          "width": 1920,
+          "height": 1200
+        },
+        {
+          "url": "http://www.xn--2z1b002atta693a.com/assets/img/main/2.jpg",
+          "width": 1920,
+          "height": 1200
+        },
+        {
+          "url": "http://neo233.viahost.co.kr/01_atheon/assets/img/main/theme1.jpg",
+          "width": 1920,
+          "height": 1200,
+          "note": "단순함 (entropy 5.23 < 6.8)"
+        },
+        {
+          "url": "http://neo233.viahost.co.kr/01_atheon/assets/img/main/theme2.jpg",
+          "width": 1920,
+          "height": 1200,
+          "note": "단순함 (entropy 5.37 < 6.8)"
+        },
+        {
+          "url": "http://neo233.viahost.co.kr/01_atheon/assets/img/main/theme3.jpg",
+          "width": 1920,
+          "height": 1200,
+          "note": "단순함 (entropy 5.51 < 6.8)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "디에이치 아델스타": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://dh-adelstar.co.kr",
+      "candidates": [
+        {
+          "url": "https://dh-adelstar.co.kr/images/intro4_bg1.jpg?2",
+          "width": 3840,
+          "height": 2387
+        },
+        {
+          "url": "https://dh-adelstar.co.kr/images/intro1_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 4.24 < 6.8)"
+        },
+        {
+          "url": "https://dh-adelstar.co.kr/images/intro2_bg1.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 4.44 < 6.8)"
+        },
+        {
+          "url": "https://dh-adelstar.co.kr/images/intro3_bg1.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 6.61 < 6.8)"
+        },
+        {
+          "url": "https://dh-adelstar.co.kr/images/img_sales_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 6.12 < 6.8)"
+        },
+        {
+          "url": "https://dh-adelstar.co.kr/images/img_premium_bg1.jpg?1",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 5.69 < 6.8)"
+        }
+      ]
+    },
+    "라클라체자이드파인": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))"
+    },
+    "래미안 엘라비네": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 앞쪽 5쪽에 이미지가 없음"
+    },
+    "래미안 원페를라": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 앞쪽 5쪽에 이미지가 없음"
+    },
+    "리버센 SK VIEW 롯데캐슬": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "리버센트 푸르지오 위브": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://prugio.com/hb/2025/rivercent/",
+      "candidates": [
+        {
+          "url": "https://prugio.com/hb/2025/rivercent/assets/images/sub/landscaping.jpg?v=1",
+          "width": 1408,
+          "height": 3770,
+          "note": "비율 0.37 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://prugio.com/hb/2025/rivercent/m/assets/images/sub/m_landscaping.jpg?v=1",
+          "width": 750,
+          "height": 3027,
+          "note": "가로 750px (800px 미만)"
+        },
+        {
+          "url": "https://prugio.com/hb/2025/rivercent/assets/images/sub/place.jpg?v=1",
+          "width": 1408,
+          "height": 1496,
+          "note": "비율 0.94 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://prugio.com/hb/2025/rivercent/assets/images/main/visual-bg-new.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://prugio.com/hb/2025/rivercent/assets/images/main/premium-bg-01.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://prugio.com/hb/2025/rivercent/assets/images/main/premium-bg-02.jpg",
+          "width": 1920,
+          "height": 970
+        }
+      ]
+    },
+    "만안역 중앙하이츠 포레": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "망포역 푸르지오 르마크": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.prugio.com/hb/2025/mangpo/",
+      "candidates": [
+        {
+          "url": "https://www.prugio.com/hb/2025/mangpo/assets/images/main/visual-bg-new3.jpg",
+          "width": 3840,
+          "height": 2412
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/mangpo/assets/images/sub/complex.jpg",
+          "width": 1408,
+          "height": 1788,
+          "note": "비율 0.79 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/mangpo/assets/images/sub/place.jpg?v=1",
+          "width": 1408,
+          "height": 1547,
+          "note": "비율 0.91 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/mangpo/assets/images/main/premium-bg-01.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/mangpo/assets/images/main/premium-bg-02.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/mangpo/assets/images/main/premium-bg-03.jpg",
+          "width": 1920,
+          "height": 970
+        }
+      ]
+    },
+    "반포 래미안 트리니원": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 앞쪽 5쪽에 이미지가 없음"
+    },
+    "봉담자이 프라이드시티": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "부천 중앙하이츠 심곡 102동": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://blog.naver.com/hankipo",
+      "candidates": [
+        {
+          "url": "https://blogfiles.pstatic.net/MjAyNDA5MDlfMTky/MDAxNzI1ODQ0OTEzNjM1.wM8mfFaUHdoGGIZC0FNYGr0TkQhhaZ5QILiXj5ClArIg.3AokUJ0_ghLUlVu40ymhdEyr0H8CPpaj5Gozul3X2Xog.JPEG/%EC%A1%B0%EA%B0%90%EB%8F%84.jpg/backtop?type=w3000_q70",
+          "width": 3000,
+          "height": 2293
+        },
+        {
+          "url": "https://editor-static.pstatic.net/v/basic/1.78.1/img/se-sp-viewer.ee5afa38.png",
+          "width": 932,
+          "height": 836,
+          "note": "비율 1.11 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://ssl.pstatic.net/static/blog/skin/108/side-head.png",
+          "width": 966,
+          "height": 90,
+          "note": "비율 10.73 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://ssl.pstatic.net/static/blog/skin/108/side-footer.png",
+          "width": 966,
+          "height": 90,
+          "note": "비율 10.73 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://ssl.pstatic.net/static/blog/skin/108/blog-menu.png",
+          "width": 966,
+          "height": 60,
+          "note": "비율 16.10 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://ssl.pstatic.net/static/blog/skin/108/body.png",
+          "width": 3000,
+          "height": 1,
+          "note": "비율 3000.00 (1.2~2.2 밖)"
+        }
+      ]
+    },
+    "부천 JY 포에시아": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://cafe.daum.net/JY8168834",
+      "candidates": [
+        {
+          "url": "https://t1.daumcdn.net/cafe_image/entrance/banner2.jpg",
+          "width": 870,
+          "height": 360,
+          "note": "비율 2.42 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://t1.daumcdn.net/cafe_image/cf_img4/title/bg/2020skin_img.jpg",
+          "width": 1100,
+          "height": 113,
+          "note": "비율 9.73 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://t1.daumcdn.net/cafe_image/entrance/banner3.jpg",
+          "width": 870,
+          "height": 70,
+          "note": "비율 12.43 (1.2~2.2 밖)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "부천역 에피트 어바닉": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://brand.hldni.com/bucheon-urbanic/",
+      "candidates": [
+        {
+          "url": "https://brand.hldni.com/bucheon-urbanic/image/main/premium_bg.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 4.04 < 6.8)"
+        },
+        {
+          "url": "https://brand.hldni.com/bucheon-urbanic/image/main/contact_bg.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 4.74 < 6.8)"
+        },
+        {
+          "url": "https://brand.hldni.com/bucheon-urbanic/image/main/brand_bg.jpg",
+          "width": 1920,
+          "height": 904,
+          "note": "단순함 (entropy 1.50 < 6.8)"
+        },
+        {
+          "url": "https://brand.hldni.com/bucheon-urbanic/image/sub/danzi/danzi.jpg",
+          "width": 1300,
+          "height": 1325,
+          "note": "비율 0.98 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://brand.hldni.com/bucheon-urbanic/image/sub/about/map_bg.jpg",
+          "width": 1300,
+          "height": 940,
+          "note": "단순함 (entropy 1.87 < 6.8)"
+        },
+        {
+          "url": "https://brand.hldni.com/bucheon-urbanic/image/sub/vis_img.jpg",
+          "width": 1920,
+          "height": 440,
+          "note": "비율 4.36 (1.2~2.2 밖)"
+        }
+      ],
+      "review": true
+    },
+    "북서울자이 폴라리스(보류지)": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 1403×992: 단순함 (entropy 5.48 < 6.8))"
+    },
+    "북오산자이 리버블시티": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "브라운스톤 월곡 센트럴": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.브라운스톤월곡센트럴.com",
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "빌리브센트하이(2차)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://cent.villiv.co.kr",
+      "candidates": [
+        {
+          "url": "https://cent.villiv.co.kr/resources/img/gate/gate_bg.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://cent.villiv.co.kr/resources/img/gnb_menu_ver3.png",
+          "width": 950,
+          "height": 15,
+          "note": "비율 63.33 (1.2~2.2 밖)"
+        }
+      ]
+    },
+    "상동역 롯데캐슬 시그니처": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.lottecastle.co.kr/APT/AT00430/main/index.do",
+      "candidates": [
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/8/202608120137512090.jpg",
+          "width": 1160,
+          "height": 1726,
+          "note": "비율 0.67 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/8/202608120448055020.jpg",
+          "width": 1920,
+          "height": 1029
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/8/202608120136283350.jpg",
+          "width": 1160,
+          "height": 1104,
+          "note": "비율 1.05 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/8/202608141020033910.jpg",
+          "width": 1160,
+          "height": 640,
+          "note": "단순함 (entropy 6.80 < 6.8)"
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/8/202608141020034191.jpg",
+          "width": 1160,
+          "height": 640
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/8/202608141020034292.jpg",
+          "width": 1160,
+          "height": 640
+        }
+      ]
+    },
+    "상봉 센트럴 아이파크": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.sangbong-ipark.com",
+      "candidates": [
+        {
+          "url": "https://neo233.viahost.co.kr/00_sangbong/images/complex04_01_4.jpg",
+          "width": 1200,
+          "height": 3245,
+          "note": "비율 0.37 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.sangbong-ipark.com/images/main/main_mobile_slide2.jpg",
+          "width": 2489,
+          "height": 1400,
+          "note": "단순함 (entropy 6.56 < 6.8)"
+        },
+        {
+          "url": "https://www.sangbong-ipark.com/images/main/main_mobile_slide.jpg",
+          "width": 2489,
+          "height": 1400
+        },
+        {
+          "url": "https://neo233.viahost.co.kr/00_sangbong/images/sub02_01_2b.jpg",
+          "width": 2300,
+          "height": 1425,
+          "note": "단순함 (entropy 5.61 < 6.8)"
+        },
+        {
+          "url": "https://www.sangbong-ipark.com/images/img_planning_01.png",
+          "width": 2300,
+          "height": 1425,
+          "note": "단순함 (entropy 5.60 < 6.8)"
+        },
+        {
+          "url": "https://neo233.viahost.co.kr/00_sangbong/images/img_planning_02_mo.jpg",
+          "width": 800,
+          "height": 3421,
+          "note": "비율 0.23 (1.2~2.2 밖)"
+        }
+      ]
+    },
+    "서울원 아이파크": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://seoulone-ipark.co.kr/",
+      "candidates": [
+        {
+          "url": "https://seoulone-ipark.co.kr/images/vis-bg02-m.jpg",
+          "width": 2496,
+          "height": 1400
+        },
+        {
+          "url": "https://seoulone-ipark.co.kr/images/vis-bg05-m.jpg",
+          "width": 2489,
+          "height": 1400
+        },
+        {
+          "url": "https://seoulone-ipark.co.kr/images/vis-bg01-m.jpg?ver=2",
+          "width": 2489,
+          "height": 1400
+        },
+        {
+          "url": "https://seoulone-ipark.co.kr/images/location-map.jpg?ver=2",
+          "width": 2490,
+          "height": 1357,
+          "note": "단순함 (entropy 5.09 < 6.8)"
+        },
+        {
+          "url": "https://seoulone-ipark.co.kr/images/vis-bg02-pc.jpg",
+          "width": 1920,
+          "height": 960
+        },
+        {
+          "url": "https://seoulone-ipark.co.kr/images/vis-bg05-pc.jpg",
+          "width": 1920,
+          "height": 960
+        }
+      ]
+    },
+    "성남복정1지구 B1블록 복정역 에피트": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "소사 휴먼빌": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "수원역 아너스빌 타임원": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.수원역아너스빌.com",
+      "candidates": [
+        {
+          "url": "https://www.xn--h50bp5wj1cbqa48h72an9b.com/sub/location.jpg",
+          "width": 1200,
+          "height": 2369,
+          "note": "비율 0.51 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--h50bp5wj1cbqa48h72an9b.com/sub/t_dh.jpg",
+          "width": 1200,
+          "height": 2144,
+          "note": "비율 0.56 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--h50bp5wj1cbqa48h72an9b.com/sub/t_complex.jpg",
+          "width": 1200,
+          "height": 2032,
+          "note": "비율 0.59 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--h50bp5wj1cbqa48h72an9b.com/img/main_img03.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://www.xn--h50bp5wj1cbqa48h72an9b.com/img/premium_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 6.57 < 6.8)"
+        },
+        {
+          "url": "https://www.xn--h50bp5wj1cbqa48h72an9b.com/img/contact_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 6.13 < 6.8)"
+        }
+      ]
+    },
+    "수지자이 에디시온": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))"
+    },
+    "시흥 은계 에피트": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))"
+    },
+    "시흥 은계 에피트(조합원 취소분)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://efete-eungye.com/",
+      "candidates": [
+        {
+          "url": "http://efete-eungye.com/asset/mainvisual01.png",
+          "width": 2880,
+          "height": 1454
+        },
+        {
+          "url": "http://efete-eungye.com/asset/sec_unit_bg.png",
+          "width": 2880,
+          "height": 1454,
+          "note": "단순함 (entropy 3.51 < 6.8)"
+        },
+        {
+          "url": "http://efete-eungye.com/asset/sec_location_bg.png",
+          "width": 2880,
+          "height": 1454,
+          "note": "투명한 부분이 100% (장식용 이미지)"
+        },
+        {
+          "url": "http://efete-eungye.com/asset/sec_brand_bg.png",
+          "width": 2880,
+          "height": 1356,
+          "note": "단순함 (entropy 1.56 < 6.8)"
+        },
+        {
+          "url": "http://efete-eungye.com/asset/sec_premium_bg.png",
+          "width": 2880,
+          "height": 1287,
+          "note": "비율 2.24 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://efete-eungye.com/asset/sub/location_bg.png",
+          "width": 1950,
+          "height": 1310,
+          "note": "단순함 (entropy 0.92 < 6.8)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "시흥거모 엘가 로제비앙": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://시흥거모-엘가로제비앙.com",
+      "candidates": [
+        {
+          "url": "http://xn----3x5epl402b6xcrshb9i17et6a17mv32c.com/img/location_zoom.png",
+          "width": 1800,
+          "height": 2041,
+          "note": "비율 0.88 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://xn----3x5epl402b6xcrshb9i17et6a17mv32c.com/img/location_img01.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "http://xn----3x5epl402b6xcrshb9i17et6a17mv32c.com/img/main_bg.png",
+          "width": 1920,
+          "height": 1000,
+          "note": "투명한 부분이 100% (장식용 이미지)"
+        },
+        {
+          "url": "http://xn----3x5epl402b6xcrshb9i17et6a17mv32c.com/img/location_img03.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "http://xn----3x5epl402b6xcrshb9i17et6a17mv32c.com/img/location_img02.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "http://xn----3x5epl402b6xcrshb9i17et6a17mv32c.com/img/location_img04.jpg",
+          "width": 1920,
+          "height": 1000
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "식사 푸르지오 파크센트": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://siksaprugio.com",
+      "candidates": [
+        {
+          "url": "https://siksaprugio.com/assets/images/sub/complex.jpg?v=1",
+          "width": 1408,
+          "height": 2411,
+          "note": "비율 0.58 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://siksaprugio.com/m/assets/images/sub/m_complex.jpg?v=1",
+          "width": 750,
+          "height": 2603,
+          "note": "가로 750px (800px 미만)"
+        },
+        {
+          "url": "https://siksaprugio.com/assets/images/main/visual-bg.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://siksaprugio.com/assets/images/main/unit-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 3.45 < 6.8)"
+        },
+        {
+          "url": "https://siksaprugio.com/assets/images/main/premium-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 5.37 < 6.8)"
+        },
+        {
+          "url": "https://siksaprugio.com/assets/images/sub/place.jpg?v=2",
+          "width": 1408,
+          "height": 1073
+        }
+      ]
+    },
+    "식사 푸르지오 파크센트(조합원 취소분)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://siksaprugio.com",
+      "candidates": [
+        {
+          "url": "https://siksaprugio.com/assets/images/sub/complex.jpg?v=1",
+          "width": 1408,
+          "height": 2411,
+          "note": "비율 0.58 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://siksaprugio.com/m/assets/images/sub/m_complex.jpg?v=1",
+          "width": 750,
+          "height": 2603,
+          "note": "가로 750px (800px 미만)"
+        },
+        {
+          "url": "https://siksaprugio.com/assets/images/main/visual-bg.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://siksaprugio.com/assets/images/main/unit-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 3.45 < 6.8)"
+        },
+        {
+          "url": "https://siksaprugio.com/assets/images/main/premium-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 5.37 < 6.8)"
+        },
+        {
+          "url": "https://siksaprugio.com/assets/images/sub/place.jpg?v=2",
+          "width": 1408,
+          "height": 1073
+        }
+      ]
+    },
+    "쌍용 더 플래티넘 서대문": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.쌍용더플래티넘서대문.com",
+      "candidates": [
+        {
+          "url": "https://www.xn--x50b59afhs4mwmfqskkpdhwjjz3aiwe.com/img/main.jpg",
+          "width": 1920,
+          "height": 4541,
+          "note": "비율 0.42 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--x50b59afhs4mwmfqskkpdhwjjz3aiwe.com/img/location_map.png",
+          "width": 2000,
+          "height": 1481,
+          "note": "단순함 (entropy 6.01 < 6.8)"
+        },
+        {
+          "url": "https://www.xn--x50b59afhs4mwmfqskkpdhwjjz3aiwe.com/sub/check.jpg",
+          "width": 1100,
+          "height": 1990,
+          "note": "비율 0.55 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--x50b59afhs4mwmfqskkpdhwjjz3aiwe.com/img/common/site_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 3.06 < 6.8)"
+        },
+        {
+          "url": "https://www.xn--x50b59afhs4mwmfqskkpdhwjjz3aiwe.com/img/main2.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://www.xn--x50b59afhs4mwmfqskkpdhwjjz3aiwe.com/img/main_bg.png",
+          "width": 1920,
+          "height": 1000,
+          "note": "투명한 부분이 100% (장식용 이미지)"
+        }
+      ]
+    },
+    "쌍용 더 플래티넘 온수역": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://더플래티넘온수역.com",
+      "candidates": [
+        {
+          "url": "https://xn--x50bj6bv2fivnfueckm77en1d.com/assets/images/sub/complex.jpg",
+          "width": 1200,
+          "height": 2154,
+          "note": "비율 0.56 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--x50bj6bv2fivnfueckm77en1d.com/assets/images/sub/place.jpg",
+          "width": 1200,
+          "height": 1569,
+          "note": "비율 0.76 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--x50bj6bv2fivnfueckm77en1d.com/assets/images/main/visual-bg-new-02.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://xn--x50bj6bv2fivnfueckm77en1d.com/assets/images/main/visual-bg-new-01.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://xn--x50bj6bv2fivnfueckm77en1d.com/assets/images/main/schedule-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 6.22 < 6.8)"
+        },
+        {
+          "url": "https://xn--x50bj6bv2fivnfueckm77en1d.com/assets/images/main/location-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 4.58 < 6.8)"
+        }
+      ]
+    },
+    "써밋 더힐": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "써밋 클라비온": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://summitclavion.com/",
+      "candidates": [
+        {
+          "url": "https://summitclavion.com/bon/img/loca_map.jpg",
+          "width": 2000,
+          "height": 1825,
+          "note": "비율 1.10 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://summitclavion.com/bon/img/dan/01cont01.jpg?v01",
+          "width": 2125,
+          "height": 1497
+        },
+        {
+          "url": "https://summitclavion.com/bon/img/msumm_img.jpg",
+          "width": 2000,
+          "height": 1440
+        },
+        {
+          "url": "https://summitclavion.com/img/mprem02.jpg",
+          "width": 2000,
+          "height": 1334
+        },
+        {
+          "url": "https://summitclavion.com/img/mprem05.jpg",
+          "width": 2000,
+          "height": 1333
+        },
+        {
+          "url": "https://summitclavion.com/bon/img/mcal_img.jpg",
+          "width": 2000,
+          "height": 1333,
+          "note": "단순함 (entropy 5.18 < 6.8)"
+        }
+      ]
+    },
+    "아크로 드 서초": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "아크로 리버스카이": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "아크로 리츠카운티": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "아크로 베스티뉴": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "안양 에버포레 자연앤 e편한세상(A1BL)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.elife.co.kr",
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 1242×600: 단순함 (entropy 2.24 < 6.8))"
+    },
+    "안양역 센트럴 아이파크 수자인": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.i-park.com/anyangyeok",
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "안양자이 더 포레스트": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "안양자이 헤리티온": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))"
+    },
+    "야목역 서희스타힐스 그랜드힐": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.야목역서희스타힐스그랜드힐.com",
+      "candidates": [
+        {
+          "url": "https://www.xn--2i0bs4kloch9d4zkhlca439cd3a150f0iqomae.com/img/sub/cpx_layout_n3.png",
+          "width": 1202,
+          "height": 1593,
+          "note": "비율 0.75 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--2i0bs4kloch9d4zkhlca439cd3a150f0iqomae.com/img/main/section01_bg_n2.jpg?new",
+          "width": 1920,
+          "height": 960
+        },
+        {
+          "url": "https://www.xn--2i0bs4kloch9d4zkhlca439cd3a150f0iqomae.com/img/sub/parallax_bg.jpg",
+          "width": 1920,
+          "height": 540,
+          "note": "비율 3.56 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--2i0bs4kloch9d4zkhlca439cd3a150f0iqomae.com/img/sub/location_n4.png",
+          "width": 1200,
+          "height": 569,
+          "note": "단순함 (entropy 3.70 < 6.8)"
+        },
+        {
+          "url": "https://www.xn--2i0bs4kloch9d4zkhlca439cd3a150f0iqomae.com/img/main/section01_item_n.png?new",
+          "width": 747,
+          "height": 76,
+          "note": "가로 747px (800px 미만)"
+        }
+      ]
+    },
+    "양주역 제일풍경채 위너스카이": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://jeil-yj.co.kr",
+      "candidates": [
+        {
+          "url": "http://jeil-yj.co.kr/assets/images/sub/complex.jpg",
+          "width": 1100,
+          "height": 1656,
+          "note": "비율 0.66 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://jeil-yj.co.kr/assets/images/main/location-bg.jpg",
+          "width": 1746,
+          "height": 1000
+        },
+        {
+          "url": "http://jeil-yj.co.kr/assets/images/main/visual-new-bg-03.jpg",
+          "width": 1740,
+          "height": 1000,
+          "note": "단순함 (entropy 6.79 < 6.8)"
+        },
+        {
+          "url": "http://jeil-yj.co.kr/assets/images/main/visual-new-bg-02.jpg",
+          "width": 1740,
+          "height": 1000
+        },
+        {
+          "url": "http://jeil-yj.co.kr/assets/images/main/brand-bg.jpg",
+          "width": 1740,
+          "height": 1000
+        },
+        {
+          "url": "http://jeil-yj.co.kr/assets/images/main/unit2-bg.jpg",
+          "width": 1740,
+          "height": 1000,
+          "note": "단순함 (entropy 4.95 < 6.8)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "엘리프 역곡": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://엘리프역곡.kr",
+      "candidates": [
+        {
+          "url": "https://xn--399ap6vcpjpc887g.kr/images/vis-bg01.jpg",
+          "width": 1920,
+          "height": 966
+        },
+        {
+          "url": "https://xn--399ap6vcpjpc887g.kr/images/vis-bg02.jpg",
+          "width": 1920,
+          "height": 966
+        },
+        {
+          "url": "https://xn--399ap6vcpjpc887g.kr/images/premium_bg.jpg",
+          "width": 1920,
+          "height": 966,
+          "note": "단순함 (entropy 5.18 < 6.8)"
+        },
+        {
+          "url": "https://xn--399ap6vcpjpc887g.kr/images/location_bg.jpg?v=2",
+          "width": 1920,
+          "height": 966,
+          "note": "단순함 (entropy 2.73 < 6.8)"
+        },
+        {
+          "url": "https://xn--399ap6vcpjpc887g.kr/images/brand_bg01.jpg",
+          "width": 1920,
+          "height": 966
+        },
+        {
+          "url": "https://xn--399ap6vcpjpc887g.kr/images/brand_bg02.jpg",
+          "width": 1920,
+          "height": 966
+        }
+      ]
+    },
+    "엘리프 원종": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://엘리프원종.com",
+      "candidates": [
+        {
+          "url": "https://xn--oy2bp6tkva73c7y1a.com/open/images/slide_01.jpg",
+          "width": 2500,
+          "height": 1475
+        },
+        {
+          "url": "https://xn--oy2bp6tkva73c7y1a.com/open/images/unit_bg.jpg",
+          "width": 2000,
+          "height": 1631,
+          "note": "단순함 (entropy 5.80 < 6.8)"
+        },
+        {
+          "url": "https://xn--oy2bp6tkva73c7y1a.com/open/images/soon_main_01.jpg",
+          "width": 2000,
+          "height": 1374,
+          "note": "단순함 (entropy 5.30 < 6.8)"
+        },
+        {
+          "url": "https://xn--oy2bp6tkva73c7y1a.com/open/images/premium_04.jpg",
+          "width": 2000,
+          "height": 1340,
+          "note": "단순함 (entropy 6.12 < 6.8)"
+        },
+        {
+          "url": "https://xn--oy2bp6tkva73c7y1a.com/open/images/premium_bg.jpg",
+          "width": 2000,
+          "height": 1335,
+          "note": "단순함 (entropy 4.82 < 6.8)"
+        },
+        {
+          "url": "https://xn--oy2bp6tkva73c7y1a.com/open/images/location_bg.jpg",
+          "width": 2000,
+          "height": 1333,
+          "note": "단순함 (entropy 5.79 < 6.8)"
+        }
+      ]
+    },
+    "엘리프 한신더휴 수원 C3블록(본청약)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://www.엘리프한신더휴수원.com",
+      "candidates": [
+        {
+          "url": "https://xn--9m1b83j3xh2was2iwubdz8ceua06k.com/images/complex-info/plan1_251029.jpg",
+          "width": 1300,
+          "height": 3594,
+          "note": "비율 0.36 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--9m1b83j3xh2was2iwubdz8ceua06k.com/images/info/location-environment1_260729.jpg",
+          "width": 1300,
+          "height": 3238,
+          "note": "비율 0.40 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--9m1b83j3xh2was2iwubdz8ceua06k.com/images/complex-info/layout1_c3_251029.jpg",
+          "width": 1300,
+          "height": 2850,
+          "note": "비율 0.46 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--9m1b83j3xh2was2iwubdz8ceua06k.com/images/complex-info/layout1_d3_251029.jpg",
+          "width": 1300,
+          "height": 2850,
+          "note": "비율 0.46 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--9m1b83j3xh2was2iwubdz8ceua06k.com/images/main/bg_premium1.jpg",
+          "width": 2000,
+          "height": 1000,
+          "note": "단순함 (entropy 5.03 < 6.8)"
+        },
+        {
+          "url": "https://xn--9m1b83j3xh2was2iwubdz8ceua06k.com/images/main/bg_brand1_250701.jpg",
+          "width": 2000,
+          "height": 1000,
+          "note": "단순함 (entropy 6.72 < 6.8)"
+        }
+      ]
+    },
+    "엘리프 한신더휴 수원 D3블록(본청약)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://www.엘리프한신더휴수원.com",
+      "candidates": [
+        {
+          "url": "https://xn--9m1b83j3xh2was2iwubdz8ceua06k.com/images/complex-info/plan1_251029.jpg",
+          "width": 1300,
+          "height": 3594,
+          "note": "비율 0.36 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--9m1b83j3xh2was2iwubdz8ceua06k.com/images/info/location-environment1_260729.jpg",
+          "width": 1300,
+          "height": 3238,
+          "note": "비율 0.40 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--9m1b83j3xh2was2iwubdz8ceua06k.com/images/complex-info/layout1_c3_251029.jpg",
+          "width": 1300,
+          "height": 2850,
+          "note": "비율 0.46 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--9m1b83j3xh2was2iwubdz8ceua06k.com/images/complex-info/layout1_d3_251029.jpg",
+          "width": 1300,
+          "height": 2850,
+          "note": "비율 0.46 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--9m1b83j3xh2was2iwubdz8ceua06k.com/images/main/bg_premium1.jpg",
+          "width": 2000,
+          "height": 1000,
+          "note": "단순함 (entropy 5.03 < 6.8)"
+        },
+        {
+          "url": "https://xn--9m1b83j3xh2was2iwubdz8ceua06k.com/images/main/bg_brand1_250701.jpg",
+          "width": 2000,
+          "height": 1000,
+          "note": "단순함 (entropy 6.72 < 6.8)"
+        }
+      ]
+    },
+    "엠타워 디루체": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 1086×778: 단순함 (entropy 5.84 < 6.8))"
+    },
+    "역북 서희스타힐스 프라임시티(조합원 취소분)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://www.역북프라임시티.com",
+      "candidates": [
+        {
+          "url": "http://www.xn--oi2b47it3ewrdhqckz2aknd.com/img/content/b_01_01.jpg",
+          "width": 3000,
+          "height": 1557
+        },
+        {
+          "url": "http://www.xn--oi2b47it3ewrdhqckz2aknd.com/img/content/a_02_03.jpg",
+          "width": 2000,
+          "height": 1300
+        },
+        {
+          "url": "http://www.xn--oi2b47it3ewrdhqckz2aknd.com/img/visual01.jpg",
+          "width": 2200,
+          "height": 860,
+          "note": "비율 2.56 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.xn--oi2b47it3ewrdhqckz2aknd.com/img/visual02.jpg",
+          "width": 2200,
+          "height": 860,
+          "note": "비율 2.56 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.xn--oi2b47it3ewrdhqckz2aknd.com/img/visual03.jpg",
+          "width": 2200,
+          "height": 860,
+          "note": "비율 2.56 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.xn--oi2b47it3ewrdhqckz2aknd.com/img/planBg.jpg",
+          "width": 2000,
+          "height": 847,
+          "note": "비율 2.36 (1.2~2.2 밖)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 앞쪽 5쪽에 이미지가 없음"
+    },
+    "역삼센트럴자이": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "오남역 서희스타힐스 여의재 3단지": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://www.오남역서희스타힐스여의재.com",
+      "candidates": [
+        {
+          "url": "https://www.xn--q20b152av7aa413bca79ak6fvvae81e0yqoma.com/theme/theme/images/_schedule_bg01.jpg",
+          "width": 2066,
+          "height": 1111,
+          "note": "단순함 (entropy 6.74 < 6.8)"
+        },
+        {
+          "url": "https://www.xn--q20b152av7aa413bca79ak6fvvae81e0yqoma.com/theme/theme/img/sub2_1_01.jpg",
+          "width": 1200,
+          "height": 1627,
+          "note": "비율 0.74 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2137553090-bbfeea72881855bed522856fa7f8716437dfb4f76ac2dc5ab187fa424018d6e4-d?mw=1600&mh=900",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2137553132-5e5e7334b9113b6e7459655e8ee17e61abb48f29c462c6e9ea83c3f15989ebaf-d?mw=1600&mh=900",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2137553152-06a44a3e974ee85f4b81acaa4398a44e7550cdbafa3ab40126474402631e07d7-d?mw=1600&mh=900",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "url": "https://www.xn--q20b152av7aa413bca79ak6fvvae81e0yqoma.com/theme/theme/images/_sub_bg02.jpg",
+          "width": 1920,
+          "height": 640,
+          "note": "비율 3.00 (1.2~2.2 밖)"
+        }
+      ]
+    },
+    "오남역 서희스타힐스 여의재 3단지 (조합원 취소분)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.오남역서희스타힐스여의재.com",
+      "candidates": [
+        {
+          "url": "https://www.xn--q20b152av7aa413bca79ak6fvvae81e0yqoma.com/theme/theme/images/_schedule_bg01.jpg",
+          "width": 2066,
+          "height": 1111,
+          "note": "단순함 (entropy 6.74 < 6.8)"
+        },
+        {
+          "url": "https://www.xn--q20b152av7aa413bca79ak6fvvae81e0yqoma.com/theme/theme/img/sub2_1_01.jpg",
+          "width": 1200,
+          "height": 1627,
+          "note": "비율 0.74 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2137553090-bbfeea72881855bed522856fa7f8716437dfb4f76ac2dc5ab187fa424018d6e4-d?mw=1600&mh=900",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2137553132-5e5e7334b9113b6e7459655e8ee17e61abb48f29c462c6e9ea83c3f15989ebaf-d?mw=1600&mh=900",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "url": "https://www.xn--q20b152av7aa413bca79ak6fvvae81e0yqoma.com/theme/theme/images/_sub_bg02.jpg",
+          "width": 1920,
+          "height": 640,
+          "note": "비율 3.00 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://img.youtube.com/vi/CfNYaZ_02K0/maxresdefault.jpg",
+          "width": 1280,
+          "height": 720
+        }
+      ]
+    },
+    "오산 세교 우미 린 레이크시티": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://ow2.lynn.co.kr",
+      "candidates": [
+        {
+          "url": "https://ow2.lynn.co.kr/upload/editor/c6b45c0907044baf8ca03fb845cdeb90.png",
+          "width": 1100,
+          "height": 2043,
+          "note": "비율 0.54 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://ow2.lynn.co.kr/upload/editor/c76c073ab53443c19599ef78f655ff70.png",
+          "width": 1920,
+          "height": 1124
+        },
+        {
+          "url": "https://ow2.lynn.co.kr/upload/editor/2eea60b8e56f4700be898e9e35758bda.png",
+          "width": 1920,
+          "height": 1124
+        },
+        {
+          "url": "https://ow2.lynn.co.kr/resources/assets/v3/images/main/sec05_bg.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 6.69 < 6.8)"
+        },
+        {
+          "url": "https://ow2.lynn.co.kr/resources/assets/v3/images/main/sec03_bg_new.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 3.99 < 6.8)"
+        },
+        {
+          "url": "https://ow2.lynn.co.kr/resources/assets/v3/images/main/sec02_bg.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 5.31 < 6.8)"
+        }
+      ]
+    },
+    "오정 해모로 스마트시티(조합원 취소분)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://오정해모로스마트시티.com",
+      "candidates": [
+        {
+          "url": "https://xn--2o2b2zft01wbias7oo1ds82apoaq1s.com/images/mv_bg01.jpg?ver=2",
+          "width": 2000,
+          "height": 980
+        },
+        {
+          "url": "https://xn--2o2b2zft01wbias7oo1ds82apoaq1s.com/images/mv_bg02.jpg?ver=2",
+          "width": 2000,
+          "height": 980
+        },
+        {
+          "url": "https://xn--2o2b2zft01wbias7oo1ds82apoaq1s.com/images/main_con02_bg.jpg",
+          "width": 2000,
+          "height": 980,
+          "note": "단순함 (entropy 2.04 < 6.8)"
+        },
+        {
+          "url": "https://xn--2o2b2zft01wbias7oo1ds82apoaq1s.com/images/main_con04_bg04.jpg?ver=1",
+          "width": 1920,
+          "height": 980,
+          "note": "단순함 (entropy 4.88 < 6.8)"
+        },
+        {
+          "url": "https://xn--2o2b2zft01wbias7oo1ds82apoaq1s.com/images/main_con02_slide_img007.jpg",
+          "width": 1003,
+          "height": 1336,
+          "note": "비율 0.75 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--2o2b2zft01wbias7oo1ds82apoaq1s.com/images/main_con02_slide_img001.jpg",
+          "width": 1265,
+          "height": 843,
+          "note": "단순함 (entropy 6.69 < 6.8)"
+        }
+      ]
+    },
+    "오티에르 반포": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://오티에르반포.kr",
+      "candidates": [
+        {
+          "url": "https://i.vimeocdn.com/video/1446270409-57b760bc4718f668625cdcc696caedf3eb88a24627b9074827240ed48ae2dcc6-d?mw=1500&mh=752",
+          "width": 1499,
+          "height": 752,
+          "note": "단순함 (entropy 2.21 < 6.8)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 786×691: 단순함 (entropy 0.83 < 6.8))"
+    },
+    "오티에르 포레": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://오티에르포레.kr",
+      "candidates": [
+        {
+          "url": "https://xn--om2b1zg5yuja495cjmb.kr/resources/img/main/sec5-bg.jpg",
+          "width": 2144,
+          "height": 1434,
+          "note": "단순함 (entropy 6.72 < 6.8)"
+        },
+        {
+          "url": "https://xn--om2b1zg5yuja495cjmb.kr/resources/img/main/sec1-bg.jpg",
+          "width": 1920,
+          "height": 1444,
+          "note": "단순함 (entropy 5.52 < 6.8)"
+        },
+        {
+          "url": "https://xn--om2b1zg5yuja495cjmb.kr/resources/img/main/sec06.jpg",
+          "width": 909,
+          "height": 1080,
+          "note": "비율 0.84 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--om2b1zg5yuja495cjmb.kr/resources/img/main/sec6-1.png",
+          "width": 626,
+          "height": 770,
+          "note": "가로 626px (800px 미만)"
+        },
+        {
+          "url": "https://xn--om2b1zg5yuja495cjmb.kr/resources/img/main/sec6-2.png",
+          "width": 626,
+          "height": 770,
+          "note": "가로 626px (800px 미만)"
+        },
+        {
+          "url": "https://xn--om2b1zg5yuja495cjmb.kr/resources/img/main/top_link01.jpg",
+          "width": 781,
+          "height": 140,
+          "note": "가로 781px (800px 미만)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "오퍼스 한강 스위첸": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "옥정중앙역 대방 디에트르(중상1, 복합1BL)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://www.detre-oj.co.kr/",
+      "candidates": [
+        {
+          "url": "https://detre-oj.co.kr/img/mcontact_bg03.jpg",
+          "width": 4000,
+          "height": 3000
+        },
+        {
+          "url": "https://detre-oj.co.kr/img/busi/02cont01.jpg?v05",
+          "width": 3000,
+          "height": 1813,
+          "note": "단순함 (entropy 5.39 < 6.8)"
+        },
+        {
+          "url": "https://detre-oj.co.kr/img/busi/02cont01.jpg?v04",
+          "width": 3000,
+          "height": 1813,
+          "note": "단순함 (entropy 5.39 < 6.8)"
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2204028352-4b5d8e55a5c964777ef95265e5100348171595d0b578098a55aec71c84d205ad-d",
+          "width": 2560,
+          "height": 1440,
+          "note": "단순함 (entropy 6.25 < 6.8)"
+        },
+        {
+          "url": "https://detre-oj.co.kr/img/mprem02.jpg",
+          "width": 2000,
+          "height": 1334
+        },
+        {
+          "url": "https://detre-oj.co.kr/img/mth03.jpg",
+          "width": 2000,
+          "height": 1333
+        }
+      ]
+    },
+    "왕숙 한신더휴 센텀(남양주 왕숙 A-17BL) 공공분양주택": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://ws-thehue.com",
+      "candidates": [
+        {
+          "url": "https://ws-thehue.com/home/design/images/new/location.jpg",
+          "width": 1100,
+          "height": 2869,
+          "note": "비율 0.38 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://ws-thehue.com/home/design/images/new/main_location_bg2.jpg?ver=4",
+          "width": 1920,
+          "height": 1350,
+          "note": "단순함 (entropy 5.60 < 6.8)"
+        },
+        {
+          "url": "https://ws-thehue.com/home/design/images/new/main_location_bg2.jpg?ver=3",
+          "width": 1920,
+          "height": 1350,
+          "note": "단순함 (entropy 5.60 < 6.8)"
+        },
+        {
+          "url": "https://ws-thehue.com/home/design/images/new/m_location.jpg",
+          "width": 1100,
+          "height": 2273,
+          "note": "비율 0.48 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://ws-thehue.com/home/design/images/new/main_contact_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 3.87 < 6.8)"
+        },
+        {
+          "url": "https://ws-thehue.com/home/design/images/new/unit_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 4.87 < 6.8)"
+        }
+      ]
+    },
+    "용인 고림 동문 디 이스트": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://yongin-dmapt.co.kr/",
+      "candidates": [
+        {
+          "url": "https://www.yongin-dmapt.co.kr/image/main/section2-bg.png",
+          "width": 2560,
+          "height": 1080,
+          "note": "비율 2.37 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.yongin-dmapt.co.kr/image/sub/danji/danji-img1.jpg",
+          "width": 1300,
+          "height": 1758,
+          "note": "비율 0.74 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.yongin-dmapt.co.kr/image/main/main_img_260405_1.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.yongin-dmapt.co.kr/image/main/section5_bg.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 0.97 < 6.8)"
+        },
+        {
+          "url": "https://www.yongin-dmapt.co.kr/image/sub/sub_visual.jpg",
+          "width": 2560,
+          "height": 546,
+          "note": "비율 4.69 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.yongin-dmapt.co.kr/image/sub/about/map_bg.jpg",
+          "width": 1300,
+          "height": 894,
+          "note": "단순함 (entropy 3.92 < 6.8)"
+        }
+      ]
+    },
+    "용인 푸르지오 원클러스터 2단지": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.prugio.com/hb/2025/onecluster",
+      "candidates": [
+        {
+          "url": "https://www.prugio.com/hb/2025/onecluster/assets/images/main/overview-map.jpg?v=1218",
+          "width": 3840,
+          "height": 1940,
+          "note": "단순함 (entropy 4.19 < 6.8)"
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/onecluster/assets/images/sub/special.jpg",
+          "width": 1408,
+          "height": 1984,
+          "note": "비율 0.71 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/onecluster/assets/images/main/visual-new-bg-02.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/onecluster/assets/images/main/visual-new-bg.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/onecluster/assets/images/main/premium-bg-01.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/onecluster/assets/images/main/premium-bg-02.jpg",
+          "width": 1920,
+          "height": 970
+        }
+      ]
+    },
+    "용인 푸르지오 원클러스터파크": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.prugio.com/hb/2025/oneclusterpark",
+      "candidates": [
+        {
+          "url": "https://www.prugio.com/hb/2025/oneclusterpark/assets/images/sub/complex.jpg?v=1",
+          "width": 1408,
+          "height": 3130,
+          "note": "비율 0.45 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/oneclusterpark/m/assets/images/sub/m_complex.jpg?v=1",
+          "width": 750,
+          "height": 3532,
+          "note": "가로 750px (800px 미만)"
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/oneclusterpark/assets/images/main/visual-bg-02.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/oneclusterpark/assets/images/main/visual-bg-01.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/oneclusterpark/assets/images/main/unit-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 4.68 < 6.8)"
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/oneclusterpark/assets/images/main/overview-map.jpg?v=1",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 4.31 < 6.8)"
+        }
+      ]
+    },
+    "용인 플랫폼시티 라온프라이빗 아르디에": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.yp-raon.com",
+      "candidates": [
+        {
+          "url": "https://www.yp-raon.com/images/sub/location_img.jpg?v=20260616",
+          "width": 1200,
+          "height": 3366,
+          "note": "비율 0.36 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.yp-raon.com/images/main/main_location_img01.png",
+          "width": 2400,
+          "height": 1248,
+          "note": "투명한 부분이 17% (장식용 이미지)"
+        },
+        {
+          "url": "https://www.yp-raon.com/images/sub/block_img.jpg",
+          "width": 1200,
+          "height": 1736,
+          "note": "비율 0.69 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.yp-raon.com/images/main/main_img2.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://www.yp-raon.com/images/main/main_img3.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://www.yp-raon.com/images/main/location_bg04.jpg",
+          "width": 1920,
+          "height": 1000
+        }
+      ]
+    },
+    "용인반도체클러스터 동일하이빌 파크밸리(D1-1블록)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://용인동일하이빌파크밸리.com",
+      "candidates": [
+        {
+          "url": "https://xn--2q1bm4i47b10c27q38a0a7a938p85fz2g.com/img/location_map.png",
+          "width": 2000,
+          "height": 1392,
+          "note": "단순함 (entropy 4.64 < 6.8)"
+        },
+        {
+          "url": "https://xn--2q1bm4i47b10c27q38a0a7a938p85fz2g.com/img/main_img.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 1.72 < 6.8)"
+        },
+        {
+          "url": "https://xn--2q1bm4i47b10c27q38a0a7a938p85fz2g.com/img/main.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://xn--2q1bm4i47b10c27q38a0a7a938p85fz2g.com/img/main_bg.png",
+          "width": 1920,
+          "height": 1000,
+          "note": "투명한 부분이 100% (장식용 이미지)"
+        },
+        {
+          "url": "https://xn--2q1bm4i47b10c27q38a0a7a938p85fz2g.com/img/brand_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 3.78 < 6.8)"
+        },
+        {
+          "url": "https://xn--2q1bm4i47b10c27q38a0a7a938p85fz2g.com/img/unit_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 6.00 < 6.8)"
+        }
+      ]
+    },
+    "운정 아이파크 시티": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://unjeong-iparkcity.com",
+      "candidates": [
+        {
+          "url": "https://unjeong-iparkcity.com/images/complexplan_zoom.jpg",
+          "width": 2200,
+          "height": 1167
+        },
+        {
+          "url": "https://unjeong-iparkcity.com/images/vis-bg2.jpg",
+          "width": 1920,
+          "height": 960
+        },
+        {
+          "url": "https://unjeong-iparkcity.com/images/vis-bg1.jpg?ver=2",
+          "width": 1920,
+          "height": 960,
+          "note": "단순함 (entropy 5.81 < 6.8)"
+        },
+        {
+          "url": "https://unjeong-iparkcity.com/images/overview-img2.jpg",
+          "width": 1920,
+          "height": 960
+        },
+        {
+          "url": "https://unjeong-iparkcity.com/images/location-shadow.png",
+          "width": 1920,
+          "height": 852,
+          "note": "비율 2.25 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://unjeong-iparkcity.com/images/sub31-img1.jpg?ver=1",
+          "width": 1600,
+          "height": 849
+        }
+      ]
+    },
+    "원종 휴먼빌 클라츠": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://www.원종휴먼빌클라츠.com",
+      "candidates": [
+        {
+          "url": "http://www.xn--oi2b45cf3edslp8bdznf9d50q.com/sub/location_map2.jpg",
+          "width": 2200,
+          "height": 1211,
+          "note": "단순함 (entropy 5.57 < 6.8)"
+        },
+        {
+          "url": "http://www.xn--oi2b45cf3edslp8bdznf9d50q.com/img/main_img002.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "http://www.xn--oi2b45cf3edslp8bdznf9d50q.com/img/main_img00.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "http://www.xn--oi2b45cf3edslp8bdznf9d50q.com/img/main_bg2.png",
+          "width": 1920,
+          "height": 1000,
+          "note": "투명한 부분이 100% (장식용 이미지)"
+        },
+        {
+          "url": "https://i.ytimg.com/vi/44DEEF7i7cI/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGEMgXihyMA8=&rs=AOn4CLAn6NI3ht148lP_4ZIBjn-FZu_UuA",
+          "width": 1280,
+          "height": 720
+        },
+        {
+          "url": "http://www.xn--oi2b45cf3edslp8bdznf9d50q.com/sub/complex.jpg",
+          "width": 1100,
+          "height": 825
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "월계 중흥S-클래스 리비에르": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://wg-sclass.com",
+      "candidates": [
+        {
+          "url": "https://wg-sclass.com/module/index_visual/slide/img/visual1.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://wg-sclass.com/module/index_visual/slide/img/visual2.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://wg-sclass.com/module/index_section/premium_260618/img/sect3_bg.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 5.17 < 6.8)"
+        },
+        {
+          "url": "https://wg-sclass.com/module/index_section/special4_260616/img/bg.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 4.60 < 6.8)"
+        },
+        {
+          "url": "https://wg-sclass.com/module/index_section/premium_260618/img/sect3_5.jpg",
+          "width": 600,
+          "height": 350,
+          "note": "가로 600px (800px 미만)"
+        },
+        {
+          "url": "https://wg-sclass.com/module/index_section/premium_260618/img/sect3_6.jpg",
+          "width": 600,
+          "height": 350,
+          "note": "가로 600px (800px 미만)"
+        }
+      ]
+    },
+    "의왕 월암지구 대방 디에트르 레이크파크": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://www.detre-wa.co.kr",
+      "candidates": [
+        {
+          "url": "http://www.detre-wa.co.kr/html/images/sub/route_zoom.jpg",
+          "width": 2350,
+          "height": 1463,
+          "note": "단순함 (entropy 4.57 < 6.8)"
+        },
+        {
+          "url": "http://www.detre-wa.co.kr/html/images/main/n_visual01.jpg",
+          "width": 2000,
+          "height": 989
+        },
+        {
+          "url": "http://www.detre-wa.co.kr/html/images/main/n_visual02.jpg",
+          "width": 2000,
+          "height": 989
+        },
+        {
+          "url": "http://www.detre-wa.co.kr/html/images/sub/num_img.jpg",
+          "width": 1200,
+          "height": 1593,
+          "note": "비율 0.75 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.detre-wa.co.kr/html/images/sub/premium_img.jpg",
+          "width": 1200,
+          "height": 1512,
+          "note": "비율 0.79 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.detre-wa.co.kr/html/images/main/section03_img1.png",
+          "width": 2000,
+          "height": 879,
+          "note": "비율 2.28 (1.2~2.2 밖)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "의왕고천지구 대방 디에트르 센트럴(B1BL)": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "의왕시청역 SK VIEW IPARK": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://uw.skview.co.kr",
+      "candidates": [
+        {
+          "url": "http://uw.skview.co.kr/img/main_vd_bg.png",
+          "width": 8000,
+          "height": 4167,
+          "note": "투명한 부분이 12% (장식용 이미지)"
+        },
+        {
+          "url": "http://uw.skview.co.kr/img/main_vd.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2103499060-545930c5e5f2895b20657cf060045617213c236a7b7c641dfcb5863d67eab6b2-d?mw=2880&mh=1620",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 6.79 < 6.8)"
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2103499146-3a49c469dd5fa13065be272e4ab6d7dbc9079bc7f0b7c35afe37737733c51631-d?mw=2880&mh=1620",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2103499415-74ce5d583045849487d16521688b18380ff015e2ca8924b936ebaa548d4afcec-d",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://i.vimeocdn.com/video/2103499243-89e46b8f42cd9cbda754b15ea66665a46b35d83d0583c6ff7daf0ed00280cef9-d?mw=2880&mh=1620",
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    "의왕역 한신더휴": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://의왕역한신더휴.kr",
+      "candidates": [
+        {
+          "url": "https://i.vimeocdn.com/video/2173109337-f0acf5b4215e17f9f33d0ef142f99f98f7da94c4491920ddd324e95f72b8519f-d",
+          "width": 1080,
+          "height": 1920,
+          "note": "비율 0.56 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--9m1bv80a6ic4lx5bf49bq4c.kr/theme/theme06/img/section3_bg.jpg",
+          "width": 1920,
+          "height": 1072,
+          "note": "단순함 (entropy 5.90 < 6.8)"
+        },
+        {
+          "url": "https://xn--9m1bv80a6ic4lx5bf49bq4c.kr/theme/theme06/img/section1.jpg",
+          "width": 1920,
+          "height": 996
+        },
+        {
+          "url": "https://xn--9m1bv80a6ic4lx5bf49bq4c.kr/theme/theme06/img/section5_bg.jpg",
+          "width": 1920,
+          "height": 882,
+          "note": "단순함 (entropy 5.48 < 6.8)"
+        },
+        {
+          "url": "https://xn--9m1bv80a6ic4lx5bf49bq4c.kr/theme/theme06/img/msection_01_bg.jpg",
+          "width": 900,
+          "height": 1447,
+          "note": "비율 0.62 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--9m1bv80a6ic4lx5bf49bq4c.kr/theme/theme06/img/sub3_1_01.jpg",
+          "width": 1200,
+          "height": 938
+        }
+      ]
+    },
+    "의왕역 SK VIEW": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://uws.skview.co.kr",
+      "candidates": [
+        {
+          "url": "https://i.vimeocdn.com/video/2208815809-01a55e7c325f217a91d192d0fe6f3dd4caebf83e8ad91f97a463c2c815fc32b7-d?mw=2200&mh=1238",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://uws.skview.co.kr/img/main.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://uws.skview.co.kr/img/main.png",
+          "width": 1920,
+          "height": 1000,
+          "note": "투명한 부분이 100% (장식용 이미지)"
+        },
+        {
+          "url": "https://uws.skview.co.kr/img/summ_sky.png",
+          "width": 1920,
+          "height": 1000,
+          "note": "투명한 부분이 52% (장식용 이미지)"
+        },
+        {
+          "url": "https://uws.skview.co.kr/img/main_bg.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://uws.skview.co.kr/img/summ_bg.png",
+          "width": 1920,
+          "height": 1000,
+          "note": "투명한 부분이 100% (장식용 이미지)"
+        }
+      ]
+    },
+    "의정부역 센트럴 아이파크": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.i-park.com/uijeongbucentral",
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "이천 서희스타힐스 SKY (조합원 취소분)": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "이천 중리지구 B3블록 금성백조 예미지": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://ic-yemizi.com/",
+      "candidates": [
+        {
+          "url": "https://ic-yemizi.com/assets/images/main/visual-bg-02.jpg",
+          "width": 3840,
+          "height": 1940
+        },
+        {
+          "url": "https://ic-yemizi.com/assets/images/main/visual-bg-01.jpg",
+          "width": 3840,
+          "height": 1940
+        },
+        {
+          "url": "https://ic-yemizi.com/assets/images/main/unit-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 5.64 < 6.8)"
+        },
+        {
+          "url": "https://ic-yemizi.com/assets/images/main/tv-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 4.00 < 6.8)"
+        },
+        {
+          "url": "https://ic-yemizi.com/assets/images/main/location-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 3.89 < 6.8)"
+        },
+        {
+          "url": "https://i.ytimg.com/vi/ry0YWq5tyik/maxres2.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYSSAcKH8wDw==&rs=AOn4CLAMWxrYgpmDExTbIxK6lB0x-ftDRg",
+          "width": 1280,
+          "height": 720,
+          "note": "단순함 (entropy 5.67 < 6.8)"
+        }
+      ]
+    },
+    "이천자이 더 리체": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "이촌 르엘": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.lottecastle.co.kr",
+      "candidates": [
+        {
+          "url": "https://www.lottecastle.co.kr/common/images/leel-section2-bg.jpg",
+          "width": 1920,
+          "height": 2027,
+          "note": "비율 0.95 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210359551630.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210400139550.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 6.40 < 6.8)"
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210321329840.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210145293670.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/common/images/sales_bg_01.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 6.55 < 6.8)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))"
+    },
+    "잠실 래미안아이파크": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.raemian.co.kr/sales/s/jamsiljinju",
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "잠실 르엘": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.lottecastle.co.kr",
+      "candidates": [
+        {
+          "url": "https://www.lottecastle.co.kr/common/images/leel-section2-bg.jpg",
+          "width": 1920,
+          "height": 2027,
+          "note": "비율 0.95 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210359551630.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210400139550.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 6.40 < 6.8)"
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210321329840.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210145293670.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/common/images/sales_bg_01.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 6.55 < 6.8)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "장위 푸르지오 마크원": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://prugio.com/hb/2026/markone/",
+      "candidates": [
+        {
+          "url": "https://prugio.com/hb/2026/markone/assets/images/sub/place.jpg",
+          "width": 1408,
+          "height": 1384,
+          "note": "비율 1.02 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://prugio.com/hb/2026/markone/assets/images/main/visual-bg-new-02.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://prugio.com/hb/2026/markone/assets/images/main/visual-bg-new-01.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://prugio.com/hb/2026/markone/assets/images/main/schedule-bg.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://prugio.com/hb/2026/markone/assets/images/main/premium-img-01.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://prugio.com/hb/2026/markone/assets/images/main/envi-bg.png",
+          "width": 1920,
+          "height": 970,
+          "note": "투명한 부분이 56% (장식용 이미지)"
+        }
+      ]
+    },
+    "제기동역 아이파크": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "제일풍경채 의왕고천(본청약)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.gc-jeil.co.kr/",
+      "candidates": [
+        {
+          "url": "https://www.gc-jeil.co.kr/html/sub2/img/img2_1.jpg",
+          "width": 1200,
+          "height": 1786,
+          "note": "비율 0.67 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.gc-jeil.co.kr/module/_pc/index_visual/img/visual1.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.gc-jeil.co.kr/module/_pc/index_visual/img/visual2.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.gc-jeil.co.kr/module/_pc/index_section/_unit1/img/bg.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 6.09 < 6.8)"
+        },
+        {
+          "url": "https://www.gc-jeil.co.kr/module/_pc/index_section/location/img/bg.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 1.84 < 6.8)"
+        },
+        {
+          "url": "https://www.gc-jeil.co.kr/module/_pc/index_section/_brand/img/bg1.jpg",
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    "중동역 다채로움 더원": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://중동역다채로움더원.com",
+      "candidates": [
+        {
+          "url": "http://xn--2j1b9hun72mdquifbid72sy0i.com/bon/img/dan/01cont01.jpg",
+          "width": 1972,
+          "height": 1414,
+          "note": "단순함 (entropy 6.55 < 6.8)"
+        },
+        {
+          "url": "http://xn--2j1b9hun72mdquifbid72sy0i.com/bon/img/simg.jpg",
+          "width": 2000,
+          "height": 1334,
+          "note": "단순함 (entropy 6.60 < 6.8)"
+        },
+        {
+          "url": "http://xn--2j1b9hun72mdquifbid72sy0i.com/bon/img/mimg01.jpg",
+          "width": 2000,
+          "height": 1269
+        },
+        {
+          "url": "http://xn--2j1b9hun72mdquifbid72sy0i.com/bon/img/mloca.jpg",
+          "width": 2000,
+          "height": 1152,
+          "note": "단순함 (entropy 5.35 < 6.8)"
+        },
+        {
+          "url": "http://xn--2j1b9hun72mdquifbid72sy0i.com/bon/img/contact_bg.jpg",
+          "width": 2000,
+          "height": 1125,
+          "note": "단순함 (entropy 5.48 < 6.8)"
+        },
+        {
+          "url": "http://xn--2j1b9hun72mdquifbid72sy0i.com/bon/img/mprem01.jpg",
+          "width": 1500,
+          "height": 864
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "중앙하이츠 원종역": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.중앙하이츠원종역.com",
+      "candidates": [
+        {
+          "url": "https://www.xn--2e5bqkuw2tw6b5xac3xm4o.com/img/main/sec07_bg.png",
+          "width": 1920,
+          "height": 960,
+          "note": "단순함 (entropy 3.63 < 6.8)"
+        },
+        {
+          "url": "https://www.xn--2e5bqkuw2tw6b5xac3xm4o.com/img/main/station_bg.jpg",
+          "width": 1920,
+          "height": 900
+        },
+        {
+          "url": "https://www.xn--2e5bqkuw2tw6b5xac3xm4o.com/img/sub/no_layout2_n.png",
+          "width": 1100,
+          "height": 1540,
+          "note": "비율 0.71 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--2e5bqkuw2tw6b5xac3xm4o.com/img/popup0930.jpg",
+          "width": 856,
+          "height": 1307,
+          "note": "비율 0.65 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--2e5bqkuw2tw6b5xac3xm4o.com/img/sub/parallax_bg.png",
+          "width": 1920,
+          "height": 511,
+          "note": "비율 3.76 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--2e5bqkuw2tw6b5xac3xm4o.com/img/main/premium_slide01.jpg",
+          "width": 960,
+          "height": 900,
+          "note": "비율 1.07 (1.2~2.2 밖)"
+        }
+      ]
+    },
+    "중흥S-클래스 힐더포레": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://hf-sclass.com",
+      "candidates": [
+        {
+          "url": "http://hf-sclass.com/sub/location_zoom.jpg",
+          "width": 2400,
+          "height": 1466,
+          "note": "단순함 (entropy 5.89 < 6.8)"
+        },
+        {
+          "url": "http://hf-sclass.com/sub/complex_zoom.jpg",
+          "width": 2400,
+          "height": 1445
+        },
+        {
+          "url": "http://hf-sclass.com/img/complex_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 0.93 < 6.8)"
+        },
+        {
+          "url": "http://hf-sclass.com/img/main_bg.png",
+          "width": 1920,
+          "height": 1000,
+          "note": "투명한 부분이 100% (장식용 이미지)"
+        },
+        {
+          "url": "http://hf-sclass.com/img/main.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "http://hf-sclass.com/img/unit_bg.jpg",
+          "width": 1920,
+          "height": 1000
+        }
+      ]
+    },
+    "진위역 서희스타힐스 더 파크뷰(3차)": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "창경궁 롯데캐슬 시그니처": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.lottecastle.co.kr/",
+      "candidates": [
+        {
+          "url": "https://www.lottecastle.co.kr/common/images/leel-section2-bg.jpg",
+          "width": 1920,
+          "height": 2027,
+          "note": "비율 0.95 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210359551630.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210400139550.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 6.40 < 6.8)"
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210321329840.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210145293670.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/common/images/sales_bg_01.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 6.55 < 6.8)"
+        }
+      ]
+    },
+    "철산역자이": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "청계 노르웨이숲": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://청계노르웨이숲.com",
+      "candidates": [
+        {
+          "url": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/visual-bg-01.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/visual-bg-new-01.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/unit-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 1.51 < 6.8)"
+        },
+        {
+          "url": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/schedule-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 4.92 < 6.8)"
+        },
+        {
+          "url": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/location-bg.png",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 3.90 < 6.8)"
+        },
+        {
+          "url": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/contact-bg.png",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 4.26 < 6.8)"
+        }
+      ]
+    },
+    "청계 노르웨이숲(14차)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://청계노르웨이숲.com",
+      "candidates": [
+        {
+          "url": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/visual-bg-01.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/visual-bg-new-01.jpg",
+          "width": 1920,
+          "height": 970
+        },
+        {
+          "url": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/unit-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 1.51 < 6.8)"
+        },
+        {
+          "url": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/schedule-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 4.92 < 6.8)"
+        },
+        {
+          "url": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/location-bg.png",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 3.90 < 6.8)"
+        },
+        {
+          "url": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/contact-bg.png",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 4.26 < 6.8)"
+        }
+      ]
+    },
+    "충정로역자이르네": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://충정로역자이르네.com",
+      "candidates": [
+        {
+          "url": "https://xn--950bx0l9xa587a4zb1e20bn04a.com/grand/images/premium.jpg?v=202611241523505543061",
+          "width": 1300,
+          "height": 4650,
+          "note": "비율 0.28 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--950bx0l9xa587a4zb1e20bn04a.com/grand/images/location.jpg?v=202611241523555543538",
+          "width": 1300,
+          "height": 2728,
+          "note": "비율 0.48 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--950bx0l9xa587a4zb1e20bn04a.com/grand/images/premium_m.jpg?v=202611241523505543061",
+          "width": 770,
+          "height": 2840,
+          "note": "가로 770px (800px 미만)"
+        },
+        {
+          "url": "https://xn--950bx0l9xa587a4zb1e20bn04a.com/grand/images/mainVisual_bg.jpg?v=2",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://xn--950bx0l9xa587a4zb1e20bn04a.com/grand/images/main_premium_bg.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 2.11 < 6.8)"
+        },
+        {
+          "url": "https://xn--950bx0l9xa587a4zb1e20bn04a.com/grand/images/main_contact_bg.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 5.77 < 6.8)"
+        }
+      ]
+    },
+    "파주 운정신도시 우미 린 더 센텀": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "파주금촌 금호어울림(조합원 취소분)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://pjkhapt.com",
+      "candidates": [
+        {
+          "url": "https://pjkhapt.com/bon_subpage/sub_img/special_design/special_design04.jpg",
+          "width": 6559,
+          "height": 4223,
+          "note": "단순함 (entropy 6.79 < 6.8)"
+        },
+        {
+          "url": "https://pjkhapt.com/bon_subpage/sub_img/special_design/special_design01.jpg",
+          "width": 6240,
+          "height": 4160,
+          "note": "단순함 (entropy 5.75 < 6.8)"
+        },
+        {
+          "url": "https://pjkhapt.com/bon_subpage/sub_img/special_design/special_design03.jpg",
+          "width": 4512,
+          "height": 3008
+        },
+        {
+          "url": "https://pjkhapt.com/sub/normal/sub_img/location/location_map.png",
+          "width": 1765,
+          "height": 1135,
+          "note": "단순함 (entropy 5.41 < 6.8)"
+        },
+        {
+          "url": "https://pjkhapt.com/image/visual_01.png",
+          "width": 1920,
+          "height": 920
+        },
+        {
+          "url": "https://pjkhapt.com/image/visual_02.png",
+          "width": 1920,
+          "height": 920
+        }
+      ]
+    },
+    "판교TH212(2차)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://blog.naver.com/kkvista",
+      "candidates": [
+        {
+          "url": "https://blogfiles.pstatic.net/MjAxODAzMTJfMzUg/MDAxNTIwODE0NTEwMzMx.G3txscREi881zZplJbHblRDxjoqhV-99MS6Ccr1uNMUg.9EgQRa32KvdeKp749zGDdm6JOv9OyCBDDrghw8gUZTIg.JPEG.kkvista/%ED%8E%9C%ED%84%B0%EB%A6%AC%EC%9B%80_%EB%A9%94%EC%9D%B8%EC%8B%9C%EC%95%88_500kb_%EC%84%B8%EB%A1%9C+%EC%A1%B0%EC%A0%88_2_%EC%B5%9C%EC%A2%85.jpg",
+          "width": 1890,
+          "height": 725,
+          "note": "비율 2.61 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://editor-static.pstatic.net/v/basic/1.78.1/img/se-sp-viewer.ee5afa38.png",
+          "width": 932,
+          "height": 836,
+          "note": "비율 1.11 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://postfiles.pstatic.net/MjAyNjExMjNfMjAw/MDAxNzk1NDAyNzY4MzA3.JaV5rE37_-l1QwAVqOL09rNnDtuxxueiMZsrRpvtWP4g.zgS-j6u7W9gYguLIcMEolf-9fvoz1CIzJM7NgGlzncAg.JPEG/DJI_0031_a1b4a.jpg?type=w966",
+          "width": 966,
+          "height": 724
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "평촌자이 퍼스니티": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))"
+    },
+    "평택 고덕 국제신도시 A-55 대광로제비앙 모아엘가(4차)": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "평택 고덕 우미 린 프레스티지(Abc-36BL)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://pg1.lynn.co.kr",
+      "candidates": [
+        {
+          "url": "https://pg1.lynn.co.kr/upload/editor/0b03ee0b37a645e78e673c687f11e54e.png",
+          "width": 1100,
+          "height": 2388,
+          "note": "비율 0.46 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://pg1.lynn.co.kr/upload/editor/088ac3e1fcc9427e954607b91d0d22d2.png",
+          "width": 1112,
+          "height": 2084,
+          "note": "비율 0.53 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://img.youtube.com/vi/lrZ_wl4rSYg/oardefault.jpg",
+          "width": 1080,
+          "height": 1920,
+          "note": "비율 0.56 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://img.youtube.com/vi/C0x2G_rMr_8/oardefault.jpg",
+          "width": 1080,
+          "height": 1920,
+          "note": "비율 0.56 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://img.youtube.com/vi/HacrUSSogiQ/oardefault.jpg",
+          "width": 1080,
+          "height": 1920,
+          "note": "비율 0.56 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://img.youtube.com/vi/KNpAqmAKYvc/oardefault.jpg",
+          "width": 1080,
+          "height": 1920,
+          "note": "비율 0.56 (1.2~2.2 밖)"
+        }
+      ]
+    },
+    "평택 고덕국제신도시 A48블록 금성백조 예미지": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "평택 고덕국제신도시 A50블록 미래도 파밀리에(본청약)": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))"
+    },
+    "평택 브레인시티 한신더휴": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://pt-thehue.com/",
+      "candidates": [
+        {
+          "url": "http://pt-thehue.com/image/sub/danji/59a_img2.jpg",
+          "width": 1300,
+          "height": 2480,
+          "note": "비율 0.52 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://pt-thehue.com/image/main/vis_img02.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "http://pt-thehue.com/image/main/vis_img.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 3.85 < 6.8)"
+        },
+        {
+          "url": "http://pt-thehue.com/image/main/bg--.png",
+          "width": 1920,
+          "height": 1080,
+          "note": "투명한 부분이 100% (장식용 이미지)"
+        },
+        {
+          "url": "http://pt-thehue.com/image/main/map_bg.jpg",
+          "width": 1708,
+          "height": 920,
+          "note": "단순함 (entropy 3.53 < 6.8)"
+        },
+        {
+          "url": "http://pt-thehue.com/image/sub/danji/danji_img1.jpg",
+          "width": 1300,
+          "height": 955
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "평택역 더센트럴45": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://thecentral45.com",
+      "candidates": [
+        {
+          "url": "https://thecentral45.com/img/main02.png?ver=4",
+          "width": 4044,
+          "height": 2106
+        },
+        {
+          "url": "https://thecentral45.com/img/info01_02.png",
+          "width": 2801,
+          "height": 3010,
+          "note": "비율 0.93 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://thecentral45.com/img/visual_home.png?ver=4",
+          "width": 3841,
+          "height": 2001
+        },
+        {
+          "url": "https://thecentral45.com/img/visual_info.png?ver=4",
+          "width": 3841,
+          "height": 1306,
+          "note": "비율 2.94 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://thecentral45.com/img/main02_mo.png?ver=4",
+          "width": 1561,
+          "height": 1901,
+          "note": "비율 0.82 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://thecentral45.com/img/visual_info_mo.png?ver=4",
+          "width": 1561,
+          "height": 1901,
+          "note": "비율 0.82 (1.2~2.2 밖)"
+        }
+      ]
+    },
+    "평택청북 사랑으로 부영 2차 아파트 우선분양 전환 후 잔여세대": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://sarangeuro.co.kr",
+      "candidates": [
+        {
+          "url": "https://sarangeuro.co.kr/images/main/main_bg1.jpg",
+          "width": 1920,
+          "height": 750,
+          "note": "비율 2.56 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://sarangeuro.co.kr/apt/files/23_apt_pic_airview.jpg",
+          "width": 950,
+          "height": 887,
+          "note": "비율 1.07 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://sarangeuro.co.kr/apt/files/275_apt_pic_airview.jpg",
+          "width": 950,
+          "height": 758
+        },
+        {
+          "url": "https://sarangeuro.co.kr/apt/files/10_apt_pic_airview.jpg",
+          "width": 950,
+          "height": 684
+        },
+        {
+          "url": "https://sarangeuro.co.kr/apt/files/353_apt_pic_airview.jpg",
+          "width": 950,
+          "height": 682
+        },
+        {
+          "url": "https://sarangeuro.co.kr/apt/files/19_apt_pic_airview.jpg",
+          "width": 950,
+          "height": 682
+        }
+      ]
+    },
+    "평택화양 서희스타힐스 센트럴파크(조합원 취소분)": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "풍무역 롯데캐슬 시그니처": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.lottecastle.co.kr",
+      "candidates": [
+        {
+          "url": "https://www.lottecastle.co.kr/common/images/leel-section2-bg.jpg",
+          "width": 1920,
+          "height": 2027,
+          "note": "비율 0.95 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210359551630.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210400139550.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 6.40 < 6.8)"
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210321329840.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/files/etc/2026/9/202609210145293670.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.lottecastle.co.kr/common/images/sales_bg_01.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 6.55 < 6.8)"
+        }
+      ]
+    },
+    "풍무역 푸르지오 더 마크": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.prugio.com/hb/2025/themark/",
+      "candidates": [
+        {
+          "url": "https://www.prugio.com/hb/2025/themark/assets/images/main/visual-bg-new-02.jpg",
+          "width": 3840,
+          "height": 1940
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/themark/assets/images/main/visual-bg-new-01.jpg",
+          "width": 3840,
+          "height": 1940
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/themark/assets/images/sub/place.jpg?v=1",
+          "width": 1408,
+          "height": 1875,
+          "note": "비율 0.75 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/themark/assets/images/sub/complex.jpg?v=1",
+          "width": 1408,
+          "height": 1642,
+          "note": "비율 0.86 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/themark/assets/images/main/schedule-bg.jpg",
+          "width": 1920,
+          "height": 970,
+          "note": "단순함 (entropy 4.26 < 6.8)"
+        },
+        {
+          "url": "https://www.prugio.com/hb/2025/themark/assets/images/main/premium-bg-01.jpg",
+          "width": 1920,
+          "height": 970
+        }
+      ]
+    },
+    "풍무역세권 수자인 그라센트 1차": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "풍무역세권 수자인 그라센트 2차": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.sujain-pm2.co.kr",
+      "candidates": [
+        {
+          "url": "https://www.sujain-pm2.co.kr/sub/complex.jpg",
+          "width": 1300,
+          "height": 1748,
+          "note": "비율 0.74 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.sujain-pm2.co.kr/img/main.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://www.sujain-pm2.co.kr/img/unit_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 5.30 < 6.8)"
+        },
+        {
+          "url": "https://www.sujain-pm2.co.kr/img/contact_bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 2.73 < 6.8)"
+        },
+        {
+          "url": "https://www.sujain-pm2.co.kr/sub/location.jpg",
+          "width": 1600,
+          "height": 1167,
+          "note": "단순함 (entropy 5.68 < 6.8)"
+        },
+        {
+          "url": "https://www.sujain-pm2.co.kr/sub/s_location.jpg",
+          "width": 1600,
+          "height": 1129,
+          "note": "단순함 (entropy 5.62 < 6.8)"
+        }
+      ]
+    },
+    "한강 푸르지오 리버프론트": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://prugio-riverfront.com/",
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "한신더휴 하이엔에듀포레": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://gc-thehue.com",
+      "candidates": [
+        {
+          "url": "https://gc-thehue.com/images/complex-info/system2.jpg",
+          "width": 1200,
+          "height": 2407,
+          "note": "비율 0.50 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://gc-thehue.com/images/main/bg_brand1.jpg",
+          "width": 2000,
+          "height": 1098,
+          "note": "단순함 (entropy 4.05 < 6.8)"
+        },
+        {
+          "url": "https://gc-thehue.com/images/main/visual1.jpg",
+          "width": 2000,
+          "height": 1000,
+          "note": "단순함 (entropy 6.35 < 6.8)"
+        },
+        {
+          "url": "https://gc-thehue.com/images/main/img_landscap1_240910.jpg",
+          "width": 1800,
+          "height": 1100,
+          "note": "단순함 (entropy 5.34 < 6.8)"
+        },
+        {
+          "url": "https://gc-thehue.com/images/main/img_landscap2.jpg",
+          "width": 1800,
+          "height": 1100,
+          "note": "단순함 (entropy 5.62 < 6.8)"
+        },
+        {
+          "url": "https://gc-thehue.com/images/complex-info/plan1.jpg",
+          "width": 1200,
+          "height": 1595,
+          "note": "비율 0.75 (1.2~2.2 밖)"
+        }
+      ],
+      "review": true
+    },
+    "한화포레나 영흥숲(4차)": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "해링턴 스퀘어 리버파크": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://해링턴스퀘어리버파크.com",
+      "candidates": [
+        {
+          "url": "http://xn--oy2bnbw4lf9i97d8pu5qa03csxh1vh.com/assets/images/main/visual-bg-new-02.jpg",
+          "width": 2140,
+          "height": 1047
+        },
+        {
+          "url": "http://xn--oy2bnbw4lf9i97d8pu5qa03csxh1vh.com/assets/images/main/visual-bg-new-01.jpg",
+          "width": 1994,
+          "height": 1055
+        },
+        {
+          "url": "http://xn--oy2bnbw4lf9i97d8pu5qa03csxh1vh.com/assets/images/main/location-bg.jpg",
+          "width": 1920,
+          "height": 945,
+          "note": "단순함 (entropy 6.39 < 6.8)"
+        },
+        {
+          "url": "http://xn--oy2bnbw4lf9i97d8pu5qa03csxh1vh.com/assets/images/sub/place.jpg",
+          "width": 1100,
+          "height": 1182,
+          "note": "비율 0.93 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://xn--oy2bnbw4lf9i97d8pu5qa03csxh1vh.com/assets/images/main/unit-bg.jpg",
+          "width": 960,
+          "height": 945,
+          "note": "비율 1.02 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://xn--oy2bnbw4lf9i97d8pu5qa03csxh1vh.com/assets/images/sub/sub-title-bg.jpg",
+          "width": 1920,
+          "height": 428,
+          "note": "비율 4.49 (1.2~2.2 밖)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "해링턴플레이스 노원 센트럴": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.harrington495.kr",
+      "candidates": [
+        {
+          "url": "https://www.harrington495.kr/images/main/contact-bg.jpg",
+          "width": 1920,
+          "height": 960,
+          "note": "단순함 (entropy 6.76 < 6.8)"
+        },
+        {
+          "url": "https://www.harrington495.kr/images/main/visual-7.jpg",
+          "width": 1374,
+          "height": 880
+        },
+        {
+          "url": "https://www.harrington495.kr/images/main/visual-1.jpg",
+          "width": 1374,
+          "height": 880
+        },
+        {
+          "url": "https://www.harrington495.kr/images/main/visual-2.jpg",
+          "width": 1374,
+          "height": 880
+        },
+        {
+          "url": "https://www.harrington495.kr/images/main/visual-3.jpg",
+          "width": 1374,
+          "height": 880
+        },
+        {
+          "url": "https://www.harrington495.kr/images/main/visual-4.jpg",
+          "width": 1374,
+          "height": 880
+        }
+      ]
+    },
+    "해링턴플레이스 풍무(3BL)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://www.해링턴플레이스풍무.com",
+      "candidates": [
+        {
+          "url": "http://www.xn--om2bn5a35auzq89f3lqrqf62ax0a.com/home/design/images/layout.jpg",
+          "width": 1100,
+          "height": 3176,
+          "note": "비율 0.35 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.xn--om2bn5a35auzq89f3lqrqf62ax0a.com/home/design/images/plan.jpg",
+          "width": 1100,
+          "height": 2033,
+          "note": "비율 0.54 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.xn--om2bn5a35auzq89f3lqrqf62ax0a.com/home/design/images/main_cg01.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "http://www.xn--om2bn5a35auzq89f3lqrqf62ax0a.com/home/design/images/main_cg02.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "http://www.xn--om2bn5a35auzq89f3lqrqf62ax0a.com/home/design/images/main_cg03.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "http://www.xn--om2bn5a35auzq89f3lqrqf62ax0a.com/home/design/images/main_visual_05.jpg?ver=1795502619",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 5.36 < 6.8)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))"
+    },
+    "호반써밋 풍무Ⅱ": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://hobansummit-pungmu2.com/",
+      "candidates": [
+        {
+          "url": "https://hobansummit-pungmu2.com/final/assets/images/sub/img_location2.png",
+          "width": 3000,
+          "height": 1900,
+          "note": "단순함 (entropy 4.64 < 6.8)"
+        },
+        {
+          "url": "https://hobansummit-pungmu2.com/final/assets/images/sub/img_plan.png",
+          "width": 1200,
+          "height": 3090,
+          "note": "비율 0.39 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://hobansummit-pungmu2.com/final/assets/images/sub/img_location3.png",
+          "width": 1920,
+          "height": 1538,
+          "note": "단순함 (entropy 5.17 < 6.8)"
+        },
+        {
+          "url": "https://hobansummit-pungmu2.com/final/assets/images/main/img_visual_si3.png",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://hobansummit-pungmu2.com/final/assets/images/main/img_visual_si1.png",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://hobansummit-pungmu2.com/final/assets/images/main/img_visual_si2.png",
+          "width": 1920,
+          "height": 1000
+        }
+      ]
+    },
+    "호반써밋 풍무Ⅲ": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://hobansummit-pungmu3.co.kr/",
+      "candidates": [
+        {
+          "url": "https://hobansummit-pungmu3.co.kr/final/assets/images/sub/img_location_02.png",
+          "width": 2400,
+          "height": 1732,
+          "note": "단순함 (entropy 5.74 < 6.8)"
+        },
+        {
+          "url": "https://hobansummit-pungmu3.co.kr/final/assets/images/sub/img_plan.png",
+          "width": 1199,
+          "height": 2930,
+          "note": "비율 0.41 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://hobansummit-pungmu3.co.kr/final/assets/images/main/260706/bg_sec1.png",
+          "width": 1920,
+          "height": 999,
+          "note": "단순함 (entropy 6.22 < 6.8)"
+        },
+        {
+          "url": "https://hobansummit-pungmu3.co.kr/final/assets/images/sub/img_location_03.png",
+          "width": 1200,
+          "height": 1572,
+          "note": "비율 0.76 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://hobansummit-pungmu3.co.kr/final/assets/images/main/260706/bg_sec2.png",
+          "width": 1920,
+          "height": 980,
+          "note": "단순함 (entropy 6.80 < 6.8)"
+        },
+        {
+          "url": "https://hobansummit-pungmu3.co.kr/final/assets/images/main/bg_sec2.png",
+          "width": 1920,
+          "height": 980,
+          "note": "단순함 (entropy 6.18 < 6.8)"
+        }
+      ]
+    },
+    "호현 센트럴 아이파크": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.i-park.com/hohyeoncentral",
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "홍대입구역 센트럴 아르떼 해모로": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://홍대센트럴아르떼해모로.com/",
+      "candidates": [
+        {
+          "url": "https://xn--vk1bx5cx7b6l88b30cyvv6zhtv6aezf8pc.com/resources/img/main/sec04_bg.jpg",
+          "width": 1920,
+          "height": 2467,
+          "note": "비율 0.78 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--vk1bx5cx7b6l88b30cyvv6zhtv6aezf8pc.com/resources/img/main/sec02_cg.png",
+          "width": 1920,
+          "height": 1300,
+          "note": "투명한 부분이 89% (장식용 이미지)"
+        },
+        {
+          "url": "https://xn--vk1bx5cx7b6l88b30cyvv6zhtv6aezf8pc.com/resources/img/main/sec01.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://xn--vk1bx5cx7b6l88b30cyvv6zhtv6aezf8pc.com/resources/img/main/sec03_01.jpg",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://xn--vk1bx5cx7b6l88b30cyvv6zhtv6aezf8pc.com/resources/img/main/sec03_02.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "한 색이 43% (40% 초과)"
+        },
+        {
+          "url": "https://xn--vk1bx5cx7b6l88b30cyvv6zhtv6aezf8pc.com/resources/img/main/sec03_03.jpg",
+          "width": 1920,
+          "height": 1080,
+          "note": "단순함 (entropy 6.60 < 6.8)"
+        }
+      ]
+    },
+    "화서역 호수공원 아너스빌": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.화서역아너스빌.com",
+      "candidates": [
+        {
+          "url": "https://www.xn--h50bp5wx7b30b79e72a035f.com/assets/images/sub/location.jpg",
+          "width": 1200,
+          "height": 2337,
+          "note": "비율 0.51 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--h50bp5wx7b30b79e72a035f.com/assets/images/main/visual-bg-261110.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://www.xn--h50bp5wx7b30b79e72a035f.com/assets/images/main/overview-bg-261110.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://www.xn--h50bp5wx7b30b79e72a035f.com/assets/images/main/three-bg.jpg",
+          "width": 1920,
+          "height": 1000
+        },
+        {
+          "url": "https://www.xn--h50bp5wx7b30b79e72a035f.com/assets/images/main/map-bg.jpg",
+          "width": 1920,
+          "height": 1000,
+          "note": "단순함 (entropy 5.34 < 6.8)"
+        },
+        {
+          "url": "https://www.xn--h50bp5wx7b30b79e72a035f.com/assets/images/main/premium-bg-261110.jpg",
+          "width": 1920,
+          "height": 1000
+        }
+      ]
+    },
+    "화성 비봉지구 B1블록 금성백조 예미지2차": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "회천중앙역 로제비앙 그랜드센텀": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://회천중앙역로제비앙그랜드센텀.com",
+      "candidates": [
+        {
+          "url": "https://xn--2i0bs4kloc5va99snwepsica34k01l50c7wqu9obpr.com/final/assets/images/main/bg_sec1.png",
+          "width": 1920,
+          "height": 2155,
+          "note": "비율 0.89 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--2i0bs4kloc5va99snwepsica34k01l50c7wqu9obpr.com/final/assets/images/sub/img_location.png",
+          "width": 1200,
+          "height": 3043,
+          "note": "비율 0.39 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--2i0bs4kloc5va99snwepsica34k01l50c7wqu9obpr.com/final/assets/images/main/img_sec4_image1.png",
+          "width": 1920,
+          "height": 1305,
+          "note": "투명한 부분이 25% (장식용 이미지)"
+        },
+        {
+          "url": "https://xn--2i0bs4kloc5va99snwepsica34k01l50c7wqu9obpr.com/final/assets/images/sub/img_plan2.png",
+          "width": 1200,
+          "height": 1960,
+          "note": "비율 0.61 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://xn--2i0bs4kloc5va99snwepsica34k01l50c7wqu9obpr.com/final/assets/images/main/img_visual_bg3.png",
+          "width": 1920,
+          "height": 1155
+        },
+        {
+          "url": "https://xn--2i0bs4kloc5va99snwepsica34k01l50c7wqu9obpr.com/final/assets/images/main/bg_visual.png",
+          "width": 1920,
+          "height": 1128,
+          "note": "단순함 (entropy 3.50 < 6.8)"
+        }
+      ]
+    },
+    "힐스테이트 광명 11": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://hillstate.co.kr/s/GM11R",
+      "candidates": [
+        {
+          "url": "https://hillstate.co.kr/common/images/bg-error.jpg",
+          "width": 1920,
+          "height": 980,
+          "note": "단순함 (entropy 4.66 < 6.8)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "힐스테이트 등촌역": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://hillstate.co.kr/s/deungchon",
+      "candidates": [
+        {
+          "url": "https://hillstate.co.kr/common/images/bg-error.jpg",
+          "width": 1920,
+          "height": 980,
+          "note": "단순함 (entropy 4.66 < 6.8)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "힐스테이트 메디알레": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://hillstate.co.kr/s/mediale",
+      "candidates": [
+        {
+          "url": "https://hillstate.co.kr/common/images/bg-error.jpg",
+          "width": 1920,
+          "height": 980,
+          "note": "단순함 (entropy 4.66 < 6.8)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "힐스테이트 안양펠루스": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.힐스테이트안양펠루스.com",
+      "candidates": [
+        {
+          "url": "https://www.xn--2s2b11pba61ypkq0h8xyivczvc25q.com/upload/banner/20260224115937_902760ba.jpg",
+          "width": 1920,
+          "height": 870,
+          "note": "비율 2.21 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--2s2b11pba61ypkq0h8xyivczvc25q.com/upload/banner/20260212181146_d43e0a12.jpg",
+          "width": 1920,
+          "height": 870,
+          "note": "비율 2.21 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--2s2b11pba61ypkq0h8xyivczvc25q.com/upload/banner/20260212181154_c1129044.jpg",
+          "width": 1920,
+          "height": 870,
+          "note": "비율 2.21 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--2s2b11pba61ypkq0h8xyivczvc25q.com/upload/banner/20260212175205_64ee817e.jpg",
+          "width": 1920,
+          "height": 680,
+          "note": "비율 2.82 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://www.xn--2s2b11pba61ypkq0h8xyivczvc25q.com/upload/18/202603061058343/20260306105950_7b6a3bd8.jpg",
+          "width": 1170,
+          "height": 740,
+          "note": "단순함 (entropy 4.96 < 6.8)"
+        },
+        {
+          "url": "https://www.xn--2s2b11pba61ypkq0h8xyivczvc25q.com/upload/18/202603061058343/20260306110108_22fa8f1d.jpg",
+          "width": 1170,
+          "height": 700,
+          "note": "단순함 (entropy 5.40 < 6.8)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "힐스테이트 오산 더퍼스트(조합원 자격상실 및 제명세대)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://www.osan-hillstate.co.kr",
+      "candidates": [
+        {
+          "url": "http://www.osan-hillstate.co.kr/theme/basic/img/content_0203.png",
+          "width": 1100,
+          "height": 3813,
+          "note": "비율 0.29 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.osan-hillstate.co.kr/theme/basic/img/main_new_02.jpg",
+          "width": 2000,
+          "height": 1000
+        },
+        {
+          "url": "http://www.osan-hillstate.co.kr/theme/basic/img/02.png",
+          "width": 2000,
+          "height": 1000
+        },
+        {
+          "url": "http://www.osan-hillstate.co.kr/theme/basic/img/03.png",
+          "width": 2000,
+          "height": 1000,
+          "note": "단순함 (entropy 2.14 < 6.8)"
+        },
+        {
+          "url": "http://www.osan-hillstate.co.kr/theme/basic/img/sub_v.png",
+          "width": 1900,
+          "height": 306,
+          "note": "비율 6.21 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.osan-hillstate.co.kr/theme/basic/img/footer.png",
+          "width": 1100,
+          "height": 196,
+          "note": "비율 5.61 (1.2~2.2 밖)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 앞쪽 5쪽에 이미지가 없음"
+    },
+    "힐스테이트 오산 더퍼스트(조합원 자격상실 및 제명세대)(2회차)": {
+      "checkedAt": "2026-11-24",
+      "homepage": "http://www.osan-hillstate.co.kr",
+      "candidates": [
+        {
+          "url": "http://www.osan-hillstate.co.kr/theme/basic/img/content_0203.png",
+          "width": 1100,
+          "height": 3813,
+          "note": "비율 0.29 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.osan-hillstate.co.kr/theme/basic/img/main_new_02.jpg",
+          "width": 2000,
+          "height": 1000
+        },
+        {
+          "url": "http://www.osan-hillstate.co.kr/theme/basic/img/02.png",
+          "width": 2000,
+          "height": 1000
+        },
+        {
+          "url": "http://www.osan-hillstate.co.kr/theme/basic/img/03.png",
+          "width": 2000,
+          "height": 1000,
+          "note": "단순함 (entropy 2.14 < 6.8)"
+        },
+        {
+          "url": "http://www.osan-hillstate.co.kr/theme/basic/img/sub_v.png",
+          "width": 1900,
+          "height": 306,
+          "note": "비율 6.21 (1.2~2.2 밖)"
+        },
+        {
+          "url": "http://www.osan-hillstate.co.kr/theme/basic/img/footer.png",
+          "width": 1100,
+          "height": 196,
+          "note": "비율 5.61 (1.2~2.2 밖)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 앞쪽 5쪽에 이미지가 없음"
+    },
+    "힐스테이트 이수역센트럴": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://hillstate.co.kr/s/isu_central",
+      "candidates": [
+        {
+          "url": "https://hillstate.co.kr/common/images/bg-error.jpg",
+          "width": 1920,
+          "height": 980,
+          "note": "단순함 (entropy 4.66 < 6.8)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "힐스테이트 평택역센트럴시티": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://hillstate.co.kr/s/ptcentralcity",
+      "candidates": [
+        {
+          "url": "https://hillstate.co.kr/common/images/bg-error.jpg",
+          "width": 1920,
+          "height": 980,
+          "note": "단순함 (entropy 4.66 < 6.8)"
+        }
+      ],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))"
+    },
+    "힐스테이트 회룡역파크뷰": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://hillstate.co.kr/s/hoeryong",
+      "candidates": [
+        {
+          "url": "https://hillstate.co.kr/upload/2026/04/20260428021717010807.jpg",
+          "width": 1920,
+          "height": 1056
+        },
+        {
+          "url": "https://hillstate.co.kr/upload/2026/04/20260428021717012451.jpg",
+          "width": 1920,
+          "height": 1056
+        },
+        {
+          "url": "https://hillstate.co.kr/common/images/bg-titlewrap.jpg",
+          "width": 1920,
+          "height": 810,
+          "note": "비율 2.37 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://hillstate.co.kr/upload/2025/09/20250917125446015710.jpg",
+          "width": 1218,
+          "height": 1023,
+          "note": "비율 1.19 (1.2~2.2 밖)"
+        },
+        {
+          "url": "https://hillstate.co.kr/upload/2026/11/20261103053314010941.jpg",
+          "width": 1218,
+          "height": 836,
+          "note": "단순함 (entropy 5.58 < 6.8)"
+        },
+        {
+          "url": "https://hillstate.co.kr/upload/2025/06/20250620021609010314.jpg",
+          "width": 1200,
+          "height": 40,
+          "note": "비율 30.00 (1.2~2.2 밖)"
+        }
+      ]
+    },
+    "e편한세상 당산 리버파크": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.elife.co.kr/Posm_list01.action?commonMap.CD_BIZ_LND=200160",
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "e편한세상 부천 어반스퀘어": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.elife.co.kr/",
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 334×334: 가로 334px (600px 미만))"
+    },
+    "e편한세상 일산 메이포레 1단지": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.elife.co.kr/",
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "e편한세상 일산 메이포레 3단지": {
+      "checkedAt": "2026-11-24",
+      "homepage": "https://www.elife.co.kr",
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    },
+    "VIORR(비오르)": {
+      "checkedAt": "2026-11-24",
+      "homepage": null,
+      "candidates": [],
+      "pdf": "없음: 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))"
+    }
+  }
+}
