@@ -31,7 +31,7 @@ type Props = {
   image?: ComplexImage | null;
   /** 청약홈 주택관리번호. 넘기면 조감도가 없을 때 분양 홈페이지 대표 이미지를 찾아 봄 */
   noticeNo?: string | null;
-  size?: "sm" | "lg" | "fill" | "wide";
+  size?: "sm" | "md" | "lg" | "fill" | "wide";
 };
 
 // source: 공공기관 공고 페이지에서 찾은 이미지면 그 사이트 이름 (예: "LH청약플러스"), 분양 홈페이지면 null
@@ -58,6 +58,7 @@ type CoordState = { status: "idle" | "loading" } | { status: "ok"; lat: number; 
 
 const BOX = {
   sm: "w-20", // 80×60px 고정
+  md: "w-28", // 112×84px 고정 (홈 팝업 카드용, sm처럼 출처 글씨 없음)
   lg: "w-60 max-w-full",
   fill: "w-full",
   wide: "w-full max-w-[560px]",
@@ -154,8 +155,9 @@ export default function ComplexThumb({ name, address, region, image, noticeNo, s
   }, [coord, size]);
 
   const mapCoord = coord.status === "ok" ? { lat: coord.lat, lng: coord.lng } : null;
-  // 출처 표기는 큰 이미지 아래에만 (목록 썸네일에는 붙이지 않음)
-  const caption = size !== "sm" ? (manual?.source ?? null) : null;
+  // 출처 표기는 큰 이미지 아래에만 (목록·팝업 썸네일에는 붙이지 않음)
+  const compact = size === "sm" || size === "md";
+  const caption = !compact ? (manual?.source ?? null) : null;
 
   const frame = (
     <div
@@ -204,7 +206,7 @@ export default function ComplexThumb({ name, address, region, image, noticeNo, s
       >
         {frame}
       </a>
-      {ogImage?.homepage && size !== "sm" && (
+      {ogImage?.homepage && !compact && (
         <figcaption className="mt-1 text-[11px] text-muted">
           {/* 공공기관에서 찾은 이미지는 기관 사이트 이름으로, 분양 홈페이지는 주소로 표시 */}
           이미지 출처: {ogImage.source ? "" : "단지 분양 홈페이지 · "}
@@ -218,7 +220,7 @@ export default function ComplexThumb({ name, address, region, image, noticeNo, s
           출처: {caption}
         </figcaption>
       )}
-      {size !== "sm" && !caption && !ogImage && (
+      {!compact && !caption && !ogImage && (
         <figcaption className="mt-1 text-[11px] text-muted">누르면 카카오맵에서 위치가 열려요</figcaption>
       )}
     </figure>

@@ -2,16 +2,16 @@
  * 홈 "이번 주 청약 소식" 팝업의 카드 만들기 (화면 공용, 저장·계산 로직 변경 없음)
  *
  * 기준 주간은 한국시간 월요일~일요일입니다.
- * 카드는 아래 순서로 만들고, 보여줄 내용이 없는 카드는 빼고 돌려줍니다.
- *   1. 이번 주 청약 일정   2. 가점 없이 노려볼 만한 공고   3. 지난주 당첨 결과
+ * 카드는 아래 순서로 만들고(design/popup 시안 4장 + 내 카드 2장), 보여줄 내용이 없는 카드는 빼고 돌려줍니다.
+ *   1. 이번 주 청약 일정 (요일별, 무순위 포함)   2. 이번 주 주목할 단지   3. 지난주 당첨 결과
  *   4. 내 점수 맞춤(저장된 가점이 있을 때)   5. 내 관심 공고(로그인 + 관심 공고)   6. 청약 상식
- * 판정은 lib/judge.ts 결과(verdicts)를 받아 세기만 하고, 숫자는 API·CSV·저장값에 있는 것만 씁니다.
+ * 판정은 lib/judge.ts 결과(verdicts)를 받아 세기만 하고, 숫자는 API·CSV·저장값에 있는 것만 씁니다. 없는 값은 빼거나 숨깁니다.
  */
 
 import type { Notice, RemndrNotice } from "./applyhome";
 import { scheduleEvents } from "./calendar";
 import { rateShort } from "./competition";
-import type { Complex, HouseType } from "./complexes";
+import type { Complex } from "./complexes";
 import { growthStage } from "./growth";
 import type { Verdict } from "./judge";
 import { lotteryRatio, percent } from "./lottery";
@@ -22,17 +22,18 @@ import { addDays, daysBetween, ddayText, md, nextEvent } from "./mySchedule";
 import { areaOf, bandOf, type PastRow } from "./similar";
 
 export const WEEKLY_SETTINGS = {
-  scheduleMax: 6, // 이번 주 일정 최대 줄 수 (넘치면 "외 N건")
-  listMax: 3, // 나머지 카드 목록 최대 개수
+  featuredMax: 3, // 이번 주 주목할 단지 최대 개수
+  priceChipsMax: 3, // 단지마다 보여줄 타입별 분양가 개수
+  resultsMax: 4, // 지난주 당첨 결과 최대 줄 수
+  listMax: 3, // 내 점수 맞춤·관심 공고 목록 최대 개수
 };
 
 // ───────────────────────── 카드 모양 ─────────────────────────
 
-export type CardTone = "brand" | "accent" | "beige";
-
+/** 목록 한 줄 (내 점수 맞춤·관심 공고) */
 export type CardRow = {
   key: string;
-  lead?: string; // 왼쪽 작은 글자 (요일·날짜)
+  lead?: string; // 왼쪽 작은 글자
   title: string;
   sub?: string;
   right?: string;
@@ -41,26 +42,52 @@ export type CardRow = {
   external?: boolean; // 청약홈 등 바깥 주소
 };
 
-export type WeeklyCard = {
-  id: "schedule" | "lottery" | "results" | "mine" | "favorites" | "tip";
-  tone: CardTone;
-  label: string; // 맨 위 작은 분류 글자
-  title: string;
-  intro?: string; // 제목 아래 한 줄 설명
-  rows: CardRow[];
-  more?: string; // "외 N건"
-  body?: string; // 청약 상식 본문
-  extraLink?: { href: string; text: string };
-  all: { href: string; text: string };
+export type ScheduleTag = "특별공급" | "1순위" | "무순위" | "당첨발표";
+
+export type ScheduleItem = {
+  key: string;
+  tag: ScheduleTag;
+  name: string;
+  sub: string; // 지역 · 기간
+  href: string;
+  external: boolean; // 무순위는 청약홈 공고로
+  capped: boolean; // 분양가상한제 (API 값이 Y일 때만)
 };
+
+export type ScheduleDay = { date: string; dow: string; md: string; items: ScheduleItem[] };
+
+export type FeaturedItem = {
+  no: string;
+  name: string;
+  region: string;
+  unit: string;
+  address: string;
+  dates: string; // "접수 11.24 · 발표 12.1" (있는 값만)
+  chips: string[]; // "59타입 최고 4.2억", "추첨 60%"
+  capped: boolean;
+  href: string;
+};
+
+export type ResultRow = { key: string; name: string; type: string; min: number; rate: string | null; href: string };
+
+type CardBase = { label: string; title: string; all: { href: string; text: string } };
+
+export type WeeklyCard = CardBase &
+  (
+    | { id: "schedule"; range: string; days: ScheduleDay[]; defaultDay: string }
+    | { id: "featured"; items: FeaturedItem[]; more?: string }
+    | { id: "results"; intro: string; rows: ResultRow[]; more?: string }
+    | { id: "mine" | "favorites"; intro?: string; rows: CardRow[] }
+    | { id: "tip"; body: string; link: { href: string; text: string } }
+  );
 
 export type Tip = { title: string; body: string };
 
 export type WeeklyInput = {
   today: string; // "YYYY-MM-DD" (한국시간)
-  notices: Notice[] | null; // /api/notices (실패하면 null)
-  remndr: RemndrNotice[] | null; // /api/remndr-notices (실패하면 null)
-  history: Complex[] | null; // /api/complexes 과거 당첨가점 (API가 실패해 CSV로 대신하는 경우는 null)
+  notices: Notice[] | null; // /api/notices 또는 주차별 파일 (실패하면 null)
+  remndr: RemndrNotice[] | null; // /api/remndr-notices 또는 주차별 파일 (실패하면 null)
+  history: Complex[] | null; // 과거 당첨가점 (API가 실패해 CSV로 대신하는 경우는 null)
   csv: Complex[]; // data/complexes.csv (가점제·추첨제 세대수가 적힌 단지만 추첨 비율 계산)
   score: SavedScore | null;
   home: MyHome;
@@ -130,12 +157,13 @@ export const lastWeekOf = (today: string): Week => weekOf(addDays(weekOf(today).
 
 const overlaps = (w: Week, start: string | null, end: string | null) => !!start && start <= w.end && (end ?? start) >= w.start;
 const inWeek = (w: Week, d: string | null) => !!d && d >= w.start && d <= w.end;
-const dayText = (d: string) => `${DOW[dowOf(d)]} ${md(d)}`;
+const dayText = (d: string) => `${md(d)}(${DOW[dowOf(d)]})`;
 const norm = (s: string) => s.replace(/\s+/g, "");
 const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
 const noticeHref = (no: string) => `/notice?no=${encodeURIComponent(no)}`;
+const capped = (n: Notice) => n.regulations?.["분양가상한제"] === true;
 
-/** 이번 주에 특별공급·1순위 접수가 걸친 공고 (내 점수 맞춤 판정 대상) */
+/** 이번 주에 특별공급·1순위 접수가 걸친 공고 (주목할 단지·내 점수 맞춤 대상) */
 export function noticesReceivingThisWeek(notices: Notice[], today: string): Notice[] {
   const w = weekOf(today);
   return notices.filter((n) => {
@@ -166,12 +194,14 @@ export function similarQuery(n: Notice, home: MyHome): string | null {
 // ───────────────────────── 카드 만들기 ─────────────────────────
 
 export function buildWeeklyCards(i: WeeklyInput): WeeklyCard[] {
-  return [scheduleCard(i), lotteryCard(i), resultsCard(i), mineCard(i), favoritesCard(i), tipCard(i)].filter(
+  return [scheduleCard(i), featuredCard(i), resultsCard(i), mineCard(i), favoritesCard(i), tipCard(i)].filter(
     (c): c is WeeklyCard => c !== null,
   );
 }
 
-export type WeekEvent = CardRow & { date: string; order: number };
+export type WeekEvent = ScheduleItem & { date: string; order: number };
+
+const TAG_ORDER: Record<ScheduleTag, number> = { 특별공급: 0, "1순위": 1, 무순위: 2, 당첨발표: 3 };
 
 /** 이번 주 특별공급·1순위 접수, 당첨자 발표 일정 (날짜순). 주간 자동화의 점검에도 씀 */
 export function weekScheduleEvents(notices: Notice[], today: string): WeekEvent[] {
@@ -181,90 +211,113 @@ export function weekScheduleEvents(notices: Notice[], today: string): WeekEvent[
     for (const e of scheduleEvents(n.schedule)) {
       if (e.key !== "special" && e.key !== "rank1" && e.key !== "winner") continue;
       if (!overlaps(w, e.range.start, e.range.end)) continue;
-      const date = e.range.start < w.start ? w.start : e.range.start;
-      const span = e.range.start === e.range.end ? "" : ` (${md(e.range.start)}~${md(e.range.end)})`;
+      const tag: ScheduleTag = e.key === "special" ? "특별공급" : e.key === "rank1" ? "1순위" : "당첨발표";
+      const span = e.range.start === e.range.end ? "" : `${md(e.range.start)}~${md(e.range.end)}`;
       events.push({
         key: `${n.houseManageNo}-${e.key}`,
-        date,
-        order: e.key === "special" ? 0 : e.key === "rank1" ? 1 : 2,
-        lead: dayText(date),
-        title: n.name,
-        sub: `${e.label}${span} · ${n.region} ${n.unit}`.trim(),
+        date: e.range.start < w.start ? w.start : e.range.start,
+        order: TAG_ORDER[tag],
+        tag,
+        name: n.name,
+        sub: [`${n.region} ${n.unit}`.trim(), span].filter(Boolean).join(" · "),
         href: noticeHref(n.houseManageNo),
+        external: false,
+        capped: capped(n),
       });
     }
   }
-  return events.sort((a, b) => a.date.localeCompare(b.date) || a.order - b.order || a.title.localeCompare(b.title, "ko"));
+  return events.sort((a, b) => a.date.localeCompare(b.date) || a.order - b.order || a.name.localeCompare(b.name, "ko"));
 }
 
-/** 1. 이번 주 청약 일정 */
-function scheduleCard({ notices, today }: WeeklyInput): WeeklyCard | null {
-  if (!notices) return null;
+/** 1. 이번 주 청약 일정: 요일 칸별 목록 (특별공급·1순위·당첨자 발표 + 무순위 접수) */
+function scheduleCard({ notices, remndr, today }: WeeklyInput): WeeklyCard | null {
+  if (!notices && !remndr) return null;
   const w = weekOf(today);
-  const events = weekScheduleEvents(notices, today);
+  const events: WeekEvent[] = weekScheduleEvents(notices ?? [], today);
+  for (const r of remndr ?? []) {
+    if (!overlaps(w, r.receiptStart, r.receiptEnd)) continue;
+    const end = r.receiptEnd ?? r.receiptStart!;
+    events.push({
+      key: `r-${r.houseManageNo}`,
+      date: r.receiptStart! < w.start ? w.start : r.receiptStart!,
+      order: TAG_ORDER["무순위"],
+      tag: "무순위",
+      name: r.name,
+      sub: [`${r.region} ${r.unit}`.trim(), r.kind, r.receiptStart !== end ? `${md(r.receiptStart!)}~${md(end)}` : ""].filter(Boolean).join(" · "),
+      href: r.url ?? "/notice",
+      external: !!r.url,
+      capped: false, // 무순위 API에는 분양가상한제 값이 없음
+    });
+  }
   if (!events.length) return null;
-  const max = WEEKLY_SETTINGS.scheduleMax;
+  events.sort((a, b) => a.date.localeCompare(b.date) || a.order - b.order || a.name.localeCompare(b.name, "ko"));
+
+  // 월~금은 늘 보이고, 토·일은 일정이 있을 때만
+  const days: ScheduleDay[] = Array.from({ length: 7 }, (_, i) => addDays(w.start, i))
+    .map((date) => ({ date, dow: DOW[dowOf(date)], md: md(date), items: events.filter((e) => e.date === date) }))
+    .filter((d, i) => i < 5 || d.items.length > 0);
+  const last = days[days.length - 1].date;
+  const defaultDay =
+    days.find((d) => d.date === today && d.items.length)?.date ?? days.find((d) => d.date >= today && d.items.length)?.date ?? days.find((d) => d.items.length)!.date;
+
   return {
     id: "schedule",
-    tone: "brand",
     label: "THIS WEEK",
     title: "이번 주 청약 일정",
-    intro: `${md(w.start)}(월) ~ ${md(w.end)}(일) 서울·경기`,
-    rows: events.slice(0, max),
-    more: events.length > max ? `외 ${events.length - max}건` : undefined,
+    range: `${dayText(w.start)} ~ ${dayText(last)} · 총 ${events.length}건`,
+    days,
+    defaultDay,
     all: { href: "/notice", text: "분양 공고 전체 보기" },
   };
 }
 
-/** 2. 가점 없이 노려볼 만한 공고: 이번 주 무순위·잔여세대 접수 + 추첨제 비율이 높은 주택형 */
-function lotteryCard({ notices, remndr, csv, today }: WeeklyInput): WeeklyCard | null {
-  const w = weekOf(today);
-  const rows: CardRow[] = [];
-
-  for (const r of (remndr ?? [])
-    .filter((r) => overlaps(w, r.receiptStart, r.receiptEnd))
-    .sort((a, b) => (a.receiptStart ?? "").localeCompare(b.receiptStart ?? ""))) {
-    rows.push({
-      key: `r-${r.houseManageNo}`,
-      lead: dayText(r.receiptStart! < w.start ? w.start : r.receiptStart!),
-      title: r.name,
-      sub: [r.kind, `${r.region} ${r.unit}`.trim(), r.supply !== null ? `${r.supply}세대` : ""].filter(Boolean).join(" · "),
-      href: r.url ?? undefined,
-      external: !!r.url,
-    });
+/** 타입별 최고 분양가: 전용면적 정수(59, 84…)로 묶어 그중 가장 높은 값 (API의 분양 최고가, 만원) */
+function priceChips(n: Notice): string[] {
+  const byArea = new Map<number, number>();
+  for (const t of n.types) {
+    const area = areaOf(t.type);
+    if (area === null || t.topAmount === null || t.topAmount <= 0) continue;
+    const a = Math.floor(area);
+    byArea.set(a, Math.max(byArea.get(a) ?? 0, t.topAmount));
   }
+  return [...byArea]
+    .sort((a, b) => a[0] - b[0])
+    .slice(0, WEEKLY_SETTINGS.priceChipsMax)
+    .map(([a, v]) => `${a}타입 최고 ${(v / 10000).toFixed(1)}억`);
+}
 
-  // 추첨 비율은 CSV에 가점제·추첨제 세대수를 적어 둔 단지만 계산됩니다 (청약홈 API에는 없음)
+/** 2. 이번 주 주목할 단지: 이번 주 특별공급·1순위 접수 공고 (접수가 빠른 순) */
+function featuredCard({ notices, csv, today }: WeeklyInput): WeeklyCard | null {
+  if (!notices) return null;
+  const receiptOf = (n: Notice) => [n.schedule.special?.start, n.schedule.rank1?.start].filter((d): d is string => !!d).sort()[0] ?? null;
+  const list = noticesReceivingThisWeek(notices, today).sort((a, b) => (receiptOf(a) ?? "").localeCompare(receiptOf(b) ?? ""));
+  if (!list.length) return null;
+
+  // 추첨 비율은 CSV에 가점제·추첨제 세대수를 적어 둔 단지만 (청약홈 API에는 없음)
   const byName = new Map(csv.map((c) => [norm(c.name), c]));
-  const lottery: { n: Notice; t: HouseType; ratio: number }[] = [];
-  for (const n of noticesReceivingThisWeek(notices ?? [], today)) {
-    const c = byName.get(norm(n.name));
-    for (const t of c?.types ?? []) {
-      const ratio = lotteryRatio(t);
-      if (ratio !== null && ratio > 0) lottery.push({ n, t, ratio });
-    }
-  }
-  lottery.sort((a, b) => b.ratio - a.ratio);
-  for (const { n, t, ratio } of lottery) {
-    rows.push({
-      key: `l-${n.houseManageNo}-${t.type}`,
-      title: `${n.name} ${t.type}`,
-      sub: `${n.region} ${n.unit}`.trim(),
-      right: `추첨 ${percent(ratio)}`,
-      rightTone: "accent",
+  const items: FeaturedItem[] = list.map((n) => {
+    const receipt = receiptOf(n);
+    const winner = n.schedule.winner;
+    const ratios = (byName.get(norm(n.name))?.types ?? []).map(lotteryRatio).filter((r): r is number => r !== null && r > 0);
+    return {
+      no: n.houseManageNo,
+      name: n.name,
+      region: n.region,
+      unit: n.unit,
+      address: n.address,
+      dates: [receipt ? `접수 ${md(receipt)}` : "", winner ? `발표 ${md(winner)}` : ""].filter(Boolean).join(" · "),
+      chips: [...priceChips(n), ...(ratios.length ? [`추첨 최대 ${percent(Math.max(...ratios))}`] : [])],
+      capped: capped(n),
       href: noticeHref(n.houseManageNo),
-    });
-  }
-
-  if (!rows.length) return null;
+    };
+  });
+  const max = WEEKLY_SETTINGS.featuredMax;
   return {
-    id: "lottery",
-    tone: "accent",
-    label: "NO SCORE NEEDED",
-    title: "가점 없이 노려볼 만한 공고",
-    intro: "무순위·잔여세대는 가점이 아니라 추첨으로 뽑아요. 자격은 공고문에서 확인하세요.",
-    rows: rows.slice(0, WEEKLY_SETTINGS.listMax),
-    more: rows.length > WEEKLY_SETTINGS.listMax ? `외 ${rows.length - WEEKLY_SETTINGS.listMax}건` : undefined,
+    id: "featured",
+    label: "THIS WEEK",
+    title: "이번 주 주목할 단지",
+    items: items.slice(0, max),
+    more: items.length > max ? `외 ${items.length - max}곳` : undefined,
     all: { href: "/notice", text: "분양 공고 전체 보기" },
   };
 }
@@ -274,32 +327,31 @@ function resultsCard({ notices, history, today }: WeeklyInput): WeeklyCard | nul
   if (!notices || !history) return null;
   const lw = lastWeekOf(today);
   const byId = new Map(history.map((c) => [c.id, c]));
-  const rows: CardRow[] = [];
+  const rows: ResultRow[] = [];
   for (const n of notices.filter((n) => inWeek(lw, n.schedule.winner)).sort((a, b) => a.schedule.winner!.localeCompare(b.schedule.winner!))) {
     const c = byId.get(n.houseManageNo);
     // 당첨가점이 있는 주택형 중 공급(1순위 경쟁률 기준)이 가장 많은 주택형 하나
-    const t = c?.types
-      .filter((t) => t.min !== null)
-      .sort((a, b) => (b.cmpet?.supply ?? 0) - (a.cmpet?.supply ?? 0))[0];
+    const t = c?.types.filter((t) => t.min !== null).sort((a, b) => (b.cmpet?.supply ?? 0) - (a.cmpet?.supply ?? 0))[0];
     if (!c || !t) continue;
     const rate = t.cmpet ? rateShort(t.cmpet) : null;
     rows.push({
       key: n.houseManageNo,
-      title: `${c.name} ${t.type}`,
-      sub: [`${md(n.schedule.winner!)} 발표`, `${c.sido} ${c.sigungu}`.trim(), rate && rate !== "–" ? `경쟁률 ${rate}` : ""].filter(Boolean).join(" · "),
-      right: `최저 ${fmt(t.min!)}점`,
+      name: c.name,
+      type: t.type,
+      min: t.min!,
+      rate: rate && rate !== "–" ? rate : null,
       href: `/compare?${new URLSearchParams({ id: c.id, t: t.type })}`,
     });
   }
   if (!rows.length) return null;
+  const max = WEEKLY_SETTINGS.resultsMax;
   return {
     id: "results",
-    tone: "beige",
-    label: "LAST WEEK",
+    label: "RESULT",
     title: "지난주 당첨 결과",
-    intro: `${md(lw.start)}(월) ~ ${md(lw.end)}(일) 발표 · 내 거주 구분 기준 당첨가점`,
-    rows: rows.slice(0, WEEKLY_SETTINGS.listMax),
-    more: rows.length > WEEKLY_SETTINGS.listMax ? `외 ${rows.length - WEEKLY_SETTINGS.listMax}건` : undefined,
+    intro: `${dayText(lw.start)} ~ ${dayText(lw.end)} 발표 · 내 거주 구분 기준`,
+    rows: rows.slice(0, max),
+    more: rows.length > max ? `외 ${rows.length - max}곳` : undefined,
     all: { href: "/compare", text: "단지 비교 전체 보기" },
   };
 }
@@ -353,7 +405,6 @@ function mineCard({ score, home, notices, verdicts, today }: WeeklyInput): Weekl
 
   return {
     id: "mine",
-    tone: "brand",
     label: "FOR ME",
     title: "내 점수 맞춤",
     intro,
@@ -381,7 +432,6 @@ function favoritesCard({ favorites, today }: WeeklyInput): WeeklyCard | null {
   if (!rows.length) return null;
   return {
     id: "favorites",
-    tone: "accent",
     label: "MY LIST",
     title: "내 관심 공고",
     intro: "가장 가까운 일정 순",
@@ -396,12 +446,10 @@ function tipCard({ tips, today, tipIndex }: WeeklyInput): WeeklyCard | null {
   const tip = tips[tipIndex !== undefined && tipIndex >= 0 && tipIndex < tips.length ? tipIndex : tipIndexFor(today, tips.length)];
   return {
     id: "tip",
-    tone: "beige",
-    label: "청약 상식",
+    label: "TIP",
     title: tip.title,
-    rows: [],
     body: tip.body,
-    extraLink: { href: "/eligibility", text: "부적격 점검하러 가기 →" },
+    link: { href: "/eligibility", text: "부적격 점검하러 가기 →" },
     all: { href: "/score", text: "가점 계산 전체 보기" },
   };
 }

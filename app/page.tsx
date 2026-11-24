@@ -7,10 +7,11 @@
 import HomeDashboard from "@/components/HomeDashboard";
 import WeeklyPopup from "@/components/WeeklyPopup";
 import { loadComplexes } from "@/lib/complexes";
-import { loadWeeklyFiles } from "@/lib/weekly-file";
+import { loadWeeklyFiles, weeklyNoticeImages } from "@/lib/weekly-file";
 
 export default function Home() {
-  const { complexes } = loadComplexes();
+  const { complexes, images } = loadComplexes();
+  const weekly = loadWeeklyFiles();
   return (
     <>
       <header className="mb-8 border-b border-line pb-6">
@@ -19,7 +20,7 @@ export default function Home() {
       </header>
       <HomeDashboard fallback={complexes} />
       {/* 홈에서만 띄우는 "이번 주 청약 소식" 팝업 (CSV는 추첨제 비율 계산용, weekly는 매주 자동으로 만든 주차별 파일) */}
-      <WeeklyPopup csv={complexes} weekly={loadWeeklyFiles()} />
+      <WeeklyPopup csv={complexes} images={images} noticeImages={weeklyNoticeImages(weekly)} weekly={weekly} />
     </>
   );
 }
