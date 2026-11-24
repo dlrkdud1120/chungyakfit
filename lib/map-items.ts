@@ -91,7 +91,7 @@ export function toMapItem(n: MapNotice & { coord: Coord | null }, today: string)
     status: statusOf(events, today),
     next: upcoming ? { label: upcoming.label, short: upcoming.short, start: upcoming.start, end: upcoming.end, dday: daysBetween(today, upcoming.start) } : null,
     capped: isApt && n.regulations?.["분양가상한제"] === true,
-    types: isApt ? n.types : [],
+    types: n.types ?? [],
     url: n.url,
     notice: isApt ? n : null,
     coord: n.coord,

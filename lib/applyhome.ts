@@ -232,7 +232,7 @@ export async function fetchNotices(): Promise<NoticeResult> {
 // ───────────────────────── 1-2. 무순위·잔여세대 공고 ─────────────────────────
 
 /**
- * 무순위·잔여세대·재공급 공고 (getRemndrLttotPblancDetail)
+ * 무순위·잔여세대·재공급 공고 (getRemndrLttotPblancDetail + 주택형별 getRemndrLttotPblancMdl)
  * 실제 응답에서 확인한 필드 (2026-11-23):
  *   HOUSE_SECD_NM  "무순위", "불법행위 재공급" 등
  *   SUBSCRPT_RCEPT_BGNDE / _ENDDE  청약접수 시작·종료일
@@ -252,6 +252,7 @@ export type RemndrNotice = {
   receiptEnd: string | null;
   winnerDate: string | null;
   contractDate?: string | null; // 계약 시작일
+  types?: NoticeType[]; // 주택형별 공급세대·분양 최고가 (getRemndrLttotPblancMdl, 실제 응답에서 확인. 예전 주차 파일에는 없음)
   supply: number | null;
   url: string | null;
 };
@@ -283,6 +284,18 @@ export async function fetchRemndrNotices(daysBack = NOTICE_SETTINGS.daysBack): P
         url: str(d.PBLANC_URL),
       }))
       .filter((n) => n.houseManageNo && NOTICE_SETTINGS.regions.includes(n.region));
+
+    // 주택형별 정보는 공고마다 따로 부름 (필드 이름은 일반 분양 공고의 주택형 API와 같음). 실패해도 공고 목록은 그대로
+    await mapLimit(notices, NOTICE_SETTINGS.concurrency, async (n) => {
+      try {
+        const rows = await getAll(`${DETAIL}/getRemndrLttotPblancMdl`, { "cond[HOUSE_MANAGE_NO::EQ]": n.houseManageNo }, NOTICE_SETTINGS.noticeCacheSec);
+        n.types = rows
+          .filter((m) => str(m.HOUSE_MANAGE_NO) === n.houseManageNo) // 조건이 무시된 경우를 대비해 한 번 더 거름
+          .map((m) => ({ type: str(m.HOUSE_TY) ?? "", supply: num(m.SUPLY_HSHLDCO), special: num(m.SPSPLY_HSHLDCO), topAmount: num(m.LTTOT_TOP_AMOUNT) }));
+      } catch {
+        n.types = [];
+      }
+    });
     return { ok: true, notices, fetchedAt: new Date().toISOString() };
   } catch (e) {
     return { ok: false, reason: (e as Error).message };
@@ -291,7 +304,7 @@ export async function fetchRemndrNotices(daysBack = NOTICE_SETTINGS.daysBack): P
 
 /**
  * 무순위·잔여세대 공고를 분양 공고(Notice) 모양으로 (분양 공고 목록에 함께 보여줄 때)
- * 주택형·규제 정보는 이 API에 없어 비워 둡니다. 판정은 하지 않습니다(추첨으로 뽑는 공고).
+ * 규제 정보는 이 API에 없어 비워 둡니다. 판정은 하지 않습니다(추첨으로 뽑는 공고).
  */
 export function remndrToNotice(r: RemndrNotice): Notice {
   const receipt = r.receiptStart ? { start: r.receiptStart, end: r.receiptEnd && r.receiptEnd >= r.receiptStart ? r.receiptEnd : r.receiptStart } : null;
@@ -312,7 +325,7 @@ export function remndrToNotice(r: RemndrNotice): Notice {
     regulations: null,
     homepage: r.homepage ?? null,
     url: r.url,
-    types: [],
+    types: r.types ?? [],
     remndr: true,
   };
 }
