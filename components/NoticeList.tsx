@@ -2,13 +2,14 @@
 
 /**
  * 분양 공고 — 목록 → 상세 두 화면
- *  목록(/notice): 행마다 썸네일, 단지명, 지역, 내 판정, 다음 일정만. 지역 검색·필터는 "필터"를 눌러야 펼쳐짐
+ *  목록(/notice): 맨 위 검색창(단지명·지역·건설사, 자동완성·최근 검색어, ?q=), 행마다 썸네일·단지명·지역·내 판정·다음 일정.
+ *                 "필터"를 누르면 시·도, 일정(접수 중·접수 예정·발표 대기·마감 제외), 공급, 내 판정, 정렬. 검색 규칙은 lib/notice-search.ts
  *  상세(/notice?no=주택관리번호): 공급세대, 일정 전체, 규제, 입지 점수, 캘린더 추가, 관심 공고 별
  * /api/notices(서버)를 불러 청약홈 공고를 보여주고, 실패하면 data/complexes.csv의 단지 목록을 대신 보여줍니다.
  */
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { Notice, NoticeResult } from "@/lib/applyhome";
 import type { Complex } from "@/lib/complexes";
@@ -17,9 +18,13 @@ import CalendarButton from "@/components/CalendarButton";
 import FavoriteStar from "@/components/FavoriteStar";
 import { favoriteFromNotice } from "@/lib/meTypes";
 import ComplexThumb from "@/components/ComplexThumb";
+import NoticeSearch, { Highlight } from "@/components/NoticeSearch";
+import { buildersOf, makeQuery, matchNotice, type Match, type MatchField } from "@/lib/notice-search";
 import type { LocationBrief } from "@/components/CompareList";
 import { useMy } from "@/components/Providers";
-import { useNoticeVerdict, VERDICT_COLOR } from "@/components/useNoticeVerdict";
+import { useNoticeVerdict, useNoticeVerdicts, VERDICT_COLOR } from "@/components/useNoticeVerdict";
+import type { Verdict } from "@/lib/judge";
+import { noticeCategory, noticeStatus, type Category, type Status } from "@/lib/map-items";
 import { shortSido } from "@/lib/similar";
 import { scheduleEvents } from "@/lib/calendar";
 import { locationKey } from "@/lib/location";
@@ -37,11 +42,38 @@ export default function NoticeList({
   locations: Record<string, LocationBrief>; // 키: locationKey(단지명, 지역)
 }) {
   const [state, setState] = useState<State>({ status: "loading" });
-  const detailNo = useSearchParams().get("no"); // 있으면 상세 화면
+  const params = useSearchParams();
+  const router = useRouter();
+  const detailNo = params.get("no"); // 있으면 상세 화면
+  const q = params.get("q") ?? ""; // 검색어 (주소창 ?q=, 새로고침해도 유지)
   // 목록 필터 (접어 둠)
   const [filterOpen, setFilterOpen] = useState(false);
   const [region, setRegion] = useState("전체");
-  const [word, setWord] = useState("");
+  // 자동완성에서 고른 지역 태그와 건설사
+  const [regionTags, setRegionTags] = useState<{ region: string; unit: string }[]>([]);
+  const [builder, setBuilder] = useState<string | null>(null);
+  // 일정·공급·판정 필터와 정렬 (지도로 찾기와 같은 규칙)
+  const [statusF, setStatusF] = useState<OpenStatus[]>([]);
+  const [hideClosed, setHideClosed] = useState(false);
+  const [categoryF, setCategoryF] = useState<Category[]>([]);
+  const [verdictF, setVerdictF] = useState<Verdict[]>([]);
+  const [sort, setSort] = useState<SortKey>("notice");
+  const notices = state.status === "done" && state.result.ok ? state.result.notices : NO_NOTICES;
+  const verdicts = useNoticeVerdicts(notices, verdictF.length > 0 || sort === "verdict");
+
+  /** 검색어를 주소창에 담기 (기록은 쌓지 않음) */
+  const setQ = (text: string) => window.history.replaceState(null, "", text ? `/notice?${new URLSearchParams({ q: text })}` : "/notice");
+  const resetAll = () => {
+    setQ("");
+    setRegion("전체");
+    setRegionTags([]);
+    setBuilder(null);
+    setStatusF([]);
+    setHideClosed(false);
+    setCategoryF([]);
+    setVerdictF([]);
+    setSort("notice");
+  };
 
   useEffect(() => {
     let alive = true;
@@ -68,7 +100,10 @@ export default function NoticeList({
     const n = result.notices.find((x) => x.houseManageNo === detailNo);
     return (
       <div>
-        <Link href="/notice" className="inline-block rounded border border-line bg-white px-3 py-1.5 text-xs text-brand hover:border-brand">
+        <Link
+          href={q ? `/notice?${new URLSearchParams({ q })}` : "/notice"}
+          className="inline-block rounded border border-line bg-white px-3 py-1.5 text-xs text-brand hover:border-brand"
+        >
           ← 목록
         </Link>
         {n ? (
@@ -83,50 +118,151 @@ export default function NoticeList({
 
   // ───────── 목록 ─────────
   const regions = [...new Set(result.notices.map((n) => n.region))];
-  const key = word.trim().replace(/\s+/g, "");
-  const list = result.notices.filter(
-    (n) => (region === "전체" || n.region === region) && (!key || `${n.name}${n.region}${n.unit}${n.address}`.replace(/\s+/g, "").includes(key)),
-  );
-  const filtered = region !== "전체" || key !== "";
+  const query = makeQuery(q);
+  const rows = result.notices
+    .filter((n) => region === "전체" || n.region === region)
+    .filter((n) => !regionTags.length || regionTags.some((t) => n.region === t.region && (!t.unit || n.unit === t.unit)))
+    .filter((n) => !builder || buildersOf(n).includes(builder))
+    .map((n) => ({ n, match: query ? matchNotice(n, query) : null }))
+    .filter((r) => !query || r.match);
+  // 일정·공급·판정 필터 (판정은 불러온 뒤에만 거름)
+  const today = todayKST();
+  const verdictMap = verdicts.status === "done" ? verdicts.map : null;
+  const shown = rows
+    .filter(({ n }) => {
+      const s = noticeStatus(n, today);
+      if (hideClosed && s === "마감") return false;
+      if (statusF.length && !statusF.includes(s as OpenStatus)) return false;
+      if (categoryF.length && !categoryF.includes(noticeCategory(n))) return false;
+      if (verdictF.length && verdictMap) {
+        const v = verdictMap[n.houseManageNo] ?? null;
+        if (!v || !verdictF.includes(v)) return false;
+      }
+      return true;
+    })
+    .sort(sortBy(sort, today, verdictMap));
+  const filterN = statusF.length + (hideClosed ? 1 : 0) + categoryF.length + verdictF.length + (region !== "전체" ? 1 : 0) + (sort !== "notice" ? 1 : 0);
+  const filtered = region !== "전체" || !!query || regionTags.length > 0 || builder !== null || filterN > 0;
+  const toggle = <T,>(list: T[], v: T) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
+  const rowHref = (no: string) => `/notice?${new URLSearchParams(q ? { no, q } : { no })}`;
 
   return (
     <div>
-      {/* 한 줄: 건수와 "필터" */}
-      <div className="flex items-center justify-between border-b border-line pb-3 text-sm">
-        <span className="text-muted">
-          {filtered ? `${list.length}건 (전체 ${result.notices.length}건)` : `${result.notices.length}건`}
-          {!result.typesLoaded && " · 주택형별 정보는 불러오지 못했습니다"}
-        </span>
-        <button type="button" onClick={() => setFilterOpen((v) => !v)} aria-expanded={filterOpen} className="text-brand underline underline-offset-2">
-          {filterOpen ? "필터 닫기" : "필터"}
-        </button>
-      </div>
-      {filterOpen && (
-        <div className="flex flex-wrap items-center gap-2 border-b border-line py-3">
-          <select value={region} onChange={(e) => setRegion(e.target.value)} aria-label="지역" className="rounded border border-line bg-white px-2 py-1.5 text-sm">
-            <option>전체</option>
-            {regions.map((r) => (
-              <option key={r}>{r}</option>
-            ))}
-          </select>
-          <input
-            value={word}
-            onChange={(e) => setWord(e.target.value)}
-            placeholder="단지명·지역 검색"
-            aria-label="단지명·지역 검색"
-            className="w-44 rounded border border-line bg-white px-2 py-1.5 text-sm focus:border-brand focus:outline-none"
-          />
+      {/* 검색창 (단지명·지역·건설사, 자동완성) */}
+      <NoticeSearch
+        key={q}
+        notices={result.notices}
+        initial={q}
+        onSubmit={setQ}
+        onPickComplex={(no) => router.push(rowHref(no))}
+        onPickRegion={(r, unit) => setRegionTags((tags) => (tags.some((t) => t.region === r && t.unit === unit) ? tags : [...tags, { region: r, unit }]))}
+        onPickBuilder={setBuilder}
+      />
+      {(regionTags.length > 0 || builder) && (
+        <div className="mb-3 flex flex-wrap gap-1.5" aria-label="적용한 검색 조건">
+          {regionTags.map((t) => (
+            <Tag key={`${t.region}${t.unit}`} label={`${t.region} ${t.unit}`.trim()} onRemove={() => setRegionTags((tags) => tags.filter((x) => x !== t))} />
+          ))}
+          {builder && <Tag label={`건설사 ${builder}`} onRemove={() => setBuilder(null)} />}
         </div>
       )}
 
-      {list.length === 0 ? (
-        <p className="py-10 text-center text-sm text-muted">
-          {filtered ? "조건에 맞는 공고가 없습니다." : "기간 안에 서울·경기 APT 분양 공고가 없습니다."}
-        </p>
+      {/* 한 줄: 건수와 "필터" */}
+      <div className="flex items-center justify-between border-b border-line pb-3 text-sm">
+        <span className="text-muted">
+          {filtered ? `${shown.length}건 (전체 ${result.notices.length}건)` : `${result.notices.length}건`}
+          {!result.typesLoaded && " · 주택형별 정보는 불러오지 못했습니다"}
+          {(verdictF.length > 0 || sort === "verdict") && verdicts.status === "loading" && " · 판정 불러오는 중…"}
+        </span>
+        <button type="button" onClick={() => setFilterOpen((v) => !v)} aria-expanded={filterOpen} className="text-brand underline underline-offset-2">
+          {filterOpen ? "필터 닫기" : "필터"}
+          {filterN > 0 && <span className="ml-0.5 text-accent-dark no-underline">({filterN})</span>}
+        </button>
+      </div>
+      {filterOpen && (
+        <div className="space-y-2.5 border-b border-line py-3 text-xs">
+          <FilterRow label="지역">
+            <select value={region} onChange={(e) => setRegion(e.target.value)} aria-label="시·도" className="rounded border border-line bg-white px-2 py-1 text-sm">
+              <option>전체</option>
+              {regions.map((r) => (
+                <option key={r}>{r}</option>
+              ))}
+            </select>
+            <span className="self-center text-muted">시·군·구와 건설사는 위 검색창에서 골라요.</span>
+          </FilterRow>
+          <FilterRow label="일정">
+            {OPEN_STATUSES.map((s) => (
+              <Chip key={s} on={statusF.includes(s)} onClick={() => setStatusF((l) => toggle(l, s))}>
+                {s}
+              </Chip>
+            ))}
+            <Chip on={hideClosed} onClick={() => setHideClosed((v) => !v)}>
+              마감 제외
+            </Chip>
+          </FilterRow>
+          <FilterRow label="공급">
+            {(
+              [
+                ["민영", "민영"],
+                ["공공", "공공·신혼희망타운"],
+              ] as [Category, string][]
+            ).map(([v, text]) => (
+              <Chip key={v} on={categoryF.includes(v)} onClick={() => setCategoryF((l) => toggle(l, v))}>
+                {text}
+              </Chip>
+            ))}
+          </FilterRow>
+          <FilterRow label="내 판정">
+            {(["안정", "도전", "어려움"] as Verdict[]).map((v) => (
+              <Chip key={v} on={verdictF.includes(v)} disabled={verdicts.status === "none"} onClick={() => setVerdictF((l) => toggle(l, v))}>
+                {v}
+              </Chip>
+            ))}
+            {verdicts.status === "none" && (
+              <span className="self-center text-muted">
+                {verdicts.reason === "점수 필요" ? (
+                  <Link href="/score" className="text-brand underline">
+                    가점을 저장하면
+                  </Link>
+                ) : (
+                  <Link href="/check" className="text-brand underline">
+                    거주지를 정하면
+                  </Link>
+                )}{" "}
+                쓸 수 있어요
+              </span>
+            )}
+          </FilterRow>
+          <FilterRow label="정렬">
+            <select value={sort} onChange={(e) => setSort(e.target.value as SortKey)} aria-label="정렬" className="rounded border border-line bg-white px-2 py-1 text-sm">
+              <option value="notice">최근 공고순</option>
+              <option value="next">다음 일정 가까운 순</option>
+              <option value="verdict" disabled={verdicts.status === "none"}>
+                내 판정 좋은 순
+              </option>
+            </select>
+            {filterN > 0 && (
+              <button type="button" onClick={resetAll} className="self-center text-muted underline hover:text-brand">
+                초기화
+              </button>
+            )}
+          </FilterRow>
+        </div>
+      )}
+
+      {shown.length === 0 ? (
+        <div className="py-10 text-center text-sm text-muted">
+          <p>{query ? `'${q}'에 맞는 공고가 없어요` : filtered ? "조건에 맞는 공고가 없습니다." : "기간 안에 서울·경기 APT 분양 공고가 없습니다."}</p>
+          {filtered && (
+            <button type="button" onClick={resetAll} className="mt-3 rounded border border-brand px-3 py-1.5 text-xs text-brand hover:bg-brand/5">
+              검색·필터 초기화
+            </button>
+          )}
+        </div>
       ) : (
         <ul>
-          {list.map((n) => (
-            <ListRow key={n.houseManageNo || n.name} n={n} images={images} />
+          {shown.map(({ n, match }) => (
+            <ListRow key={n.houseManageNo || n.name} n={n} images={images} match={match} href={rowHref(n.houseManageNo)} />
           ))}
         </ul>
       )}
@@ -138,8 +274,70 @@ export default function NoticeList({
   );
 }
 
+// ───────── 일정·공급·판정 필터와 정렬 ─────────
+
+type OpenStatus = Exclude<Status, "마감">;
+type SortKey = "notice" | "next" | "verdict";
+const OPEN_STATUSES: OpenStatus[] = ["접수 중", "접수 예정", "발표 대기"];
+const NO_NOTICES: Notice[] = [];
+const VERDICT_RANK: Record<Verdict, number> = { 안정: 0, 도전: 1, 어려움: 2 };
+
+/** 정렬: 최근 공고순(원래 순서) / 다음 일정 가까운 순(마감은 맨 뒤) / 내 판정 좋은 순(같으면 다음 일정 순) */
+function sortBy(key: SortKey, today: string, verdicts: Record<string, Verdict | null> | null) {
+  const nextStart = (n: Notice) => nextEvent(n.schedule, today)?.start ?? "9999";
+  return (a: { n: Notice }, b: { n: Notice }) => {
+    if (key === "notice") return 0; // 청약홈 공고일 최신순 그대로
+    const byNext = nextStart(a.n).localeCompare(nextStart(b.n));
+    if (key === "next") return byNext;
+    const rank = (n: Notice) => {
+      const v = verdicts?.[n.houseManageNo] ?? null;
+      return v ? VERDICT_RANK[v] : 9;
+    };
+    return rank(a.n) - rank(b.n) || byNext;
+  };
+}
+
+function FilterRow({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="flex items-start gap-2">
+      <span className="w-12 shrink-0 pt-1 text-muted">{label}</span>
+      <div className="flex flex-wrap gap-1.5">{children}</div>
+    </div>
+  );
+}
+
+function Chip({ on, onClick, disabled = false, children }: { on: boolean; onClick: () => void; disabled?: boolean; children: React.ReactNode }) {
+  return (
+    <button
+      type="button"
+      aria-pressed={on}
+      disabled={disabled}
+      onClick={onClick}
+      className={`rounded-full border px-2.5 py-1 ${on ? "border-brand bg-brand text-white" : "border-line bg-white text-ink hover:border-brand"} disabled:opacity-40`}
+    >
+      {children}
+    </button>
+  );
+}
+
 /** 목록 한 줄: 썸네일, 단지명, 지역, 내 판정, 다음 일정. 누르면 상세로 */
-function ListRow({ n, images }: { n: Notice; images: ComplexImages }) {
+const MATCH_LABEL: Record<MatchField, string> = { name: "", region: "", builder: "시공", agency: "공급기관", kind: "종류" };
+
+/** 검색 조건 태그 (지역·건설사). ×로 빼기 */
+function Tag({ label, onRemove }: { label: string; onRemove: () => void }) {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full border border-brand/40 bg-brand/5 py-0.5 pr-1 pl-2.5 text-xs text-brand">
+      {label}
+      <button type="button" onClick={onRemove} aria-label={`${label} 빼기`} className="flex h-5 w-5 items-center justify-center rounded-full hover:bg-brand/10">
+        <svg viewBox="0 0 20 20" className="h-3 w-3" aria-hidden="true">
+          <path d="M6 6l8 8M14 6l-8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      </button>
+    </span>
+  );
+}
+
+function ListRow({ n, images, match, href }: { n: Notice; images: ComplexImages; match: Match | null; href: string }) {
   // 화면에 보일 때만 판정을 불러옴
   const ref = useRef<HTMLLIElement>(null);
   const [seen, setSeen] = useState(false);
@@ -169,12 +367,20 @@ function ListRow({ n, images }: { n: Notice; images: ComplexImages }) {
         image={imageFor(images, n.name)}
         noticeNo={n.houseManageNo}
       />
-      <Link href={`/notice?no=${encodeURIComponent(n.houseManageNo)}`} className="group flex min-w-0 flex-1 items-center gap-3">
+      <Link href={href} className="group flex min-w-0 flex-1 items-center gap-3">
         <span className="min-w-0 flex-1">
-          <span className="line-clamp-2 text-sm leading-snug font-medium group-hover:underline">{n.name}</span>
-          <span className="block truncate text-xs text-muted">
-            {n.region} {n.unit}
+          <span className="line-clamp-2 text-sm leading-snug font-medium group-hover:underline">
+            <Highlight text={n.name} range={match?.field === "name" ? match.range : null} />
           </span>
+          <span className="block truncate text-xs text-muted">
+            <Highlight text={`${n.region} ${n.unit}`.trim()} range={match?.field === "region" ? match.range : null} />
+          </span>
+          {/* 단지명·지역 밖에서 맞았으면 어디서 맞았는지 한 줄 */}
+          {match && MATCH_LABEL[match.field] && (
+            <span className="block truncate text-xs text-muted">
+              {MATCH_LABEL[match.field]} <Highlight text={match.text} range={match.range} />
+            </span>
+          )}
         </span>
         <span className="shrink-0 text-right">
           <span className="block text-sm">

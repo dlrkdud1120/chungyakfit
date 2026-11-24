@@ -69,6 +69,12 @@ export function statusOf(events: MapEvent[], today: string): Status {
   return "마감";
 }
 
+/** 일반 분양 공고 한 건의 일정 상태 (분양 공고 목록 필터와 같은 규칙) */
+export const noticeStatus = (n: Notice, today: string): Status => statusOf(eventsOf({ ...n, source: "apt" }), today);
+
+/** 공급 구분: 민영 APT는 "민영", 국민주택·신혼희망타운 등은 "공공" (지도와 같은 규칙) */
+export const noticeCategory = (n: Notice): Category => (n.supplyKind === "민영" && n.kind === "APT" ? "민영" : "공공");
+
 export function toMapItem(n: MapNotice & { coord: Coord | null }, today: string): MapItem {
   const events = eventsOf(n);
   const upcoming = events.filter((e) => e.end >= today).sort((a, b) => a.start.localeCompare(b.start))[0];
@@ -80,7 +86,7 @@ export function toMapItem(n: MapNotice & { coord: Coord | null }, today: string)
     region: n.region,
     unit: n.unit,
     address: n.address ?? "",
-    category: !isApt ? "무순위" : n.supplyKind === "민영" && n.kind === "APT" ? "민영" : "공공",
+    category: !isApt ? "무순위" : noticeCategory(n),
     events,
     status: statusOf(events, today),
     next: upcoming ? { label: upcoming.label, short: upcoming.short, start: upcoming.start, end: upcoming.end, dday: daysBetween(today, upcoming.start) } : null,
