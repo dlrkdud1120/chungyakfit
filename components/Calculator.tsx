@@ -10,6 +10,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import DateWheel from "@/components/DateWheel";
 import Fold from "@/components/Fold";
 import { useScoreDraft } from "@/components/scoreDraft";
 import { saveMyScore } from "@/lib/myScore";
@@ -124,18 +125,18 @@ export default function Calculator({ fallback }: { fallback: Complex[] }) {
         {step === 1 && (
           <div className="border-t border-line">
             <Row label="생년월일">
-              <DateInput value={birthDate} onChange={(v) => set({ birthDate: v })} />
+              <DateWheel label="생년월일" kind="birth" value={birthDate} onChange={(v) => set({ birthDate: v })} />
             </Row>
             <Row label="혼인 여부">
               <Segment value={married ? "y" : "n"} options={[["n", "미혼"], ["y", "기혼"]]} onChange={(v) => set({ married: v === "y" })} />
             </Row>
             {married && (
               <Row label="혼인신고일">
-                <DateInput value={marriageDate} onChange={(v) => set({ marriageDate: v })} />
+                <DateWheel label="혼인신고일" kind="past" value={marriageDate} onChange={(v) => set({ marriageDate: v })} />
               </Row>
             )}
             <Row label="계산 기준일" hint="보통 입주자모집공고일. 모르면 오늘 그대로">
-              <DateInput value={baseDate} onChange={(v) => set({ baseDate: v || null })} />
+              <DateWheel label="계산 기준일" kind="base" value={baseDate} onChange={(v) => set({ baseDate: v || null })} />
             </Row>
           </div>
         )}
@@ -151,7 +152,7 @@ export default function Calculator({ fallback }: { fallback: Complex[] }) {
             </Row>
             {houseHistory === "sold" && (
               <Row label="처분일" hint="여러 채였다면 마지막 처분일">
-                <DateInput value={soldDate} onChange={(v) => set({ soldDate: v })} />
+                <DateWheel label="처분일" kind="past" value={soldDate} onChange={(v) => set({ soldDate: v })} />
               </Row>
             )}
             <p className="py-3 text-[13px] leading-relaxed text-muted">
@@ -223,7 +224,7 @@ export default function Calculator({ fallback }: { fallback: Complex[] }) {
             </Row>
             {hasAccount && (
               <Row label="본인 가입일">
-                <DateInput value={accountJoinDate} onChange={(v) => set({ accountJoinDate: v })} />
+                <DateWheel label="본인 청약통장 가입일" kind="past" value={accountJoinDate} onChange={(v) => set({ accountJoinDate: v })} />
               </Row>
             )}
             {married && (
@@ -237,7 +238,7 @@ export default function Calculator({ fallback }: { fallback: Complex[] }) {
                 </Row>
                 {spouseHasAccount && (
                   <Row label="배우자 가입일">
-                    <DateInput value={spouseAccountJoinDate} onChange={(v) => set({ spouseAccountJoinDate: v })} />
+                    <DateWheel label="배우자 청약통장 가입일" kind="past" value={spouseAccountJoinDate} onChange={(v) => set({ spouseAccountJoinDate: v })} />
                   </Row>
                 )}
               </>
@@ -352,17 +353,6 @@ function Row({ label, hint, children }: { label: string; hint?: string; children
       </div>
       <div>{children}</div>
     </div>
-  );
-}
-
-function DateInput({ value, onChange }: { value: string; onChange: (v: string) => void }) {
-  return (
-    <input
-      type="date"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      className="w-full rounded border border-line bg-white px-3 py-1.5 text-sm tabular-nums focus:border-brand focus:outline-none sm:w-44"
-    />
   );
 }
 

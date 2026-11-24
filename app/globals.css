@@ -57,3 +57,10 @@ body {
     opacity: 0;
   }
 }
+
+/* 날짜 선택 시트가 아래에서 올라오는 효과 (components/DateWheel.tsx, 동작 줄이기 설정이면 쓰지 않음) */
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+}
