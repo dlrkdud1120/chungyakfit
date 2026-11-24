@@ -154,6 +154,8 @@ export type Notice = {
   homepage: string | null;
   url: string | null; // 청약홈 공고 페이지
   types: NoticeType[];
+  builder?: string | null; // 시공사 CNSTRCT_ENTRPS_NM (여러 곳이면 쉼표로 이어짐. 예전 주차 파일에는 없을 수 있음)
+  developer?: string | null; // 사업주체 BSNS_MBY_NM (LH·GH·SH 같은 공급기관 구분에 씀)
 };
 
 export type NoticeResult =
@@ -193,6 +195,8 @@ export async function fetchNotices(): Promise<NoticeResult> {
         regulations: readRegulations(Object.fromEntries(REGULATIONS.map((r) => [r.code, str(d[r.code])]))),
         homepage: str(d.HMPG_ADRES),
         url: str(d.PBLANC_URL),
+        builder: str(d.CNSTRCT_ENTRPS_NM),
+        developer: str(d.BSNS_MBY_NM),
         types: [] as NoticeType[],
       };
     })

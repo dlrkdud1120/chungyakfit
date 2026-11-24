@@ -2,13 +2,14 @@
 
 /**
  * 분양 공고 — 목록 → 상세 두 화면
- *  목록(/notice): 행마다 썸네일, 단지명, 지역, 내 판정, 다음 일정만. 지역 검색·필터는 "필터"를 눌러야 펼쳐짐
+ *  목록(/notice): 맨 위 검색창(단지명·지역·건설사, 자동완성·최근 검색어, ?q=), 행마다 썸네일·단지명·지역·내 판정·다음 일정.
+ *                 시·도 필터는 "필터"를 눌러야 펼쳐짐. 검색 규칙은 lib/notice-search.ts
  *  상세(/notice?no=주택관리번호): 공급세대, 일정 전체, 규제, 입지 점수, 캘린더 추가, 관심 공고 별
  * /api/notices(서버)를 불러 청약홈 공고를 보여주고, 실패하면 data/complexes.csv의 단지 목록을 대신 보여줍니다.
  */
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { Notice, NoticeResult } from "@/lib/applyhome";
 import type { Complex } from "@/lib/complexes";
@@ -17,6 +18,8 @@ import CalendarButton from "@/components/CalendarButton";
 import FavoriteStar from "@/components/FavoriteStar";
 import { favoriteFromNotice } from "@/lib/meTypes";
 import ComplexThumb from "@/components/ComplexThumb";
+import NoticeSearch, { Highlight } from "@/components/NoticeSearch";
+import { buildersOf, makeQuery, matchNotice, type Match, type MatchField } from "@/lib/notice-search";
 import type { LocationBrief } from "@/components/CompareList";
 import { useMy } from "@/components/Providers";
 import { useNoticeVerdict, VERDICT_COLOR } from "@/components/useNoticeVerdict";
@@ -37,11 +40,25 @@ export default function NoticeList({
   locations: Record<string, LocationBrief>; // 키: locationKey(단지명, 지역)
 }) {
   const [state, setState] = useState<State>({ status: "loading" });
-  const detailNo = useSearchParams().get("no"); // 있으면 상세 화면
+  const params = useSearchParams();
+  const router = useRouter();
+  const detailNo = params.get("no"); // 있으면 상세 화면
+  const q = params.get("q") ?? ""; // 검색어 (주소창 ?q=, 새로고침해도 유지)
   // 목록 필터 (접어 둠)
   const [filterOpen, setFilterOpen] = useState(false);
   const [region, setRegion] = useState("전체");
-  const [word, setWord] = useState("");
+  // 자동완성에서 고른 지역 태그와 건설사
+  const [regionTags, setRegionTags] = useState<{ region: string; unit: string }[]>([]);
+  const [builder, setBuilder] = useState<string | null>(null);
+
+  /** 검색어를 주소창에 담기 (기록은 쌓지 않음) */
+  const setQ = (text: string) => window.history.replaceState(null, "", text ? `/notice?${new URLSearchParams({ q: text })}` : "/notice");
+  const resetAll = () => {
+    setQ("");
+    setRegion("전체");
+    setRegionTags([]);
+    setBuilder(null);
+  };
 
   useEffect(() => {
     let alive = true;
@@ -68,7 +85,10 @@ export default function NoticeList({
     const n = result.notices.find((x) => x.houseManageNo === detailNo);
     return (
       <div>
-        <Link href="/notice" className="inline-block rounded border border-line bg-white px-3 py-1.5 text-xs text-brand hover:border-brand">
+        <Link
+          href={q ? `/notice?${new URLSearchParams({ q })}` : "/notice"}
+          className="inline-block rounded border border-line bg-white px-3 py-1.5 text-xs text-brand hover:border-brand"
+        >
           ← 목록
         </Link>
         {n ? (
@@ -83,18 +103,41 @@ export default function NoticeList({
 
   // ───────── 목록 ─────────
   const regions = [...new Set(result.notices.map((n) => n.region))];
-  const key = word.trim().replace(/\s+/g, "");
-  const list = result.notices.filter(
-    (n) => (region === "전체" || n.region === region) && (!key || `${n.name}${n.region}${n.unit}${n.address}`.replace(/\s+/g, "").includes(key)),
-  );
-  const filtered = region !== "전체" || key !== "";
+  const query = makeQuery(q);
+  const rows = result.notices
+    .filter((n) => region === "전체" || n.region === region)
+    .filter((n) => !regionTags.length || regionTags.some((t) => n.region === t.region && (!t.unit || n.unit === t.unit)))
+    .filter((n) => !builder || buildersOf(n).includes(builder))
+    .map((n) => ({ n, match: query ? matchNotice(n, query) : null }))
+    .filter((r) => !query || r.match);
+  const filtered = region !== "전체" || !!query || regionTags.length > 0 || builder !== null;
+  const rowHref = (no: string) => `/notice?${new URLSearchParams(q ? { no, q } : { no })}`;
 
   return (
     <div>
+      {/* 검색창 (단지명·지역·건설사, 자동완성) */}
+      <NoticeSearch
+        key={q}
+        notices={result.notices}
+        initial={q}
+        onSubmit={setQ}
+        onPickComplex={(no) => router.push(rowHref(no))}
+        onPickRegion={(r, unit) => setRegionTags((tags) => (tags.some((t) => t.region === r && t.unit === unit) ? tags : [...tags, { region: r, unit }]))}
+        onPickBuilder={setBuilder}
+      />
+      {(regionTags.length > 0 || builder) && (
+        <div className="mb-3 flex flex-wrap gap-1.5" aria-label="적용한 검색 조건">
+          {regionTags.map((t) => (
+            <Tag key={`${t.region}${t.unit}`} label={`${t.region} ${t.unit}`.trim()} onRemove={() => setRegionTags((tags) => tags.filter((x) => x !== t))} />
+          ))}
+          {builder && <Tag label={`건설사 ${builder}`} onRemove={() => setBuilder(null)} />}
+        </div>
+      )}
+
       {/* 한 줄: 건수와 "필터" */}
       <div className="flex items-center justify-between border-b border-line pb-3 text-sm">
         <span className="text-muted">
-          {filtered ? `${list.length}건 (전체 ${result.notices.length}건)` : `${result.notices.length}건`}
+          {filtered ? `${rows.length}건 (전체 ${result.notices.length}건)` : `${result.notices.length}건`}
           {!result.typesLoaded && " · 주택형별 정보는 불러오지 못했습니다"}
         </span>
         <button type="button" onClick={() => setFilterOpen((v) => !v)} aria-expanded={filterOpen} className="text-brand underline underline-offset-2">
@@ -109,24 +152,23 @@ export default function NoticeList({
               <option key={r}>{r}</option>
             ))}
           </select>
-          <input
-            value={word}
-            onChange={(e) => setWord(e.target.value)}
-            placeholder="단지명·지역 검색"
-            aria-label="단지명·지역 검색"
-            className="w-44 rounded border border-line bg-white px-2 py-1.5 text-sm focus:border-brand focus:outline-none"
-          />
+          <span className="text-xs text-muted">단지명·지역·건설사 검색은 위 검색창에서 해요.</span>
         </div>
       )}
 
-      {list.length === 0 ? (
-        <p className="py-10 text-center text-sm text-muted">
-          {filtered ? "조건에 맞는 공고가 없습니다." : "기간 안에 서울·경기 APT 분양 공고가 없습니다."}
-        </p>
+      {rows.length === 0 ? (
+        <div className="py-10 text-center text-sm text-muted">
+          <p>{query ? `'${q}'에 맞는 공고가 없어요` : filtered ? "조건에 맞는 공고가 없습니다." : "기간 안에 서울·경기 APT 분양 공고가 없습니다."}</p>
+          {filtered && (
+            <button type="button" onClick={resetAll} className="mt-3 rounded border border-brand px-3 py-1.5 text-xs text-brand hover:bg-brand/5">
+              검색·필터 초기화
+            </button>
+          )}
+        </div>
       ) : (
         <ul>
-          {list.map((n) => (
-            <ListRow key={n.houseManageNo || n.name} n={n} images={images} />
+          {rows.map(({ n, match }) => (
+            <ListRow key={n.houseManageNo || n.name} n={n} images={images} match={match} href={rowHref(n.houseManageNo)} />
           ))}
         </ul>
       )}
@@ -139,7 +181,23 @@ export default function NoticeList({
 }
 
 /** 목록 한 줄: 썸네일, 단지명, 지역, 내 판정, 다음 일정. 누르면 상세로 */
-function ListRow({ n, images }: { n: Notice; images: ComplexImages }) {
+const MATCH_LABEL: Record<MatchField, string> = { name: "", region: "", builder: "시공", agency: "공급기관", kind: "종류" };
+
+/** 검색 조건 태그 (지역·건설사). ×로 빼기 */
+function Tag({ label, onRemove }: { label: string; onRemove: () => void }) {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full border border-brand/40 bg-brand/5 py-0.5 pr-1 pl-2.5 text-xs text-brand">
+      {label}
+      <button type="button" onClick={onRemove} aria-label={`${label} 빼기`} className="flex h-5 w-5 items-center justify-center rounded-full hover:bg-brand/10">
+        <svg viewBox="0 0 20 20" className="h-3 w-3" aria-hidden="true">
+          <path d="M6 6l8 8M14 6l-8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      </button>
+    </span>
+  );
+}
+
+function ListRow({ n, images, match, href }: { n: Notice; images: ComplexImages; match: Match | null; href: string }) {
   // 화면에 보일 때만 판정을 불러옴
   const ref = useRef<HTMLLIElement>(null);
   const [seen, setSeen] = useState(false);
@@ -169,12 +227,20 @@ function ListRow({ n, images }: { n: Notice; images: ComplexImages }) {
         image={imageFor(images, n.name)}
         noticeNo={n.houseManageNo}
       />
-      <Link href={`/notice?no=${encodeURIComponent(n.houseManageNo)}`} className="group flex min-w-0 flex-1 items-center gap-3">
+      <Link href={href} className="group flex min-w-0 flex-1 items-center gap-3">
         <span className="min-w-0 flex-1">
-          <span className="line-clamp-2 text-sm leading-snug font-medium group-hover:underline">{n.name}</span>
-          <span className="block truncate text-xs text-muted">
-            {n.region} {n.unit}
+          <span className="line-clamp-2 text-sm leading-snug font-medium group-hover:underline">
+            <Highlight text={n.name} range={match?.field === "name" ? match.range : null} />
           </span>
+          <span className="block truncate text-xs text-muted">
+            <Highlight text={`${n.region} ${n.unit}`.trim()} range={match?.field === "region" ? match.range : null} />
+          </span>
+          {/* 단지명·지역 밖에서 맞았으면 어디서 맞았는지 한 줄 */}
+          {match && MATCH_LABEL[match.field] && (
+            <span className="block truncate text-xs text-muted">
+              {MATCH_LABEL[match.field]} <Highlight text={match.text} range={match.range} />
+            </span>
+          )}
         </span>
         <span className="shrink-0 text-right">
           <span className="block text-sm">
