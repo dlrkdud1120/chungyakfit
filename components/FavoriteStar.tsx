@@ -8,6 +8,7 @@
 import { useState } from "react";
 import { LoginHint } from "@/components/KakaoLogin";
 import { useMy } from "@/components/Providers";
+import { toast } from "@/components/Toast";
 import type { FavoriteInput } from "@/lib/meTypes";
 
 export default function FavoriteStar({ item, label = false }: { item: FavoriteInput; label?: boolean }) {
@@ -21,7 +22,13 @@ export default function FavoriteStar({ item, label = false }: { item: FavoriteIn
         aria-pressed={on}
         aria-label={on ? `${item.name} 관심 공고에서 빼기` : `${item.name} 관심 공고에 담기`}
         title={on ? "관심 공고에서 빼기" : "관심 공고에 담기"}
-        onClick={() => (my.status === "user" ? my.toggleFavorite(item) : setHint((h) => !h))}
+        onClick={() => {
+          if (my.status !== "user") return setHint((h) => !h);
+          my.toggleFavorite(item);
+          // 뺀 경우에는 바로 되돌릴 수 있게
+          if (on) toast("관심 공고에서 뺐어요", { label: "되돌리기", onClick: () => my.toggleFavorite(item) });
+          else toast("관심 공고에 담았어요. 마이페이지에서 모아 볼 수 있어요");
+        }}
         className={`inline-flex items-center gap-1 text-xs ${on ? "text-accent-dark" : "text-muted hover:text-accent-dark"}`}
       >
         <svg viewBox="0 0 16 16" className="h-4 w-4" fill={on ? "#f4a53f" : "none"} stroke={on ? "#f4a53f" : "currentColor"} strokeWidth="1.3" aria-hidden>

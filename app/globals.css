@@ -64,3 +64,42 @@ body {
     transform: translateY(100%);
   }
 }
+
+/* ───── 토스트·점수 막대·불러오는 중 뼈대 (동작 줄이기 설정이면 효과 없이 바로 최종 모습) ───── */
+@media (prefers-reduced-motion: no-preference) {
+  .toast-in {
+    animation: toast-up 0.2s ease-out;
+  }
+  .bar-grow {
+    transform-origin: left center;
+    animation: bar-grow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .skeleton {
+    background: linear-gradient(90deg, #e9eeec 0%, #f4f7f6 50%, #e9eeec 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shine 1.4s ease-in-out infinite;
+  }
+}
+.skeleton {
+  background-color: #e9eeec;
+  border-radius: 3px;
+}
+@keyframes toast-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes skeleton-shine {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}

@@ -23,6 +23,7 @@ import { isShort, NO_CMPET, pickCmpet, rankText, rateShort, rateText, type Cmpet
 import { judge, VERDICT_ORDER, type Verdict } from "@/lib/judge";
 import { parseMyHome, readMyHomeRaw, saveMyHome, subscribeMyHome } from "@/lib/myHome";
 import { parseMyScore, readMyScoreRaw, subscribeMyScore, type SavedFuture } from "@/lib/myScore";
+import SkeletonRows from "@/components/SkeletonRows";
 import {
   areaOf,
   bandLabel,
@@ -297,7 +298,7 @@ export default function CheckPossibility() {
 
           {mode === "notice" ? (
             <>
-              {notices.status === "loading" && <p className="py-3 text-sm text-muted">청약홈에서 공고를 불러오는 중…</p>}
+              {notices.status === "loading" && <SkeletonRows label="청약홈에서 공고를 불러오는 중" rows={3} thumb={false} className="mt-2" />}
               {notices.status === "fail" && (
                 <p className="py-3 text-sm text-muted">
                   공고를 불러오지 못했습니다 ({notices.reason}). &lsquo;지역·면적 직접&rsquo;으로 확인해 보세요.
@@ -689,9 +690,16 @@ function PositionBar({ my, stats }: { my: number; stats: Stats }) {
   const pMy = pos(my);
   // 최저·평균 눈금이 가까우면 글자를 두 줄로 나눠 겹치지 않게
   const twoRows = pAvg - pMin < 22;
+  // 다음 기준선까지 남은 점수 (표시용 뺄셈만, 판정은 judge.ts 결과 그대로)
+  const gap = my < stats.min ? { to: stats.min, name: "최저" } : my < stats.avg ? { to: stats.avg, name: "평균" } : null;
+  const gapText = gap ? `${gap.name}까지 ${fmt(round1(gap.to - my))}점` : `평균보다 ${fmt(round1(my - stats.avg))}점 위`;
 
   return (
-    <div className="mt-4 mb-2" role="img" aria-label={`최저 ${fmt(stats.min)}점, 평균 ${fmt(stats.avg)}점, 내 점수 ${fmt(my)}점`}>
+    <div
+      className="mt-4 mb-2"
+      role="img"
+      aria-label={`최저 ${fmt(stats.min)}점, 평균 ${fmt(stats.avg)}점, 내 점수 ${fmt(my)}점, ${gapText}`}
+    >
       <div className={`relative text-[11px] text-muted tabular-nums ${twoRows ? "h-8" : "h-4"}`}>
         <TickLabel pos={pMin} side="end" top={0}>
           최저 {fmt(stats.min)}
@@ -704,9 +712,18 @@ function PositionBar({ my, stats }: { my: number; stats: Stats }) {
         <span className="absolute bottom-0 h-1.5 w-px bg-muted" style={{ left: `${pMin}%` }} />
         <span className="absolute bottom-0 h-1.5 w-px bg-muted" style={{ left: `${pAvg}%` }} />
       </div>
-      <div className="relative h-2.5 overflow-hidden rounded-sm bg-line">
-        <div className="absolute inset-y-0 bg-accent" style={{ left: `${pMin}%`, width: `${pAvg - pMin}%` }} />
-        <div className="absolute inset-y-0 right-0 bg-ok" style={{ left: `${pAvg}%` }} />
+      {/* 배경 구간(최저 미만·최저~평균·평균 이상)은 옅게, 그 위에 내 점수 막대를 0점부터 겹쳐 그림 */}
+      <div className="relative h-3 overflow-hidden rounded-sm bg-line">
+        <div className="absolute inset-y-0 bg-accent/45" style={{ left: `${pMin}%`, width: `${pAvg - pMin}%` }} />
+        <div className="absolute inset-y-0 right-0 bg-ok/45" style={{ left: `${pAvg}%` }} />
+        <div className="bar-grow absolute inset-y-[3px] left-0 rounded-[1px] bg-ink" style={{ width: `${pMy}%` }} />
+        {/* 다음 기준까지 모자란 만큼 (어려움 → 최저, 도전 → 평균). 넘었으면 표시 안 함 */}
+        {gap && (
+          <div
+            className="absolute inset-y-[3px] border-y border-r border-dashed border-ink/60"
+            style={{ left: `${pMy}%`, width: `${pos(gap.to) - pMy}%` }}
+          />
+        )}
       </div>
       <div className="relative h-8 text-[11px] tabular-nums">
         <span
@@ -714,10 +731,11 @@ function PositionBar({ my, stats }: { my: number; stats: Stats }) {
           style={{ left: `${pMy}%` }}
         />
         <span
-          className={`absolute top-3.5 font-semibold whitespace-nowrap ${pMy >= 12 && pMy <= 88 ? "-translate-x-1/2" : ""}`}
-          style={pMy < 12 ? { left: 0 } : pMy > 88 ? { right: 0 } : { left: `${pMy}%` }}
+          className={`absolute top-3.5 font-semibold whitespace-nowrap ${pMy >= 22 && pMy <= 78 ? "-translate-x-1/2" : ""}`}
+          style={pMy < 22 ? { left: 0 } : pMy > 78 ? { right: 0 } : { left: `${pMy}%` }}
         >
           내 점수 {fmt(my)}
+          <span className="font-normal text-muted"> · {gapText}</span>
         </span>
       </div>
     </div>

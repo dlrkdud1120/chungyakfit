@@ -45,6 +45,7 @@ import { parseMyScore, readMyScoreRaw, subscribeMyScore } from "@/lib/myScore";
 import { md, todayKST } from "@/lib/mySchedule";
 import { shortType } from "@/lib/similar";
 import { similarQuery } from "@/lib/weekly-cards";
+import SkeletonRows from "@/components/SkeletonRows";
 
 const SEOUL = { lat: 37.5665, lng: 126.978 };
 const START_LEVEL = 8; // 처음 확대 수준 (숫자가 클수록 넓게)
@@ -383,7 +384,7 @@ export default function MapSearch() {
           {selected ? (
             <Summary item={selected} info={score ? (verdicts[selected.id] ?? null) : null} hasScore={!!score} home={home} onBack={backToList} />
           ) : load.status === "loading" ? (
-            <p className="px-4 py-6 text-sm text-muted">공고와 위치를 불러오는 중…</p>
+            <SkeletonRows label="공고와 위치를 불러오는 중" rows={4} className="px-4 pt-2" />
           ) : load.status === "fail" ? (
             <p className="px-4 py-6 text-sm text-muted">공고를 불러오지 못했어요. ({load.reason})</p>
           ) : (

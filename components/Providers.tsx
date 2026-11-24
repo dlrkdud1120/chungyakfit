@@ -92,6 +92,10 @@ function MyProvider({ enabled, children }: { enabled: boolean; children: React.R
   const mine = userId && loaded?.for === userId ? loaded : null;
   const data = mine?.data ?? null;
   const dataState: DataState = !userId ? "idle" : (mine?.state ?? "loading");
+  const dataRef = useRef<MeData | null>(data);
+  useEffect(() => {
+    dataRef.current = data;
+  }, [data]);
 
   /** 화면 먼저 바꾸고 서버에 반영. 실패하면 서버 값으로 되돌림 */
   const mutate = useCallback(
@@ -164,7 +168,8 @@ function MyProvider({ enabled, children }: { enabled: boolean; children: React.R
       reload,
       isFavorite: (no) => !!data?.favorites.some((f) => f.no === no),
       toggleFavorite: (f) => {
-        const on = !!data?.favorites.some((x) => x.no === f.no);
+        // 최신 값으로 판단 (토스트의 "되돌리기"처럼 예전 화면에서 만든 함수가 나중에 불려도 맞게)
+        const on = !!(dataRef.current ?? data)?.favorites.some((x) => x.no === f.no);
         if (on) {
           mutate((d) => ({ ...d, favorites: d.favorites.filter((x) => x.no !== f.no) }), `/api/me/favorites?no=${f.no}`, { method: "DELETE" });
         } else {
