@@ -246,6 +246,7 @@ export type RemndrNotice = {
   unit: string;
   address?: string; // 공급 위치 (지도용. 예전 주차 파일에는 없을 수 있음)
   homepage?: string | null; // 분양 홈페이지 (대표 이미지 수집용)
+  developer?: string | null; // 사업주체 BSNS_MBY_NM (이미지 빈칸 목록의 공급기관)
   kind: string; // 무순위, 불법행위 재공급 …
   noticeDate?: string | null; // 모집공고일
   receiptStart: string | null;
@@ -274,6 +275,7 @@ export async function fetchRemndrNotices(daysBack = NOTICE_SETTINGS.daysBack): P
         unit: unitFromAddress(str(d.HSSPLY_ADRES) ?? ""),
         address: str(d.HSSPLY_ADRES) ?? "",
         homepage: str(d.HMPG_ADRES),
+        developer: str(d.BSNS_MBY_NM),
         kind: str(d.HOUSE_SECD_NM) ?? "",
         noticeDate: str(d.RCRIT_PBLANC_DE),
         receiptStart: str(d.SUBSCRPT_RCEPT_BGNDE),
@@ -332,7 +334,7 @@ export function remndrToNotice(r: RemndrNotice): Notice {
 
 // ───────────────────────── 1-3. 공고 목록 (이미지 수집용) ─────────────────────────
 
-export type NoticeEntry = { houseManageNo: string; name: string; region: string; unit: string; address: string; homepage: string | null; url: string | null };
+export type NoticeEntry = { houseManageNo: string; name: string; region: string; unit: string; address: string; homepage: string | null; url: string | null; developer?: string | null };
 
 /**
  * 최근 N일 동안의 서울·경기 분양 공고 이름·홈페이지·청약홈 주소만 (주택형은 부르지 않아 가벼움)
@@ -351,6 +353,7 @@ export async function fetchNoticeEntries(daysBack: number): Promise<NoticeEntry[
         address,
         homepage: str(d.HMPG_ADRES),
         url: str(d.PBLANC_URL),
+        developer: str(d.BSNS_MBY_NM), // 사업주체 (이미지 빈칸 목록의 공급기관)
       };
     })
     .filter((n) => n.houseManageNo && n.name && NOTICE_SETTINGS.regions.includes(n.region));
