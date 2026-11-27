@@ -78,8 +78,8 @@ const ONLY = args.find((a) => a.startsWith("--only="))?.slice(7) ?? "";
 const NOS = new Set((args.find((a) => a.startsWith("--nos="))?.slice(6) ?? "").split(",").filter(Boolean));
 const NEW_ONLY = args.includes("--new-only");
 const NO_PDF = args.includes("--no-pdf");
-// 주간 자동화처럼 공고 번호를 주면 최근 분양 공고만 봄
-const SCOPE = NOS.size ? "current" : (args.find((a) => a.startsWith("--scope="))?.slice(8) ?? "all");
+// 공고 번호를 주면 기본은 최근 분양 공고만 봄 (매일 자동화는 --scope=all을 같이 줘서 무순위까지)
+const SCOPE = args.find((a) => a.startsWith("--scope="))?.slice(8) ?? (NOS.size ? "current" : "all");
 const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 

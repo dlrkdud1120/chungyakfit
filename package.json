@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "collect-images": "tsx scripts/collect-images.ts",
+    "daily-images": "tsx scripts/daily-images.ts",
     "missing-images": "tsx scripts/missing-images.ts",
     "add-images": "tsx scripts/add-images.ts"
   },
