@@ -3,7 +3,7 @@
 /**
  * 대표 이미지 고르기 표 (/admin/images, 내 컴퓨터에서만)
  * 단지마다 지금 이미지 + 상위 후보(최대 6개). 후보를 누르면 image-overrides.json에 저장(1순위),
- * "지도 사용"은 hide, "지정 해제"는 직접 지정을 지움. 맨 위에서 "확인 필요"·"지도"만 볼 수 있음.
+ * "지도 사용"은 hide, "지정 해제"는 직접 지정을 지움. 맨 위에서 "확인 필요"·"지도"·"지도 · 후보 있음"만 볼 수 있음.
  */
 
 import { useMemo, useState } from "react";
@@ -20,7 +20,8 @@ export type AdminRow = {
   checkedAt: string | null;
 };
 
-type Filter = "all" | "review" | "map";
+// mapCand: 지금 지도로 나오지만 고를 후보 이미지가 하나라도 있는 단지 (여기서 눌러 고르면 바로 채워짐)
+type Filter = "all" | "review" | "map" | "mapCand";
 
 const KIND_COLOR: Record<string, string> = {
   "직접 지정": "text-brand",
@@ -46,7 +47,7 @@ export default function AdminImages({ rows: initial }: { rows: AdminRow[] }) {
   }, [rows]);
   const isMap = (r: AdminRow) => r.current.kind === "지도" || r.current.kind === "숨김";
   const shown = rows.filter(
-    (r) => (filter === "all" || (filter === "review" ? r.review : isMap(r))) && (!word.trim() || r.name.replace(/\s+/g, "").includes(word.replace(/\s+/g, ""))),
+    (r) => (filter === "all" || (filter === "review" ? r.review : filter === "mapCand" ? isMap(r) && r.candidates.length > 0 : isMap(r))) && (!word.trim() || r.name.replace(/\s+/g, "").includes(word.replace(/\s+/g, ""))),
   );
 
   async function save(name: string, value: string | null) {
@@ -92,6 +93,7 @@ export default function AdminImages({ rows: initial }: { rows: AdminRow[] }) {
             ["all", `전체 ${rows.length}`],
             ["review", "확인 필요만"],
             ["map", "지도만"],
+            ["mapCand", `지도 · 후보 있음 ${rows.filter((r) => isMap(r) && r.candidates.length > 0).length}`],
           ] as [Filter, string][]
         ).map(([f, label]) => (
           <button

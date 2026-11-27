@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "collect-images": "tsx scripts/collect-images.ts"
+    "collect-images": "tsx scripts/collect-images.ts",
+    "missing-images": "tsx scripts/missing-images.ts",
+    "add-images": "tsx scripts/add-images.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.119.0",
