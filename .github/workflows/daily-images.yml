@@ -1,0 +1,86 @@
+# 새 공고 조감도 매일 모으기
+#
+# 매일 오전 7시(한국시간)에 scripts/daily-images.ts를 돌려
+# 최근 분양 공고·무순위 중 처음 보는 단지의 대표 이미지를 모으고, main에 바로 넣지 않고 Pull Request로 올립니다.
+#   - 처음 보는 단지가 없는 날은 PR을 만들지 않습니다.
+#   - PR은 하나(auto/daily-images)만 씁니다. 병합하기 전에 다음 날 실행되면 그날 결과로 PR 내용이 바뀝니다.
+#     (병합하지 않은 단지는 main에서 아직 "처음 보는 단지"라 다음 날 다시 모아서 같이 올라옵니다)
+#   - 실패하면 PR을 만들지 않고 실행 요약에 실패 내용만 남깁니다. 사이트는 지금처럼 지도 썸네일로 동작합니다.
+#
+# 필요한 설정은 주간 자동화(weekly-data.yml)와 같습니다: APPLYHOME_API_KEY secret, Actions의 PR 만들기 허용
+
+name: 새 공고 조감도
+
+on:
+  schedule:
+    - cron: "0 22 * * *" # UTC 22시 = 한국시간 다음 날 오전 7시
+  workflow_dispatch: # Actions 화면의 "Run workflow" 버튼으로 바로 실행
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: daily-images
+  cancel-in-progress: false
+
+jobs:
+  images:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: 코드 받기
+        uses: actions/checkout@v4
+
+      - name: Node.js 준비
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: 패키지 설치
+        run: npm ci
+
+      - name: Playwright 브라우저 설치 (이미지 수집용)
+        run: npx playwright install --with-deps chromium
+
+      - name: 새 공고 이미지 모으기
+        id: images
+        env:
+          APPLYHOME_API_KEY: ${{ secrets.APPLYHOME_API_KEY }}
+        run: npx tsx scripts/daily-images.ts
+
+      - name: 실행 요약에 결과 남기기
+        if: success()
+        run: cat .daily/summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Pull Request 만들기
+        if: success() && steps.images.outputs.count != '0'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: auto/daily-images
+          base: main
+          title: "[자동] 새 공고 조감도 (${{ steps.images.outputs.date }})"
+          body-path: .daily/summary.md
+          commit-message: "[자동] 새 공고 조감도 (${{ steps.images.outputs.date }})"
+          add-paths: |
+            data/auto-images.json
+            data/image-candidates.json
+            data/complexes.csv
+            public/images/complexes/*.jpg
+          delete-branch: true
+
+      - name: 실패 내용 남기기 (PR은 만들지 않음)
+        if: failure()
+        run: |
+          {
+            echo "## 새 공고 조감도 모으기 실패"
+            echo ""
+            echo "PR을 만들지 않았습니다. 사이트는 지금처럼 지도 썸네일로 동작합니다."
+            echo ""
+            if [ -f .daily/error.txt ]; then
+              echo "**원인:** $(cat .daily/error.txt)"
+            else
+              echo "**원인:** 위 단계의 로그를 확인하세요."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
