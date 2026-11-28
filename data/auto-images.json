@@ -395,6 +395,13 @@
       "source": "분양 홈페이지"
     },
     {
+      "name": "오남역 서희스타힐스 여의재 1단지",
+      "image": "https://www.xn--1-6v7et1dr5y9yba899csmap2y5zs0jroma.com/theme/theme/images/_schedule_bg01.jpg",
+      "homepage": "https://www.오남역서희스타힐스1단지.com",
+      "checkedAt": "2026-11-28",
+      "source": "분양 홈페이지"
+    },
+    {
       "name": "오남역 서희스타힐스 여의재 3단지",
       "image": "https://i.vimeocdn.com/video/2137553090-bbfeea72881855bed522856fa7f8716437dfb4f76ac2dc5ab187fa424018d6e4-d?mw=1600&mh=900",
       "homepage": "http://www.오남역서희스타힐스여의재.com",
@@ -570,6 +577,13 @@
       "source": "분양 홈페이지"
     },
     {
+      "name": "청계 노르웨이숲(13차)",
+      "image": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/visual-bg-new-01.jpg",
+      "homepage": "https://청계노르웨이숲.com",
+      "checkedAt": "2026-11-28",
+      "source": "분양 홈페이지"
+    },
+    {
       "name": "청계 노르웨이숲(14차)",
       "image": "https://xn--989a62gh9h1mjj1f9xaj1y.com/assets/images/main/visual-bg-new-01.jpg",
       "homepage": "https://청계노르웨이숲.com",
@@ -577,10 +591,24 @@
       "source": "분양 홈페이지"
     },
     {
+      "name": "청량리 롯데캐슬 하이루체",
+      "image": "https://www.lottecastle.co.kr/files/etc/2023/6/202306230214426300.jpg",
+      "homepage": "https://www.lottecastle.co.kr/APT/AT00395/main/index.do",
+      "checkedAt": "2026-11-28",
+      "source": "분양 홈페이지"
+    },
+    {
       "name": "충정로역자이르네",
       "image": "https://xn--950bx0l9xa587a4zb1e20bn04a.com/grand/images/mainVisual_bg.jpg?v=2",
       "homepage": "https://충정로역자이르네.com",
       "checkedAt": "2026-11-24",
+      "source": "분양 홈페이지"
+    },
+    {
+      "name": "충정로역자이르네(2차)",
+      "image": "https://xn--950bx0l9xa587a4zb1e20bn04a.com/grand/images/mainVisual_bg.jpg?v=2",
+      "homepage": "https://충정로역자이르네.com",
+      "checkedAt": "2026-11-28",
       "source": "분양 홈페이지"
     },
     {
@@ -740,6 +768,12 @@
       "checkedAt": "2026-11-24"
     },
     {
+      "name": "고양 장항 아테라",
+      "homepage": "https://www.arteragy.co.kr",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1068×465: 투명한 부분이 84% (장식용 이미지)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-28"
+    },
+    {
       "name": "과천 디에트르 퍼스티지(S2BL)",
       "homepage": "http://www.detre-gc.co.kr/",
       "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×345: 가로 377px (600px 미만))",
@@ -878,6 +912,13 @@
       "checkedAt": "2026-11-24"
     },
     {
+      "name": "병점복합타운 주복1블록 공공분양",
+      "homepage": "https://apply.lh.or.kr/lhapply/apply/wt/wrtanc/selectWrtancList.do?mi=1027",
+      "reason": "LH청약플러스 공고 목록(77건)에서 같은 지구·블록의 공고를 찾지 못함 · 청약홈 공고에 첨부 파일이 없음",
+      "checkedAt": "2026-11-28",
+      "agency": "LH"
+    },
+    {
       "name": "봉담자이 프라이드시티",
       "homepage": "https://www.idsd.co.kr",
       "reason": "공용 홈페이지로 보임 (제목 \"디에스디삼호(주) DSD SAMHO\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
@@ -942,6 +983,18 @@
       "homepage": "http://시흥거모-엘가로제비앙.com",
       "reason": "이미지를 https로 불러올 수 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
       "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "신림스카이아파트(20차)",
+      "homepage": null,
+      "reason": "홈페이지 주소 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 377×374: 가로 377px (600px 미만))",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "name": "신천역 에피트(3차)",
+      "homepage": "http://halla-shincheon.co.kr/",
+      "reason": "홈페이지가 열리지 않음 (접속 실패·시간 초과) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-28"
     },
     {
       "name": "써밋 더힐",
@@ -1044,6 +1097,12 @@
       "homepage": "https://opus-switzen.com/",
       "reason": "공용 홈페이지로 보임 (제목 \"403 Forbidden\"에 단지명이 없음) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
       "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "용인반도체클러스터 동일하이빌 파크밸리 2단지(D1-2블록)",
+      "homepage": "https://용인동일하이빌파크밸리2단지.com",
+      "reason": "후보는 있었으나 기준에 걸려 제외 (가장 큰 것 1568×1003: 단순함 (entropy 4.55 < 6.8)) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-28"
     },
     {
       "name": "원종 휴먼빌 클라츠",
@@ -1184,6 +1243,18 @@
       "checkedAt": "2026-11-24"
     },
     {
+      "name": "한화포레나 영흥숲",
+      "homepage": null,
+      "reason": "홈페이지 주소 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-28"
+    },
+    {
+      "name": "한화포레나 영흥숲(3차)",
+      "homepage": null,
+      "reason": "홈페이지 주소 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
+      "checkedAt": "2026-11-28"
+    },
+    {
       "name": "한화포레나 영흥숲(4차)",
       "homepage": null,
       "reason": "홈페이지 주소 없음 · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
@@ -1212,6 +1283,12 @@
       "homepage": "https://bb2-yemizi.com/",
       "reason": "홈페이지가 열리지 않음 (접속 실패·시간 초과) · 모집공고 PDF 이미지가 기준에 맞지 않음 (가장 큰 것 335×338: 가로 335px (600px 미만))",
       "checkedAt": "2026-11-24"
+    },
+    {
+      "name": "화성 송산 동원로얄듀크 포레(2차)",
+      "homepage": null,
+      "reason": "홈페이지 주소 없음 · 모집공고 PDF 앞쪽 5쪽에 이미지가 없음",
+      "checkedAt": "2026-11-28"
     },
     {
       "name": "힐스테이트 광명 11",
